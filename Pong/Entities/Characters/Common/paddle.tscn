@@ -1,0 +1,12 @@
+[gd_scene load_steps=2 format=3 uid="uid://dw0ubxif7xkl1"]
+
+[ext_resource type="Script" path="res://Entities/Characters/Common/Paddle.cs" id="1_2mud7"]
+
+[node name="Paddle" type="Area2D"]
+z_index = 2
+position = Vector2(115, 323)
+script = ExtResource("1_2mud7")
+
+[node name="MeshInstance2D" type="MeshInstance2D" parent="."]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
