@@ -1,0 +1,26 @@
+[gd_scene load_steps=3 format=3 uid="uid://dnuv2cp8sfbjp"]
+
+[ext_resource type="PackedScene" uid="uid://cfucrmtc3p37r" path="res://Scene/Environment/wall.tscn" id="1_ginc5"]
+[ext_resource type="PackedScene" uid="uid://2sw10xy611p4" path="res://Entities/Characters/character.tscn" id="2_sia4y"]
+
+[node name="FlapBird" type="Node2D"]
+
+[node name="CanvasLayer" type="CanvasLayer" parent="."]
+layer = -1
+
+[node name="Background" type="ColorRect" parent="CanvasLayer"]
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+color = Color(0.337767, 0.539703, 0.86224, 1)
+
+[node name="Wall" parent="." instance=ExtResource("1_ginc5")]
+position = Vector2(726, -88)
+
+[node name="Wall2" parent="." instance=ExtResource("1_ginc5")]
+position = Vector2(727, 477)
+
+[node name="Character" parent="." instance=ExtResource("2_sia4y")]
+position = Vector2(334, 339)

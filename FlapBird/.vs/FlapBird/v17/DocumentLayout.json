@@ -1,0 +1,53 @@
+{
+  "Version": 1,
+  "WorkspaceRootPath": "C:\\Users\\James\\Dev\\Godot\\FlapBird\\",
+  "Documents": [
+    {
+      "AbsoluteMoniker": "D:0:0:{8DB25B48-5754-406E-966F-02E55025AC49}|FlapBird.csproj|c:\\users\\james\\dev\\godot\\flapbird\\scene\\environment\\wall.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{8DB25B48-5754-406E-966F-02E55025AC49}|FlapBird.csproj|solutionrelative:scene\\environment\\wall.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{8DB25B48-5754-406E-966F-02E55025AC49}|FlapBird.csproj|c:\\users\\james\\dev\\godot\\flapbird\\entities\\characters\\character.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{8DB25B48-5754-406E-966F-02E55025AC49}|FlapBird.csproj|solutionrelative:entities\\characters\\character.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    }
+  ],
+  "DocumentGroupContainers": [
+    {
+      "Orientation": 0,
+      "VerticalTabListWidth": 256,
+      "DocumentGroups": [
+        {
+          "DockedWidth": 200,
+          "SelectedChildIndex": 0,
+          "Children": [
+            {
+              "$type": "Document",
+              "DocumentIndex": 0,
+              "Title": "Wall.cs",
+              "DocumentMoniker": "C:\\Users\\James\\Dev\\Godot\\FlapBird\\Scene\\Environment\\Wall.cs",
+              "RelativeDocumentMoniker": "Scene\\Environment\\Wall.cs",
+              "ToolTip": "C:\\Users\\James\\Dev\\Godot\\FlapBird\\Scene\\Environment\\Wall.cs",
+              "RelativeToolTip": "Scene\\Environment\\Wall.cs",
+              "ViewState": "AQIAAAcAAAAAAAAAAAAAwBkAAAAAAAAA",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2024-10-21T23:27:49.367Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 1,
+              "Title": "Character.cs",
+              "DocumentMoniker": "C:\\Users\\James\\Dev\\Godot\\FlapBird\\Entities\\Characters\\Character.cs",
+              "RelativeDocumentMoniker": "Entities\\Characters\\Character.cs",
+              "ToolTip": "C:\\Users\\James\\Dev\\Godot\\FlapBird\\Entities\\Characters\\Character.cs",
+              "RelativeToolTip": "Entities\\Characters\\Character.cs",
+              "ViewState": "AQIAABMAAAAAAAAAAAAzwCsAAAAAAAAA",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2024-10-21T22:56:53.529Z"
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}
