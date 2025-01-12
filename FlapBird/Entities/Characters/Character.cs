@@ -1,5 +1,6 @@
 using Godot;
 using System;
+using static Godot.WebSocketPeer;
 
 public partial class Character : RigidBody2D
 {
@@ -30,7 +31,16 @@ public partial class Character : RigidBody2D
 	private float faceChangeDuration = 1f;
 	[Export]
 	private float resetDuration = 3f;
-	private float timer = 0;
+	private float faceChangeTimer = 0;
+	private float resetTimer = 0;
+
+    private bool inDeathState = false;
+
+    // --------------------------------
+    //			PROPERTIES	
+    // --------------------------------
+
+    public bool InDeathState { get => inDeathState; set => inDeathState = value; }
 
     // --------------------------------
     //			STANDARD LOGIC	
@@ -39,70 +49,98 @@ public partial class Character : RigidBody2D
     public override void _Ready()
 	{
 		gameManager = GameManager.Instance;
-        Position = spawnLocation;
-        LinearVelocity = Vector2.Zero;
-        GravityScale = gravityScale;
+		Setup();
     }
 
 	public override void _PhysicsProcess(double delta)
 	{
-        if (Input.IsActionJustPressed("ui_accept") && !gameManager.GameRunning)
+        if(gameManager.GameOver && !gameManager.Resetting && Input.IsActionJustPressed("ui_accept"))
         {
-            Reset();
-			return;
+            gameManager.Reset();
+            return;
         }
 
-        if (!gameManager.GameRunning) 
-		{
-			LinearVelocity = Vector2.Zero;
-			GravityScale = 0;
-			SetFace(deathFace);
-			return; 
-		}
-
-		if (timer >= 0)
-		{ 
-			timer -= (float)delta;
-            gameManager.UpdateTimer(Mathf.Ceil(timer));
+        if(gameManager.Resetting)
+        {
+            ResetValues();
         }
 
-		if(Input.IsActionJustPressed("ui_accept"))
-		{
-			Movement();
-			SetFace(jumpFace);
-			timer = faceChangeDuration;
-		}
-		else if(timer <= 0)
-		{
-			SetFace(defaultFace);
-			gameManager.Resetting = false;
-            GravityScale = gravityScale;
-        }
+		// resetTimer = TimerDecrementer(delta, resetTimer, true);
+		faceChangeTimer = TimerDecrementer(delta, faceChangeTimer);
+
+		HandleCharacterMovementProcess();
 	}
 
     public override void _IntegrateForces(PhysicsDirectBodyState2D state)
     {
         base._IntegrateForces(state);
-
-		if (gameManager.Resetting)
-		{
-			Transform2D transform = state.Transform;
-			transform.Origin.X = spawnLocation.X;
-			transform.Origin.Y = spawnLocation.Y;
-
-			state.Transform = transform;
-		}
+		ResetPosition(state);
 	}
 
     // --------------------------------
     //			GENERAL LOGIC	
     // --------------------------------
 
-    public void Reset()
+	private void Setup()
 	{
-		gameManager.Resetting = true;
-		gameManager.GameRunning = true;
-		timer = resetDuration;
+        Position = spawnLocation;
+        LinearVelocity = Vector2.Zero;
+        GravityScale = gravityScale;
+    }
+
+    public void EnterDeathState()
+    {
+        LinearVelocity = Vector2.Zero;
+        GravityScale = 0;
+        SetFace(deathFace);
+        inDeathState = true;
+    }
+
+	// Handles logic for allowing movement and visual face changes during movement while game is active
+	private void HandleCharacterMovementProcess()
+	{
+        if (Input.IsActionJustPressed("ui_accept"))
+        {
+            Movement();
+            SetFace(jumpFace);
+            faceChangeTimer = faceChangeDuration;
+        }
+        else if (faceChangeTimer < 0)
+        {
+            SetFace(defaultFace);
+        }
+    }
+
+    // --------------------------------
+    //			TRANSFORM LOGIC	
+    // --------------------------------
+
+    public void ResetValues()
+	{
+		// gameManager.Resetting = true;
+		resetTimer = resetDuration;
+
+        // Testing:
+        GravityScale = gravityScale;
+        gameManager.Resetting = false;
+		gameManager.GameOver = false;
+    }
+
+	private void ResetPosition(PhysicsDirectBodyState2D state)
+	{
+        if (inDeathState && gameManager.Resetting)
+        {
+            GD.Print("Resetting Position");
+
+            // state.Transform = new Transform2D(0.0f, spawnLocation);
+
+            Transform2D transform = state.Transform;
+            transform.Origin.X = spawnLocation.X;
+            transform.Origin.Y = spawnLocation.Y;
+
+            state.Transform = transform;
+            inDeathState = false;
+        }
     }
 
     private void Movement()
@@ -115,7 +153,24 @@ public partial class Character : RigidBody2D
 
     }
 
-	private void SetFace(CompressedTexture2D face)
+    // --------------------------------
+    //			VISUAL LOGIC	
+    // --------------------------------
+
+	private float TimerDecrementer(double delta, float timer, bool updateUI = false)
+	{
+		if(timer >= 0)
+		{
+			timer -= (float)delta;
+			if(updateUI)
+			{
+				gameManager.UpdateTimerUI(Mathf.Ceil(timer));
+			}
+		}
+		return timer;
+    }
+
+    private void SetFace(CompressedTexture2D face)
 	{
 		faceSprite.Texture = face;
 	}
@@ -123,6 +178,6 @@ public partial class Character : RigidBody2D
 	public void SetGoalFace()
 	{
 		SetFace(goalFace);
-		timer = faceChangeDuration;
+		faceChangeTimer = faceChangeDuration;
     }
 }

@@ -8,9 +8,9 @@ public partial class Wall : Area2D
     //			VARIABLES	
     // --------------------------------
 	private GameManager gameManager;
-
+    
     [Export]
-    private bool isFloor = false;
+    private Vector2 spawnLocation;
     [Export]
 	private float speed = 100f;
 	[Export]
@@ -18,6 +18,17 @@ public partial class Wall : Area2D
     [Export]
     private Area2D botWall;
     private bool overlappingGoal = false;
+
+    // Floor Logic
+    [Export]
+    private bool isFloor = false;
+    
+
+    // --------------------------------
+    //		    PROPERTIES	
+    // --------------------------------
+
+    public Vector2 SpawnLocation { get => spawnLocation; set => spawnLocation = value; }
 
     // --------------------------------
     //		STANDARD LOGIC	
@@ -30,12 +41,18 @@ public partial class Wall : Area2D
 
 	public override void _PhysicsProcess(double delta)
 	{
-		if (gameManager.GameRunning && !gameManager.Resetting)
+		if (!gameManager.GameOver) // && !gameManager.Resetting)
 		{
 			Movement(delta);
-			HandleCollision();
+			HandleGoalCollision();
 		}
 	}
+
+    private void OnWallBodyEntered(RigidBody2D body)
+    {
+        CheckWall(topWall, body);
+        CheckWall(botWall, body);
+    }
 
     // --------------------------------
     //		MOVEMENT LOGIC	
@@ -50,32 +67,26 @@ public partial class Wall : Area2D
         Vector2 newPos = Position;
 		newPos.X -= speed * (float)delta;
 		Position = newPos;
+        SpawnLocation = newPos;
 	}
 
-	private void HandleCollision()
+	private void HandleGoalCollision()
 	{
-        if (topWall == null || botWall == null) return;
-        
-        if(CheckWall(topWall) || CheckWall(botWall))
-        {
-            return;
-        }
-
         if(!overlappingGoal)
         {
 		    CheckGoal();
         }
 	}
 
-	private bool CheckWall(Area2D wall)
+	private bool CheckWall(Area2D wall, RigidBody2D body)
 	{
-        if(!gameManager.GameRunning) { return false; }
+        if(gameManager.GameOver) { return false; }
         Array<Node2D> overlappingAreas = wall.GetOverlappingBodies();
         foreach (Node2D area in overlappingAreas)
         {
             if (area.GetClass().Equals("RigidBody2D"))
             {
-                gameManager.GameRunning = false;
+                gameManager.EnterGameOver();
 				return true;
             }
         }
@@ -93,7 +104,10 @@ public partial class Wall : Area2D
                 Character character = (Character)area;
 				character.SetGoalFace();
                 gameManager.UpdateScore();
+                gameManager.PlayScoreSound();
+                gameManager.RespawnObstacle();
             }
         }
     }
+
 }

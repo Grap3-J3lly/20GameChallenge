@@ -41,6 +41,10 @@ public partial class UIManager : Node
 
 	public void DisplayGameOver(bool isGameRunning)
 	{
+		if(!isGameRunning)
+		{
+			AssignGameOverText();
+		}
 		gameOverText.Visible = !isGameRunning;
 	}
 

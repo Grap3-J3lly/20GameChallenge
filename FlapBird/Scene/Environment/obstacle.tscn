@@ -9,10 +9,11 @@
 size = Vector2(130, 388.955)
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_e6ult"]
-size = Vector2(39.5, 217)
+size = Vector2(39.5, 240.185)
 
 [node name="Obstacle" type="Area2D" node_paths=PackedStringArray("topWall", "botWall")]
 script = ExtResource("1_5cryw")
+spawnLocation = Vector2(846, -58)
 topWall = NodePath("TopWall")
 botWall = NodePath("BottomWall")
 
@@ -40,11 +41,11 @@ position = Vector2(-4.54747e-13, 128)
 shape = SubResource("RectangleShape2D_n4v4m")
 
 [node name="GoalCollider" type="CollisionShape2D" parent="."]
-position = Vector2(45, 431.315)
+position = Vector2(45, 442.908)
 shape = SubResource("RectangleShape2D_e6ult")
 
 [node name="BottomWall" type="Area2D" parent="."]
-position = Vector2(0, 607.735)
+position = Vector2(0, 630)
 
 [node name="TileRight" type="Sprite2D" parent="BottomWall"]
 rotation = -1.5708
@@ -66,3 +67,6 @@ texture = ExtResource("4_0feg6")
 [node name="CollisionShape2D" type="CollisionShape2D" parent="BottomWall"]
 position = Vector2(-4.54747e-13, 128)
 shape = SubResource("RectangleShape2D_n4v4m")
+
+[connection signal="body_entered" from="TopWall" to="." method="OnWallBodyEntered"]
+[connection signal="body_entered" from="BottomWall" to="." method="OnWallBodyEntered"]

@@ -1,0 +1,83 @@
+[gd_scene load_steps=5 format=3 uid="uid://dqypvtgv74tbs"]
+
+[ext_resource type="Texture2D" uid="uid://d3m7g5bpsk2cm" path="res://Assets/PNG/Double/green_body_square.png" id="1_2adc4"]
+[ext_resource type="Texture2D" uid="uid://b3v2h71tbtpnx" path="res://Assets/PNG/Default/tile_background_grass.png" id="2_usutp"]
+[ext_resource type="Texture2D" uid="uid://c0csa5ankybqg" path="res://Assets/PNG/Default/tile_background_tree_large.png" id="3_n7c0r"]
+[ext_resource type="Texture2D" uid="uid://cubydb3l6u6gk" path="res://Assets/PNG/Default/tile_background_tree_small.png" id="4_f1i7l"]
+
+[node name="Island1" type="Node2D"]
+
+[node name="Hills" type="Node2D" parent="."]
+position = Vector2(-206, -568)
+
+[node name="Hill6" type="Sprite2D" parent="Hills"]
+show_behind_parent = true
+position = Vector2(51.625, 643.5)
+scale = Vector2(1.68281, 1.44375)
+texture = ExtResource("1_2adc4")
+
+[node name="Hill5" type="Sprite2D" parent="Hills"]
+show_behind_parent = true
+position = Vector2(190.625, 566.5)
+scale = Vector2(0.997657, 1.44375)
+texture = ExtResource("1_2adc4")
+
+[node name="Hill4" type="Sprite2D" parent="Hills"]
+show_behind_parent = true
+position = Vector2(380.172, 621.224)
+scale = Vector2(2.03067, 1.65279)
+texture = ExtResource("1_2adc4")
+
+[node name="Grass" type="Node2D" parent="."]
+position = Vector2(-206, -568)
+
+[node name="Grass1_5" type="Sprite2D" parent="Grass"]
+modulate = Color(0.165515, 0.664263, 0.184319, 1)
+position = Vector2(467, 479)
+scale = Vector2(1.33333, 1.33333)
+texture = ExtResource("2_usutp")
+
+[node name="Grass2_5" type="Sprite2D" parent="Grass"]
+modulate = Color(0.134375, 0.537233, 0.147929, 1)
+position = Vector2(448, 483)
+texture = ExtResource("2_usutp")
+
+[node name="Grass2_4" type="Sprite2D" parent="Grass"]
+modulate = Color(0.134375, 0.537233, 0.147929, 1)
+position = Vector2(491, 490)
+texture = ExtResource("2_usutp")
+
+[node name="Grass1_6" type="Sprite2D" parent="Grass"]
+modulate = Color(0.165515, 0.664263, 0.184319, 1)
+position = Vector2(79.0001, 520)
+scale = Vector2(1.33333, 1.33333)
+texture = ExtResource("2_usutp")
+
+[node name="Grass1_7" type="Sprite2D" parent="Grass"]
+modulate = Color(0.165515, 0.664263, 0.184319, 1)
+position = Vector2(29, 523)
+scale = Vector2(1.33333, 1.33333)
+texture = ExtResource("2_usutp")
+
+[node name="Grass2_6" type="Sprite2D" parent="Grass"]
+modulate = Color(0.134375, 0.537233, 0.147929, 1)
+position = Vector2(60, 524)
+texture = ExtResource("2_usutp")
+
+[node name="Trees" type="Node2D" parent="."]
+position = Vector2(-206, -568)
+
+[node name="Tree2_2" type="Sprite2D" parent="Trees"]
+modulate = Color(0.0901961, 0.4, 0.317647, 1)
+position = Vector2(312, 418.5)
+texture = ExtResource("3_n7c0r")
+
+[node name="Tree2_3" type="Sprite2D" parent="Trees"]
+modulate = Color(0.0901961, 0.4, 0.317647, 1)
+position = Vector2(228, 384)
+texture = ExtResource("3_n7c0r")
+
+[node name="Tree1_2" type="Sprite2D" parent="Trees"]
+modulate = Color(0.109804, 0.462745, 0.34902, 1)
+position = Vector2(268, 438)
+texture = ExtResource("4_f1i7l")

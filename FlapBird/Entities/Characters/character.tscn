@@ -11,7 +11,9 @@
 radius = 40.8
 
 [node name="Character" type="RigidBody2D" node_paths=PackedStringArray("faceSprite")]
+can_sleep = false
 script = ExtResource("1_vwl4g")
+spawnLocation = Vector2(334, 339)
 jumpForce = 500.0
 faceSprite = NodePath("DefaultFace")
 defaultFace = ExtResource("2_k8mxs")

@@ -1,22 +1,84 @@
-[gd_scene load_steps=5 format=3 uid="uid://dnuv2cp8sfbjp"]
+[gd_scene load_steps=11 format=3 uid="uid://dnuv2cp8sfbjp"]
 
 [ext_resource type="Script" path="res://Scene/GameManager.cs" id="1_4thja"]
 [ext_resource type="PackedScene" uid="uid://2sw10xy611p4" path="res://Entities/Characters/character.tscn" id="2_sia4y"]
 [ext_resource type="Script" path="res://Scene/UI/UIManager.cs" id="2_vrv3d"]
+[ext_resource type="PackedScene" uid="uid://dqypvtgv74tbs" path="res://Scene/Environment/island_1.tscn" id="3_ftovi"]
+[ext_resource type="Texture2D" uid="uid://crw4ymem60425" path="res://Assets/PNG/Default/tile_cloud.png" id="3_vryks"]
+[ext_resource type="PackedScene" uid="uid://jusi70o0bnuu" path="res://Scene/Environment/island_2.tscn" id="4_4ajsh"]
+[ext_resource type="Script" path="res://Scene/Environment/Island.cs" id="4_7d1we"]
 [ext_resource type="PackedScene" uid="uid://duefwdrsug43" path="res://Scene/Environment/obstacle.tscn" id="4_ye153"]
+[ext_resource type="Texture2D" uid="uid://c81we8qowltjr" path="res://Assets/PNG/Default/yellow_body_circle.png" id="8_fc8wn"]
+[ext_resource type="AudioStream" uid="uid://dp2hydjk550mv" path="res://Assets/Audio/raid.mp3" id="9_ol4ap"]
 
 [node name="FlapBird" type="Node2D"]
 
-[node name="GameManager" type="Node" parent="." node_paths=PackedStringArray("character", "walls")]
+[node name="Environment" type="Node" parent="."]
+
+[node name="Sun" type="Sprite2D" parent="Environment"]
+position = Vector2(37, 46)
+scale = Vector2(2.825, 2.825)
+texture = ExtResource("8_fc8wn")
+
+[node name="Clouds" type="Node" parent="Environment"]
+
+[node name="TileCloud" type="Sprite2D" parent="Environment/Clouds"]
+position = Vector2(296, 89.0001)
+rotation = -0.427691
+scale = Vector2(1.90947, 1.90947)
+texture = ExtResource("3_vryks")
+
+[node name="TileCloud2" type="Sprite2D" parent="Environment/Clouds"]
+position = Vector2(565, 185)
+rotation = 0.192603
+scale = Vector2(1.90947, 1.90947)
+texture = ExtResource("3_vryks")
+
+[node name="TileCloud3" type="Sprite2D" parent="Environment/Clouds"]
+position = Vector2(804, 124)
+rotation = -0.168568
+scale = Vector2(1.90947, 1.90947)
+texture = ExtResource("3_vryks")
+
+[node name="Island1" parent="Environment" instance=ExtResource("3_ftovi")]
+position = Vector2(242, 632)
+script = ExtResource("4_7d1we")
+islandSpeed = 0.1
+finishLine = -340.0
+respawnLocation = 1506.0
+
+[node name="Island2" parent="Environment" instance=ExtResource("4_4ajsh")]
+position = Vector2(917, 570)
+script = ExtResource("4_7d1we")
+islandSpeed = 0.1
+finishLine = -340.0
+respawnLocation = 1506.0
+
+[node name="Island3" parent="Environment" instance=ExtResource("3_ftovi")]
+position = Vector2(1506, 562)
+script = ExtResource("4_7d1we")
+islandSpeed = 0.1
+finishLine = -340.0
+respawnLocation = 1506.0
+
+[node name="GameManager" type="Node" parent="." node_paths=PackedStringArray("obstacleParent", "audioStreamPlayer")]
 script = ExtResource("1_4thja")
-character = NodePath("../Character")
-walls = [NodePath("../Obstacle"), NodePath("../Floor")]
+characterScene = ExtResource("2_sia4y")
+obstacleScene = ExtResource("4_ye153")
+maxObstacleCount = 9
+obstacleParent = NodePath("../Obstacles")
+horizontalSpawnRange = Vector2(250, 500)
+verticalSpawnRange = Vector2(-200, 50)
+score_AudioStream = ExtResource("9_ol4ap")
+audioStreamPlayer = NodePath("../AudioStreamPlayer")
 
 [node name="UIManager" type="Node" parent="." node_paths=PackedStringArray("scoreNumber", "highScoreNumber", "gameOverText")]
 script = ExtResource("2_vrv3d")
 scoreNumber = NodePath("../UI Canvas/ScoreNumber")
 highScoreNumber = NodePath("../UI Canvas/HighScoreNumber")
 gameOverText = NodePath("../UI Canvas/GameOverText")
+
+[node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="."]
 
 [node name="CanvasLayer" type="CanvasLayer" parent="."]
 layer = -1
@@ -29,16 +91,13 @@ grow_horizontal = 2
 grow_vertical = 2
 color = Color(0.337767, 0.539703, 0.86224, 1)
 
-[node name="Character" parent="." instance=ExtResource("2_sia4y")]
-position = Vector2(334, 339)
-spawnLocation = Vector2(334, 339)
-
-[node name="Obstacle" parent="." instance=ExtResource("4_ye153")]
-position = Vector2(846, -58)
+[node name="Obstacles" type="Node2D" parent="."]
+top_level = true
 
 [node name="Floor" parent="." instance=ExtResource("4_ye153")]
 position = Vector2(460, 716)
 rotation = 1.5708
+spawnLocation = Vector2(460, 716)
 isFloor = true
 
 [node name="UI Canvas" type="CanvasLayer" parent="."]
