@@ -1,0 +1,23 @@
+[gd_scene load_steps=5 format=3 uid="uid://2tf2bpxcev6q"]
+
+[ext_resource type="Script" path="res://Entities/Objects/Ball.cs" id="1_gk68y"]
+[ext_resource type="Texture2D" uid="uid://cvon7axoccvso" path="res://Entities/Objects/Circle.png" id="2_iv2fd"]
+
+[sub_resource type="QuadMesh" id="QuadMesh_2g1ek"]
+size = Vector2(20, 20)
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_yrq3t"]
+
+[node name="Ball" type="Area2D"]
+process_priority = 1
+z_index = 2
+script = ExtResource("1_gk68y")
+startingLocation = Vector2(576, 324)
+ballSpeed = 150.0
+
+[node name="MeshInstance2D" type="MeshInstance2D" parent="."]
+mesh = SubResource("QuadMesh_2g1ek")
+texture = ExtResource("2_iv2fd")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+shape = SubResource("CircleShape2D_yrq3t")

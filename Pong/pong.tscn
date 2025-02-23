@@ -1,33 +1,26 @@
-[gd_scene load_steps=17 format=3 uid="uid://hj2opvaqvd44"]
+[gd_scene load_steps=14 format=3 uid="uid://hj2opvaqvd44"]
 
 [ext_resource type="QuadMesh" uid="uid://2cf8og6g0wfd" path="res://Scene/Walls/wallMesh.tres" id="1_0yuuv"]
 [ext_resource type="Script" path="res://Scene/Walls/Wall.cs" id="1_emnrc"]
 [ext_resource type="Script" path="res://Scene/GameManager.cs" id="1_q4emb"]
-[ext_resource type="Texture2D" uid="uid://cvon7axoccvso" path="res://Entities/Objects/Circle.png" id="2_370og"]
 [ext_resource type="Shape2D" uid="uid://o25euh5gyhu1" path="res://Scene/Walls/wallCollider.tres" id="2_j5rsu"]
 [ext_resource type="Script" path="res://Entities/Characters/PlayerPaddle/PlayerPaddle.cs" id="3_8h7lr"]
 [ext_resource type="QuadMesh" uid="uid://bmq1xjwfguxlc" path="res://Entities/Characters/Common/paddleMesh.tres" id="4_1sv4m"]
 [ext_resource type="Shape2D" uid="uid://cqx525c6tlydq" path="res://Entities/Characters/Common/paddleCollider.tres" id="5_1qfmr"]
-[ext_resource type="Script" path="res://Entities/Objects/Ball.cs" id="7_3yq3r"]
 [ext_resource type="Script" path="res://Entities/Characters/EnemyPaddle/EnemyPaddle.cs" id="8_8fxgd"]
+[ext_resource type="PackedScene" uid="uid://2tf2bpxcev6q" path="res://Entities/Objects/ball.tscn" id="9_cejqo"]
 [ext_resource type="Script" path="res://Scene/Goals/Goal.cs" id="9_hn2cl"]
 [ext_resource type="Shape2D" uid="uid://be1k8muujqxef" path="res://Scene/Goals/goalCollider.tres" id="9_y6uy6"]
 [ext_resource type="Script" path="res://Scene/UI/ScoreUpdate.cs" id="13_b0uff"]
 [ext_resource type="Script" path="res://Scene/UI/WinText.cs" id="14_ftdf4"]
 
-[sub_resource type="QuadMesh" id="QuadMesh_2g1ek"]
-size = Vector2(20, 20)
-
-[sub_resource type="CircleShape2D" id="CircleShape2D_yrq3t"]
-
 [node name="Pong" type="Node2D"]
 y_sort_enabled = true
 
-[node name="GameManager" type="Node" parent="." node_paths=PackedStringArray("playerPaddle", "enemyPaddle", "ball", "playerGoal", "enemyGoal", "winText")]
+[node name="GameManager" type="Node" parent="." node_paths=PackedStringArray("playerPaddle", "enemyPaddle", "playerGoal", "enemyGoal", "winText")]
 script = ExtResource("1_q4emb")
 playerPaddle = NodePath("../PlayerPaddle")
 enemyPaddle = NodePath("../EnemyPaddle")
-ball = NodePath("../Ball")
 playerGoal = NodePath("../PlayerGoal")
 enemyGoal = NodePath("../EnemyGoal")
 winText = NodePath("../UI Canvas/WinText")
@@ -96,20 +89,8 @@ mesh = ExtResource("4_1sv4m")
 [node name="CollisionShape2D" type="CollisionShape2D" parent="EnemyPaddle"]
 shape = ExtResource("5_1qfmr")
 
-[node name="Ball" type="Area2D" parent="."]
-process_priority = 1
-z_index = 2
+[node name="Ball" parent="." instance=ExtResource("9_cejqo")]
 position = Vector2(576, 324)
-script = ExtResource("7_3yq3r")
-startingLocation = Vector2(576, 324)
-ballSpeed = 150.0
-
-[node name="MeshInstance2D" type="MeshInstance2D" parent="Ball"]
-mesh = SubResource("QuadMesh_2g1ek")
-texture = ExtResource("2_370og")
-
-[node name="CollisionShape2D" type="CollisionShape2D" parent="Ball"]
-shape = SubResource("CircleShape2D_yrq3t")
 
 [node name="PlayerGoal" type="Area2D" parent="."]
 position = Vector2(10, 324)

@@ -1,0 +1,10 @@
+{
+  "ExpandedNodes": [
+    "",
+    "\\Entities",
+    "\\Entities\\Characters",
+    "\\Entities\\Characters\\PlayerPaddle"
+  ],
+  "SelectedNode": "\\Entities\\Characters\\PlayerPaddle\\PlayerPaddle.cs",
+  "PreviewInSolutionExplorer": false
+}
