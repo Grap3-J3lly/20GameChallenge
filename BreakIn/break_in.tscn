@@ -1,0 +1,82 @@
+[gd_scene load_steps=11 format=3 uid="uid://g5gxb4cpktqk"]
+
+[ext_resource type="Script" path="res://Scene/GameBoard/Walls/Wall.cs" id="1_726mi"]
+[ext_resource type="Script" path="res://Scene/GameManager.cs" id="1_aunkb"]
+[ext_resource type="PackedScene" uid="uid://dw0ubxif7xkl1" path="res://Entities/Paddle/paddle.tscn" id="1_skalp"]
+[ext_resource type="Script" path="res://Scene/GameBoard/Goals/Goal.cs" id="3_ljs5y"]
+[ext_resource type="PackedScene" uid="uid://c47pvo1br7fck" path="res://Entities/Ball/ball.tscn" id="3_xulce"]
+[ext_resource type="Shape2D" uid="uid://be1k8muujqxef" path="res://Scene/GameBoard/Goals/goalCollider.tres" id="4_5pp8v"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_thtfy"]
+size = Vector2(20, 648)
+
+[sub_resource type="QuadMesh" id="QuadMesh_l2iol"]
+size = Vector2(20, 648)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_rshoq"]
+size = Vector2(1172, 20)
+
+[sub_resource type="QuadMesh" id="QuadMesh_46reu"]
+size = Vector2(1172, 20)
+
+[node name="BreakIn" type="Node2D"]
+
+[node name="GameManager" type="Node" parent="." node_paths=PackedStringArray("paddle", "ball", "enemyGoal")]
+script = ExtResource("1_aunkb")
+paddle = NodePath("../ObjectPool/Paddle")
+ball = NodePath("../ObjectPool/Ball")
+enemyGoal = NodePath("../GameBoard/EnemyGoal")
+
+[node name="GameBoard" type="Node" parent="."]
+
+[node name="WallL" type="Area2D" parent="GameBoard"]
+position = Vector2(0, 324)
+script = ExtResource("1_726mi")
+movementStateToStop = -1
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="GameBoard/WallL"]
+shape = SubResource("RectangleShape2D_thtfy")
+
+[node name="MeshInstance2D" type="MeshInstance2D" parent="GameBoard/WallL"]
+mesh = SubResource("QuadMesh_l2iol")
+
+[node name="WallR" type="Area2D" parent="GameBoard"]
+position = Vector2(1152, 324)
+script = ExtResource("1_726mi")
+movementStateToStop = 1
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="GameBoard/WallR"]
+shape = SubResource("RectangleShape2D_thtfy")
+
+[node name="MeshInstance2D" type="MeshInstance2D" parent="GameBoard/WallR"]
+mesh = SubResource("QuadMesh_l2iol")
+
+[node name="WallT" type="Area2D" parent="GameBoard"]
+position = Vector2(576, 0)
+script = ExtResource("1_726mi")
+isHorizontal = true
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="GameBoard/WallT"]
+shape = SubResource("RectangleShape2D_rshoq")
+
+[node name="MeshInstance2D" type="MeshInstance2D" parent="GameBoard/WallT"]
+mesh = SubResource("QuadMesh_46reu")
+
+[node name="EnemyGoal" type="Area2D" parent="GameBoard"]
+position = Vector2(576, 648)
+script = ExtResource("3_ljs5y")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="GameBoard/EnemyGoal"]
+shape = ExtResource("4_5pp8v")
+
+[node name="Environment" type="Node" parent="."]
+
+[node name="ObjectPool" type="Node" parent="."]
+
+[node name="Paddle" parent="ObjectPool" instance=ExtResource("1_skalp")]
+position = Vector2(576, 623)
+
+[node name="Ball" parent="ObjectPool" instance=ExtResource("3_xulce")]
+position = Vector2(576, 548)
+startingLocation = Vector2(586, 548)
+ballSpeed = 250.0
