@@ -52,8 +52,10 @@ public partial class GameManager : Node
     public override void _Ready()
 	{
 		Instance = this;
+        uiManager = UIManager.Instance;
+        gameOver = true;
         Setup();
-	}
+    }
 
 	public override void _Process(double delta)
 	{
@@ -64,9 +66,8 @@ public partial class GameManager : Node
     //		SETUP LOGIC	
     // --------------------------------
 
-    private void Setup()
+    public void Setup()
     {
-        uiManager = UIManager.Instance;
         uiManager.ChangeScoreField(0, true);
         SpawnCharacter();
         HandleObstacleCreation();
@@ -76,6 +77,18 @@ public partial class GameManager : Node
     {
         character = characterScene.Instantiate<Character>();
         AddChild(character);
+        character.EnterSpawnState();
+    }
+
+    public void DelayStart()
+    {
+        gameOver = false;
+        character.EnterPlayState();
+    }
+
+    public void PlayCharacter()
+    {
+        character.EnterPlayState();
     }
 
     public void Reset()

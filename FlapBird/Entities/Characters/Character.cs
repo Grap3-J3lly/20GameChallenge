@@ -49,7 +49,7 @@ public partial class Character : RigidBody2D
     public override void _Ready()
 	{
 		gameManager = GameManager.Instance;
-		Setup();
+		// Setup();
     }
 
 	public override void _PhysicsProcess(double delta)
@@ -63,6 +63,11 @@ public partial class Character : RigidBody2D
         if(gameManager.Resetting)
         {
             ResetValues();
+        }
+
+        if(gameManager.GameOver)
+        {
+            return;
         }
 
 		// resetTimer = TimerDecrementer(delta, resetTimer, true);
@@ -81,11 +86,17 @@ public partial class Character : RigidBody2D
     //			GENERAL LOGIC	
     // --------------------------------
 
-	private void Setup()
+	public void EnterPlayState()
 	{
-        Position = spawnLocation;
         LinearVelocity = Vector2.Zero;
         GravityScale = gravityScale;
+    }
+
+    public void EnterSpawnState()
+    {
+        Position = spawnLocation;
+        LinearVelocity = Vector2.Zero;
+        GravityScale = 0;
     }
 
     public void EnterDeathState()

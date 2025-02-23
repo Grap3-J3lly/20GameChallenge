@@ -19,7 +19,7 @@ public partial class Island : Node2D
 	// Called every frame. 'delta' is the elapsed time since the previous frame.
 	public override void _Process(double delta)
 	{
-		if (GameManager.Instance != null && GameManager.Instance.GameOver)
+		if (GameManager.Instance != null && !GameManager.Instance.GameOver)
 		{
 			Position = new Vector2(Position.X - islandSpeed, Position.Y);
 		}

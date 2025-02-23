@@ -1,0 +1,22 @@
+[gd_resource type="Theme" load_steps=8 format=3 uid="uid://wn0xbxy8ppke"]
+
+[ext_resource type="Texture2D" uid="uid://pf7nx66rnsbv" path="res://Assets/MenuUI/M_Button_H.png" id="1_nprsw"]
+[ext_resource type="Texture2D" uid="uid://dqvk1u05ye3ke" path="res://Assets/MenuUI/M_Button_D.png" id="2_ibxip"]
+[ext_resource type="Texture2D" uid="uid://huew4d7ijmdc" path="res://Assets/MenuUI/M_Button_P.png" id="3_3ukf7"]
+[ext_resource type="FontFile" uid="uid://65anix1v37bg" path="res://Assets/MenuUI/super_corn/Super Corn.ttf" id="4_bnu6b"]
+
+[sub_resource type="StyleBoxTexture" id="StyleBoxTexture_2myl6"]
+texture = ExtResource("1_nprsw")
+
+[sub_resource type="StyleBoxTexture" id="StyleBoxTexture_l43cd"]
+texture = ExtResource("2_ibxip")
+
+[sub_resource type="StyleBoxTexture" id="StyleBoxTexture_al402"]
+texture = ExtResource("3_3ukf7")
+
+[resource]
+default_font = ExtResource("4_bnu6b")
+default_font_size = 30
+Button/styles/hover = SubResource("StyleBoxTexture_2myl6")
+Button/styles/normal = SubResource("StyleBoxTexture_l43cd")
+Button/styles/pressed = SubResource("StyleBoxTexture_al402")
