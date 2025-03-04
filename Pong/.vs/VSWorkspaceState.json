@@ -3,8 +3,11 @@
     "",
     "\\Entities",
     "\\Entities\\Characters",
-    "\\Entities\\Characters\\PlayerPaddle"
+    "\\Entities\\Characters\\Common",
+    "\\Entities\\Characters\\EnemyPaddle",
+    "\\Entities\\Characters\\PlayerPaddle",
+    "\\Scene"
   ],
-  "SelectedNode": "\\Entities\\Characters\\PlayerPaddle\\PlayerPaddle.cs",
+  "SelectedNode": "\\Scene\\GameManager.cs",
   "PreviewInSolutionExplorer": false
 }

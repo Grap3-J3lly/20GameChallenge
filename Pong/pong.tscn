@@ -17,10 +17,11 @@
 [node name="Pong" type="Node2D"]
 y_sort_enabled = true
 
-[node name="GameManager" type="Node" parent="." node_paths=PackedStringArray("playerPaddle", "enemyPaddle", "playerGoal", "enemyGoal", "winText")]
+[node name="GameManager" type="Node" parent="." node_paths=PackedStringArray("playerPaddle", "enemyPaddle", "ball", "playerGoal", "enemyGoal", "winText")]
 script = ExtResource("1_q4emb")
 playerPaddle = NodePath("../PlayerPaddle")
 enemyPaddle = NodePath("../EnemyPaddle")
+ball = NodePath("../Ball")
 playerGoal = NodePath("../PlayerGoal")
 enemyGoal = NodePath("../EnemyGoal")
 winText = NodePath("../UI Canvas/WinText")

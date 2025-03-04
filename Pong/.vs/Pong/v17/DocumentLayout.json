@@ -3,36 +3,36 @@
   "WorkspaceRootPath": "C:\\Users\\James\\Dev\\Godot\\20GameChallenge\\Pong\\",
   "Documents": [
     {
-      "AbsoluteMoniker": "D:0:0:{7A9343EC-403F-4BAD-99CE-FF861C5F7743}|Pong.csproj|c:\\users\\james\\dev\\godot\\20gamechallenge\\pong\\entities\\characters\\playerpaddle\\playerpaddle.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{7A9343EC-403F-4BAD-99CE-FF861C5F7743}|Pong.csproj|solutionrelative:entities\\characters\\playerpaddle\\playerpaddle.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+      "AbsoluteMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|C:\\Users\\James\\Dev\\Godot\\20GameChallenge\\Pong\\Scene\\GameManager.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|solutionrelative:Scene\\GameManager.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{7A9343EC-403F-4BAD-99CE-FF861C5F7743}|Pong.csproj|c:\\users\\james\\dev\\godot\\20gamechallenge\\pong\\scene\\walls\\wall.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{7A9343EC-403F-4BAD-99CE-FF861C5F7743}|Pong.csproj|solutionrelative:scene\\walls\\wall.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+      "AbsoluteMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|C:\\Users\\James\\Dev\\Godot\\20GameChallenge\\Pong\\Entities\\Characters\\EnemyPaddle\\EnemyPaddle.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|solutionrelative:Entities\\Characters\\EnemyPaddle\\EnemyPaddle.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{7A9343EC-403F-4BAD-99CE-FF861C5F7743}|Pong.csproj|c:\\users\\james\\dev\\godot\\20gamechallenge\\pong\\scene\\ui\\wintext.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{7A9343EC-403F-4BAD-99CE-FF861C5F7743}|Pong.csproj|solutionrelative:scene\\ui\\wintext.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+      "AbsoluteMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|C:\\Users\\James\\Dev\\Godot\\20GameChallenge\\Pong\\Entities\\Characters\\Common\\Paddle.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|solutionrelative:Entities\\Characters\\Common\\Paddle.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{7A9343EC-403F-4BAD-99CE-FF861C5F7743}|Pong.csproj|c:\\users\\james\\dev\\godot\\20gamechallenge\\pong\\scene\\ui\\scoreupdate.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{7A9343EC-403F-4BAD-99CE-FF861C5F7743}|Pong.csproj|solutionrelative:scene\\ui\\scoreupdate.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+      "AbsoluteMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|C:\\Users\\James\\Dev\\Godot\\20GameChallenge\\Pong\\Entities\\Characters\\PlayerPaddle\\PlayerPaddle.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|solutionrelative:Entities\\Characters\\PlayerPaddle\\PlayerPaddle.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{7A9343EC-403F-4BAD-99CE-FF861C5F7743}|Pong.csproj|c:\\users\\james\\dev\\godot\\20gamechallenge\\pong\\scene\\gamemanager.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{7A9343EC-403F-4BAD-99CE-FF861C5F7743}|Pong.csproj|solutionrelative:scene\\gamemanager.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+      "AbsoluteMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|C:\\Users\\James\\Dev\\Godot\\20GameChallenge\\Pong\\Scene\\Walls\\Wall.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|solutionrelative:Scene\\Walls\\Wall.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{7A9343EC-403F-4BAD-99CE-FF861C5F7743}|Pong.csproj|c:\\users\\james\\dev\\godot\\20gamechallenge\\pong\\entities\\characters\\enemypaddle\\enemypaddle.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{7A9343EC-403F-4BAD-99CE-FF861C5F7743}|Pong.csproj|solutionrelative:entities\\characters\\enemypaddle\\enemypaddle.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+      "AbsoluteMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|C:\\Users\\James\\Dev\\Godot\\20GameChallenge\\Pong\\Scene\\UI\\WinText.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|solutionrelative:Scene\\UI\\WinText.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{7A9343EC-403F-4BAD-99CE-FF861C5F7743}|Pong.csproj|c:\\users\\james\\dev\\godot\\20gamechallenge\\pong\\entities\\objects\\ball.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{7A9343EC-403F-4BAD-99CE-FF861C5F7743}|Pong.csproj|solutionrelative:entities\\objects\\ball.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+      "AbsoluteMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|C:\\Users\\James\\Dev\\Godot\\20GameChallenge\\Pong\\Scene\\UI\\ScoreUpdate.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|solutionrelative:Scene\\UI\\ScoreUpdate.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{7A9343EC-403F-4BAD-99CE-FF861C5F7743}|Pong.csproj|c:\\users\\james\\dev\\godot\\20gamechallenge\\pong\\entities\\characters\\common\\paddle.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{7A9343EC-403F-4BAD-99CE-FF861C5F7743}|Pong.csproj|solutionrelative:entities\\characters\\common\\paddle.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+      "AbsoluteMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|C:\\Users\\James\\Dev\\Godot\\20GameChallenge\\Pong\\Entities\\Objects\\Ball.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|solutionrelative:Entities\\Objects\\Ball.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     }
   ],
   "DocumentGroupContainers": [
@@ -42,11 +42,11 @@
       "DocumentGroups": [
         {
           "DockedWidth": 200,
-          "SelectedChildIndex": 7,
+          "SelectedChildIndex": 3,
           "Children": [
             {
               "$type": "Document",
-              "DocumentIndex": 1,
+              "DocumentIndex": 4,
               "Title": "Wall.cs",
               "DocumentMoniker": "C:\\Users\\James\\Dev\\Godot\\20GameChallenge\\Pong\\Scene\\Walls\\Wall.cs",
               "RelativeDocumentMoniker": "Scene\\Walls\\Wall.cs",
@@ -54,12 +54,11 @@
               "RelativeToolTip": "Scene\\Walls\\Wall.cs",
               "ViewState": "AgIAAAAAAAAAAAAAAAAxwAAAAAAAAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-02-14T00:30:55.922Z",
-              "EditorCaption": ""
+              "WhenOpened": "2025-02-14T00:30:55.922Z"
             },
             {
               "$type": "Document",
-              "DocumentIndex": 2,
+              "DocumentIndex": 5,
               "Title": "WinText.cs",
               "DocumentMoniker": "C:\\Users\\James\\Dev\\Godot\\20GameChallenge\\Pong\\Scene\\UI\\WinText.cs",
               "RelativeDocumentMoniker": "Scene\\UI\\WinText.cs",
@@ -71,7 +70,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 3,
+              "DocumentIndex": 6,
               "Title": "ScoreUpdate.cs",
               "DocumentMoniker": "C:\\Users\\James\\Dev\\Godot\\20GameChallenge\\Pong\\Scene\\UI\\ScoreUpdate.cs",
               "RelativeDocumentMoniker": "Scene\\UI\\ScoreUpdate.cs",
@@ -83,31 +82,33 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 4,
+              "DocumentIndex": 0,
               "Title": "GameManager.cs",
               "DocumentMoniker": "C:\\Users\\James\\Dev\\Godot\\20GameChallenge\\Pong\\Scene\\GameManager.cs",
               "RelativeDocumentMoniker": "Scene\\GameManager.cs",
               "ToolTip": "C:\\Users\\James\\Dev\\Godot\\20GameChallenge\\Pong\\Scene\\GameManager.cs",
               "RelativeToolTip": "Scene\\GameManager.cs",
-              "ViewState": "AQIAAFgAAAAAAAAAAAAnwGkAAAAgAAAA",
+              "ViewState": "AgIAABUAAAAAAAAAAAAAAGkAAAAgAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2024-09-17T22:11:11.335Z"
+              "WhenOpened": "2024-09-17T22:11:11.335Z",
+              "EditorCaption": ""
             },
             {
               "$type": "Document",
-              "DocumentIndex": 5,
+              "DocumentIndex": 1,
               "Title": "EnemyPaddle.cs",
               "DocumentMoniker": "C:\\Users\\James\\Dev\\Godot\\20GameChallenge\\Pong\\Entities\\Characters\\EnemyPaddle\\EnemyPaddle.cs",
               "RelativeDocumentMoniker": "Entities\\Characters\\EnemyPaddle\\EnemyPaddle.cs",
               "ToolTip": "C:\\Users\\James\\Dev\\Godot\\20GameChallenge\\Pong\\Entities\\Characters\\EnemyPaddle\\EnemyPaddle.cs",
               "RelativeToolTip": "Entities\\Characters\\EnemyPaddle\\EnemyPaddle.cs",
-              "ViewState": "AQIAAAAAAAAAAAAAAAAAABYAAABQAAAA",
+              "ViewState": "AgIAAC0AAAAAAAAAAAAAABYAAABQAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2024-09-17T22:07:01.369Z"
+              "WhenOpened": "2024-09-17T22:07:01.369Z",
+              "EditorCaption": ""
             },
             {
               "$type": "Document",
-              "DocumentIndex": 6,
+              "DocumentIndex": 7,
               "Title": "Ball.cs",
               "DocumentMoniker": "C:\\Users\\James\\Dev\\Godot\\20GameChallenge\\Pong\\Entities\\Objects\\Ball.cs",
               "RelativeDocumentMoniker": "Entities\\Objects\\Ball.cs",
@@ -119,19 +120,20 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 7,
+              "DocumentIndex": 2,
               "Title": "Paddle.cs",
               "DocumentMoniker": "C:\\Users\\James\\Dev\\Godot\\20GameChallenge\\Pong\\Entities\\Characters\\Common\\Paddle.cs",
               "RelativeDocumentMoniker": "Entities\\Characters\\Common\\Paddle.cs",
               "ToolTip": "C:\\Users\\James\\Dev\\Godot\\20GameChallenge\\Pong\\Entities\\Characters\\Common\\Paddle.cs",
               "RelativeToolTip": "Entities\\Characters\\Common\\Paddle.cs",
-              "ViewState": "AQIAABoAAAAAUT1o5J0TwDcAAAAhAAAA",
+              "ViewState": "AgIAABoAAAAAUT1o5J0TwDcAAAAhAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2024-09-10T22:49:25.029Z"
+              "WhenOpened": "2024-09-10T22:49:25.029Z",
+              "EditorCaption": ""
             },
             {
               "$type": "Document",
-              "DocumentIndex": 0,
+              "DocumentIndex": 3,
               "Title": "PlayerPaddle.cs",
               "DocumentMoniker": "C:\\Users\\James\\Dev\\Godot\\20GameChallenge\\Pong\\Entities\\Characters\\PlayerPaddle\\PlayerPaddle.cs",
               "RelativeDocumentMoniker": "Entities\\Characters\\PlayerPaddle\\PlayerPaddle.cs",
