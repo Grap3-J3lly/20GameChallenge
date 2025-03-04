@@ -1,4 +1,4 @@
-[gd_scene load_steps=11 format=3 uid="uid://g5gxb4cpktqk"]
+[gd_scene load_steps=12 format=3 uid="uid://g5gxb4cpktqk"]
 
 [ext_resource type="Script" path="res://Scene/GameBoard/Walls/Wall.cs" id="1_726mi"]
 [ext_resource type="Script" path="res://Scene/GameManager.cs" id="1_aunkb"]
@@ -6,6 +6,7 @@
 [ext_resource type="Script" path="res://Scene/GameBoard/Goals/Goal.cs" id="3_ljs5y"]
 [ext_resource type="PackedScene" uid="uid://c47pvo1br7fck" path="res://Entities/Ball/ball.tscn" id="3_xulce"]
 [ext_resource type="Shape2D" uid="uid://be1k8muujqxef" path="res://Scene/GameBoard/Goals/goalCollider.tres" id="4_5pp8v"]
+[ext_resource type="PackedScene" uid="uid://bf43jjavm06nd" path="res://Entities/Brick/brick.tscn" id="7_h5w5b"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_thtfy"]
 size = Vector2(20, 648)
@@ -80,3 +81,6 @@ position = Vector2(576, 623)
 position = Vector2(576, 548)
 startingLocation = Vector2(586, 548)
 ballSpeed = 250.0
+
+[node name="Brick" parent="ObjectPool" instance=ExtResource("7_h5w5b")]
+position = Vector2(586, 100)

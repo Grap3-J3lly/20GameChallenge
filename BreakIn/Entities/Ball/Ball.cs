@@ -16,6 +16,8 @@ public partial class Ball : Area2D
 	private Vector2 movementState = new Vector2();
 	private Vector2 currentDirection;
 
+    private Area2D collidingObject;
+
     // --------------------------------
     //			PROPERTIES	
     // --------------------------------
@@ -73,7 +75,7 @@ public partial class Ball : Area2D
 
     private void Move(double delta)
     {
-        HandleImpactEvents();
+        // HandleImpactEvents();
         Vector2 newPosition = new Vector2(Position.X + (ballSpeed * (float)delta) * movementState.X, Position.Y + (ballSpeed * (float)delta) * movementState.Y);
         Position = newPosition;
     }
@@ -100,7 +102,28 @@ public partial class Ball : Area2D
     //		    IMPACT LOGIC	
     // --------------------------------
 
-    private void HandleImpactEvents()
+    public void OnAreaEnter(Node2D impactObject)
+    {
+        if((collidingObject != null && collidingObject == (Area2D)impactObject) || collidingObject != null && collidingObject.GetParent() == impactObject.GetParent())
+        {
+            return;
+        }
+        collidingObject = (Area2D)impactObject;
+        GD.Print(collidingObject);
+        HandleImpactEvents();
+
+    }
+
+    public void OnAreaExit(Node2D impactObject)
+    {
+        if(collidingObject != null && collidingObject == (Area2D)impactObject)
+        {
+            GD.Print("Clearing Colliding Object");
+            collidingObject = null;
+        }
+    }
+
+    public void HandleImpactEvents()
     {
         Wall hitWall;
         if (IsImpactingWall(out hitWall))
@@ -114,13 +137,16 @@ public partial class Ball : Area2D
             movementState = new Vector2(-movementState.X, movementState.Y);
             currentDirection.X *= -1;
         }
-        if(IsImpactingPaddle()) //out bool isPlayerPaddle))
+        uint collisionLayer;
+        if(IsImpactingPaddle(out collisionLayer)) //out bool isPlayerPaddle))
         {
-            //float xVal = 0;
-            //if(isPlayerPaddle) xVal = 1; 
-            //else xVal = -1;
-
-            //GD.Print(xVal);
+            if(collisionLayer == 2)
+            {
+                GD.Print("Hit Layer 2");
+                movementState = new Vector2(-movementState.X, movementState.Y);
+                currentDirection.X *= -1;
+                return;
+            }
 
             movementState = new Vector2(movementState.X, -movementState.Y);
             currentDirection.Y *= -1;
@@ -156,16 +182,19 @@ public partial class Ball : Area2D
         return false;
     }
 
-    private bool IsImpactingPaddle()
+    private bool IsImpactingPaddle(out uint collisionLayer)
     {
+        collisionLayer = 0;
         Array<Area2D> overlappingAreas = GetOverlappingAreas();
         for (int i = 0; i < overlappingAreas.Count; i++)
         {
             try
             {
-                Paddle potentialPaddle = (Paddle)overlappingAreas[i];
+                Paddle potentialPaddle = (Paddle)(overlappingAreas[i].GetParent<Area2D>());
                 if (potentialPaddle != null)
                 {
+                    collisionLayer = overlappingAreas[i].CollisionLayer;
+
                     return true;
                 }
             }

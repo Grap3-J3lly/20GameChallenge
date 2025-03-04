@@ -11,6 +11,8 @@ size = Vector2(20, 20)
 [node name="Ball" type="Area2D"]
 process_priority = 1
 z_index = 2
+collision_layer = 3
+collision_mask = 3
 script = ExtResource("1_mwafn")
 
 [node name="MeshInstance2D" type="MeshInstance2D" parent="."]
@@ -19,3 +21,6 @@ texture = ExtResource("2_iv2fd")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 shape = SubResource("CircleShape2D_yrq3t")
+
+[connection signal="area_entered" from="." to="." method="OnAreaEnter"]
+[connection signal="area_exited" from="." to="." method="OnAreaExit"]
