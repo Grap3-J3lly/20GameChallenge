@@ -34,6 +34,7 @@ public partial class Paddle : Area2D
                 // If hit wall & wall is not supposed to stop object, return true
                 if (potentialWall != null && movementState == potentialWall.MovementStateToStop)
                 {
+                    GD.Print("Can't Move");
                     return false;
                 }
             }

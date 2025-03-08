@@ -48,33 +48,40 @@ public partial class EnemyPaddle : Paddle
         // If Ball's X coordinate is Positive (heading towards enemy paddle), then try to follow ball's position
 
         // Otherwise, Reset to center
-        if(ball == null) { return; }
+        if(ball == null) 
+        {
+            GD.Print("Ball is Null");
+            return; 
+        }
         base.Move(delta);
 
-        float movementDirection = CalculateMovementDirection(ball.Position);
-        movementState = Mathf.RoundToInt(movementDirection);
-
+        movementState = CalculateMovementDirection(ball.Position);
+        GD.Print("Movement Direction: " + movementState);
+        GD.Print("Ball X Direction: " + ball.CurrentDirection.X);
         if (CanMove() && ball.CurrentDirection.X > 0)
         {
-            Translate(movementDirection, delta);
+            GD.Print("Moving toward Ball");
+            Translate(movementState, delta);
         }
         if(ball.CurrentDirection.X < 0 && Position != restLocation)
         {
-            movementDirection = CalculateMovementDirection(restLocation);
-            Translate(movementDirection, delta);
+            GD.Print("Moving to reset position");
+            movementState = CalculateMovementDirection(restLocation);
+            Translate(movementState, delta);
         }
     }
 
-    private float CalculateMovementDirection(Vector2 targetPosition)
+    // Returns 1 if target is below paddle, -1 if target is above paddle, 0 otherwise
+    private int CalculateMovementDirection(Vector2 targetPosition)
     {
         if(targetPosition.Y > Position.Y + (paddleWidth / 2))
         {
-            return 1.0f;
+            return 1;
         }
         if (targetPosition.Y < Position.Y - (paddleWidth / 2))
         {
-            return -1.0f;
+            return -1;
         }
-        return 0.0f;
+        return 0;
     }
 }

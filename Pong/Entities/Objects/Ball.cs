@@ -113,10 +113,9 @@ public partial class Ball : Area2D
             if(isPlayerPaddle) xVal = 1; 
             else xVal = -1;
 
-            GD.Print(xVal);
-
             movementState = new Vector2(xVal, movementState.Y);
-            currentDirection.X *= xVal;
+
+            currentDirection.X *= -1;
         }
         Goal hitGoal;
         if(IsImpactingGoal(out hitGoal))
