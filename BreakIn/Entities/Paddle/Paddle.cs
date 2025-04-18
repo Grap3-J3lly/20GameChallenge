@@ -12,6 +12,9 @@ public partial class Paddle : Area2D
 	protected int movementState = 0;
     protected float startSpeed;
 
+    [Export]
+    private Dictionary<Area2D, Vector2> DirectionalValues = new Dictionary<Area2D, Vector2>();
+
     // --------------------------------
     //			PROPERTIES	
     // --------------------------------

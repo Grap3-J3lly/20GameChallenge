@@ -1,18 +1,18 @@
 [gd_scene load_steps=12 format=3 uid="uid://g5gxb4cpktqk"]
 
-[ext_resource type="Script" path="res://Scene/GameBoard/Walls/Wall.cs" id="1_726mi"]
-[ext_resource type="Script" path="res://Scene/GameManager.cs" id="1_aunkb"]
+[ext_resource type="Script" uid="uid://ctxgjpo7cpy10" path="res://Scene/GameBoard/Walls/Wall.cs" id="1_726mi"]
+[ext_resource type="Script" uid="uid://dk72s2bwdvrrf" path="res://Scene/GameManager.cs" id="1_aunkb"]
 [ext_resource type="PackedScene" uid="uid://dw0ubxif7xkl1" path="res://Entities/Paddle/paddle.tscn" id="1_skalp"]
-[ext_resource type="Script" path="res://Scene/GameBoard/Goals/Goal.cs" id="3_ljs5y"]
+[ext_resource type="Script" uid="uid://cwav2s11qfmdu" path="res://Scene/GameBoard/Goals/Goal.cs" id="3_ljs5y"]
 [ext_resource type="PackedScene" uid="uid://c47pvo1br7fck" path="res://Entities/Ball/ball.tscn" id="3_xulce"]
 [ext_resource type="Shape2D" uid="uid://be1k8muujqxef" path="res://Scene/GameBoard/Goals/goalCollider.tres" id="4_5pp8v"]
 [ext_resource type="PackedScene" uid="uid://bf43jjavm06nd" path="res://Entities/Brick/brick.tscn" id="7_h5w5b"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_thtfy"]
-size = Vector2(20, 648)
+size = Vector2(20, 760)
 
 [sub_resource type="QuadMesh" id="QuadMesh_l2iol"]
-size = Vector2(20, 648)
+size = Vector2(20, 760)
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_rshoq"]
 size = Vector2(1172, 20)
@@ -31,29 +31,33 @@ enemyGoal = NodePath("../GameBoard/EnemyGoal")
 [node name="GameBoard" type="Node" parent="."]
 
 [node name="WallL" type="Area2D" parent="GameBoard"]
-position = Vector2(0, 324)
+position = Vector2(0, 440)
 script = ExtResource("1_726mi")
 movementStateToStop = -1
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="GameBoard/WallL"]
+position = Vector2(0, 50)
 shape = SubResource("RectangleShape2D_thtfy")
 
 [node name="MeshInstance2D" type="MeshInstance2D" parent="GameBoard/WallL"]
+position = Vector2(0, 50)
 mesh = SubResource("QuadMesh_l2iol")
 
 [node name="WallR" type="Area2D" parent="GameBoard"]
-position = Vector2(1152, 324)
+position = Vector2(1152, 440)
 script = ExtResource("1_726mi")
 movementStateToStop = 1
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="GameBoard/WallR"]
+position = Vector2(0, 50)
 shape = SubResource("RectangleShape2D_thtfy")
 
 [node name="MeshInstance2D" type="MeshInstance2D" parent="GameBoard/WallR"]
+position = Vector2(0, 50)
 mesh = SubResource("QuadMesh_l2iol")
 
 [node name="WallT" type="Area2D" parent="GameBoard"]
-position = Vector2(576, 0)
+position = Vector2(576, 116)
 script = ExtResource("1_726mi")
 isHorizontal = true
 
@@ -64,7 +68,7 @@ shape = SubResource("RectangleShape2D_rshoq")
 mesh = SubResource("QuadMesh_46reu")
 
 [node name="EnemyGoal" type="Area2D" parent="GameBoard"]
-position = Vector2(576, 648)
+position = Vector2(576, 864)
 script = ExtResource("3_ljs5y")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="GameBoard/EnemyGoal"]
@@ -74,13 +78,172 @@ shape = ExtResource("4_5pp8v")
 
 [node name="ObjectPool" type="Node" parent="."]
 
-[node name="Paddle" parent="ObjectPool" instance=ExtResource("1_skalp")]
-position = Vector2(576, 623)
+[node name="Paddle" parent="ObjectPool" node_paths=PackedStringArray("DirectionalValues") instance=ExtResource("1_skalp")]
+position = Vector2(576, 796)
+DirectionalValues = {
+NodePath("AreaTop"): Vector2(1, -1),
+NodePath("AreaBottom"): Vector2(1, 1),
+NodePath("AreaLeft"): Vector2(-1, 1),
+NodePath("AreaRight"): Vector2(1, 1)
+}
 
 [node name="Ball" parent="ObjectPool" instance=ExtResource("3_xulce")]
-position = Vector2(576, 548)
+position = Vector2(827, 168)
 startingLocation = Vector2(586, 548)
 ballSpeed = 250.0
 
-[node name="Brick" parent="ObjectPool" instance=ExtResource("7_h5w5b")]
-position = Vector2(586, 100)
+[node name="Brick" parent="ObjectPool" node_paths=PackedStringArray("DirectionalValues") instance=ExtResource("7_h5w5b")]
+position = Vector2(64, 138)
+layerCount = 1
+DirectionalValues = {
+NodePath("AreaTop"): Vector2(1, -1),
+NodePath("AreaBottom"): Vector2(1, 1),
+NodePath("AreaLeft"): Vector2(-1, 1),
+NodePath("AreaRight"): Vector2(1, 1)
+}
+
+[node name="Brick2" parent="ObjectPool" node_paths=PackedStringArray("DirectionalValues") instance=ExtResource("7_h5w5b")]
+position = Vector2(166, 138)
+layerCount = 1
+DirectionalValues = {
+NodePath("AreaTop"): Vector2(1, -1),
+NodePath("AreaBottom"): Vector2(1, 1),
+NodePath("AreaLeft"): Vector2(-1, 1),
+NodePath("AreaRight"): Vector2(1, 1)
+}
+
+[node name="Brick3" parent="ObjectPool" node_paths=PackedStringArray("DirectionalValues") instance=ExtResource("7_h5w5b")]
+position = Vector2(269, 138)
+layerCount = 1
+DirectionalValues = {
+NodePath("AreaTop"): Vector2(1, -1),
+NodePath("AreaBottom"): Vector2(1, 1),
+NodePath("AreaLeft"): Vector2(-1, 1),
+NodePath("AreaRight"): Vector2(1, 1)
+}
+
+[node name="Brick4" parent="ObjectPool" node_paths=PackedStringArray("DirectionalValues") instance=ExtResource("7_h5w5b")]
+position = Vector2(372, 138)
+layerCount = 1
+DirectionalValues = {
+NodePath("AreaTop"): Vector2(1, -1),
+NodePath("AreaBottom"): Vector2(1, 1),
+NodePath("AreaLeft"): Vector2(-1, 1),
+NodePath("AreaRight"): Vector2(1, 1)
+}
+
+[node name="Brick5" parent="ObjectPool" node_paths=PackedStringArray("DirectionalValues") instance=ExtResource("7_h5w5b")]
+position = Vector2(474, 138)
+layerCount = 1
+DirectionalValues = {
+NodePath("AreaTop"): Vector2(1, -1),
+NodePath("AreaBottom"): Vector2(1, 1),
+NodePath("AreaLeft"): Vector2(-1, 1),
+NodePath("AreaRight"): Vector2(1, 1)
+}
+
+[node name="Brick6" parent="ObjectPool" node_paths=PackedStringArray("DirectionalValues") instance=ExtResource("7_h5w5b")]
+position = Vector2(576, 138)
+layerCount = 1
+DirectionalValues = {
+NodePath("AreaTop"): Vector2(1, -1),
+NodePath("AreaBottom"): Vector2(1, 1),
+NodePath("AreaLeft"): Vector2(-1, 1),
+NodePath("AreaRight"): Vector2(1, 1)
+}
+
+[node name="Brick7" parent="ObjectPool" node_paths=PackedStringArray("DirectionalValues") instance=ExtResource("7_h5w5b")]
+position = Vector2(678, 138)
+layerCount = 1
+DirectionalValues = {
+NodePath("AreaTop"): Vector2(1, -1),
+NodePath("AreaBottom"): Vector2(1, 1),
+NodePath("AreaLeft"): Vector2(-1, 1),
+NodePath("AreaRight"): Vector2(1, 1)
+}
+
+[node name="Brick8" parent="ObjectPool" node_paths=PackedStringArray("DirectionalValues") instance=ExtResource("7_h5w5b")]
+position = Vector2(780, 138)
+layerCount = 1
+DirectionalValues = {
+NodePath("AreaTop"): Vector2(1, -1),
+NodePath("AreaBottom"): Vector2(1, 1),
+NodePath("AreaLeft"): Vector2(-1, 1),
+NodePath("AreaRight"): Vector2(1, 1)
+}
+
+[node name="Brick9" parent="ObjectPool" node_paths=PackedStringArray("DirectionalValues") instance=ExtResource("7_h5w5b")]
+position = Vector2(882, 138)
+layerCount = 1
+DirectionalValues = {
+NodePath("AreaTop"): Vector2(1, -1),
+NodePath("AreaBottom"): Vector2(1, 1),
+NodePath("AreaLeft"): Vector2(-1, 1),
+NodePath("AreaRight"): Vector2(1, 1)
+}
+
+[node name="Brick10" parent="ObjectPool" node_paths=PackedStringArray("DirectionalValues") instance=ExtResource("7_h5w5b")]
+position = Vector2(984, 138)
+layerCount = 1
+DirectionalValues = {
+NodePath("AreaTop"): Vector2(1, -1),
+NodePath("AreaBottom"): Vector2(1, 1),
+NodePath("AreaLeft"): Vector2(-1, 1),
+NodePath("AreaRight"): Vector2(1, 1)
+}
+
+[node name="Brick11" parent="ObjectPool" node_paths=PackedStringArray("DirectionalValues") instance=ExtResource("7_h5w5b")]
+position = Vector2(1086, 138)
+layerCount = 1
+DirectionalValues = {
+NodePath("AreaTop"): Vector2(1, -1),
+NodePath("AreaBottom"): Vector2(1, 1),
+NodePath("AreaLeft"): Vector2(-1, 1),
+NodePath("AreaRight"): Vector2(1, 1)
+}
+
+[node name="UI" type="CanvasLayer" parent="."]
+visible = false
+
+[node name="WholeCanvas" type="Control" parent="UI"]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="TopArea" type="Control" parent="UI/WholeCanvas"]
+layout_mode = 1
+anchors_preset = 10
+anchor_right = 1.0
+offset_bottom = 105.0
+grow_horizontal = 2
+
+[node name="LivesLeftText" type="RichTextLabel" parent="UI/WholeCanvas/TopArea"]
+layout_mode = 1
+anchors_preset = 4
+anchor_top = 0.5
+anchor_bottom = 0.5
+offset_left = 20.0
+offset_top = -32.5
+offset_right = 420.0
+offset_bottom = 27.5
+grow_vertical = 2
+theme_override_font_sizes/normal_font_size = 40
+text = "Lives Remaining: "
+
+[node name="ScoreText" type="RichTextLabel" parent="UI/WholeCanvas/TopArea"]
+layout_mode = 1
+anchors_preset = 6
+anchor_left = 1.0
+anchor_top = 0.5
+anchor_right = 1.0
+anchor_bottom = 0.5
+offset_left = -220.0
+offset_top = -30.0
+offset_bottom = 30.0
+grow_horizontal = 0
+grow_vertical = 2
+theme_override_font_sizes/normal_font_size = 40
+text = "Score: 999"

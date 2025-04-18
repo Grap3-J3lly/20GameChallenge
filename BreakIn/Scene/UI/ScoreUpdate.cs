@@ -15,6 +15,6 @@ public partial class ScoreUpdate : RichTextLabel
 	
 	public override void _Process(double delta)
 	{
-		Text = isPlayerScore? gameManager.PlayerScore.ToString() : gameManager.EnemyScore.ToString();
+		// Text = isPlayerScore? gameManager.PlayerScore.ToString() : gameManager.EnemyScore.ToString();
 	}
 }

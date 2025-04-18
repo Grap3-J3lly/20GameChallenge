@@ -1,6 +1,8 @@
-[gd_scene load_steps=4 format=3 uid="uid://bf43jjavm06nd"]
+[gd_scene load_steps=6 format=3 uid="uid://bf43jjavm06nd"]
 
-[ext_resource type="Script" path="res://Entities/Brick/Brick.cs" id="1_ci3aa"]
+[ext_resource type="Script" uid="uid://bmr42wfwd4854" path="res://Entities/Brick/Brick.cs" id="1_ci3aa"]
+[ext_resource type="Shape2D" uid="uid://cqx525c6tlydq" path="res://Entities/Paddle/paddleColliderWide.tres" id="2_gvckn"]
+[ext_resource type="Shape2D" uid="uid://c27okb0cr1wpp" path="res://Entities/Paddle/paddleColliderTall.tres" id="3_u7lsm"]
 
 [sub_resource type="QuadMesh" id="QuadMesh_svshc"]
 size = Vector2(100, 20)
@@ -8,12 +10,55 @@ size = Vector2(100, 20)
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_d1082"]
 size = Vector2(100, 20)
 
-[node name="Brick" type="Area2D"]
+[node name="Brick" type="Area2D" node_paths=PackedStringArray("DirectionalValues")]
 disable_mode = 2
+collision_layer = 0
 script = ExtResource("1_ci3aa")
+LayerColors = Array[Color]([Color(1, 1, 1, 1), Color(0, 0, 1, 1), Color(0, 1, 0, 1)])
+DirectionalValues = {
+NodePath("AreaTop"): Vector2(0, -1),
+NodePath("AreaBottom"): Vector2(0, 1),
+NodePath("AreaLeft"): Vector2(-1, 0),
+NodePath("AreaRight"): Vector2(1, 0)
+}
 
 [node name="MeshInstance2D" type="MeshInstance2D" parent="."]
 mesh = SubResource("QuadMesh_svshc")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 shape = SubResource("RectangleShape2D_d1082")
+debug_color = Color(0.677243, 0.475167, 0.473746, 0.42)
+
+[node name="AreaTop" type="Area2D" parent="."]
+disable_mode = 2
+priority = 2
+
+[node name="ColliderTop" type="CollisionShape2D" parent="AreaTop"]
+position = Vector2(0, -9.75)
+shape = ExtResource("2_gvckn")
+
+[node name="AreaBottom" type="Area2D" parent="."]
+disable_mode = 2
+priority = 2
+
+[node name="ColliderBottom" type="CollisionShape2D" parent="AreaBottom"]
+position = Vector2(0, 9.75)
+shape = ExtResource("2_gvckn")
+
+[node name="AreaLeft" type="Area2D" parent="."]
+disable_mode = 2
+collision_layer = 2
+priority = 1
+
+[node name="ColliderLeft" type="CollisionShape2D" parent="AreaLeft"]
+position = Vector2(-49.75, 0)
+shape = ExtResource("3_u7lsm")
+
+[node name="AreaRight" type="Area2D" parent="."]
+disable_mode = 2
+collision_layer = 2
+priority = 1
+
+[node name="ColliderRight" type="CollisionShape2D" parent="AreaRight"]
+position = Vector2(49.75, 0)
+shape = ExtResource("3_u7lsm")

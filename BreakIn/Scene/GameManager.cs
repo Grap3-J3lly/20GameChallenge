@@ -23,7 +23,6 @@ public partial class GameManager : Node
     private float enemyIncreaseSpeedAmount = 10f;
 
 	private int playerScore = 0;
-	private int enemyScore = 0;
 	private bool gameOver = false;
 
     // --------------------------------
@@ -32,8 +31,7 @@ public partial class GameManager : Node
 
     public static GameManager Instance { get; private set; }
     public Ball Ball { get => ball; }
-	public int PlayerScore { get => playerScore; }
-	public int EnemyScore { get => enemyScore; }
+	public int PlayerScore { get => playerScore; set => playerScore = value; }
 	public bool GameOver { get => gameOver; }
 
     // --------------------------------
@@ -61,9 +59,9 @@ public partial class GameManager : Node
 
 		if (goal == enemyGoal)
 		{
-			if (increment) ++enemyScore;
-			else { enemyScore = newVal; }
-			GD.Print("Enemy Score: " + enemyScore);
+			//if (increment) ++playerScore;
+			//else { playerScore = newVal; }
+			//GD.Print("Enemy Score: " + playerScore);
 		}
 		DetermineGameOver();
 		ball.BallSpeed += ballIncreaseSpeedAmount;

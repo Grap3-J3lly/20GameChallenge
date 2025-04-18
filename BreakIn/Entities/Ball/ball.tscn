@@ -1,6 +1,6 @@
 [gd_scene load_steps=5 format=3 uid="uid://c47pvo1br7fck"]
 
-[ext_resource type="Script" path="res://Entities/Ball/Ball.cs" id="1_mwafn"]
+[ext_resource type="Script" uid="uid://bflwrwrqqrcqj" path="res://Entities/Ball/Ball.cs" id="1_mwafn"]
 [ext_resource type="Texture2D" uid="uid://cvon7axoccvso" path="res://Entities/Ball/Circle.png" id="2_iv2fd"]
 
 [sub_resource type="QuadMesh" id="QuadMesh_2g1ek"]

@@ -3,20 +3,28 @@
   "WorkspaceRootPath": "C:\\Users\\James\\Dev\\Godot\\20GameChallenge\\FlapBird\\",
   "Documents": [
     {
-      "AbsoluteMoniker": "D:0:0:{8DB25B48-5754-406E-966F-02E55025AC49}|FlapBird.csproj|c:\\users\\james\\dev\\godot\\20gamechallenge\\flapbird\\scene\\environment\\wall.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{8DB25B48-5754-406E-966F-02E55025AC49}|FlapBird.csproj|solutionrelative:scene\\environment\\wall.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+      "AbsoluteMoniker": "D:0:0:{8DB25B48-5754-406E-966F-02E55025AC49}|FlapBird.csproj|c:\\users\\james\\dev\\godot\\20gamechallenge\\flapbird\\entities\\characters\\character.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{8DB25B48-5754-406E-966F-02E55025AC49}|FlapBird.csproj|solutionrelative:entities\\characters\\character.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
       "AbsoluteMoniker": "D:0:0:{8DB25B48-5754-406E-966F-02E55025AC49}|FlapBird.csproj|c:\\users\\james\\dev\\godot\\20gamechallenge\\flapbird\\scene\\gamemanager.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
       "RelativeMoniker": "D:0:0:{8DB25B48-5754-406E-966F-02E55025AC49}|FlapBird.csproj|solutionrelative:scene\\gamemanager.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{8DB25B48-5754-406E-966F-02E55025AC49}|FlapBird.csproj|c:\\users\\james\\dev\\godot\\20gamechallenge\\flapbird\\entities\\characters\\character.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{8DB25B48-5754-406E-966F-02E55025AC49}|FlapBird.csproj|solutionrelative:entities\\characters\\character.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+      "AbsoluteMoniker": "D:0:0:{8DB25B48-5754-406E-966F-02E55025AC49}|FlapBird.csproj|c:\\users\\james\\dev\\godot\\20gamechallenge\\flapbird\\scene\\environment\\wall.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{8DB25B48-5754-406E-966F-02E55025AC49}|FlapBird.csproj|solutionrelative:scene\\environment\\wall.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{8DB25B48-5754-406E-966F-02E55025AC49}|FlapBird.csproj|c:\\users\\james\\dev\\godot\\20gamechallenge\\flapbird\\scene\\ui\\playbutton.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{8DB25B48-5754-406E-966F-02E55025AC49}|FlapBird.csproj|solutionrelative:scene\\ui\\playbutton.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
       "AbsoluteMoniker": "D:0:0:{8DB25B48-5754-406E-966F-02E55025AC49}|FlapBird.csproj|c:\\users\\james\\dev\\godot\\20gamechallenge\\flapbird\\scene\\ui\\uimanager.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
       "RelativeMoniker": "D:0:0:{8DB25B48-5754-406E-966F-02E55025AC49}|FlapBird.csproj|solutionrelative:scene\\ui\\uimanager.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{8DB25B48-5754-406E-966F-02E55025AC49}|FlapBird.csproj|c:\\users\\james\\dev\\godot\\20gamechallenge\\flapbird\\scene\\ui\\quitbutton.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{8DB25B48-5754-406E-966F-02E55025AC49}|FlapBird.csproj|solutionrelative:scene\\ui\\quitbutton.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
       "AbsoluteMoniker": "D:0:0:{8DB25B48-5754-406E-966F-02E55025AC49}|FlapBird.csproj|c:\\users\\james\\dev\\godot\\20gamechallenge\\flapbird\\scene\\environment\\island.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
@@ -30,64 +38,7 @@
       "DocumentGroups": [
         {
           "DockedWidth": 223,
-          "SelectedChildIndex": 2,
-          "Children": [
-            {
-              "$type": "Document",
-              "DocumentIndex": 4,
-              "Title": "Island.cs",
-              "DocumentMoniker": "C:\\Users\\James\\Dev\\Godot\\20GameChallenge\\FlapBird\\Scene\\Environment\\Island.cs",
-              "RelativeDocumentMoniker": "Scene\\Environment\\Island.cs",
-              "ToolTip": "C:\\Users\\James\\Dev\\Godot\\20GameChallenge\\FlapBird\\Scene\\Environment\\Island.cs",
-              "RelativeToolTip": "Scene\\Environment\\Island.cs",
-              "ViewState": "AgIAAAUAAAAAAAAAAAAAwBwAAABAAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-01-08T23:21:51.438Z"
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 3,
-              "Title": "UIManager.cs",
-              "DocumentMoniker": "C:\\Users\\James\\Dev\\Godot\\20GameChallenge\\FlapBird\\Scene\\UI\\UIManager.cs",
-              "RelativeDocumentMoniker": "Scene\\UI\\UIManager.cs",
-              "ToolTip": "C:\\Users\\James\\Dev\\Godot\\20GameChallenge\\FlapBird\\Scene\\UI\\UIManager.cs",
-              "RelativeToolTip": "Scene\\UI\\UIManager.cs",
-              "ViewState": "AgIAAAsAAAAAAAAAAAAMwBQAAAAYAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2024-10-24T23:55:37.688Z",
-              "EditorCaption": ""
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 0,
-              "Title": "Wall.cs",
-              "DocumentMoniker": "C:\\Users\\James\\Dev\\Godot\\20GameChallenge\\FlapBird\\Scene\\Environment\\Wall.cs",
-              "RelativeDocumentMoniker": "Scene\\Environment\\Wall.cs",
-              "ToolTip": "C:\\Users\\James\\Dev\\Godot\\20GameChallenge\\FlapBird\\Scene\\Environment\\Wall.cs",
-              "RelativeToolTip": "Scene\\Environment\\Wall.cs",
-              "ViewState": "AgIAAFYAAAAAAAAAAAAswGoAAAAtAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2024-10-21T23:27:49.367Z",
-              "EditorCaption": ""
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 2,
-              "Title": "Character.cs",
-              "DocumentMoniker": "C:\\Users\\James\\Dev\\Godot\\20GameChallenge\\FlapBird\\Entities\\Characters\\Character.cs",
-              "RelativeDocumentMoniker": "Entities\\Characters\\Character.cs",
-              "ToolTip": "C:\\Users\\James\\Dev\\Godot\\20GameChallenge\\FlapBird\\Entities\\Characters\\Character.cs",
-              "RelativeToolTip": "Entities\\Characters\\Character.cs",
-              "ViewState": "AgIAABQAAAAAAAAAAAAAwCQAAAAmAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2024-10-21T22:56:53.529Z",
-              "EditorCaption": ""
-            }
-          ]
-        },
-        {
-          "DockedWidth": 177,
-          "SelectedChildIndex": 0,
+          "SelectedChildIndex": 6,
           "Children": [
             {
               "$type": "Document",
@@ -97,9 +48,87 @@
               "RelativeDocumentMoniker": "Scene\\GameManager.cs",
               "ToolTip": "C:\\Users\\James\\Dev\\Godot\\20GameChallenge\\FlapBird\\Scene\\GameManager.cs",
               "RelativeToolTip": "Scene\\GameManager.cs",
-              "ViewState": "AgIAAGsAAAAAAAAAAAAowHcAAAAAAAAAAAAAAA==",
+              "ViewState": "AgIAAFcAAAAAAAAAAAD4v2kAAAAhAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2024-10-24T22:22:32.256Z",
+              "WhenOpened": "2025-02-11T00:02:15.764Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 5,
+              "Title": "QuitButton.cs",
+              "DocumentMoniker": "C:\\Users\\James\\Dev\\Godot\\20GameChallenge\\FlapBird\\Scene\\UI\\QuitButton.cs",
+              "RelativeDocumentMoniker": "Scene\\UI\\QuitButton.cs",
+              "ToolTip": "C:\\Users\\James\\Dev\\Godot\\20GameChallenge\\FlapBird\\Scene\\UI\\QuitButton.cs",
+              "RelativeToolTip": "Scene\\UI\\QuitButton.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAABIAAAATAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-02-10T23:58:40.649Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 3,
+              "Title": "PlayButton.cs",
+              "DocumentMoniker": "C:\\Users\\James\\Dev\\Godot\\20GameChallenge\\FlapBird\\Scene\\UI\\PlayButton.cs",
+              "RelativeDocumentMoniker": "Scene\\UI\\PlayButton.cs",
+              "ToolTip": "C:\\Users\\James\\Dev\\Godot\\20GameChallenge\\FlapBird\\Scene\\UI\\PlayButton.cs",
+              "RelativeToolTip": "Scene\\UI\\PlayButton.cs",
+              "ViewState": "AgIAABAAAAAAAAAAAAAQwBgAAABCAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-02-10T23:58:39.647Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 6,
+              "Title": "Island.cs",
+              "DocumentMoniker": "C:\\Users\\James\\Dev\\Godot\\20GameChallenge\\FlapBird\\Scene\\Environment\\Island.cs",
+              "RelativeDocumentMoniker": "Scene\\Environment\\Island.cs",
+              "ToolTip": "C:\\Users\\James\\Dev\\Godot\\20GameChallenge\\FlapBird\\Scene\\Environment\\Island.cs",
+              "RelativeToolTip": "Scene\\Environment\\Island.cs",
+              "ViewState": "AgIAAAgAAAAAAAAAAAAAwCAAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-01-08T23:21:51.438Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 4,
+              "Title": "UIManager.cs",
+              "DocumentMoniker": "C:\\Users\\James\\Dev\\Godot\\20GameChallenge\\FlapBird\\Scene\\UI\\UIManager.cs",
+              "RelativeDocumentMoniker": "Scene\\UI\\UIManager.cs",
+              "ToolTip": "C:\\Users\\James\\Dev\\Godot\\20GameChallenge\\FlapBird\\Scene\\UI\\UIManager.cs",
+              "RelativeToolTip": "Scene\\UI\\UIManager.cs",
+              "ViewState": "AgIAABoAAAAAAAAAAAAjwBQAAAAYAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2024-10-24T23:55:37.688Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 2,
+              "Title": "Wall.cs",
+              "DocumentMoniker": "C:\\Users\\James\\Dev\\Godot\\20GameChallenge\\FlapBird\\Scene\\Environment\\Wall.cs",
+              "RelativeDocumentMoniker": "Scene\\Environment\\Wall.cs",
+              "ToolTip": "C:\\Users\\James\\Dev\\Godot\\20GameChallenge\\FlapBird\\Scene\\Environment\\Wall.cs",
+              "RelativeToolTip": "Scene\\Environment\\Wall.cs",
+              "ViewState": "AgIAAEgAAAAAAAAAAAAMwFgAAAAcAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2024-10-21T23:27:49.367Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 0,
+              "Title": "Character.cs",
+              "DocumentMoniker": "C:\\Users\\James\\Dev\\Godot\\20GameChallenge\\FlapBird\\Entities\\Characters\\Character.cs",
+              "RelativeDocumentMoniker": "Entities\\Characters\\Character.cs",
+              "ToolTip": "C:\\Users\\James\\Dev\\Godot\\20GameChallenge\\FlapBird\\Entities\\Characters\\Character.cs",
+              "RelativeToolTip": "Entities\\Characters\\Character.cs",
+              "ViewState": "AgIAADUAAAAAAAAAAAAWwEUAAAATAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2024-10-21T22:56:53.529Z",
               "EditorCaption": ""
             }
           ]

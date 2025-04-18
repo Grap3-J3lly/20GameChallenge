@@ -1,6 +1,7 @@
 using Godot;
 using Godot.Collections;
 using System;
+using System.Collections.Generic;
 
 public partial class Ball : Area2D
 {
@@ -17,6 +18,10 @@ public partial class Ball : Area2D
 	private Vector2 currentDirection;
 
     private Area2D collidingObject;
+
+    private Queue<Brick> brickQueue = new Queue<Brick>();
+    [Export]
+    private int maxCollisionCount = 3;
 
     // --------------------------------
     //			PROPERTIES	
@@ -98,65 +103,97 @@ public partial class Ball : Area2D
         ballSpeed = startSpeed;
     }
 
+    private void ReverseDirection(bool inXDirection)
+    {
+        if (inXDirection)
+        {
+            movementState = new Vector2(-movementState.X, movementState.Y);
+            currentDirection.X *= -1;
+        }
+        else
+        {
+            movementState = new Vector2(movementState.X, -movementState.Y);
+            currentDirection.Y *= -1;
+        }
+        GD.Print($"Ball.cs: Reversing Direction. Current Direction: {currentDirection}, Movement State: {movementState}");
+    }
+
     // --------------------------------
     //		    IMPACT LOGIC	
     // --------------------------------
 
     public void OnAreaEnter(Node2D impactObject)
     {
-        if((collidingObject != null && collidingObject == (Area2D)impactObject) || collidingObject != null && collidingObject.GetParent() == impactObject.GetParent())
+        if (collidingObject != null)
         {
+            GD.Print($"Ball.cs: Colliding Object Name: {collidingObject.Name} on {collidingObject.GetParent().Name}");
+        }
+        GD.Print($"Ball.cs: Impact Object Name: {impactObject.Name} on {impactObject.GetParent().Name}");
+        // GD.Print("OnAreaEnter Impact Object Name: " + impactObject.Name);
+        if(collidingObject != null && (collidingObject == (Area2D)impactObject || IsChildCollision<Paddle>(impactObject) || IsChildCollision<Brick>(impactObject)))
+        {
+            GD.Print("Ball.cs: Incorrect Collision, Ignoring");
             return;
         }
         collidingObject = (Area2D)impactObject;
-        GD.Print(collidingObject);
         HandleImpactEvents();
 
+    }
+
+
+    // Did we collide with the child of a specific object
+    private bool IsChildCollision<T>(Node2D impactObject) where T : Godot.Node
+    {
+        try
+        {
+            GD.Print($"Ball.cs: Checking for {typeof(T).Name} Collision on: {impactObject.GetParent().Name}");
+            return (T)impactObject.GetParent() != null &&
+            (impactObject.GetParent() == collidingObject ||
+            impactObject.GetParent() == collidingObject.GetParent());
+        }
+        catch { return false; }
     }
 
     public void OnAreaExit(Node2D impactObject)
     {
         if(collidingObject != null && collidingObject == (Area2D)impactObject)
         {
-            GD.Print("Clearing Colliding Object");
             collidingObject = null;
         }
     }
 
     public void HandleImpactEvents()
     {
+        Brick hitBrick;
         Wall hitWall;
+        uint collisionLayer;
+        Goal hitGoal;
+
+        if (IsImpactingBrick(out hitBrick, out collisionLayer))
+        {
+            HandleBrickImpact(hitBrick, collisionLayer);
+            return;
+        }
+
+        GD.Print($"Ball.cs: Clearing Brick Queue");
+        brickQueue.Clear();
+        
         if (IsImpactingWall(out hitWall))
         {
-            if(hitWall.IsHorizontal)
-            {
-                movementState = new Vector2(movementState.X, -movementState.Y);
-                currentDirection.Y *= -1;
-                return;
-            }
-            movementState = new Vector2(-movementState.X, movementState.Y);
-            currentDirection.X *= -1;
+            HandleWallImpact(hitWall);
+            return;
         }
-        uint collisionLayer;
-        if(IsImpactingPaddle(out collisionLayer)) //out bool isPlayerPaddle))
+        if(IsImpactingPaddle(out collisionLayer))
         {
-            if(collisionLayer == 2)
-            {
-                GD.Print("Hit Layer 2");
-                movementState = new Vector2(-movementState.X, movementState.Y);
-                currentDirection.X *= -1;
-                return;
-            }
-
-            movementState = new Vector2(movementState.X, -movementState.Y);
-            currentDirection.Y *= -1;
+            HandlePaddleImpact(collisionLayer);
+            return;
         }
-        Goal hitGoal;
         if(IsImpactingGoal(out hitGoal))
         {
-            gameManager.UpdateScore(hitGoal, true);
-            ResetPosition();
+            HandleGoalImpact(hitGoal);
+            return;
         }
+        
     }
 
     private bool IsImpactingWall(out Wall hitWall)
@@ -167,10 +204,10 @@ public partial class Ball : Area2D
         {
             try
             {
-                Wall potentialWall = (Wall)overlappingAreas[i];
-                if (potentialWall != null)
+                Wall desiredObject = (Wall)overlappingAreas[i];
+                if (desiredObject != null)
                 {
-                    hitWall = potentialWall;
+                    hitWall = desiredObject;
                     return true;
                 }
             }
@@ -180,6 +217,11 @@ public partial class Ball : Area2D
             }
         }
         return false;
+    }
+
+    private void HandleWallImpact(Wall hitWall)
+    {
+        ReverseDirection(!hitWall.IsHorizontal);
     }
 
     private bool IsImpactingPaddle(out uint collisionLayer)
@@ -190,8 +232,8 @@ public partial class Ball : Area2D
         {
             try
             {
-                Paddle potentialPaddle = (Paddle)(overlappingAreas[i].GetParent<Area2D>());
-                if (potentialPaddle != null)
+                Paddle desiredObject = (Paddle)(overlappingAreas[i].GetParent<Area2D>());
+                if (desiredObject != null)
                 {
                     collisionLayer = overlappingAreas[i].CollisionLayer;
 
@@ -200,11 +242,15 @@ public partial class Ball : Area2D
             }
             catch (Exception ex)
             {
-                // GD.PrintErr(ex, "Ball didn't impact paddle object");
                 continue;
             }
         }
         return false;
+    }
+
+    private void HandlePaddleImpact(uint collisionLayer)
+    {
+        ReverseDirection(collisionLayer == 2);
     }
 
     private bool IsImpactingGoal(out Goal hitGoal)
@@ -215,10 +261,10 @@ public partial class Ball : Area2D
         {
             try
             {
-                Goal potentialGoal = (Goal)overlappingAreas[i];
-                if (potentialGoal != null)
+                Goal desiredObject = (Goal)overlappingAreas[i];
+                if (desiredObject != null)
                 {
-                    hitGoal = potentialGoal;
+                    hitGoal = desiredObject;
                     return true;
                 }
             }
@@ -228,5 +274,58 @@ public partial class Ball : Area2D
             }
         }
         return false;
+    }
+
+    private void HandleGoalImpact(Goal hitGoal)
+    {
+        gameManager.UpdateScore(hitGoal, true);
+        ResetPosition();
+    }
+
+    private bool IsImpactingBrick(out Brick hitBrick, out uint collisionLayer)
+    {
+        hitBrick = null;
+        collisionLayer = 0;
+        Array<Area2D> overlappingAreas = GetOverlappingAreas();
+        for (int i = 0; i < overlappingAreas.Count; i++)
+        {
+            // GD.Print($"Overlapping Areas at Index {i} for Brick Check: {overlappingAreas[i].Name}");
+            try
+            {
+                Brick desiredObject = (Brick)(overlappingAreas[i].GetParent<Area2D>());
+                if (desiredObject != null && overlappingAreas[i] == collidingObject)
+                {
+                    GD.Print($"Ball.cs: Is Impacting Brick");
+                    hitBrick = desiredObject;
+                    collisionLayer = overlappingAreas[i].CollisionLayer;
+                    return true;
+                }
+            }
+            catch (Exception ex)
+            {
+                continue;
+            }
+        }
+        return false;
+    }
+
+    private void HandleBrickImpact(Brick hitBrick, uint collisionLayer)
+    {
+        if(brickQueue.Contains(hitBrick))
+        {
+            GD.Print($"Ball.cs: {hitBrick.Name} already in Brick Queue");
+            return;
+        }
+
+        hitBrick.ProcessHit();
+        brickQueue.Enqueue(hitBrick);
+        ReverseDirection(collisionLayer == 2);
+        GD.Print($"Ball.cs: Hit {hitBrick.Name}, Adding to Brick Queue\n\n");
+
+        if(brickQueue.Count >= maxCollisionCount)
+        {
+            GD.Print($"Ball.cs: Removing {brickQueue.Peek().Name}");
+            brickQueue.Dequeue();
+        }
     }
 }
