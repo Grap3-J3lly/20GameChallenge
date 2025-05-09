@@ -8,11 +8,11 @@
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_ks25o"]
 size = Vector2(100, 20)
 
-[node name="Paddle" type="Area2D" node_paths=PackedStringArray("DirectionalValues")]
+[node name="Paddle" type="Area2D" node_paths=PackedStringArray("directionalValues")]
 z_index = 2
 collision_layer = 0
 script = ExtResource("1_2mud7")
-DirectionalValues = {
+directionalValues = {
 NodePath("AreaTop"): Vector2(0, -1),
 NodePath("AreaBottom"): Vector2(0, 1),
 NodePath("AreaLeft"): Vector2(-1, 0),

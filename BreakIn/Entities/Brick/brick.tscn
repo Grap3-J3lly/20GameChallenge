@@ -10,12 +10,11 @@ size = Vector2(100, 20)
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_d1082"]
 size = Vector2(100, 20)
 
-[node name="Brick" type="Area2D" node_paths=PackedStringArray("DirectionalValues")]
+[node name="Brick" type="Area2D" node_paths=PackedStringArray("directionalValues")]
 disable_mode = 2
 collision_layer = 0
 script = ExtResource("1_ci3aa")
-LayerColors = Array[Color]([Color(1, 1, 1, 1), Color(0, 0, 1, 1), Color(0, 1, 0, 1)])
-DirectionalValues = {
+directionalValues = {
 NodePath("AreaTop"): Vector2(0, -1),
 NodePath("AreaBottom"): Vector2(0, 1),
 NodePath("AreaLeft"): Vector2(-1, 0),

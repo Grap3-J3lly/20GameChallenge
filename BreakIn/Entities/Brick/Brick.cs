@@ -4,24 +4,35 @@ using System;
 
 public partial class Brick : Area2D
 {
-	private GameManager gameManager;
+    // --------------------------------
+    //			VARIABLES	
+    // --------------------------------
+
+    private GameManager gameManager;
 	[Export]
-	private Array<Color> LayerColors = new Array<Color>();
+	private Array<Color> layerColors = new Array<Color>();
 
 	private int rowID = 0;
 	[Export]
 	private int layerCount = 0;
 
     [Export]
-    private Dictionary<Area2D, Vector2> DirectionalValues = new Dictionary<Area2D, Vector2>();
+    private Dictionary<Area2D, Vector2> directionalValues = new Dictionary<Area2D, Vector2>();
 
-	// Currently defining direction for each side of object that can be collided with. Intent here is to remove the reverse direction logic,
-	// which is being called twice when ball collides with two bricks at the same time.
+    // --------------------------------
+    //			PROPERTIES	
+    // --------------------------------
+
+    public Dictionary<Area2D, Vector2> DirectionalValues {  get { return directionalValues; } }
+
+    // --------------------------------
+    //		STANDARD FUNCTIONS	
+    // --------------------------------
 
     public override void _Ready()
 	{
 		gameManager = GameManager.Instance;
-		Modulate = LayerColors[layerCount];
+		Modulate = layerColors[layerCount];
 	}
 
 	public void ProcessHit()
@@ -34,6 +45,6 @@ public partial class Brick : Area2D
 			QueueFree();
 			return;
 		}
-		Modulate = LayerColors[--layerCount];
+		Modulate = layerColors[--layerCount];
 	}
 }

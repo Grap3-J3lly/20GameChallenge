@@ -1,0 +1,21 @@
+[gd_scene load_steps=4 format=3 uid="uid://di2wp66555pv0"]
+
+[ext_resource type="Script" uid="uid://ctxgjpo7cpy10" path="res://Scene/GameBoard/Walls/Wall.cs" id="1_qh3gu"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_thtfy"]
+size = Vector2(20, 760)
+
+[sub_resource type="QuadMesh" id="QuadMesh_l2iol"]
+size = Vector2(20, 760)
+
+[node name="WallL" type="Area2D"]
+script = ExtResource("1_qh3gu")
+movementStateToStop = -1
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+position = Vector2(0, 50)
+shape = SubResource("RectangleShape2D_thtfy")
+
+[node name="MeshInstance2D" type="MeshInstance2D" parent="."]
+position = Vector2(0, 50)
+mesh = SubResource("QuadMesh_l2iol")

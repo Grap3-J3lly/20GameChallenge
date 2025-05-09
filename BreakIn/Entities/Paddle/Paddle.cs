@@ -13,7 +13,7 @@ public partial class Paddle : Area2D
     protected float startSpeed;
 
     [Export]
-    private Dictionary<Area2D, Vector2> DirectionalValues = new Dictionary<Area2D, Vector2>();
+    private Dictionary<Area2D, Vector2> directionalValues = new Dictionary<Area2D, Vector2>();
 
     // --------------------------------
     //			PROPERTIES	
@@ -21,6 +21,8 @@ public partial class Paddle : Area2D
 
     public int MovementState { get => movementState; set => movementState = value; }
     public float StartSpeed { get => startSpeed; }
+
+    public Dictionary<Area2D, Vector2> DirectionalValues { get => directionalValues; } 
 
     // --------------------------------
     //		STANDARD FUNCTIONS	

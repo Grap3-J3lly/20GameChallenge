@@ -17,9 +17,6 @@ public partial class Ball : Area2D
 	private Vector2 movementState = new Vector2();
 	private Vector2 currentDirection;
 
-    private Area2D collidingObject;
-
-    private Queue<Brick> brickQueue = new Queue<Brick>();
     [Export]
     private int maxCollisionCount = 3;
 
@@ -43,10 +40,13 @@ public partial class Ball : Area2D
 
 	public override void _PhysicsProcess(double delta)
 	{
-        if(!gameManager.GameOver)
+        if(gameManager.GameOver)
         {
-		    Move(delta);
+            return;
         }
+
+		Move(delta);
+        HandleCollision();
 	}
 
     // --------------------------------
@@ -103,7 +103,7 @@ public partial class Ball : Area2D
         ballSpeed = startSpeed;
     }
 
-    private void ReverseDirection(bool inXDirection)
+    private void AssignDirection(bool inXDirection) // , Vector2 directionalAssignment)
     {
         if (inXDirection)
         {
@@ -122,210 +122,135 @@ public partial class Ball : Area2D
     //		    IMPACT LOGIC	
     // --------------------------------
 
-    public void OnAreaEnter(Node2D impactObject)
+    public void HandleCollision()
     {
-        if (collidingObject != null)
+        Array<Area2D> overlappingAreas = GetOverlappingAreas();
+        Queue<Area2D> areasToHandle = new Queue<Area2D>();
+
+        for (int i = 0; i < overlappingAreas.Count; i++)
         {
-            GD.Print($"Ball.cs: Colliding Object Name: {collidingObject.Name} on {collidingObject.GetParent().Name}");
+            if(IsAreaImportant(overlappingAreas[i]))
+            {
+                areasToHandle.Enqueue(overlappingAreas[i]);
+            }
         }
-        GD.Print($"Ball.cs: Impact Object Name: {impactObject.Name} on {impactObject.GetParent().Name}");
-        // GD.Print("OnAreaEnter Impact Object Name: " + impactObject.Name);
-        if(collidingObject != null && (collidingObject == (Area2D)impactObject || IsChildCollision<Paddle>(impactObject) || IsChildCollision<Brick>(impactObject)))
+
+        while(areasToHandle.Count > 0)
         {
-            GD.Print("Ball.cs: Incorrect Collision, Ignoring");
-            return;
+            // Paddle
+            // 1 Wall
+            // 2 Walls
+            // 1 Brick
+            // 2 Bricks
+            // 3 Bricks
+            // 1 Wall 1 Brick
+            // 1 Wall 2 Bricks
+            
+            HandleImpactEvent(areasToHandle.Dequeue());
         }
-        collidingObject = (Area2D)impactObject;
-        HandleImpactEvents();
 
     }
 
+    public bool IsAreaImportant(Area2D overlappingArea)
+    {
+        return // IsObjectOfType<Brick>(overlappingArea)
+            IsObjectOfType<Wall>(overlappingArea)
+            // || IsObjectOfType<Paddle>(overlappingArea) 
+            || IsObjectOfType<Goal>(overlappingArea)
+            || IsObjectOfType<Brick>(overlappingArea.GetParent<Area2D>())
+            || IsObjectOfType<Paddle>(overlappingArea.GetParent<Area2D>());
+    }
 
-    // Did we collide with the child of a specific object
-    private bool IsChildCollision<T>(Node2D impactObject) where T : Godot.Node
+    public void HandleImpactEvent(Area2D overlappingArea)
+    {
+        //if (IsObjectOfType<Brick>(overlappingArea))
+        //{
+        //    HandleBrickImpact((Brick)overlappingArea);
+        //    return;
+        //}
+        if (IsObjectOfType<Wall>(overlappingArea))
+        {
+            HandleWallImpact((Wall)overlappingArea);
+            return;
+        }
+        //if (IsObjectOfType<Paddle>(overlappingArea))
+        //{
+        //    HandlePaddleImpact();
+        //    return;
+        //}
+        if (IsObjectOfType<Goal>(overlappingArea))
+        {
+            HandleGoalImpact((Goal)overlappingArea);
+            return;
+        }
+        if (IsObjectOfType<Brick>(overlappingArea.GetParent<Area2D>()))
+        {
+            HandleBrickImpact((Brick)overlappingArea);
+            return;
+        }
+        if (IsObjectOfType<Paddle>(overlappingArea.GetParent<Area2D>()))
+        {
+            HandlePaddleImpact();
+            return;
+        }
+    }
+
+    private bool IsObjectOfType<T>(Area2D overlappingArea) where T : Godot.Area2D
     {
         try
         {
-            GD.Print($"Ball.cs: Checking for {typeof(T).Name} Collision on: {impactObject.GetParent().Name}");
-            return (T)impactObject.GetParent() != null &&
-            (impactObject.GetParent() == collidingObject ||
-            impactObject.GetParent() == collidingObject.GetParent());
-        }
-        catch { return false; }
-    }
-
-    public void OnAreaExit(Node2D impactObject)
-    {
-        if(collidingObject != null && collidingObject == (Area2D)impactObject)
-        {
-            collidingObject = null;
-        }
-    }
-
-    public void HandleImpactEvents()
-    {
-        Brick hitBrick;
-        Wall hitWall;
-        uint collisionLayer;
-        Goal hitGoal;
-
-        if (IsImpactingBrick(out hitBrick, out collisionLayer))
-        {
-            HandleBrickImpact(hitBrick, collisionLayer);
-            return;
-        }
-
-        GD.Print($"Ball.cs: Clearing Brick Queue");
-        brickQueue.Clear();
-        
-        if (IsImpactingWall(out hitWall))
-        {
-            HandleWallImpact(hitWall);
-            return;
-        }
-        if(IsImpactingPaddle(out collisionLayer))
-        {
-            HandlePaddleImpact(collisionLayer);
-            return;
-        }
-        if(IsImpactingGoal(out hitGoal))
-        {
-            HandleGoalImpact(hitGoal);
-            return;
-        }
-        
-    }
-
-    private bool IsImpactingWall(out Wall hitWall)
-    {
-        hitWall = null;
-        Array<Area2D> overlappingAreas = GetOverlappingAreas();
-        for (int i = 0; i < overlappingAreas.Count; i++)
-        {
-            try
+            T desiredObject = (T)overlappingArea;
+            if (desiredObject != null)
             {
-                Wall desiredObject = (Wall)overlappingAreas[i];
-                if (desiredObject != null)
-                {
-                    hitWall = desiredObject;
-                    return true;
-                }
-            }
-            catch (Exception ex)
-            {
-                continue;
+                GD.Print($"Ball.cs: Is Impacting Object of Type {typeof(T).Name}");
+                return true;
             }
         }
+        catch (Exception ex)
+        {
+            // GD.Print($"Ball.cs: Object was Null");
+        }
+        
         return false;
+    }
+
+    private void HandleBrickImpact(Brick hitBrick)
+    {
+        GD.Print($"Ball.cs: Registering Brick Collision");
+        //if(brickQueue.Contains(hitBrick))
+        //{
+        //    GD.Print($"Ball.cs: {hitBrick.Name} already in Brick Queue");
+        //    return;
+        //}
+
+        //hitBrick.ProcessHit();
+        //brickQueue.Enqueue(hitBrick);
+        //// AssignDirection(collisionLayer == 2);
+        //GD.Print($"Ball.cs: Hit {hitBrick.Name}, Adding to Brick Queue\n\n");
+
+        //if(brickQueue.Count >= maxCollisionCount)
+        //{
+        //    GD.Print($"Ball.cs: Removing {brickQueue.Peek().Name}");
+        //    brickQueue.Dequeue();
+        //}
     }
 
     private void HandleWallImpact(Wall hitWall)
     {
-        ReverseDirection(!hitWall.IsHorizontal);
+        GD.Print($"Ball.cs: Registering Wall Collision");
+        // AssignDirection(!hitWall.IsHorizontal);
     }
 
-    private bool IsImpactingPaddle(out uint collisionLayer)
+    private void HandlePaddleImpact()
     {
-        collisionLayer = 0;
-        Array<Area2D> overlappingAreas = GetOverlappingAreas();
-        for (int i = 0; i < overlappingAreas.Count; i++)
-        {
-            try
-            {
-                Paddle desiredObject = (Paddle)(overlappingAreas[i].GetParent<Area2D>());
-                if (desiredObject != null)
-                {
-                    collisionLayer = overlappingAreas[i].CollisionLayer;
-
-                    return true;
-                }
-            }
-            catch (Exception ex)
-            {
-                continue;
-            }
-        }
-        return false;
-    }
-
-    private void HandlePaddleImpact(uint collisionLayer)
-    {
-        ReverseDirection(collisionLayer == 2);
-    }
-
-    private bool IsImpactingGoal(out Goal hitGoal)
-    {
-        hitGoal = null;
-        Array<Area2D> overlappingAreas = GetOverlappingAreas();
-        for (int i = 0; i < overlappingAreas.Count; i++)
-        {
-            try
-            {
-                Goal desiredObject = (Goal)overlappingAreas[i];
-                if (desiredObject != null)
-                {
-                    hitGoal = desiredObject;
-                    return true;
-                }
-            }
-            catch (Exception ex)
-            {
-                continue;
-            }
-        }
-        return false;
+        GD.Print($"Ball.cs: Registering Paddle Collision");
+        // AssignDirection(collisionLayer == 2);
     }
 
     private void HandleGoalImpact(Goal hitGoal)
     {
-        gameManager.UpdateScore(hitGoal, true);
-        ResetPosition();
-    }
-
-    private bool IsImpactingBrick(out Brick hitBrick, out uint collisionLayer)
-    {
-        hitBrick = null;
-        collisionLayer = 0;
-        Array<Area2D> overlappingAreas = GetOverlappingAreas();
-        for (int i = 0; i < overlappingAreas.Count; i++)
-        {
-            // GD.Print($"Overlapping Areas at Index {i} for Brick Check: {overlappingAreas[i].Name}");
-            try
-            {
-                Brick desiredObject = (Brick)(overlappingAreas[i].GetParent<Area2D>());
-                if (desiredObject != null && overlappingAreas[i] == collidingObject)
-                {
-                    GD.Print($"Ball.cs: Is Impacting Brick");
-                    hitBrick = desiredObject;
-                    collisionLayer = overlappingAreas[i].CollisionLayer;
-                    return true;
-                }
-            }
-            catch (Exception ex)
-            {
-                continue;
-            }
-        }
-        return false;
-    }
-
-    private void HandleBrickImpact(Brick hitBrick, uint collisionLayer)
-    {
-        if(brickQueue.Contains(hitBrick))
-        {
-            GD.Print($"Ball.cs: {hitBrick.Name} already in Brick Queue");
-            return;
-        }
-
-        hitBrick.ProcessHit();
-        brickQueue.Enqueue(hitBrick);
-        ReverseDirection(collisionLayer == 2);
-        GD.Print($"Ball.cs: Hit {hitBrick.Name}, Adding to Brick Queue\n\n");
-
-        if(brickQueue.Count >= maxCollisionCount)
-        {
-            GD.Print($"Ball.cs: Removing {brickQueue.Peek().Name}");
-            brickQueue.Dequeue();
-        }
+        GD.Print($"Ball.cs: Registering Goal Collision");
+        //gameManager.UpdateScore(hitGoal, true);
+        //ResetPosition();
     }
 }
