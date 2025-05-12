@@ -57,7 +57,7 @@ NodePath("AreaRight"): Vector2(1, 0)
 }
 
 [node name="Ball" parent="ObjectPool" instance=ExtResource("3_xulce")]
-position = Vector2(347, 284)
+position = Vector2(576, 757)
 startingLocation = Vector2(586, 548)
 ballSpeed = 250.0
 

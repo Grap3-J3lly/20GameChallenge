@@ -14,7 +14,6 @@ public partial class Ball : Area2D
     [Export]
 	private float ballSpeed = 10f;
     private float startSpeed;
-	private Vector2 movementState = new Vector2();
 	private Vector2 currentDirection;
 
     [Export]
@@ -56,7 +55,6 @@ public partial class Ball : Area2D
     private void Setup()
     {
         currentDirection = PickRandomDirection();
-        AssignMovementState();
     }
 
     private Vector2 PickRandomDirection()
@@ -66,14 +64,6 @@ public partial class Ball : Area2D
 		return randomDirection;
 	}
 
-	private void AssignMovementState()
-	{
-		if(currentDirection.X > 0) { movementState.X = 1; }
-        if(currentDirection.X < 0) { movementState.X = -1; }
-        if(currentDirection.Y > 0) { movementState.Y = 1; }
-        if(currentDirection.Y < 0) { movementState.Y = -1; }
-    }
-
     // --------------------------------
     //		TRANSFORM LOGIC	
     // --------------------------------
@@ -81,7 +71,8 @@ public partial class Ball : Area2D
     private void Move(double delta)
     {
         // HandleImpactEvents();
-        Vector2 newPosition = new Vector2(Position.X + (ballSpeed * (float)delta) * movementState.X, Position.Y + (ballSpeed * (float)delta) * movementState.Y);
+        Vector2 currentDirectionNormal = currentDirection.Normalized();
+        Vector2 newPosition = new Vector2(Position.X + (ballSpeed * (float)delta) * currentDirectionNormal.X, Position.Y + (ballSpeed * (float)delta) * currentDirectionNormal.Y);
         Position = newPosition;
     }
 
@@ -105,17 +96,17 @@ public partial class Ball : Area2D
 
     private void AssignDirection(bool inXDirection) // , Vector2 directionalAssignment)
     {
-        if (inXDirection)
-        {
-            movementState = new Vector2(-movementState.X, movementState.Y);
-            currentDirection.X *= -1;
-        }
-        else
-        {
-            movementState = new Vector2(movementState.X, -movementState.Y);
-            currentDirection.Y *= -1;
-        }
-        GD.Print($"Ball.cs: Reversing Direction. Current Direction: {currentDirection}, Movement State: {movementState}");
+        //if (inXDirection)
+        //{
+        //    movementState = new Vector2(-movementState.X, movementState.Y);
+        //    currentDirection.X *= -1;
+        //}
+        //else
+        //{
+        //    movementState = new Vector2(movementState.X, -movementState.Y);
+        //    currentDirection.Y *= -1;
+        //}
+        //GD.Print($"Ball.cs: Reversing Direction. Current Direction: {currentDirection}, Movement State: {movementState}");
     }
 
     // --------------------------------
@@ -126,6 +117,7 @@ public partial class Ball : Area2D
     {
         Array<Area2D> overlappingAreas = GetOverlappingAreas();
         Queue<Area2D> areasToHandle = new Queue<Area2D>();
+        Array<Vector2> combinedNormals = new Array<Vector2>();
 
         for (int i = 0; i < overlappingAreas.Count; i++)
         {
@@ -190,7 +182,7 @@ public partial class Ball : Area2D
         }
         if (IsObjectOfType<Paddle>(overlappingArea.GetParent<Area2D>()))
         {
-            HandlePaddleImpact();
+            HandlePaddleImpact(overlappingArea);
             return;
         }
     }
@@ -241,10 +233,21 @@ public partial class Ball : Area2D
         // AssignDirection(!hitWall.IsHorizontal);
     }
 
-    private void HandlePaddleImpact()
+    private void HandlePaddleImpact(Area2D hitPieceOfPaddle)
     {
-        GD.Print($"Ball.cs: Registering Paddle Collision");
         // AssignDirection(collisionLayer == 2);
+        Paddle paddle = hitPieceOfPaddle.GetParent<Paddle>();
+        Vector2 assignedNormal = new Vector2();
+
+        foreach(Area2D piece in paddle.DirectionalValues.Keys)
+        {
+            if(piece == hitPieceOfPaddle)
+            {
+                assignedNormal = paddle.DirectionalValues[piece];
+            }
+        }
+        GD.Print($"Ball.cs: Area2D: {hitPieceOfPaddle.Name}. AssignedNormal: {assignedNormal}");
+        currentDirection = currentDirection.Bounce(assignedNormal);
     }
 
     private void HandleGoalImpact(Goal hitGoal)
