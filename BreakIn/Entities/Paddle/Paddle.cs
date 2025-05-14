@@ -2,7 +2,7 @@ using Godot;
 using Godot.Collections;
 using System;
 
-public partial class Paddle : Area2D
+public partial class Paddle : AnimatableBody2D
 {
     // --------------------------------
     //			VARIABLES	
@@ -12,17 +12,12 @@ public partial class Paddle : Area2D
 	protected int movementState = 0;
     protected float startSpeed;
 
-    [Export]
-    private Dictionary<Area2D, Vector2> directionalValues = new Dictionary<Area2D, Vector2>();
-
     // --------------------------------
     //			PROPERTIES	
     // --------------------------------
 
     public int MovementState { get => movementState; set => movementState = value; }
     public float StartSpeed { get => startSpeed; }
-
-    public Dictionary<Area2D, Vector2> DirectionalValues { get => directionalValues; } 
 
     // --------------------------------
     //		STANDARD FUNCTIONS	
@@ -33,49 +28,59 @@ public partial class Paddle : Area2D
         startSpeed = paddleSpeed;
 	}
 
+    public override void _Process(double delta)
+    {
+        base._Process(delta);
+
+        // HandleMovement(delta);
+    }
+
     public override void _PhysicsProcess(double delta)
     {
         base._PhysicsProcess(delta);
 
-        Move(delta);
+        HandleMovement(delta);
     }
 
     // --------------------------------
     //		MOVEMENT LOGIC	
     // --------------------------------
 
-    protected virtual void Move(double delta)
+    protected virtual void HandleMovement(double delta)
 	{
         float inputDir = Input.GetAxis("ui_left", "ui_right");
-        movementState = Mathf.RoundToInt(inputDir);
+        //movementState = Mathf.RoundToInt(inputDir);
 
-        if (CanMove())
-        {
-            Translate(inputDir, 1.0);
-        }
+        //if (CanMove())
+        //{
+        //    Translate(inputDir, 1.0);
+        //}
+        float movementAmount = inputDir * paddleSpeed * (float)delta;
+        MoveAndCollide(Vector2.Right * movementAmount);
     }
 
 
     protected bool CanMove()
     {
-        Array<Area2D> overlappingAreas = GetOverlappingAreas();
-        for (int i = 0; i < overlappingAreas.Count; i++)
-        {
-            try
-            {
-                Wall potentialWall = (Wall)overlappingAreas[i];
-                // If hit wall & wall is not supposed to stop object, return true
-                if (potentialWall != null && movementState == potentialWall.MovementStateToStop)
-                {
-                    return false;
-                }
-            }
-            catch (Exception e)
-            {
-                continue;
-            }
-        }
         return true;
+        //Array<Area2D> overlappingAreas = GetOverlappingAreas();
+        //for (int i = 0; i < overlappingAreas.Count; i++)
+        //{
+        //    try
+        //    {
+        //        Wall potentialWall = (Wall)overlappingAreas[i];
+        //        // If hit wall & wall is not supposed to stop object, return true
+        //        if (potentialWall != null && movementState == potentialWall.MovementStateToStop)
+        //        {
+        //            return false;
+        //        }
+        //    }
+        //    catch (Exception e)
+        //    {
+        //        continue;
+        //    }
+        //}
+        //return true;
     }
 
     protected void Translate(float movementDirection, double delta)

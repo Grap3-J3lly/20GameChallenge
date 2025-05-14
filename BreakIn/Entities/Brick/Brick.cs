@@ -2,7 +2,7 @@ using Godot;
 using Godot.Collections;
 using System;
 
-public partial class Brick : Area2D
+public partial class Brick : StaticBody2D
 {
     // --------------------------------
     //			VARIABLES	
@@ -15,15 +15,6 @@ public partial class Brick : Area2D
 	private int rowID = 0;
 	[Export]
 	private int layerCount = 0;
-
-    [Export]
-    private Dictionary<Area2D, Vector2> directionalValues = new Dictionary<Area2D, Vector2>();
-
-    // --------------------------------
-    //			PROPERTIES	
-    // --------------------------------
-
-    public Dictionary<Area2D, Vector2> DirectionalValues {  get { return directionalValues; } }
 
     // --------------------------------
     //		STANDARD FUNCTIONS	

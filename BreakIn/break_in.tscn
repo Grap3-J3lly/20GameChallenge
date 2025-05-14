@@ -1,175 +1,91 @@
-[gd_scene load_steps=8 format=3 uid="uid://g5gxb4cpktqk"]
+[gd_scene load_steps=7 format=3 uid="uid://g5gxb4cpktqk"]
 
 [ext_resource type="Script" uid="uid://dk72s2bwdvrrf" path="res://Scene/GameManager.cs" id="1_aunkb"]
 [ext_resource type="PackedScene" uid="uid://dw0ubxif7xkl1" path="res://Entities/Paddle/paddle.tscn" id="1_skalp"]
 [ext_resource type="PackedScene" uid="uid://di2wp66555pv0" path="res://Scene/GameBoard/Walls/wall.tscn" id="2_d7rxa"]
-[ext_resource type="Script" uid="uid://cwav2s11qfmdu" path="res://Scene/GameBoard/Goals/Goal.cs" id="3_ljs5y"]
+[ext_resource type="PackedScene" uid="uid://dual7tj41jj13" path="res://Scene/GameBoard/Goals/enemy_goal.tscn" id="3_2ncp3"]
 [ext_resource type="PackedScene" uid="uid://c47pvo1br7fck" path="res://Entities/Ball/ball.tscn" id="3_xulce"]
-[ext_resource type="Shape2D" uid="uid://be1k8muujqxef" path="res://Scene/GameBoard/Goals/goalCollider.tres" id="4_5pp8v"]
 [ext_resource type="PackedScene" uid="uid://bf43jjavm06nd" path="res://Entities/Brick/brick.tscn" id="7_h5w5b"]
 
 [node name="BreakIn" type="Node2D"]
 
-[node name="GameManager" type="Node" parent="." node_paths=PackedStringArray("paddle", "ball", "enemyGoal")]
+[node name="GameManager" type="Node" parent="." node_paths=PackedStringArray("paddle", "ball")]
 script = ExtResource("1_aunkb")
 paddle = NodePath("../ObjectPool/Paddle")
 ball = NodePath("../ObjectPool/Ball")
-enemyGoal = NodePath("../GameBoard/EnemyGoal")
 
 [node name="GameBoard" type="Node" parent="."]
 
-[node name="WallL" parent="GameBoard" node_paths=PackedStringArray("directionalValues") instance=ExtResource("2_d7rxa")]
+[node name="WallL" parent="GameBoard" instance=ExtResource("2_d7rxa")]
 position = Vector2(0, 440)
-directionalValues = {
-NodePath("."): Vector2(1, 0)
-}
 
 [node name="WallR" parent="GameBoard" instance=ExtResource("2_d7rxa")]
 position = Vector2(1152, 440)
 movementStateToStop = 1
 
-[node name="WallT" parent="GameBoard" node_paths=PackedStringArray("directionalValues") instance=ExtResource("2_d7rxa")]
+[node name="WallT" parent="GameBoard" instance=ExtResource("2_d7rxa")]
 position = Vector2(649.85, 116)
 rotation = 1.5708
 scale = Vector2(1, 1.6)
-directionalValues = {
-NodePath("."): Vector2(0, 1)
-}
 
-[node name="EnemyGoal" type="Area2D" parent="GameBoard"]
+[node name="EnemyGoal" parent="GameBoard" instance=ExtResource("3_2ncp3")]
 position = Vector2(576, 864)
-script = ExtResource("3_ljs5y")
-
-[node name="CollisionShape2D" type="CollisionShape2D" parent="GameBoard/EnemyGoal"]
-shape = ExtResource("4_5pp8v")
 
 [node name="Environment" type="Node" parent="."]
 
 [node name="ObjectPool" type="Node" parent="."]
 
-[node name="Paddle" parent="ObjectPool" node_paths=PackedStringArray("directionalValues") instance=ExtResource("1_skalp")]
+[node name="Paddle" parent="ObjectPool" instance=ExtResource("1_skalp")]
 position = Vector2(576, 796)
-directionalValues = {
-NodePath("AreaTop"): Vector2(0, -1),
-NodePath("AreaBottom"): Vector2(0, 1),
-NodePath("AreaLeft"): Vector2(-1, 0),
-NodePath("AreaRight"): Vector2(1, 0)
-}
 
 [node name="Ball" parent="ObjectPool" instance=ExtResource("3_xulce")]
-position = Vector2(576, 757)
+position = Vector2(577, 751)
 startingLocation = Vector2(586, 548)
 ballSpeed = 250.0
 
-[node name="Brick" parent="ObjectPool" node_paths=PackedStringArray("directionalValues") instance=ExtResource("7_h5w5b")]
+[node name="Brick" parent="ObjectPool" instance=ExtResource("7_h5w5b")]
 position = Vector2(64, 138)
 layerCount = 1
-directionalValues = {
-NodePath("AreaTop"): Vector2(0, -1),
-NodePath("AreaBottom"): Vector2(0, 1),
-NodePath("AreaLeft"): Vector2(-1, 0),
-NodePath("AreaRight"): Vector2(1, 0)
-}
 
-[node name="Brick2" parent="ObjectPool" node_paths=PackedStringArray("directionalValues") instance=ExtResource("7_h5w5b")]
+[node name="Brick2" parent="ObjectPool" instance=ExtResource("7_h5w5b")]
 position = Vector2(166, 138)
 layerCount = 1
-directionalValues = {
-NodePath("AreaTop"): Vector2(0, -1),
-NodePath("AreaBottom"): Vector2(0, 1),
-NodePath("AreaLeft"): Vector2(-1, 0),
-NodePath("AreaRight"): Vector2(1, 0)
-}
 
-[node name="Brick3" parent="ObjectPool" node_paths=PackedStringArray("directionalValues") instance=ExtResource("7_h5w5b")]
+[node name="Brick3" parent="ObjectPool" instance=ExtResource("7_h5w5b")]
 position = Vector2(269, 138)
 layerCount = 1
-directionalValues = {
-NodePath("AreaTop"): Vector2(0, -1),
-NodePath("AreaBottom"): Vector2(0, 1),
-NodePath("AreaLeft"): Vector2(-1, 0),
-NodePath("AreaRight"): Vector2(1, 0)
-}
 
-[node name="Brick4" parent="ObjectPool" node_paths=PackedStringArray("directionalValues") instance=ExtResource("7_h5w5b")]
+[node name="Brick4" parent="ObjectPool" instance=ExtResource("7_h5w5b")]
 position = Vector2(372, 138)
 layerCount = 1
-directionalValues = {
-NodePath("AreaTop"): Vector2(0, -1),
-NodePath("AreaBottom"): Vector2(0, 1),
-NodePath("AreaLeft"): Vector2(-1, 0),
-NodePath("AreaRight"): Vector2(1, 0)
-}
 
-[node name="Brick5" parent="ObjectPool" node_paths=PackedStringArray("directionalValues") instance=ExtResource("7_h5w5b")]
+[node name="Brick5" parent="ObjectPool" instance=ExtResource("7_h5w5b")]
 position = Vector2(474, 138)
-layerCount = 1
-directionalValues = {
-NodePath("AreaTop"): Vector2(0, -1),
-NodePath("AreaBottom"): Vector2(0, 1),
-NodePath("AreaLeft"): Vector2(-1, 0),
-NodePath("AreaRight"): Vector2(1, 0)
-}
+layerCount = 2
 
-[node name="Brick6" parent="ObjectPool" node_paths=PackedStringArray("directionalValues") instance=ExtResource("7_h5w5b")]
+[node name="Brick6" parent="ObjectPool" instance=ExtResource("7_h5w5b")]
 position = Vector2(576, 138)
-layerCount = 1
-directionalValues = {
-NodePath("AreaTop"): Vector2(0, -1),
-NodePath("AreaBottom"): Vector2(0, 1),
-NodePath("AreaLeft"): Vector2(-1, 0),
-NodePath("AreaRight"): Vector2(1, 0)
-}
+layerCount = 2
 
-[node name="Brick7" parent="ObjectPool" node_paths=PackedStringArray("directionalValues") instance=ExtResource("7_h5w5b")]
+[node name="Brick7" parent="ObjectPool" instance=ExtResource("7_h5w5b")]
 position = Vector2(678, 138)
 layerCount = 1
-directionalValues = {
-NodePath("AreaTop"): Vector2(0, -1),
-NodePath("AreaBottom"): Vector2(0, 1),
-NodePath("AreaLeft"): Vector2(-1, 0),
-NodePath("AreaRight"): Vector2(1, 0)
-}
 
-[node name="Brick8" parent="ObjectPool" node_paths=PackedStringArray("directionalValues") instance=ExtResource("7_h5w5b")]
+[node name="Brick8" parent="ObjectPool" instance=ExtResource("7_h5w5b")]
 position = Vector2(780, 138)
 layerCount = 1
-directionalValues = {
-NodePath("AreaTop"): Vector2(0, -1),
-NodePath("AreaBottom"): Vector2(0, 1),
-NodePath("AreaLeft"): Vector2(-1, 0),
-NodePath("AreaRight"): Vector2(1, 0)
-}
 
-[node name="Brick9" parent="ObjectPool" node_paths=PackedStringArray("directionalValues") instance=ExtResource("7_h5w5b")]
+[node name="Brick9" parent="ObjectPool" instance=ExtResource("7_h5w5b")]
 position = Vector2(882, 138)
 layerCount = 1
-directionalValues = {
-NodePath("AreaTop"): Vector2(0, -1),
-NodePath("AreaBottom"): Vector2(0, 1),
-NodePath("AreaLeft"): Vector2(-1, 0),
-NodePath("AreaRight"): Vector2(1, 0)
-}
 
-[node name="Brick10" parent="ObjectPool" node_paths=PackedStringArray("directionalValues") instance=ExtResource("7_h5w5b")]
+[node name="Brick10" parent="ObjectPool" instance=ExtResource("7_h5w5b")]
 position = Vector2(984, 138)
 layerCount = 1
-directionalValues = {
-NodePath("AreaTop"): Vector2(0, -1),
-NodePath("AreaBottom"): Vector2(0, 1),
-NodePath("AreaLeft"): Vector2(-1, 0),
-NodePath("AreaRight"): Vector2(1, 0)
-}
 
-[node name="Brick11" parent="ObjectPool" node_paths=PackedStringArray("directionalValues") instance=ExtResource("7_h5w5b")]
+[node name="Brick11" parent="ObjectPool" instance=ExtResource("7_h5w5b")]
 position = Vector2(1086, 138)
 layerCount = 1
-directionalValues = {
-NodePath("AreaTop"): Vector2(0, -1),
-NodePath("AreaBottom"): Vector2(0, 1),
-NodePath("AreaLeft"): Vector2(-1, 0),
-NodePath("AreaRight"): Vector2(1, 0)
-}
 
 [node name="UI" type="CanvasLayer" parent="."]
 visible = false

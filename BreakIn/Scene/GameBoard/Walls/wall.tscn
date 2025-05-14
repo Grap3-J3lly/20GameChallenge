@@ -8,7 +8,7 @@ size = Vector2(20, 760)
 [sub_resource type="QuadMesh" id="QuadMesh_l2iol"]
 size = Vector2(20, 760)
 
-[node name="WallL" type="Area2D"]
+[node name="WallL" type="StaticBody2D"]
 script = ExtResource("1_qh3gu")
 movementStateToStop = -1
 

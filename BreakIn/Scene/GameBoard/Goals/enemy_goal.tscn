@@ -1,0 +1,10 @@
+[gd_scene load_steps=3 format=3 uid="uid://dual7tj41jj13"]
+
+[ext_resource type="Script" uid="uid://cwav2s11qfmdu" path="res://Scene/GameBoard/Goals/Goal.cs" id="1_ykbk2"]
+[ext_resource type="Shape2D" uid="uid://be1k8muujqxef" path="res://Scene/GameBoard/Goals/goalCollider.tres" id="2_dggk7"]
+
+[node name="EnemyGoal" type="StaticBody2D"]
+script = ExtResource("1_ykbk2")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+shape = ExtResource("2_dggk7")

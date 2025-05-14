@@ -54,15 +54,11 @@ public partial class GameManager : Node
     //		SCORING LOGIC	
     // --------------------------------
 
-    public void UpdateScore(Goal goal, bool increment, int newVal = 0)
+    public void UpdateScore(bool increment, int newVal = 0)
 	{
-
-		if (goal == enemyGoal)
-		{
-			//if (increment) ++playerScore;
-			//else { playerScore = newVal; }
-			//GD.Print("Enemy Score: " + playerScore);
-		}
+		//if (increment) ++playerScore;
+		//else { playerScore = newVal; }
+		//GD.Print("Enemy Score: " + playerScore);
 		DetermineGameOver();
 		ball.BallSpeed += ballIncreaseSpeedAmount;
 	}
@@ -89,7 +85,7 @@ public partial class GameManager : Node
 
     private void RestartGame()
     {
-		UpdateScore(enemyGoal, false);
+		UpdateScore(false);
 		gameOver = false;
 		ball.ResetSpeed();
 		ball.Visible = true;

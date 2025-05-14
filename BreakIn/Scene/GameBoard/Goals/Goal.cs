@@ -1,7 +1,7 @@
 using Godot;
 using System;
 
-public partial class Goal : Area2D
+public partial class Goal : StaticBody2D
 {
 	
 }
