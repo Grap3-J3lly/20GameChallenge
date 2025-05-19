@@ -14,7 +14,7 @@ public partial class Ball : CharacterBody2D
     [Export]
 	private float ballSpeed = 10f;
     private float startSpeed;
-	private Vector2 currentDirection;
+	private Vector2 currentDirection = Vector2.Zero;
 
     [Export]
     private int maxCollisionCount = 3;
@@ -56,7 +56,7 @@ public partial class Ball : CharacterBody2D
 
     private void Setup()
     {
-        currentDirection = PickRandomDirection();
+        // currentDirection = PickRandomDirection();
         startSpeed = ballSpeed;
         Velocity = currentDirection * ballSpeed;
     }
@@ -79,6 +79,15 @@ public partial class Ball : CharacterBody2D
         {
             collisionsWaiting.Enqueue(collision);
         }
+    }
+
+    public void Fire(Vector2 paddleVel)
+    {
+        Reparent(gameManager.ObjectPool);
+        // Setup rng between .1 and .5 for x val of PaddleVelocity
+        Velocity += (2 * ballSpeed * Vector2.Up) + new Vector2(paddleVel.X * (.5f * ballSpeed), paddleVel.Y);
+        // Velocity += ballSpeed * paddleVel;
+        GD.Print($"Velocity: {Velocity}, Ball Speed: {ballSpeed}, PaddleVel: {paddleVel}");
     }
 
     private void ResetPosition()
@@ -136,7 +145,7 @@ public partial class Ball : CharacterBody2D
 
     }
 
-    private void HandlePaddleImpact(KinematicCollision2D collisionInfo) //, Paddle hitPieceOfPaddle)
+    private void HandlePaddleImpact(KinematicCollision2D collisionInfo)
     {
 
         GD.Print($"Ball.cs: Colliding with a Paddle."); // Velocity Before: {Velocity}");
@@ -145,7 +154,7 @@ public partial class Ball : CharacterBody2D
         // GD.Print($"Ball.cs: Colliding with a Paddle. Velocity After: {Velocity}");
     }
 
-    private void HandleWallImpact(KinematicCollision2D collisionInfo) //, Wall hitWall)
+    private void HandleWallImpact(KinematicCollision2D collisionInfo)
     {
         GD.Print($"Ball.cs: Colliding with a wall.");
         Velocity = Velocity.Bounce(collisionInfo.GetNormal());
@@ -158,10 +167,10 @@ public partial class Ball : CharacterBody2D
         hitBrick.ProcessHit();
     }
 
-    private void HandleGoalImpact(KinematicCollision2D collisionInfo) //, Goal hitGoal)
+    private void HandleGoalImpact(KinematicCollision2D collisionInfo)
     {
         GD.Print($"Ball.cs: Colliding with a Goal.");
-        gameManager.UpdateScore(true);
+        gameManager.Reset();
         ResetPosition();
     }
 }

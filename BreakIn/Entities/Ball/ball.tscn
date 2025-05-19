@@ -12,6 +12,7 @@ size = Vector2(20, 20)
 process_priority = 1
 z_index = 2
 script = ExtResource("1_mwafn")
+ballSpeed = 100.0
 
 [node name="MeshInstance2D" type="MeshInstance2D" parent="."]
 mesh = SubResource("QuadMesh_2g1ek")

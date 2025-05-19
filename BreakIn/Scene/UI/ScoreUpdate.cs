@@ -3,9 +3,9 @@ using System;
 
 public partial class ScoreUpdate : RichTextLabel
 {
-	[Export]
-	private bool isPlayerScore = true;
 	private GameManager gameManager;
+	[Export]
+	private string scoreLabelText = "Score: ";
 
 	public override void _Ready()
 	{
@@ -15,6 +15,6 @@ public partial class ScoreUpdate : RichTextLabel
 	
 	public override void _Process(double delta)
 	{
-		// Text = isPlayerScore? gameManager.PlayerScore.ToString() : gameManager.EnemyScore.ToString();
+		Text = scoreLabelText + gameManager.PlayerScore.ToString();
 	}
 }

@@ -7,89 +7,113 @@ public partial class GameManager : Node
 	//			VARIABLES	
 	// --------------------------------
 
+	// Packed Scenes
 	[Export]
+	private PackedScene paddleScene;
+	[Export]
+	private PackedScene ballScene;
+	[Export]
+	private PackedScene brickScene;
+
+	// Major Objects
 	private Paddle paddle;
-    [Export]
 	private Ball ball;
 	[Export]
-	private Goal enemyGoal;
-	[Export]
-	private int winScore = 5;
-	// [Export]
-	// private WinText winText;
+	private Node objectPool;
+
+	// Settings
 	[Export]
 	private float ballIncreaseSpeedAmount = 25f;
-    [Export]
-    private float enemyIncreaseSpeedAmount = 10f;
+	[Export]
+	private float enemyIncreaseSpeedAmount = 10f;
+	[Export]
+	private int playerMaxLives = 3;
 
+	// Hidden Settings
 	private int playerScore = 0;
+	private int playerLives = 3;
 	private bool gameOver = false;
 
-    // --------------------------------
-    //			PROPERTIES	
-    // --------------------------------
+	// --------------------------------
+	//			PROPERTIES	
+	// --------------------------------
 
-    public static GameManager Instance { get; private set; }
-    public Ball Ball { get => ball; }
+	public static GameManager Instance { get; private set; }
+
+	public Ball Ball { get => ball; }
+	public Node ObjectPool { get => objectPool; }
+
 	public int PlayerScore { get => playerScore; set => playerScore = value; }
+	public int PlayerLives { get => playerLives; set => playerLives = value; }
 	public bool GameOver { get => gameOver; }
 
-    // --------------------------------
-    //		STANDARD FUNCTIONS	
-    // --------------------------------
+	// --------------------------------
+	//		STANDARD FUNCTIONS	
+	// --------------------------------
 
-    public override void _Ready()
+	public override void _Ready()
 	{
 		Instance = this;
+		Setup();
 	}
 
-    public override void _Process(double delta)
-    {
-        base._Process(delta);
+	public override void _Process(double delta)
+	{
+		base._Process(delta);
 
 		HandleGeneralInput();
-    }
+		gameOver = DetermineGameOver();
+	}
 
-    // --------------------------------
-    //		SCORING LOGIC	
-    // --------------------------------
+	// --------------------------------
+	//		SCORING LOGIC	
+	// --------------------------------
 
-    public void UpdateScore(bool increment, int newVal = 0)
+	public void ReduceLife()
 	{
-		//if (increment) ++playerScore;
-		//else { playerScore = newVal; }
-		//GD.Print("Enemy Score: " + playerScore);
-		DetermineGameOver();
+		--playerLives;
+		GD.Print($"GameManager.cpp: Reducing Lives to: {playerLives}");
 		ball.BallSpeed += ballIncreaseSpeedAmount;
 	}
 
-	public void DetermineGameOver()
+	public bool DetermineGameOver()
 	{
-		//if(playerScore >= winScore)
-		//{
-		//	//winText.SetTextAndShow("[center]Player Wins!\nPress SPACE to Restart!");
-		//	gameOver = true;
-		//	return;
-		//}
-		//if (enemyScore >= winScore)
-		//{
-  //          //winText.SetTextAndShow("[center]Enemy Wins!\nPress SPACE to Restart!");
-  //          gameOver = true; 
-		//	return;
-		//}
+		return playerLives <= 0;
 	}
 
-    // --------------------------------
-    //		GENERAL LOGIC	
-    // --------------------------------
+	// --------------------------------
+	//		GENERAL LOGIC	
+	// --------------------------------
 
+	private void Setup()
+	{
+		playerScore = 0;
+		playerLives = playerMaxLives;
+		gameOver = false;
+
+		paddle = paddleScene.Instantiate<Paddle>();
+		objectPool.AddChild(paddle);
+
+		ball = ballScene.Instantiate<Ball>();
+		ball.Position = Vector2.Up * 25; // Need to do this elsewhere
+		paddle.AddChild(ball);
+	}
+
+	// Reset handles the ball hitting the goal, but the game not being over
+	public void Reset()
+	{
+		// Need Reset to also reset ball position
+		ball.Reparent(paddle);
+		ReduceLife();
+	}
+
+	// Restart handles the game fully ending
     private void RestartGame()
     {
-		UpdateScore(false);
+		playerLives = playerMaxLives;
 		gameOver = false;
 		ball.ResetSpeed();
 		ball.Visible = true;
-		//winText.Visible = false;
     }
 
     public void HandleGeneralInput()
@@ -97,6 +121,10 @@ public partial class GameManager : Node
 		if(Input.IsActionJustPressed("ui_accept") && gameOver)
 		{
 			RestartGame();
+		}
+		if(Input.IsActionJustPressed("ui_accept") && !gameOver && ball.Velocity == Vector2.Zero)
+		{
+			ball.Fire(paddle.Velocity);
 		}
 		if(Input.IsActionJustPressed("ui_cancel"))
 		{

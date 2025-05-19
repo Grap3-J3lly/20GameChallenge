@@ -1,18 +1,22 @@
-[gd_scene load_steps=7 format=3 uid="uid://g5gxb4cpktqk"]
+[gd_scene load_steps=9 format=3 uid="uid://g5gxb4cpktqk"]
 
 [ext_resource type="Script" uid="uid://dk72s2bwdvrrf" path="res://Scene/GameManager.cs" id="1_aunkb"]
 [ext_resource type="PackedScene" uid="uid://dw0ubxif7xkl1" path="res://Entities/Paddle/paddle.tscn" id="1_skalp"]
 [ext_resource type="PackedScene" uid="uid://di2wp66555pv0" path="res://Scene/GameBoard/Walls/wall.tscn" id="2_d7rxa"]
 [ext_resource type="PackedScene" uid="uid://dual7tj41jj13" path="res://Scene/GameBoard/Goals/enemy_goal.tscn" id="3_2ncp3"]
 [ext_resource type="PackedScene" uid="uid://c47pvo1br7fck" path="res://Entities/Ball/ball.tscn" id="3_xulce"]
+[ext_resource type="Script" uid="uid://o45puakrkpcp" path="res://Scene/UI/UIManager.cs" id="7_d7rxa"]
 [ext_resource type="PackedScene" uid="uid://bf43jjavm06nd" path="res://Entities/Brick/brick.tscn" id="7_h5w5b"]
+[ext_resource type="Script" uid="uid://jdufc67fdyxl" path="res://Scene/UI/ScoreUpdate.cs" id="7_sk1i4"]
 
 [node name="BreakIn" type="Node2D"]
 
-[node name="GameManager" type="Node" parent="." node_paths=PackedStringArray("paddle", "ball")]
+[node name="GameManager" type="Node" parent="." node_paths=PackedStringArray("objectPool")]
 script = ExtResource("1_aunkb")
-paddle = NodePath("../ObjectPool/Paddle")
-ball = NodePath("../ObjectPool/Ball")
+paddleScene = ExtResource("1_skalp")
+ballScene = ExtResource("3_xulce")
+brickScene = ExtResource("7_h5w5b")
+objectPool = NodePath("../ObjectPool")
 
 [node name="GameBoard" type="Node" parent="."]
 
@@ -21,7 +25,6 @@ position = Vector2(0, 440)
 
 [node name="WallR" parent="GameBoard" instance=ExtResource("2_d7rxa")]
 position = Vector2(1152, 440)
-movementStateToStop = 1
 
 [node name="WallT" parent="GameBoard" instance=ExtResource("2_d7rxa")]
 position = Vector2(649.85, 116)
@@ -34,14 +37,6 @@ position = Vector2(576, 864)
 [node name="Environment" type="Node" parent="."]
 
 [node name="ObjectPool" type="Node" parent="."]
-
-[node name="Paddle" parent="ObjectPool" instance=ExtResource("1_skalp")]
-position = Vector2(576, 796)
-
-[node name="Ball" parent="ObjectPool" instance=ExtResource("3_xulce")]
-position = Vector2(577, 751)
-startingLocation = Vector2(586, 548)
-ballSpeed = 250.0
 
 [node name="Brick" parent="ObjectPool" instance=ExtResource("7_h5w5b")]
 position = Vector2(64, 138)
@@ -87,10 +82,12 @@ layerCount = 1
 position = Vector2(1086, 138)
 layerCount = 1
 
-[node name="UI" type="CanvasLayer" parent="."]
-visible = false
+[node name="UI Manager" type="CanvasLayer" parent="." node_paths=PackedStringArray("livesField", "scoreField")]
+script = ExtResource("7_d7rxa")
+livesField = NodePath("WholeCanvas/TopArea/LivesLeftText")
+scoreField = NodePath("WholeCanvas/TopArea/ScoreText")
 
-[node name="WholeCanvas" type="Control" parent="UI"]
+[node name="WholeCanvas" type="Control" parent="UI Manager"]
 layout_mode = 3
 anchors_preset = 15
 anchor_right = 1.0
@@ -98,14 +95,14 @@ anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
 
-[node name="TopArea" type="Control" parent="UI/WholeCanvas"]
+[node name="TopArea" type="Control" parent="UI Manager/WholeCanvas"]
 layout_mode = 1
 anchors_preset = 10
 anchor_right = 1.0
 offset_bottom = 105.0
 grow_horizontal = 2
 
-[node name="LivesLeftText" type="RichTextLabel" parent="UI/WholeCanvas/TopArea"]
+[node name="LivesLeftText" type="RichTextLabel" parent="UI Manager/WholeCanvas/TopArea"]
 layout_mode = 1
 anchors_preset = 4
 anchor_top = 0.5
@@ -118,7 +115,7 @@ grow_vertical = 2
 theme_override_font_sizes/normal_font_size = 40
 text = "Lives Remaining: "
 
-[node name="ScoreText" type="RichTextLabel" parent="UI/WholeCanvas/TopArea"]
+[node name="ScoreText" type="RichTextLabel" parent="UI Manager/WholeCanvas/TopArea"]
 layout_mode = 1
 anchors_preset = 6
 anchor_left = 1.0
@@ -132,3 +129,4 @@ grow_horizontal = 0
 grow_vertical = 2
 theme_override_font_sizes/normal_font_size = 40
 text = "Score: 999"
+script = ExtResource("7_sk1i4")
