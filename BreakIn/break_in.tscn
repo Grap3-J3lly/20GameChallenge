@@ -7,7 +7,7 @@
 [ext_resource type="PackedScene" uid="uid://c47pvo1br7fck" path="res://Entities/Ball/ball.tscn" id="3_xulce"]
 [ext_resource type="Script" uid="uid://o45puakrkpcp" path="res://Scene/UI/UIManager.cs" id="7_d7rxa"]
 [ext_resource type="PackedScene" uid="uid://bf43jjavm06nd" path="res://Entities/Brick/brick.tscn" id="7_h5w5b"]
-[ext_resource type="Script" uid="uid://jdufc67fdyxl" path="res://Scene/UI/ScoreUpdate.cs" id="7_sk1i4"]
+[ext_resource type="Script" uid="uid://b13didcx4upnl" path="res://Scene/ObjectPool.cs" id="7_kjf0u"]
 
 [node name="BreakIn" type="Node2D"]
 
@@ -37,17 +37,18 @@ position = Vector2(576, 864)
 [node name="Environment" type="Node" parent="."]
 
 [node name="ObjectPool" type="Node" parent="."]
+script = ExtResource("7_kjf0u")
 
 [node name="Brick" parent="ObjectPool" instance=ExtResource("7_h5w5b")]
-position = Vector2(64, 138)
+position = Vector2(66, 138)
 layerCount = 1
 
 [node name="Brick2" parent="ObjectPool" instance=ExtResource("7_h5w5b")]
-position = Vector2(166, 138)
+position = Vector2(168, 138)
 layerCount = 1
 
 [node name="Brick3" parent="ObjectPool" instance=ExtResource("7_h5w5b")]
-position = Vector2(269, 138)
+position = Vector2(270, 138)
 layerCount = 1
 
 [node name="Brick4" parent="ObjectPool" instance=ExtResource("7_h5w5b")]
@@ -81,6 +82,12 @@ layerCount = 1
 [node name="Brick11" parent="ObjectPool" instance=ExtResource("7_h5w5b")]
 position = Vector2(1086, 138)
 layerCount = 1
+
+[node name="Brick12" parent="ObjectPool" instance=ExtResource("7_h5w5b")]
+position = Vector2(66, 161)
+layerCount = 1
+
+[node name="Bricks" type="Node" parent="ObjectPool"]
 
 [node name="UI Manager" type="CanvasLayer" parent="." node_paths=PackedStringArray("livesField", "scoreField")]
 script = ExtResource("7_d7rxa")
@@ -129,4 +136,3 @@ grow_horizontal = 0
 grow_vertical = 2
 theme_override_font_sizes/normal_font_size = 40
 text = "Score: 999"
-script = ExtResource("7_sk1i4")

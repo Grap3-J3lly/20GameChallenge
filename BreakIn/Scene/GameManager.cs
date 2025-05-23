@@ -69,11 +69,18 @@ public partial class GameManager : Node
 	//		SCORING LOGIC	
 	// --------------------------------
 
+	public void ReduceScore(int amount = 1)
+	{
+		if(playerScore <= 0) { return; }
+		playerScore -= amount;
+        GD.Print($"GameManager.cpp: Reducing Score to: {playerScore}");
+    }
+
 	public void ReduceLife()
 	{
 		--playerLives;
+		ball.BallSpeed -= ballIncreaseSpeedAmount;
 		GD.Print($"GameManager.cpp: Reducing Lives to: {playerLives}");
-		ball.BallSpeed += ballIncreaseSpeedAmount;
 	}
 
 	public bool DetermineGameOver()
@@ -82,7 +89,7 @@ public partial class GameManager : Node
 	}
 
 	// --------------------------------
-	//		GENERAL LOGIC	
+	//		SETUP LOGIC	
 	// --------------------------------
 
 	private void Setup()
@@ -95,16 +102,18 @@ public partial class GameManager : Node
 		objectPool.AddChild(paddle);
 
 		ball = ballScene.Instantiate<Ball>();
-		ball.Position = Vector2.Up * 25; // Need to do this elsewhere
 		paddle.AddChild(ball);
+		ball.ResetOnPaddle(paddle);
+		// ball.Position = Vector2.Up * 25; // Need to do this elsewhere
 	}
 
 	// Reset handles the ball hitting the goal, but the game not being over
 	public void Reset()
 	{
-		// Need Reset to also reset ball position
-		ball.Reparent(paddle);
+		ball.ResetOnPaddle(paddle);
+		paddle.Reset();
 		ReduceLife();
+		ReduceScore();
 	}
 
 	// Restart handles the game fully ending
@@ -114,6 +123,17 @@ public partial class GameManager : Node
 		gameOver = false;
 		ball.ResetSpeed();
 		ball.Visible = true;
+    }
+
+    // --------------------------------
+    //		GENERAL LOGIC	
+    // --------------------------------
+
+	public void TriggerObjectiveSuccess()
+	{
+        playerScore++;
+		ball.BallSpeed += ballIncreaseSpeedAmount;
+		GD.Print($"GameManager.cs: New Ball Speed: {ball.BallSpeed}");
     }
 
     public void HandleGeneralInput()
@@ -128,7 +148,7 @@ public partial class GameManager : Node
 		}
 		if(Input.IsActionJustPressed("ui_cancel"))
 		{
-
+			// Opens Menu
 		}
 	}
 

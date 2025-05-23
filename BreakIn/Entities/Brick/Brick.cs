@@ -17,6 +17,12 @@ public partial class Brick : StaticBody2D
 	private int layerCount = 0;
 
     // --------------------------------
+    //			PROPERTIES		
+    // --------------------------------
+	
+	public int RowID { get => rowID; set => rowID = value; }
+
+    // --------------------------------
     //		STANDARD FUNCTIONS	
     // --------------------------------
 
@@ -31,7 +37,7 @@ public partial class Brick : StaticBody2D
 		GD.Print($"Brick.cs: Layer Count - {layerCount}");
 		if(layerCount == 0)
 		{
-			gameManager.PlayerScore++;
+			gameManager.TriggerObjectiveSuccess();
 			GD.Print($"Brick.cs: Score - {gameManager.PlayerScore} ");
 			QueueFree();
 			return;

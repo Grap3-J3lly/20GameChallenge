@@ -90,17 +90,11 @@ public partial class Ball : CharacterBody2D
         GD.Print($"Velocity: {Velocity}, Ball Speed: {ballSpeed}, PaddleVel: {paddleVel}");
     }
 
-    private void ResetPosition()
+    public void ResetOnPaddle(Node newParent)
     {
-        Position = startingLocation;
-        if(!gameManager.GameOver)
-        {
-            Setup();
-        }
-        else
-        {
-            Visible = false;
-        }
+        Reparent(newParent);
+        Position = Vector2.Up * 25f;
+        Velocity = Vector2.Zero;
     }
 
     public void ResetSpeed()
@@ -150,8 +144,8 @@ public partial class Ball : CharacterBody2D
 
         GD.Print($"Ball.cs: Colliding with a Paddle."); // Velocity Before: {Velocity}");
         Velocity = Velocity.Bounce(collisionInfo.GetNormal());
-        Velocity += collisionInfo.GetTravel();
-        // GD.Print($"Ball.cs: Colliding with a Paddle. Velocity After: {Velocity}");
+        Velocity += collisionInfo.GetColliderVelocity() * .1f;
+        GD.Print($"Ball.cs: Colliding with a Paddle. Velocity {Velocity}");
     }
 
     private void HandleWallImpact(KinematicCollision2D collisionInfo)
@@ -171,6 +165,5 @@ public partial class Ball : CharacterBody2D
     {
         GD.Print($"Ball.cs: Colliding with a Goal.");
         gameManager.Reset();
-        ResetPosition();
     }
 }

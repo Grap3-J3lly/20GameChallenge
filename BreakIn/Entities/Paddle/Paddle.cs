@@ -14,6 +14,11 @@ public partial class Paddle : AnimatableBody2D
     private float paddleSpeed = 10f;
     private float startSpeed;
 
+    [Export]
+    private float scaleReductionAmount = .05f;
+    [Export]
+    private float minScale = .5f;
+
     private Vector2 velocity;
 
     // --------------------------------
@@ -56,5 +61,26 @@ public partial class Paddle : AnimatableBody2D
     public void ResetSpeed()
     {
         paddleSpeed = startSpeed;
+    }
+
+    public void Reset()
+    {
+        Position = startingLocation;
+    }
+
+    // --------------------------------
+    //		DIFFICULTY LOGIC	
+    // --------------------------------
+
+    private void ReducePaddleSize()
+    {
+        if(Scale.X <= minScale) { return; }
+        Vector2 adjustedScale = new Vector2(Scale.X - scaleReductionAmount, Scale.Y);
+        Scale = adjustedScale;
+    }
+
+    private void ResetPaddleSize()
+    {
+        Scale = Vector2.One;
     }
 }
