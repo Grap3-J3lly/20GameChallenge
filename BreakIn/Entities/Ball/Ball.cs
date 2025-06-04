@@ -164,6 +164,12 @@ public partial class Ball : CharacterBody2D
     private void HandleGoalImpact(KinematicCollision2D collisionInfo)
     {
         GD.Print($"Ball.cs: Colliding with a Goal.");
+        if(gameManager.Balls.Count > 1) 
+        {
+            gameManager.Balls.Remove(this);
+            QueueFree();
+            return;
+        }
         gameManager.Reset();
     }
 }

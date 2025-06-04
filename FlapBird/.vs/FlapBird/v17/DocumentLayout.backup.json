@@ -50,8 +50,7 @@
               "RelativeToolTip": "Scene\\GameManager.cs",
               "ViewState": "AgIAAFcAAAAAAAAAAAD4v2kAAAAhAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-02-11T00:02:15.764Z",
-              "EditorCaption": ""
+              "WhenOpened": "2025-02-11T00:02:15.764Z"
             },
             {
               "$type": "Document",
@@ -63,8 +62,7 @@
               "RelativeToolTip": "Scene\\UI\\QuitButton.cs",
               "ViewState": "AgIAAAAAAAAAAAAAAAAAABIAAAATAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-02-10T23:58:40.649Z",
-              "EditorCaption": ""
+              "WhenOpened": "2025-02-10T23:58:40.649Z"
             },
             {
               "$type": "Document",
@@ -76,8 +74,7 @@
               "RelativeToolTip": "Scene\\UI\\PlayButton.cs",
               "ViewState": "AgIAABAAAAAAAAAAAAAQwBgAAABCAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-02-10T23:58:39.647Z",
-              "EditorCaption": ""
+              "WhenOpened": "2025-02-10T23:58:39.647Z"
             },
             {
               "$type": "Document",
@@ -89,8 +86,7 @@
               "RelativeToolTip": "Scene\\Environment\\Island.cs",
               "ViewState": "AgIAAAgAAAAAAAAAAAAAwCAAAAAAAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-01-08T23:21:51.438Z",
-              "EditorCaption": ""
+              "WhenOpened": "2025-01-08T23:21:51.438Z"
             },
             {
               "$type": "Document",
@@ -102,8 +98,7 @@
               "RelativeToolTip": "Scene\\UI\\UIManager.cs",
               "ViewState": "AgIAABoAAAAAAAAAAAAjwBQAAAAYAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2024-10-24T23:55:37.688Z",
-              "EditorCaption": ""
+              "WhenOpened": "2024-10-24T23:55:37.688Z"
             },
             {
               "$type": "Document",
@@ -115,8 +110,7 @@
               "RelativeToolTip": "Scene\\Environment\\Wall.cs",
               "ViewState": "AgIAAEgAAAAAAAAAAAAMwFgAAAAcAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2024-10-21T23:27:49.367Z",
-              "EditorCaption": ""
+              "WhenOpened": "2024-10-21T23:27:49.367Z"
             },
             {
               "$type": "Document",
@@ -126,7 +120,7 @@
               "RelativeDocumentMoniker": "Entities\\Characters\\Character.cs",
               "ToolTip": "C:\\Users\\James\\Dev\\Godot\\20GameChallenge\\FlapBird\\Entities\\Characters\\Character.cs",
               "RelativeToolTip": "Entities\\Characters\\Character.cs",
-              "ViewState": "AgIAADUAAAAAAAAAAAAWwEUAAAATAAAAAAAAAA==",
+              "ViewState": "AgIAAH4AAAAAAAAAAAAowIsAAAAOAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
               "WhenOpened": "2024-10-21T22:56:53.529Z",
               "EditorCaption": ""

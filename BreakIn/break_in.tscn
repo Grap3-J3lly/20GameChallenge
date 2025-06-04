@@ -1,22 +1,27 @@
-[gd_scene load_steps=9 format=3 uid="uid://g5gxb4cpktqk"]
+[gd_scene load_steps=10 format=3 uid="uid://g5gxb4cpktqk"]
 
-[ext_resource type="Script" uid="uid://dk72s2bwdvrrf" path="res://Scene/GameManager.cs" id="1_aunkb"]
+[ext_resource type="Script" uid="uid://dk72s2bwdvrrf" path="res://Scene/Managers/GameManager.cs" id="1_aunkb"]
 [ext_resource type="PackedScene" uid="uid://dw0ubxif7xkl1" path="res://Entities/Paddle/paddle.tscn" id="1_skalp"]
 [ext_resource type="PackedScene" uid="uid://di2wp66555pv0" path="res://Scene/GameBoard/Walls/wall.tscn" id="2_d7rxa"]
 [ext_resource type="PackedScene" uid="uid://dual7tj41jj13" path="res://Scene/GameBoard/Goals/enemy_goal.tscn" id="3_2ncp3"]
 [ext_resource type="PackedScene" uid="uid://c47pvo1br7fck" path="res://Entities/Ball/ball.tscn" id="3_xulce"]
+[ext_resource type="Script" uid="uid://c7rm6lquvpdu5" path="res://Scene/Managers/PowerUpManager.cs" id="5_kjf0u"]
 [ext_resource type="Script" uid="uid://o45puakrkpcp" path="res://Scene/UI/UIManager.cs" id="7_d7rxa"]
 [ext_resource type="PackedScene" uid="uid://bf43jjavm06nd" path="res://Entities/Brick/brick.tscn" id="7_h5w5b"]
-[ext_resource type="Script" uid="uid://b13didcx4upnl" path="res://Scene/ObjectPool.cs" id="7_kjf0u"]
+[ext_resource type="Script" uid="uid://b13didcx4upnl" path="res://Scene/Managers/ObjectPool.cs" id="7_kjf0u"]
 
 [node name="BreakIn" type="Node2D"]
 
-[node name="GameManager" type="Node" parent="." node_paths=PackedStringArray("objectPool")]
+[node name="GameManager" type="Node" parent="." node_paths=PackedStringArray("objectPool", "powerUpManager")]
 script = ExtResource("1_aunkb")
 paddleScene = ExtResource("1_skalp")
 ballScene = ExtResource("3_xulce")
 brickScene = ExtResource("7_h5w5b")
 objectPool = NodePath("../ObjectPool")
+powerUpManager = NodePath("../PowerUpManager")
+
+[node name="PowerUpManager" type="Node" parent="."]
+script = ExtResource("5_kjf0u")
 
 [node name="GameBoard" type="Node" parent="."]
 
@@ -36,56 +41,9 @@ position = Vector2(576, 864)
 
 [node name="Environment" type="Node" parent="."]
 
-[node name="ObjectPool" type="Node" parent="."]
+[node name="ObjectPool" type="Node" parent="." node_paths=PackedStringArray("brickParent")]
 script = ExtResource("7_kjf0u")
-
-[node name="Brick" parent="ObjectPool" instance=ExtResource("7_h5w5b")]
-position = Vector2(66, 138)
-layerCount = 1
-
-[node name="Brick2" parent="ObjectPool" instance=ExtResource("7_h5w5b")]
-position = Vector2(168, 138)
-layerCount = 1
-
-[node name="Brick3" parent="ObjectPool" instance=ExtResource("7_h5w5b")]
-position = Vector2(270, 138)
-layerCount = 1
-
-[node name="Brick4" parent="ObjectPool" instance=ExtResource("7_h5w5b")]
-position = Vector2(372, 138)
-layerCount = 1
-
-[node name="Brick5" parent="ObjectPool" instance=ExtResource("7_h5w5b")]
-position = Vector2(474, 138)
-layerCount = 2
-
-[node name="Brick6" parent="ObjectPool" instance=ExtResource("7_h5w5b")]
-position = Vector2(576, 138)
-layerCount = 2
-
-[node name="Brick7" parent="ObjectPool" instance=ExtResource("7_h5w5b")]
-position = Vector2(678, 138)
-layerCount = 1
-
-[node name="Brick8" parent="ObjectPool" instance=ExtResource("7_h5w5b")]
-position = Vector2(780, 138)
-layerCount = 1
-
-[node name="Brick9" parent="ObjectPool" instance=ExtResource("7_h5w5b")]
-position = Vector2(882, 138)
-layerCount = 1
-
-[node name="Brick10" parent="ObjectPool" instance=ExtResource("7_h5w5b")]
-position = Vector2(984, 138)
-layerCount = 1
-
-[node name="Brick11" parent="ObjectPool" instance=ExtResource("7_h5w5b")]
-position = Vector2(1086, 138)
-layerCount = 1
-
-[node name="Brick12" parent="ObjectPool" instance=ExtResource("7_h5w5b")]
-position = Vector2(66, 161)
-layerCount = 1
+brickParent = NodePath("Bricks")
 
 [node name="Bricks" type="Node" parent="ObjectPool"]
 

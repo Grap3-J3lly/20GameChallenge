@@ -38,6 +38,7 @@ public partial class Paddle : AnimatableBody2D
 	{
         startSpeed = paddleSpeed;
         Position = startingLocation;
+        GameManager.Instance.RowClear += ReducePaddleSize;
 	}
 
     public override void _PhysicsProcess(double delta)
@@ -74,6 +75,7 @@ public partial class Paddle : AnimatableBody2D
 
     private void ReducePaddleSize()
     {
+        GD.Print($"Paddle.cs: Attempting to reduce Paddle Size");
         if(Scale.X <= minScale) { return; }
         Vector2 adjustedScale = new Vector2(Scale.X - scaleReductionAmount, Scale.Y);
         Scale = adjustedScale;

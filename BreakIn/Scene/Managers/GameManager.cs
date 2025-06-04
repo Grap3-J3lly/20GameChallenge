@@ -1,4 +1,5 @@
 using Godot;
+using Godot.Collections;
 using System;
 
 public partial class GameManager : Node
@@ -17,9 +18,12 @@ public partial class GameManager : Node
 
 	// Major Objects
 	private Paddle paddle;
-	private Ball ball;
+
+	private Array<Ball> balls = new Array<Ball>();
 	[Export]
-	private Node objectPool;
+	private ObjectPool objectPool;
+	[Export]
+	private PowerUpManager powerUpManager;
 
 	// Settings
 	[Export]
@@ -34,14 +38,20 @@ public partial class GameManager : Node
 	private int playerLives = 3;
 	private bool gameOver = false;
 
+	// Signals
+	[Signal]
+	public delegate void RowClearEventHandler();
+
 	// --------------------------------
 	//			PROPERTIES	
 	// --------------------------------
 
 	public static GameManager Instance { get; private set; }
 
-	public Ball Ball { get => ball; }
-	public Node ObjectPool { get => objectPool; }
+	public PackedScene BallScene { get => ballScene; }
+
+	public Array<Ball> Balls { get => balls; }
+	public ObjectPool ObjectPool { get => objectPool; }
 
 	public int PlayerScore { get => playerScore; set => playerScore = value; }
 	public int PlayerLives { get => playerLives; set => playerLives = value; }
@@ -79,7 +89,11 @@ public partial class GameManager : Node
 	public void ReduceLife()
 	{
 		--playerLives;
-		ball.BallSpeed -= ballIncreaseSpeedAmount;
+
+		foreach (Ball ball in Balls)
+		{
+			ball.BallSpeed -= ballIncreaseSpeedAmount;
+		}
 		GD.Print($"GameManager.cpp: Reducing Lives to: {playerLives}");
 	}
 
@@ -101,16 +115,20 @@ public partial class GameManager : Node
 		paddle = paddleScene.Instantiate<Paddle>();
 		objectPool.AddChild(paddle);
 
-		ball = ballScene.Instantiate<Ball>();
-		paddle.AddChild(ball);
-		ball.ResetOnPaddle(paddle);
+		Ball newBall = ballScene.Instantiate<Ball>();
+		balls.Add(newBall);
+		paddle.AddChild(newBall);
+        newBall.ResetOnPaddle(paddle);
 		// ball.Position = Vector2.Up * 25; // Need to do this elsewhere
+
+		// Manually assigning difficulty to easy, need to change per level
+		objectPool.SpawnBricks(brickScene, 1);
 	}
 
 	// Reset handles the ball hitting the goal, but the game not being over
 	public void Reset()
 	{
-		ball.ResetOnPaddle(paddle);
+		balls[0].ResetOnPaddle(paddle);
 		paddle.Reset();
 		ReduceLife();
 		ReduceScore();
@@ -121,8 +139,8 @@ public partial class GameManager : Node
     {
 		playerLives = playerMaxLives;
 		gameOver = false;
-		ball.ResetSpeed();
-		ball.Visible = true;
+		balls[0].ResetSpeed();
+		balls[0].Visible = true;
     }
 
     // --------------------------------
@@ -132,8 +150,12 @@ public partial class GameManager : Node
 	public void TriggerObjectiveSuccess()
 	{
         playerScore++;
-		ball.BallSpeed += ballIncreaseSpeedAmount;
-		GD.Print($"GameManager.cs: New Ball Speed: {ball.BallSpeed}");
+
+		foreach (Ball ball in balls)
+		{
+			ball.BallSpeed += ballIncreaseSpeedAmount;
+		}
+		GD.Print($"GameManager.cs: New Ball Speed: {balls[0].BallSpeed}");
     }
 
     public void HandleGeneralInput()
@@ -142,13 +164,15 @@ public partial class GameManager : Node
 		{
 			RestartGame();
 		}
-		if(Input.IsActionJustPressed("ui_accept") && !gameOver && ball.Velocity == Vector2.Zero)
+		if(Input.IsActionJustPressed("ui_accept") && !gameOver && balls[0].Velocity == Vector2.Zero)
 		{
-			ball.Fire(paddle.Velocity);
+			balls[0].Fire(paddle.Velocity);
 		}
 		if(Input.IsActionJustPressed("ui_cancel"))
 		{
 			// Opens Menu
+			GD.Print($"GameManager.cs: Triggering Tri Ball");
+			powerUpManager.TriggerPowerUp_TriBall();
 		}
 	}
 
