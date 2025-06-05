@@ -56,7 +56,11 @@ public partial class Paddle : AnimatableBody2D
         float inputDir = Input.GetAxis("ui_left", "ui_right");
         float movementAmount = inputDir * paddleSpeed * (float)delta;
         velocity = Vector2.Right * movementAmount;
-        MoveAndCollide(velocity);
+        KinematicCollision2D collision = MoveAndCollide(velocity, false, .08f, true);
+        if (collision != null)
+        {
+            HandleCollision(collision);
+        }
     }
 
     public void ResetSpeed()
@@ -67,6 +71,26 @@ public partial class Paddle : AnimatableBody2D
     public void Reset()
     {
         Position = startingLocation;
+    }
+
+    // --------------------------------
+    //		COLLISION LOGIC	
+    // --------------------------------
+
+    public void HandleCollision(KinematicCollision2D collision)
+    {
+        GodotObject collidingObject = collision.GetCollider();
+        Ball ball = collidingObject as Ball;
+
+
+        if (ball != null)
+        {
+
+            GD.Print($"Paddle.cs: Collision Normal: {collision.GetNormal()}");
+            ball.Velocity -= Velocity.Bounce(collision.GetNormal());
+            // Currently, the paddle is being stopped by the ball when hit on the side, 
+            // considering disabling collision on ball after hitting paddle and changing course.
+        }
     }
 
     // --------------------------------

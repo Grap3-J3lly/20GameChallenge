@@ -171,8 +171,9 @@ public partial class GameManager : Node
 		if(Input.IsActionJustPressed("ui_cancel"))
 		{
 			// Opens Menu
-			GD.Print($"GameManager.cs: Triggering Tri Ball");
-			powerUpManager.TriggerPowerUp_TriBall();
+			GD.Print($"GameManager.cs: Triggering Powerup");
+			// powerUpManager.Debug_TriBall();
+			powerUpManager.Debug_SuperBall();
 		}
 	}
 

@@ -58,8 +58,10 @@ public partial class ObjectPool : Node
             {
                 Brick newBrick = brickScn.Instantiate<Brick>();
                 brickParent.AddChild(newBrick);
+                bricks.Add(newBrick);
                 newBrick.RowID = y;
                 newBrick.Position = initialSpawnPosition + (new Vector2(distancePerBrick.X * x, distancePerBrick.Y * y));
+                newBrick.LayerCount = rowCount - y - 1;
             }
         }
 

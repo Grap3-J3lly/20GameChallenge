@@ -21,12 +21,18 @@ public partial class Ball : CharacterBody2D
 
     private Queue<KinematicCollision2D> collisionsWaiting = new Queue<KinematicCollision2D>();
 
+    // Powerup Info
+    private bool superMode = false;
+    private int brickBreakCount = 0;
+
     // --------------------------------
     //			PROPERTIES	
     // --------------------------------
 
     public float BallSpeed { get => ballSpeed; set => ballSpeed = value; }
     public Vector2 CurrentDirection { get => currentDirection; }
+
+    public bool SuperMode { get => superMode; set => superMode = value; }
 
     // --------------------------------
     //		STANDARD FUNCTIONS	
@@ -87,7 +93,7 @@ public partial class Ball : CharacterBody2D
         // Setup rng between .1 and .5 for x val of PaddleVelocity
         Velocity += (2 * ballSpeed * Vector2.Up) + new Vector2(paddleVel.X * (.5f * ballSpeed), paddleVel.Y);
         // Velocity += ballSpeed * paddleVel;
-        GD.Print($"Velocity: {Velocity}, Ball Speed: {ballSpeed}, PaddleVel: {paddleVel}");
+        GD.Print($"Ball.cs: Velocity: {Velocity}, Ball Speed: {ballSpeed}, PaddleVel: {paddleVel}");
     }
 
     public void ResetOnPaddle(Node newParent)
@@ -114,51 +120,62 @@ public partial class Ball : CharacterBody2D
         GodotObject collidingObject = currentCollision.GetCollider();
 
         Paddle potentialPaddle = collidingObject as Paddle;
+        Brick potentialBrick = collidingObject as Brick;
+        Goal potentialGoal = collidingObject as Goal;
+        Wall potentialWall = collidingObject as Wall;
+        Ball potentialBall = collidingObject as Ball;
+
         if(potentialPaddle != null)
         {
             HandlePaddleImpact(currentCollision);
         }
-
-        Wall potentialWall = collidingObject as Wall;
-        if(potentialWall != null)
-        {
-            HandleWallImpact(currentCollision);
-        }
-        
-        Brick potentialBrick = collidingObject as Brick;
         if (potentialBrick != null)
         {
             HandleBrickImpact(currentCollision, potentialBrick);
         }
-
-        Goal potentialGoal = collidingObject as Goal;
-        if(potentialGoal != null)
+        if (potentialWall != null)
+        {
+            HandleWallImpact(currentCollision);
+        }
+        if (potentialGoal != null)
         {
             HandleGoalImpact(currentCollision);
         }
-
+        if(potentialBall != null)
+        {
+            HandleDefaultImpact(currentCollision);
+        }
     }
 
+    private void HandleDefaultImpact(KinematicCollision2D collisionInfo)
+    {
+        // GD.Print($"Ball.cs: Colliding with a wall.");
+        Velocity = Velocity.Bounce(collisionInfo.GetNormal());
+    }
     private void HandlePaddleImpact(KinematicCollision2D collisionInfo)
     {
 
         GD.Print($"Ball.cs: Colliding with a Paddle."); // Velocity Before: {Velocity}");
-        Velocity = Velocity.Bounce(collisionInfo.GetNormal());
+        HandleDefaultImpact(collisionInfo);
         Velocity += collisionInfo.GetColliderVelocity() * .1f;
         GD.Print($"Ball.cs: Colliding with a Paddle. Velocity {Velocity}");
-    }
-
-    private void HandleWallImpact(KinematicCollision2D collisionInfo)
-    {
-        GD.Print($"Ball.cs: Colliding with a wall.");
-        Velocity = Velocity.Bounce(collisionInfo.GetNormal());
     }
 
     private void HandleBrickImpact(KinematicCollision2D collisionInfo, Brick hitBrick)
     {
         GD.Print($"Ball.cs: Colliding with a Brick.");
-        Velocity = Velocity.Bounce(collisionInfo.GetNormal());
-        hitBrick.ProcessHit();
+        if(!superMode)
+        {
+            HandleDefaultImpact(collisionInfo);
+        }
+        hitBrick.ProcessHit(superMode);
+        brickBreakCount++;
+    }
+
+    private void HandleWallImpact(KinematicCollision2D collisionInfo)
+    {
+        HandleDefaultImpact(collisionInfo);
+        ResetSuperMode();
     }
 
     private void HandleGoalImpact(KinematicCollision2D collisionInfo)
@@ -172,4 +189,18 @@ public partial class Ball : CharacterBody2D
         }
         gameManager.Reset();
     }
+
+    // --------------------------------
+    //		    POWERUP LOGIC	
+    // --------------------------------
+
+    private void ResetSuperMode()
+    {
+        if (superMode && brickBreakCount > 0)
+        {
+            superMode = false;
+            brickBreakCount = 0;
+        }
+    }
+
 }

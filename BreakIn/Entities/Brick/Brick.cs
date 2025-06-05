@@ -22,6 +22,7 @@ public partial class Brick : StaticBody2D
     // --------------------------------
 	
 	public int RowID { get => rowID; set => rowID = value; }
+	public int LayerCount { get => layerCount; set => layerCount = value; }
 
     // --------------------------------
     //		STANDARD FUNCTIONS	
@@ -34,10 +35,10 @@ public partial class Brick : StaticBody2D
 		Modulate = layerColors[layerCount];
 	}
 
-	public void ProcessHit()
+	public void ProcessHit(bool superBall)
 	{
 		GD.Print($"Brick.cs: Layer Count - {layerCount}");
-		if(layerCount == 0)
+		if(layerCount == 0 || superBall)
 		{
 			gameManager.TriggerObjectiveSuccess();
 			GD.Print($"Brick.cs: Score - {gameManager.PlayerScore} ");
@@ -52,6 +53,7 @@ public partial class Brick : StaticBody2D
 	private void CheckIfBrickRowEmpty()
 	{
 		int bricksInRow = objectPool.GetBrickCountByRowID(rowID);
+		// GD.Print($"Brick.cs: Bricks Remaining in Row {rowID}: {bricksInRow}");
 		if (bricksInRow != 0)
 		{
 			return;
