@@ -48,8 +48,10 @@ public partial class GameManager : Node
 
 	public static GameManager Instance { get; private set; }
 
+	public PackedScene PaddleScene { get => paddleScene; }
 	public PackedScene BallScene { get => ballScene; }
 
+	public Paddle Paddle { get => paddle; }
 	public Array<Ball> Balls { get => balls; }
 	public ObjectPool ObjectPool { get => objectPool; }
 
@@ -173,7 +175,10 @@ public partial class GameManager : Node
 			// Opens Menu
 			GD.Print($"GameManager.cs: Triggering Powerup");
 			// powerUpManager.Debug_TriBall();
-			powerUpManager.Debug_SuperBall();
+			// powerUpManager.Debug_SuperBall();
+			// powerUpManager.Debug_SuperWide();
+			// powerUpManager.Debug_PaddleSpeed();
+			powerUpManager.Debug_Shield();
 		}
 	}
 

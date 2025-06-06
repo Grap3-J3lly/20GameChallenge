@@ -9,6 +9,10 @@ public partial class Paddle : AnimatableBody2D
     // --------------------------------
     [Export]
     private Vector2 startingLocation = new Vector2(576.0f, 796.0f);
+    [Export]
+    private MeshInstance2D meshInstance;
+    [Export]
+    private CollisionShape2D collisionShape;
 
     [Export]
     private float paddleSpeed = 10f;
@@ -21,11 +25,15 @@ public partial class Paddle : AnimatableBody2D
 
     private Vector2 velocity;
 
+    // Powerup Info
+    private bool superMode = false;
+
     // --------------------------------
     //			PROPERTIES	
     // --------------------------------
 
     public Vector2 StartingLocation { get => startingLocation; set => startingLocation = value; } 
+    public float PaddleSpeed { get => paddleSpeed; set => paddleSpeed = value; }
     public float StartSpeed { get => startSpeed; }
 
     public Vector2 Velocity { get => velocity; set => velocity = value; }
@@ -59,7 +67,7 @@ public partial class Paddle : AnimatableBody2D
         KinematicCollision2D collision = MoveAndCollide(velocity, false, .08f, true);
         if (collision != null)
         {
-            HandleCollision(collision);
+            HandleCollision(collision, delta);
         }
     }
 
@@ -77,19 +85,17 @@ public partial class Paddle : AnimatableBody2D
     //		COLLISION LOGIC	
     // --------------------------------
 
-    public void HandleCollision(KinematicCollision2D collision)
+    public void HandleCollision(KinematicCollision2D collision, double delta)
     {
+        float realDelta = (float)delta;
         GodotObject collidingObject = collision.GetCollider();
         Ball ball = collidingObject as Ball;
 
 
         if (ball != null)
-        {
-
-            GD.Print($"Paddle.cs: Collision Normal: {collision.GetNormal()}");
-            ball.Velocity -= Velocity.Bounce(collision.GetNormal());
-            // Currently, the paddle is being stopped by the ball when hit on the side, 
-            // considering disabling collision on ball after hitting paddle and changing course.
+        {            
+            // Gross hack but it does what I want
+            ball.Velocity += (5 * Velocity) + (ball.Velocity.Bounce(collision.GetNormal()) * realDelta);
         }
     }
 
@@ -99,14 +105,24 @@ public partial class Paddle : AnimatableBody2D
 
     private void ReducePaddleSize()
     {
-        GD.Print($"Paddle.cs: Attempting to reduce Paddle Size");
-        if(Scale.X <= minScale) { return; }
-        Vector2 adjustedScale = new Vector2(Scale.X - scaleReductionAmount, Scale.Y);
-        Scale = adjustedScale;
+        ChangePaddleSize(-scaleReductionAmount);
     }
 
-    private void ResetPaddleSize()
+    public void ChangePaddleSize(float changeAmount, bool isSuper = false)
     {
-        Scale = Vector2.One;
+        GD.Print($"Paddle.cs: Attempting to change Paddle Size");
+        if (meshInstance.Scale.X <= minScale || superMode) { return; }
+        Vector2 adjustedScale = new Vector2(meshInstance.Scale.X + changeAmount, meshInstance.Scale.Y);
+        meshInstance.Scale = adjustedScale;
+        collisionShape.Scale = adjustedScale;
+        superMode = isSuper;
+    }
+
+    public void ResetPaddleSize()
+    {
+        meshInstance.Scale = Vector2.One;
+        collisionShape.Scale = Vector2.One;
+        superMode = false;
+        GD.Print($"Paddle.cs: Resetting Paddle Size");
     }
 }

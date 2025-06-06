@@ -22,6 +22,7 @@ powerUpManager = NodePath("../PowerUpManager")
 
 [node name="PowerUpManager" type="Node" parent="."]
 script = ExtResource("5_kjf0u")
+wallScene = ExtResource("2_d7rxa")
 
 [node name="GameBoard" type="Node" parent="."]
 
@@ -48,6 +49,7 @@ brickParent = NodePath("Bricks")
 [node name="Bricks" type="Node" parent="ObjectPool"]
 
 [node name="UI Manager" type="CanvasLayer" parent="." node_paths=PackedStringArray("livesField", "scoreField")]
+visible = false
 script = ExtResource("7_d7rxa")
 livesField = NodePath("WholeCanvas/TopArea/LivesLeftText")
 scoreField = NodePath("WholeCanvas/TopArea/ScoreText")
