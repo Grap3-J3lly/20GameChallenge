@@ -13,8 +13,6 @@ public partial class GameManager : Node
 	private PackedScene paddleScene;
 	[Export]
 	private PackedScene ballScene;
-	[Export]
-	private PackedScene brickScene;
 
 	// Major Objects
 	private Paddle paddle;
@@ -54,6 +52,7 @@ public partial class GameManager : Node
 	public Paddle Paddle { get => paddle; }
 	public Array<Ball> Balls { get => balls; }
 	public ObjectPool ObjectPool { get => objectPool; }
+	public PowerUpManager PowerUpManager { get => powerUpManager; }
 
 	public int PlayerScore { get => playerScore; set => playerScore = value; }
 	public int PlayerLives { get => playerLives; set => playerLives = value; }
@@ -124,7 +123,7 @@ public partial class GameManager : Node
 		// ball.Position = Vector2.Up * 25; // Need to do this elsewhere
 
 		// Manually assigning difficulty to easy, need to change per level
-		objectPool.SpawnBricks(brickScene, 1);
+		objectPool.SpawnBricks(1);
 	}
 
 	// Reset handles the ball hitting the goal, but the game not being over
@@ -178,7 +177,7 @@ public partial class GameManager : Node
 			// powerUpManager.Debug_SuperBall();
 			// powerUpManager.Debug_SuperWide();
 			// powerUpManager.Debug_PaddleSpeed();
-			powerUpManager.Debug_Shield();
+			// powerUpManager.Debug_Shield();
 		}
 	}
 

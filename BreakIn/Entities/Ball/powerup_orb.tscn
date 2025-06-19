@@ -1,0 +1,10 @@
+[gd_scene load_steps=3 format=3 uid="uid://cj18gu8fxmlk"]
+
+[ext_resource type="PackedScene" uid="uid://c47pvo1br7fck" path="res://Entities/Ball/ball.tscn" id="1_5mc2u"]
+[ext_resource type="Script" uid="uid://cfwtk6j0jeihy" path="res://Entities/Ball/PowerupOrb.cs" id="2_rixcl"]
+
+[node name="PowerupOrb" instance=ExtResource("1_5mc2u")]
+collision_layer = 2
+collision_mask = 2
+script = ExtResource("2_rixcl")
+colors = Array[Color]([Color(0, 0, 0, 1), Color(1, 0, 0, 1), Color(0, 1, 0, 1), Color(0, 0, 1, 1), Color(0.648998, 0.00338513, 0.815298, 1)])

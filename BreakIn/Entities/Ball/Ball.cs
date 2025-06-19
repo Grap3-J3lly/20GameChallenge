@@ -8,18 +8,18 @@ public partial class Ball : CharacterBody2D
     // --------------------------------
     //			VARIABLES	
     // --------------------------------
-    private GameManager gameManager;
+    protected GameManager gameManager;
     [Export]
     private Vector2 startingLocation = new Vector2();
     [Export]
 	private float ballSpeed = 10f;
     private float startSpeed;
-	private Vector2 currentDirection = Vector2.Zero;
+	protected Vector2 currentDirection = Vector2.Zero;
 
     [Export]
     private int maxCollisionCount = 3;
 
-    private Queue<KinematicCollision2D> collisionsWaiting = new Queue<KinematicCollision2D>();
+    protected Queue<KinematicCollision2D> collisionsWaiting = new Queue<KinematicCollision2D>();
 
     // Powerup Info
     private bool superMode = false;
@@ -33,6 +33,7 @@ public partial class Ball : CharacterBody2D
     public Vector2 CurrentDirection { get => currentDirection; }
 
     public bool SuperMode { get => superMode; set => superMode = value; }
+    public int BrickBreakCount { get => brickBreakCount; set => brickBreakCount = value; }
 
     // --------------------------------
     //		STANDARD FUNCTIONS	
@@ -78,7 +79,7 @@ public partial class Ball : CharacterBody2D
     //		TRANSFORM LOGIC	
     // --------------------------------
 
-    private void HandleMovement(double delta)
+    protected void HandleMovement(double delta)
     {
         KinematicCollision2D collision = MoveAndCollide(Velocity * (float)delta);
         if (collision != null)
@@ -112,7 +113,7 @@ public partial class Ball : CharacterBody2D
     //		    IMPACT LOGIC	
     // --------------------------------
 
-    public void HandleCollision()
+    public virtual void HandleCollision()
     {
         if(collisionsWaiting.Count <= 0) { return; }
         KinematicCollision2D currentCollision = collisionsWaiting.Dequeue();
@@ -152,7 +153,7 @@ public partial class Ball : CharacterBody2D
         // GD.Print($"Ball.cs: Colliding with a wall.");
         Velocity = Velocity.Bounce(collisionInfo.GetNormal());
     }
-    private void HandlePaddleImpact(KinematicCollision2D collisionInfo)
+    protected virtual void HandlePaddleImpact(KinematicCollision2D collisionInfo)
     {
 
         GD.Print($"Ball.cs: Colliding with a Paddle."); // Velocity Before: {Velocity}");

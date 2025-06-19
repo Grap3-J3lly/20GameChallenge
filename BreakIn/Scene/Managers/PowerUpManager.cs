@@ -11,6 +11,9 @@ public partial class PowerUpManager : Node
     public static PowerUpManager Instance;
     public GameManager gameManager;
 
+    [Export]
+    private PackedScene powerupOrbScene;
+
     private Paddle paddle;
 
     // Tri Ball Info
@@ -72,10 +75,18 @@ public partial class PowerUpManager : Node
     //		    POWERUP LOGIC	
     // --------------------------------
 
-    public void TriggerRandomPowerup()
+    /// <summary>
+    /// Trigger one of the supported powerups by a given index. 
+    /// </summary>
+    /// <param name="powerupIndex">Index 0: TriBall
+    /// Index 1: SuperBall
+    /// Index 2: SuperWide
+    /// Index 3: Shield
+    /// Index 4: PaddleSpeed</param>
+    public void TriggerPowerupByIndex(int powerupIndex)
     {
-        RandomNumberGenerator rng = new RandomNumberGenerator();
-        int powerupIndex = rng.RandiRange(0, 4);
+        //RandomNumberGenerator rng = new RandomNumberGenerator();
+        //int powerupIndex = rng.RandiRange(0, 4);
 
         switch (powerupIndex)
         {
@@ -102,19 +113,33 @@ public partial class PowerUpManager : Node
 
     private void TriggerPowerUp_TriBall()
     {
-        Ball ballCenter = gameManager.Balls[0];
+        GD.Print($"PowerupManager.cs: Triggering TriBall");
+
+        Ball leftBall = null;
+        Ball rightBall = null;
+
+        Array<Ball> newBalls = new Array<Ball>();
+
+        for(int i = 0; i < gameManager.Balls.Count; i++)
+        {
+            Ball ballCenter = gameManager.Balls[i];
         
-        SpawnExtraBall(ballCenter, Vector2.Left);
-        SpawnExtraBall(ballCenter, Vector2.Right);
+            leftBall = SpawnExtraBall(ballCenter, Vector2.Left);
+            rightBall = SpawnExtraBall(ballCenter, Vector2.Right);
+
+            newBalls.Add(leftBall);
+            newBalls.Add(rightBall);
+        }
+        gameManager.Balls.AddRange(newBalls);
     }
 
-    private void SpawnExtraBall(Ball primaryBall, Vector2 direction)
+    private Ball SpawnExtraBall(Ball primaryBall, Vector2 direction)
     {
         Ball newBall = gameManager.BallScene.Instantiate<Ball>();
         gameManager.ObjectPool.AddChild(newBall);
-        gameManager.Balls.Add(newBall);
         newBall.Position = primaryBall.Position + (direction * extraBallPositionOffset);
         newBall.Velocity = primaryBall.Velocity + (direction * extraBallVelocityOffset);
+        return newBall;
     }
 
     //  - - - Super Ball - - - // 
@@ -127,11 +152,13 @@ public partial class PowerUpManager : Node
     
     private void TriggerPowerUp_SuperBall()
     {
+        GD.Print($"PowerupManager.cs: Triggering SuperBall");
         Array<Ball> balls = gameManager.Balls;
         foreach (Ball ball in balls)
         {
             ball.BallSpeed += superBallSpeedBoostAmount;
             ball.SuperMode = true;
+            ball.BrickBreakCount = 0;
         }
     }
 
@@ -145,23 +172,27 @@ public partial class PowerUpManager : Node
 
     private void TriggerPowerUp_Shield()
     {
+        GD.Print($"PowerupManager.cs: Triggering Shield");
+        shieldTimer = shieldDuration;
+        if(shield != null) { return; }
+
         shield = wallScene.Instantiate<Wall>();
         gameManager.ObjectPool.AddChild(shield);
         shield.Rotation = Mathf.Pi/2;
-        shield.Position = new Vector2(gameManager.Paddle.Position.X, gameManager.Paddle.Position.Y - 100);
+        shield.Position = new Vector2(gameManager.Paddle.StartingLocation.X, gameManager.Paddle.StartingLocation.Y - 100);
         shield.Scale = new Vector2(shield.Scale.X, shield.Scale.Y * shieldWidth);
-        shieldTimer = shieldDuration;
     }
 
     private void RunShieldTimer(float realDelta)
     {
-        if (shieldTimer > 0)
+        if (shieldTimer > 0 && shield != null)
         {
             shieldTimer -= realDelta;
             if (shieldTimer <= 0)
             {
                 shieldTimer = 0;
-                shield.QueueFree();
+                shield.Free();
+                shield = null;
             }
         }
     }
@@ -176,6 +207,7 @@ public partial class PowerUpManager : Node
     
     private void TriggerPowerUp_SuperWide()
     {
+        GD.Print($"PowerupManager.cs: Triggering SuperWide");
         paddle.ChangePaddleSize(superWidePaddleWidth, true);
         superWideTimer = superWideDuration;
     }
@@ -203,6 +235,7 @@ public partial class PowerUpManager : Node
     
     private void TriggerPowerUp_PaddleSpeed()
     {
+        GD.Print($"PowerupManager.cs: Triggering PaddleSpeed");
         paddle.PaddleSpeed = maxPaddleSpeed;
         paddleSpeedTimer = paddleSpeedDuration;
     }

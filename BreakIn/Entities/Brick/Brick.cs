@@ -40,15 +40,23 @@ public partial class Brick : StaticBody2D
 		GD.Print($"Brick.cs: Layer Count - {layerCount}");
 		if(layerCount == 0 || superBall)
 		{
-			gameManager.TriggerObjectiveSuccess();
-			GD.Print($"Brick.cs: Score - {gameManager.PlayerScore} ");
-			objectPool.Bricks.Remove(this);
-			CheckIfBrickRowEmpty();
-			QueueFree();
+			DestroyBrick();
 			return;
 		}
 		Modulate = layerColors[--layerCount];
 	}
+
+	private void DestroyBrick()
+	{
+        gameManager.TriggerObjectiveSuccess();
+        GD.Print($"Brick.cs: Score - {gameManager.PlayerScore} ");
+        objectPool.Bricks.Remove(this);
+        CheckIfBrickRowEmpty();
+
+		objectPool.SpawnPowerupOrb(Position);
+
+        QueueFree();
+    }
 
 	private void CheckIfBrickRowEmpty()
 	{

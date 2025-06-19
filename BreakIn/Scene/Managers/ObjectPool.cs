@@ -10,7 +10,15 @@ public partial class ObjectPool : Node
 
     [Export]
     private Node brickParent;
-    
+    [Export]
+    private Node powerupParent;
+
+    [Export]
+    private PackedScene brickScene;
+    [Export]
+    private PackedScene powerupOrbScene;
+
+
     [Export]
     private int maxRowCount_Easy = 2;
     [Export]
@@ -34,10 +42,10 @@ public partial class ObjectPool : Node
     public Array<Brick> Bricks {  get { return bricks; } }
 
     // --------------------------------
-    //		GENERAL FUNCTIONS	
+    //		SPAWN FUNCTIONS	
     // --------------------------------
 
-    public void SpawnBricks(PackedScene brickScn, int difficulty)
+    public void SpawnBricks(int difficulty)
     {
         int rowCount = -1;
         switch(difficulty)
@@ -56,7 +64,7 @@ public partial class ObjectPool : Node
         {
             for(int x = 0; x < maxBrickPerRow; x++)
             {
-                Brick newBrick = brickScn.Instantiate<Brick>();
+                Brick newBrick = brickScene.Instantiate<Brick>();
                 brickParent.AddChild(newBrick);
                 bricks.Add(newBrick);
                 newBrick.RowID = y;
@@ -66,6 +74,17 @@ public partial class ObjectPool : Node
         }
 
     }
+
+    public void SpawnPowerupOrb(Vector2 spawnLocation)
+    {
+        PowerupOrb newOrb = powerupOrbScene.Instantiate<PowerupOrb>();
+        powerupParent.AddChild(newOrb);
+        newOrb.Position = spawnLocation;
+    }
+
+    // --------------------------------
+    //		BRICK FUNCTIONS	
+    // --------------------------------
 
     public int GetBrickCountByRowID(int rowID)
     {

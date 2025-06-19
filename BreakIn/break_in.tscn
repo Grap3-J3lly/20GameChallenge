@@ -1,4 +1,4 @@
-[gd_scene load_steps=10 format=3 uid="uid://g5gxb4cpktqk"]
+[gd_scene load_steps=11 format=3 uid="uid://g5gxb4cpktqk"]
 
 [ext_resource type="Script" uid="uid://dk72s2bwdvrrf" path="res://Scene/Managers/GameManager.cs" id="1_aunkb"]
 [ext_resource type="PackedScene" uid="uid://dw0ubxif7xkl1" path="res://Entities/Paddle/paddle.tscn" id="1_skalp"]
@@ -9,6 +9,7 @@
 [ext_resource type="Script" uid="uid://o45puakrkpcp" path="res://Scene/UI/UIManager.cs" id="7_d7rxa"]
 [ext_resource type="PackedScene" uid="uid://bf43jjavm06nd" path="res://Entities/Brick/brick.tscn" id="7_h5w5b"]
 [ext_resource type="Script" uid="uid://b13didcx4upnl" path="res://Scene/Managers/ObjectPool.cs" id="7_kjf0u"]
+[ext_resource type="PackedScene" uid="uid://cj18gu8fxmlk" path="res://Entities/Ball/powerup_orb.tscn" id="9_kk8c4"]
 
 [node name="BreakIn" type="Node2D"]
 
@@ -16,7 +17,6 @@
 script = ExtResource("1_aunkb")
 paddleScene = ExtResource("1_skalp")
 ballScene = ExtResource("3_xulce")
-brickScene = ExtResource("7_h5w5b")
 objectPool = NodePath("../ObjectPool")
 powerUpManager = NodePath("../PowerUpManager")
 
@@ -42,11 +42,16 @@ position = Vector2(576, 864)
 
 [node name="Environment" type="Node" parent="."]
 
-[node name="ObjectPool" type="Node" parent="." node_paths=PackedStringArray("brickParent")]
+[node name="ObjectPool" type="Node" parent="." node_paths=PackedStringArray("brickParent", "powerupParent")]
 script = ExtResource("7_kjf0u")
 brickParent = NodePath("Bricks")
+powerupParent = NodePath("Powerups")
+brickScene = ExtResource("7_h5w5b")
+powerupOrbScene = ExtResource("9_kk8c4")
 
 [node name="Bricks" type="Node" parent="ObjectPool"]
+
+[node name="Powerups" type="Node" parent="ObjectPool"]
 
 [node name="UI Manager" type="CanvasLayer" parent="." node_paths=PackedStringArray("livesField", "scoreField")]
 visible = false
