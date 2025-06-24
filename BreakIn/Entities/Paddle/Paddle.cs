@@ -7,8 +7,8 @@ public partial class Paddle : AnimatableBody2D
     // --------------------------------
     //			VARIABLES	
     // --------------------------------
-    [Export]
-    private Vector2 startingLocation = new Vector2(576.0f, 796.0f);
+    private GameManager gameManager;
+
     [Export]
     private MeshInstance2D meshInstance;
     [Export]
@@ -31,8 +31,6 @@ public partial class Paddle : AnimatableBody2D
     // --------------------------------
     //			PROPERTIES	
     // --------------------------------
-
-    public Vector2 StartingLocation { get => startingLocation; set => startingLocation = value; } 
     public float PaddleSpeed { get => paddleSpeed; set => paddleSpeed = value; }
     public float StartSpeed { get => startSpeed; }
 
@@ -45,8 +43,8 @@ public partial class Paddle : AnimatableBody2D
     public override void _Ready()
 	{
         startSpeed = paddleSpeed;
-        Position = startingLocation;
-        GameManager.Instance.RowClear += ReducePaddleSize;
+        gameManager = GameManager.Instance;
+        gameManager.RowClear += ReducePaddleSize;
 	}
 
     public override void _PhysicsProcess(double delta)
@@ -78,7 +76,7 @@ public partial class Paddle : AnimatableBody2D
 
     public void Reset()
     {
-        Position = startingLocation;
+        Position = gameManager.PaddleStartingLocation;
     }
 
     // --------------------------------

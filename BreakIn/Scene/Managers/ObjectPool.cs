@@ -1,101 +1,49 @@
 using Godot;
 using Godot.Collections;
 using System;
+using System.Collections;
 
 public partial class ObjectPool : Node
 {
     // --------------------------------
     //			VARIABLES	
     // --------------------------------
-
-    [Export]
-    private Node brickParent;
-    [Export]
-    private Node powerupParent;
-
-    [Export]
-    private PackedScene brickScene;
-    [Export]
-    private PackedScene powerupOrbScene;
-
-
-    [Export]
-    private int maxRowCount_Easy = 2;
-    [Export]
-    private int maxRowCount_Medium = 3;
-    [Export]
-    private int maxRowCount_Hard = 5;
     [Export]
     private int maxBrickPerRow = 11;
-
-    [Export]
-    private Vector2 initialSpawnPosition = new Vector2(66, 138);
-    [Export] Vector2 distancePerBrick = new Vector2(102, 23);
-
-
-    private Array<Brick> bricks = new Array<Brick>();
-
-    // --------------------------------
-    //			PROPERTIES	
-    // --------------------------------
-
-    public Array<Brick> Bricks {  get { return bricks; } }
 
     // --------------------------------
     //		SPAWN FUNCTIONS	
     // --------------------------------
 
-    public void SpawnBricks(int difficulty)
+    public T[,] SpawnObjectsInGrid<T>(PackedScene objectScene, Vector2 initialSpawnPosition, Vector2I gridCount, Vector2 distancePerObject, Node parent) where T : Node2D
     {
-        int rowCount = -1;
-        switch(difficulty)
-        {
-            case 1: rowCount = maxRowCount_Easy;
-                break;
-            case 2: rowCount = maxRowCount_Medium;
-                break;
-            case 3: rowCount = maxRowCount_Hard;
-                break;
-            default: GD.PrintErr($"ObjectPool.cs: Invalid Difficulty Value Provided");
-                break;
-        }
+        T[,] objectGrid = new T[gridCount.X, gridCount.Y];
 
-        for (int y = 0; y < rowCount; y++)
+        for (int y = 0; y < gridCount.Y; y++)
         {
-            for(int x = 0; x < maxBrickPerRow; x++)
+            for (int x = 0; x < gridCount.X; x++)
             {
-                Brick newBrick = brickScene.Instantiate<Brick>();
-                brickParent.AddChild(newBrick);
-                bricks.Add(newBrick);
-                newBrick.RowID = y;
-                newBrick.Position = initialSpawnPosition + (new Vector2(distancePerBrick.X * x, distancePerBrick.Y * y));
-                newBrick.LayerCount = rowCount - y - 1;
+                T newObject = objectScene.Instantiate<T>();
+                parent.AddChild(newObject);
+                newObject.Position = initialSpawnPosition + (new Vector2(distancePerObject.X * x, distancePerObject.Y * y));
+                objectGrid[x, y] = newObject;
             }
         }
 
+        return objectGrid;
     }
 
-    public void SpawnPowerupOrb(Vector2 spawnLocation)
+    public T SpawnObjectAtPosition<T>(PackedScene objectScene, Vector2 spawnPosition, Node parent) where T : Node2D
     {
-        PowerupOrb newOrb = powerupOrbScene.Instantiate<PowerupOrb>();
-        powerupParent.AddChild(newOrb);
-        newOrb.Position = spawnLocation;
+        T newObject = objectScene.Instantiate<T>();
+        parent.AddChild(newObject);
+        newObject.Position = spawnPosition;
+        return newObject;
     }
 
     // --------------------------------
     //		BRICK FUNCTIONS	
     // --------------------------------
-
-    public int GetBrickCountByRowID(int rowID)
-    {
-        int count = 0;
-        foreach(Brick brick in bricks)
-        {
-            if(brick.RowID == rowID) { count++; }
-        }
-
-        return count;
-    }
 
     
 }

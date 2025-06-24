@@ -17,12 +17,15 @@ public partial class Brick : StaticBody2D
 	[Export]
 	private int layerCount = 0;
 
+	private Vector2I gridPosition = new Vector2I();
+
     // --------------------------------
     //			PROPERTIES		
     // --------------------------------
 	
 	public int RowID { get => rowID; set => rowID = value; }
 	public int LayerCount { get => layerCount; set => layerCount = value; }
+	public Vector2I GridPosition { get => gridPosition; set => gridPosition = value; }
 
     // --------------------------------
     //		STANDARD FUNCTIONS	
@@ -50,17 +53,17 @@ public partial class Brick : StaticBody2D
 	{
         gameManager.TriggerObjectiveSuccess();
         GD.Print($"Brick.cs: Score - {gameManager.PlayerScore} ");
-        objectPool.Bricks.Remove(this);
+        gameManager.Bricks.Remove(this);
         CheckIfBrickRowEmpty();
 
-		objectPool.SpawnPowerupOrb(Position);
+		gameManager.SpawnPowerUpOrb(Position);
 
         QueueFree();
     }
 
 	private void CheckIfBrickRowEmpty()
 	{
-		int bricksInRow = objectPool.GetBrickCountByRowID(rowID);
+		int bricksInRow = GetBrickCountByRowID(rowID);
 		// GD.Print($"Brick.cs: Bricks Remaining in Row {rowID}: {bricksInRow}");
 		if (bricksInRow != 0)
 		{
@@ -69,4 +72,15 @@ public partial class Brick : StaticBody2D
 
 		gameManager.EmitSignal(GameManager.SignalName.RowClear);
 	}
+
+    public int GetBrickCountByRowID(int rowID)
+    {
+        int count = 0;
+        foreach (Brick brick in gameManager.Bricks)
+        {
+            if (brick.RowID == rowID) { count++; }
+        }
+
+        return count;
+    }
 }

@@ -13,12 +13,16 @@
 
 [node name="BreakIn" type="Node2D"]
 
-[node name="GameManager" type="Node" parent="." node_paths=PackedStringArray("objectPool", "powerUpManager")]
+[node name="GameManager" type="Node" parent="." node_paths=PackedStringArray("objectPool", "powerUpManager", "brickParent", "powerupParent")]
 script = ExtResource("1_aunkb")
 paddleScene = ExtResource("1_skalp")
 ballScene = ExtResource("3_xulce")
+brickScene = ExtResource("7_h5w5b")
+powerupOrbScene = ExtResource("9_kk8c4")
 objectPool = NodePath("../ObjectPool")
 powerUpManager = NodePath("../PowerUpManager")
+brickParent = NodePath("../ObjectPool/Bricks")
+powerupParent = NodePath("../ObjectPool/Powerups")
 
 [node name="PowerUpManager" type="Node" parent="."]
 script = ExtResource("5_kjf0u")
@@ -42,19 +46,14 @@ position = Vector2(576, 864)
 
 [node name="Environment" type="Node" parent="."]
 
-[node name="ObjectPool" type="Node" parent="." node_paths=PackedStringArray("brickParent", "powerupParent")]
+[node name="ObjectPool" type="Node" parent="."]
 script = ExtResource("7_kjf0u")
-brickParent = NodePath("Bricks")
-powerupParent = NodePath("Powerups")
-brickScene = ExtResource("7_h5w5b")
-powerupOrbScene = ExtResource("9_kk8c4")
 
 [node name="Bricks" type="Node" parent="ObjectPool"]
 
 [node name="Powerups" type="Node" parent="ObjectPool"]
 
 [node name="UI Manager" type="CanvasLayer" parent="." node_paths=PackedStringArray("livesField", "scoreField")]
-visible = false
 script = ExtResource("7_d7rxa")
 livesField = NodePath("WholeCanvas/TopArea/LivesLeftText")
 scoreField = NodePath("WholeCanvas/TopArea/ScoreText")

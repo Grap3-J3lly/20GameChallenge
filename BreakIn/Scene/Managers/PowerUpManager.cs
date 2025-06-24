@@ -11,9 +11,6 @@ public partial class PowerUpManager : Node
     public static PowerUpManager Instance;
     public GameManager gameManager;
 
-    [Export]
-    private PackedScene powerupOrbScene;
-
     private Paddle paddle;
 
     // Tri Ball Info
@@ -179,7 +176,7 @@ public partial class PowerUpManager : Node
         shield = wallScene.Instantiate<Wall>();
         gameManager.ObjectPool.AddChild(shield);
         shield.Rotation = Mathf.Pi/2;
-        shield.Position = new Vector2(gameManager.Paddle.StartingLocation.X, gameManager.Paddle.StartingLocation.Y - 100);
+        shield.Position = new Vector2(gameManager.PaddleStartingLocation.X, gameManager.PaddleStartingLocation.Y - 100);
         shield.Scale = new Vector2(shield.Scale.X, shield.Scale.Y * shieldWidth);
     }
 
