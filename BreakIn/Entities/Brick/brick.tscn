@@ -11,7 +11,7 @@ size = Vector2(100, 20)
 [node name="Brick" type="StaticBody2D"]
 disable_mode = 2
 script = ExtResource("1_ci3aa")
-layerColors = Array[Color]([Color(1, 1, 1, 1), Color(0, 0, 1, 1), Color(1, 0, 0, 1)])
+layerColors = Array[Color]([Color(1, 1, 1, 1), Color(0, 0, 1, 1), Color(1, 0, 0, 1), Color(0, 1, 0, 1), Color(0.925359, 0.566063, 0.195519, 1)])
 
 [node name="MeshInstance2D" type="MeshInstance2D" parent="."]
 mesh = SubResource("QuadMesh_svshc")

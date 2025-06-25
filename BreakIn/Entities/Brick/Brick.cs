@@ -8,7 +8,7 @@ public partial class Brick : StaticBody2D
     //			VARIABLES	
     // --------------------------------
 
-    private GameManager gameManager;
+    private BreakoutManager breakoutManager;
 	private ObjectPool objectPool;
 	[Export]
 	private Array<Color> layerColors = new Array<Color>();
@@ -33,8 +33,8 @@ public partial class Brick : StaticBody2D
 
     public override void _Ready()
 	{
-		gameManager = GameManager.Instance;
-		objectPool = gameManager.ObjectPool;
+		breakoutManager = BreakoutManager.Instance;
+		objectPool = breakoutManager.ObjectPool;
 		Modulate = layerColors[layerCount];
 	}
 
@@ -51,12 +51,12 @@ public partial class Brick : StaticBody2D
 
 	private void DestroyBrick()
 	{
-        gameManager.TriggerObjectiveSuccess();
-        GD.Print($"Brick.cs: Score - {gameManager.PlayerScore} ");
-        gameManager.Bricks.Remove(this);
+        breakoutManager.TriggerObjectiveSuccess();
+        GD.Print($"Brick.cs: Score - {breakoutManager.PlayerScore} ");
+		breakoutManager.Bricks[gridPosition.X, gridPosition.Y] = null;
         CheckIfBrickRowEmpty();
 
-		gameManager.SpawnPowerUpOrb(Position);
+		breakoutManager.SpawnPowerUpOrb(Position);
 
         QueueFree();
     }
@@ -64,21 +64,23 @@ public partial class Brick : StaticBody2D
 	private void CheckIfBrickRowEmpty()
 	{
 		int bricksInRow = GetBrickCountByRowID(rowID);
-		// GD.Print($"Brick.cs: Bricks Remaining in Row {rowID}: {bricksInRow}");
+		GD.Print($"Brick.cs: Bricks Remaining in Row {rowID}: {bricksInRow}");
 		if (bricksInRow != 0)
 		{
 			return;
 		}
 
-		gameManager.EmitSignal(GameManager.SignalName.RowClear);
+		breakoutManager.EmitSignal(BreakoutManager.SignalName.RowClear);
 	}
 
     public int GetBrickCountByRowID(int rowID)
     {
         int count = 0;
-        foreach (Brick brick in gameManager.Bricks)
+
+        foreach (Brick brick in breakoutManager.Bricks)
         {
-            if (brick.RowID == rowID) { count++; }
+			// GD.Print($"Brick.cs: Brick Row ID: {brick.RowID}"); // <-- To use, add check for brick being null
+            if (brick != null && brick.RowID == rowID) { count++; }
         }
 
         return count;

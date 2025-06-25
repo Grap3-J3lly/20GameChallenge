@@ -9,7 +9,7 @@ public partial class PowerUpManager : Node
     // --------------------------------
 
     public static PowerUpManager Instance;
-    public GameManager gameManager;
+    public BreakoutManager breakoutManager;
 
     private Paddle paddle;
 
@@ -54,8 +54,8 @@ public partial class PowerUpManager : Node
     public override void _Ready()
     {
         Instance = this;
-        gameManager = GameManager.Instance;
-        paddle = gameManager.Paddle;
+        breakoutManager = BreakoutManager.Instance;
+        paddle = breakoutManager.Paddle;
     }
 
     public override void _Process(double delta)
@@ -117,9 +117,9 @@ public partial class PowerUpManager : Node
 
         Array<Ball> newBalls = new Array<Ball>();
 
-        for(int i = 0; i < gameManager.Balls.Count; i++)
+        for(int i = 0; i < breakoutManager.Balls.Count; i++)
         {
-            Ball ballCenter = gameManager.Balls[i];
+            Ball ballCenter = breakoutManager.Balls[i];
         
             leftBall = SpawnExtraBall(ballCenter, Vector2.Left);
             rightBall = SpawnExtraBall(ballCenter, Vector2.Right);
@@ -127,13 +127,13 @@ public partial class PowerUpManager : Node
             newBalls.Add(leftBall);
             newBalls.Add(rightBall);
         }
-        gameManager.Balls.AddRange(newBalls);
+        breakoutManager.Balls.AddRange(newBalls);
     }
 
     private Ball SpawnExtraBall(Ball primaryBall, Vector2 direction)
     {
-        Ball newBall = gameManager.BallScene.Instantiate<Ball>();
-        gameManager.ObjectPool.AddChild(newBall);
+        Ball newBall = breakoutManager.BallScene.Instantiate<Ball>();
+        breakoutManager.ObjectPool.AddChild(newBall);
         newBall.Position = primaryBall.Position + (direction * extraBallPositionOffset);
         newBall.Velocity = primaryBall.Velocity + (direction * extraBallVelocityOffset);
         return newBall;
@@ -150,7 +150,7 @@ public partial class PowerUpManager : Node
     private void TriggerPowerUp_SuperBall()
     {
         GD.Print($"PowerupManager.cs: Triggering SuperBall");
-        Array<Ball> balls = gameManager.Balls;
+        Array<Ball> balls = breakoutManager.Balls;
         foreach (Ball ball in balls)
         {
             ball.BallSpeed += superBallSpeedBoostAmount;
@@ -174,9 +174,9 @@ public partial class PowerUpManager : Node
         if(shield != null) { return; }
 
         shield = wallScene.Instantiate<Wall>();
-        gameManager.ObjectPool.AddChild(shield);
+        breakoutManager.ObjectPool.AddChild(shield);
         shield.Rotation = Mathf.Pi/2;
-        shield.Position = new Vector2(gameManager.PaddleStartingLocation.X, gameManager.PaddleStartingLocation.Y - 100);
+        shield.Position = new Vector2(breakoutManager.PaddleStartingLocation.X, breakoutManager.PaddleStartingLocation.Y - 100);
         shield.Scale = new Vector2(shield.Scale.X, shield.Scale.Y * shieldWidth);
     }
 

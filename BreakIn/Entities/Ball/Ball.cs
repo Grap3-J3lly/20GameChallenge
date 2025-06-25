@@ -8,7 +8,7 @@ public partial class Ball : CharacterBody2D
     // --------------------------------
     //			VARIABLES	
     // --------------------------------
-    protected GameManager gameManager;
+    protected BreakoutManager breakoutManager;
     [Export]
     private Vector2 startingLocation = new Vector2();
     [Export]
@@ -41,14 +41,14 @@ public partial class Ball : CharacterBody2D
 
     public override void _Ready()
 	{
-        gameManager = GameManager.Instance;
+        breakoutManager = BreakoutManager.Instance;
         Setup();
         
 	}
 
 	public override void _PhysicsProcess(double delta)
 	{
-        if(gameManager.GameOver)
+        if(breakoutManager.GameOver)
         {
             return;
         }
@@ -90,7 +90,7 @@ public partial class Ball : CharacterBody2D
 
     public void Fire(Vector2 paddleVel)
     {
-        Reparent(gameManager.ObjectPool);
+        Reparent(breakoutManager.ObjectPool);
         // Setup rng between .1 and .5 for x val of PaddleVelocity
         Velocity += (2 * ballSpeed * Vector2.Up) + new Vector2(paddleVel.X * (.5f * ballSpeed), paddleVel.Y);
         // Velocity += ballSpeed * paddleVel;
@@ -182,13 +182,13 @@ public partial class Ball : CharacterBody2D
     private void HandleGoalImpact(KinematicCollision2D collisionInfo)
     {
         GD.Print($"Ball.cs: Colliding with a Goal.");
-        if(gameManager.Balls.Count > 1) 
+        if(breakoutManager.Balls.Count > 1) 
         {
-            gameManager.Balls.Remove(this);
+            breakoutManager.Balls.Remove(this);
             QueueFree();
             return;
         }
-        gameManager.Reset();
+        breakoutManager.Reset();
     }
 
     // --------------------------------

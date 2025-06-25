@@ -4,7 +4,7 @@ using static System.Net.Mime.MediaTypeNames;
 
 public partial class UIManager : CanvasLayer
 {
-    private GameManager gameManager;
+    private BreakoutManager breakoutManager;
 
     [Export]
     private string livesLabelText = "Lives Remaining: ";
@@ -18,13 +18,13 @@ public partial class UIManager : CanvasLayer
 
     public override void _Ready()
     {
-        gameManager = GameManager.Instance;
+        breakoutManager = BreakoutManager.Instance;
     }
 
     public override void _Process(double delta)
     {
-        UpdateLabel(livesField, livesLabelText, gameManager.PlayerLives);
-        UpdateLabel(scoreField, scoreLabelText, gameManager.PlayerScore);
+        UpdateLabel(livesField, livesLabelText, breakoutManager.PlayerLives);
+        UpdateLabel(scoreField, scoreLabelText, breakoutManager.PlayerScore);
     }
 
     private void UpdateLabel(RichTextLabel label, string preValueText, int value)

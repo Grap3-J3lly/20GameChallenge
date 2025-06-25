@@ -1,0 +1,103 @@
+[gd_scene load_steps=11 format=3 uid="uid://1iva5wilxcet"]
+
+[ext_resource type="Script" uid="uid://dk72s2bwdvrrf" path="res://Scene/Managers/BreakoutManager.cs" id="1_ra2vd"]
+[ext_resource type="PackedScene" uid="uid://dw0ubxif7xkl1" path="res://Entities/Paddle/paddle.tscn" id="2_dhw4s"]
+[ext_resource type="PackedScene" uid="uid://c47pvo1br7fck" path="res://Entities/Ball/ball.tscn" id="3_vsjxa"]
+[ext_resource type="PackedScene" uid="uid://bf43jjavm06nd" path="res://Entities/Brick/brick.tscn" id="4_24pcb"]
+[ext_resource type="PackedScene" uid="uid://cj18gu8fxmlk" path="res://Entities/Ball/powerup_orb.tscn" id="5_77uq7"]
+[ext_resource type="Script" uid="uid://c7rm6lquvpdu5" path="res://Scene/Managers/PowerUpManager.cs" id="6_1a48d"]
+[ext_resource type="PackedScene" uid="uid://di2wp66555pv0" path="res://Scene/GameBoard/Walls/wall.tscn" id="7_iqavb"]
+[ext_resource type="PackedScene" uid="uid://dual7tj41jj13" path="res://Scene/GameBoard/Goals/enemy_goal.tscn" id="8_n83oc"]
+[ext_resource type="Script" uid="uid://b13didcx4upnl" path="res://Scene/Managers/ObjectPool.cs" id="9_idhfp"]
+[ext_resource type="Script" uid="uid://o45puakrkpcp" path="res://Scene/UI/BreakoutUI/UIManager.cs" id="10_dq7ph"]
+
+[node name="BreakIn" type="Node2D"]
+
+[node name="BreakoutManager" type="Node" parent="." node_paths=PackedStringArray("objectPool", "brickParent", "powerUpManager", "powerupParent")]
+script = ExtResource("1_ra2vd")
+paddleScene = ExtResource("2_dhw4s")
+ballScene = ExtResource("3_vsjxa")
+brickScene = ExtResource("4_24pcb")
+powerupOrbScene = ExtResource("5_77uq7")
+objectPool = NodePath("../ObjectPool")
+brickParent = NodePath("../ObjectPool/Bricks")
+powerUpManager = NodePath("../PowerUpManager")
+powerupParent = NodePath("../ObjectPool/Powerups")
+difficulty = 3
+
+[node name="PowerUpManager" type="Node" parent="."]
+script = ExtResource("6_1a48d")
+wallScene = ExtResource("7_iqavb")
+
+[node name="GameBoard" type="Node" parent="."]
+
+[node name="WallL" parent="GameBoard" instance=ExtResource("7_iqavb")]
+position = Vector2(0, 440)
+
+[node name="WallR" parent="GameBoard" instance=ExtResource("7_iqavb")]
+position = Vector2(1152, 440)
+
+[node name="WallT" parent="GameBoard" instance=ExtResource("7_iqavb")]
+position = Vector2(649.85, 116)
+rotation = 1.5708
+scale = Vector2(1, 1.6)
+
+[node name="EnemyGoal" parent="GameBoard" instance=ExtResource("8_n83oc")]
+position = Vector2(576, 864)
+
+[node name="Environment" type="Node" parent="."]
+
+[node name="ObjectPool" type="Node" parent="."]
+script = ExtResource("9_idhfp")
+
+[node name="Bricks" type="Node" parent="ObjectPool"]
+
+[node name="Powerups" type="Node" parent="ObjectPool"]
+
+[node name="UI Manager" type="CanvasLayer" parent="." node_paths=PackedStringArray("livesField", "scoreField")]
+script = ExtResource("10_dq7ph")
+livesField = NodePath("WholeCanvas/TopArea/LivesLeftText")
+scoreField = NodePath("WholeCanvas/TopArea/ScoreText")
+
+[node name="WholeCanvas" type="Control" parent="UI Manager"]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="TopArea" type="Control" parent="UI Manager/WholeCanvas"]
+layout_mode = 1
+anchors_preset = 10
+anchor_right = 1.0
+offset_bottom = 105.0
+grow_horizontal = 2
+
+[node name="LivesLeftText" type="RichTextLabel" parent="UI Manager/WholeCanvas/TopArea"]
+layout_mode = 1
+anchors_preset = 4
+anchor_top = 0.5
+anchor_bottom = 0.5
+offset_left = 20.0
+offset_top = -32.5
+offset_right = 420.0
+offset_bottom = 27.5
+grow_vertical = 2
+theme_override_font_sizes/normal_font_size = 40
+text = "Lives Remaining: "
+
+[node name="ScoreText" type="RichTextLabel" parent="UI Manager/WholeCanvas/TopArea"]
+layout_mode = 1
+anchors_preset = 6
+anchor_left = 1.0
+anchor_top = 0.5
+anchor_right = 1.0
+anchor_bottom = 0.5
+offset_left = -220.0
+offset_top = -30.0
+offset_bottom = 30.0
+grow_horizontal = 0
+grow_vertical = 2
+theme_override_font_sizes/normal_font_size = 40
+text = "Score: 999"

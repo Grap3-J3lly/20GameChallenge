@@ -3,11 +3,11 @@ using System;
 
 public partial class WinText : RichTextLabel
 {
-	private GameManager gameManager;
+	private BreakoutManager gameManager;
 	public override void _Ready()
 	{
 		Visible = false;
-		gameManager = GameManager.Instance;
+		gameManager = BreakoutManager.Instance;
 	}
 	
 	public void SetTextAndShow(string text)

@@ -14,7 +14,7 @@ public partial class PowerupOrb : Ball
     {
         currentDirection = Vector2.Down;
         base._Ready();
-        powerUpManager = gameManager.PowerUpManager;
+        powerUpManager = breakoutManager.PowerUpManager;
 
         RandomNumberGenerator rng = new RandomNumberGenerator();
         GD.Print($"PowerupOrb.cs: Colors Count: {colors.Count}");
@@ -26,7 +26,7 @@ public partial class PowerupOrb : Ball
     public override void _PhysicsProcess(double delta)
     {
         // base._PhysicsProcess(delta);
-        if (gameManager.GameOver)
+        if (breakoutManager.GameOver)
         {
             return;
         }

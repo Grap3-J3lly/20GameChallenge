@@ -1,0 +1,79 @@
+[gd_scene load_steps=5 format=3 uid="uid://g5gxb4cpktqk"]
+
+[ext_resource type="Script" uid="uid://nr5a437t5qn4" path="res://Scene/Managers/GameManager.cs" id="1_7o08m"]
+[ext_resource type="Script" uid="uid://b557hnulbsi83" path="res://Scene/SceneManagement/SceneManager.cs" id="2_k15wb"]
+[ext_resource type="PackedScene" uid="uid://c4ueua7jfdfco" path="res://Scene/UI/menu_system.tscn" id="3_k15wb"]
+[ext_resource type="Script" uid="uid://tj4lr00leo8f" path="res://Scene/UI/QuitButton.cs" id="4_ybgqn"]
+
+[node name="GameNode" type="Node"]
+script = ExtResource("1_7o08m")
+
+[node name="SceneManager" type="Node" parent="."]
+script = ExtResource("2_k15wb")
+scenePaths = Array[String](["res://Scene/UI/menu_system.tscn", "res://Scene/break_in.tscn"])
+
+[node name="MenuSystem" parent="." instance=ExtResource("3_k15wb")]
+
+[node name="ColorRect" type="ColorRect" parent="MenuSystem"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+color = Color(0.228554, 0.142329, 0.301255, 1)
+
+[node name="RichTextLabel" type="RichTextLabel" parent="MenuSystem/ColorRect"]
+custom_minimum_size = Vector2(500, 100)
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -250.0
+offset_top = -150.0
+offset_right = 250.0
+offset_bottom = -50.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_font_sizes/normal_font_size = 50
+bbcode_enabled = true
+text = "[center]Breakout"
+
+[node name="PlayButton" type="Button" parent="MenuSystem/ColorRect"]
+custom_minimum_size = Vector2(200, 50)
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -20.5
+offset_top = -15.5
+offset_right = 20.5
+offset_bottom = 15.5
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_font_sizes/font_size = 30
+text = "Play"
+icon_alignment = 1
+
+[node name="QuitButton" type="Button" parent="MenuSystem/ColorRect"]
+custom_minimum_size = Vector2(200, 50)
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -100.0
+offset_top = 50.0
+offset_right = 100.0
+offset_bottom = 100.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_font_sizes/font_size = 30
+text = "Quit"
+icon_alignment = 1
+script = ExtResource("4_ybgqn")

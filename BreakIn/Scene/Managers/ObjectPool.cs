@@ -6,12 +6,6 @@ using System.Collections;
 public partial class ObjectPool : Node
 {
     // --------------------------------
-    //			VARIABLES	
-    // --------------------------------
-    [Export]
-    private int maxBrickPerRow = 11;
-
-    // --------------------------------
     //		SPAWN FUNCTIONS	
     // --------------------------------
 
@@ -39,11 +33,5 @@ public partial class ObjectPool : Node
         parent.AddChild(newObject);
         newObject.Position = spawnPosition;
         return newObject;
-    }
-
-    // --------------------------------
-    //		BRICK FUNCTIONS	
-    // --------------------------------
-
-    
+    }    
 }

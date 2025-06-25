@@ -7,7 +7,7 @@ public partial class Paddle : AnimatableBody2D
     // --------------------------------
     //			VARIABLES	
     // --------------------------------
-    private GameManager gameManager;
+    private BreakoutManager breakoutManager;
 
     [Export]
     private MeshInstance2D meshInstance;
@@ -43,8 +43,8 @@ public partial class Paddle : AnimatableBody2D
     public override void _Ready()
 	{
         startSpeed = paddleSpeed;
-        gameManager = GameManager.Instance;
-        gameManager.RowClear += ReducePaddleSize;
+        breakoutManager = BreakoutManager.Instance;
+        breakoutManager.RowClear += ReducePaddleSize;
 	}
 
     public override void _PhysicsProcess(double delta)
@@ -76,7 +76,7 @@ public partial class Paddle : AnimatableBody2D
 
     public void Reset()
     {
-        Position = gameManager.PaddleStartingLocation;
+        Position = breakoutManager.PaddleStartingLocation;
     }
 
     // --------------------------------
