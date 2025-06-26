@@ -1,6 +1,8 @@
-[gd_scene load_steps=2 format=3 uid="uid://c4ueua7jfdfco"]
+[gd_scene load_steps=4 format=3 uid="uid://c4ueua7jfdfco"]
 
 [ext_resource type="Script" uid="uid://bxcy6bjnl7by5" path="res://Scene/Managers/MenuManager.cs" id="1_sjjf8"]
+[ext_resource type="Script" uid="uid://cc0olugnkxali" path="res://Scene/UI/PlayButton.cs" id="2_fywvq"]
+[ext_resource type="Script" uid="uid://tj4lr00leo8f" path="res://Scene/UI/QuitButton.cs" id="2_pyovw"]
 
 [node name="MenuSystem" type="Control"]
 layout_mode = 3
@@ -10,3 +12,229 @@ anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
 script = ExtResource("1_sjjf8")
+
+[node name="MainMenu" type="Control" parent="."]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="ColorRect" type="ColorRect" parent="MainMenu"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+color = Color(0.228554, 0.142329, 0.301255, 1)
+
+[node name="TitleArea" type="VBoxContainer" parent="MainMenu/ColorRect"]
+layout_mode = 1
+anchors_preset = 2
+anchor_top = 1.0
+anchor_bottom = 1.0
+offset_top = -283.845
+offset_right = 350.0
+offset_bottom = -53.845
+grow_vertical = 0
+theme_override_constants/separation = 15
+
+[node name="RichTextLabel" type="RichTextLabel" parent="MainMenu/ColorRect/TitleArea"]
+custom_minimum_size = Vector2(350, 100)
+layout_mode = 2
+size_flags_horizontal = 4
+theme_override_font_sizes/normal_font_size = 50
+bbcode_enabled = true
+text = "[center]Breakout"
+
+[node name="PlayButton" type="Button" parent="MainMenu/ColorRect/TitleArea"]
+custom_minimum_size = Vector2(200, 50)
+layout_mode = 2
+size_flags_horizontal = 4
+theme_override_font_sizes/font_size = 30
+text = "Play"
+icon_alignment = 1
+script = ExtResource("2_fywvq")
+
+[node name="QuitButton" type="Button" parent="MainMenu/ColorRect/TitleArea"]
+custom_minimum_size = Vector2(200, 50)
+layout_mode = 2
+size_flags_horizontal = 4
+theme_override_font_sizes/font_size = 30
+text = "Quit"
+icon_alignment = 1
+script = ExtResource("2_pyovw")
+
+[node name="CreditArea" type="VBoxContainer" parent="MainMenu/ColorRect"]
+layout_mode = 1
+anchors_preset = 3
+anchor_left = 1.0
+anchor_top = 1.0
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = -300.0
+offset_top = -190.0
+grow_horizontal = 0
+grow_vertical = 0
+theme_override_constants/separation = 15
+
+[node name="CreditsTitle" type="RichTextLabel" parent="MainMenu/ColorRect/CreditArea"]
+custom_minimum_size = Vector2(250, 50)
+layout_mode = 2
+size_flags_horizontal = 4
+size_flags_vertical = 4
+theme_override_font_sizes/normal_font_size = 30
+theme_override_font_sizes/bold_font_size = 30
+bbcode_enabled = true
+text = "[center][b]Credits"
+
+[node name="CreditsBody" type="RichTextLabel" parent="MainMenu/ColorRect/CreditArea"]
+custom_minimum_size = Vector2(300, 125)
+layout_mode = 2
+size_flags_horizontal = 4
+theme_override_font_sizes/normal_font_size = 25
+bbcode_enabled = true
+text = "[center]BigThe
+Kenney Assets
+Pixabay"
+
+[node name="LevelSelect" type="Control" parent="."]
+visible = false
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="ColorRect" type="ColorRect" parent="LevelSelect"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+color = Color(0.228554, 0.142329, 0.301255, 1)
+
+[node name="VBoxContainer" type="VBoxContainer" parent="LevelSelect/ColorRect"]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -100.0
+offset_top = -79.0
+offset_right = 100.0
+offset_bottom = 79.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_constants/separation = 100
+
+[node name="Level1Button" type="Button" parent="LevelSelect/ColorRect/VBoxContainer"]
+custom_minimum_size = Vector2(200, 75)
+layout_mode = 2
+size_flags_horizontal = 4
+theme_override_font_sizes/font_size = 30
+text = "Easy"
+icon_alignment = 1
+script = ExtResource("2_fywvq")
+
+[node name="Level2Button" type="Button" parent="LevelSelect/ColorRect/VBoxContainer"]
+custom_minimum_size = Vector2(200, 75)
+layout_mode = 2
+size_flags_horizontal = 4
+theme_override_font_sizes/font_size = 30
+text = "Medium"
+icon_alignment = 1
+script = ExtResource("2_fywvq")
+gameDifficulty = 2
+
+[node name="Level3Button" type="Button" parent="LevelSelect/ColorRect/VBoxContainer"]
+custom_minimum_size = Vector2(200, 75)
+layout_mode = 2
+size_flags_horizontal = 4
+theme_override_font_sizes/font_size = 30
+text = "Hard"
+icon_alignment = 1
+script = ExtResource("2_fywvq")
+gameDifficulty = 3
+
+[node name="BackButton" type="Button" parent="LevelSelect/ColorRect"]
+custom_minimum_size = Vector2(200, 50)
+layout_mode = 1
+anchors_preset = 2
+anchor_top = 1.0
+anchor_bottom = 1.0
+offset_left = 25.0
+offset_top = -75.0
+offset_right = 225.0
+offset_bottom = -25.0
+grow_vertical = 0
+size_flags_horizontal = 4
+theme_override_font_sizes/font_size = 30
+text = "Back"
+icon_alignment = 1
+
+[node name="Settings" type="Control" parent="."]
+visible = false
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="ColorRect" type="ColorRect" parent="Settings"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+color = Color(0.228554, 0.142329, 0.301255, 1)
+
+[node name="VBoxContainer" type="VBoxContainer" parent="Settings/ColorRect"]
+custom_minimum_size = Vector2(250, 0)
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -100.0
+offset_top = -79.0
+offset_right = 100.0
+offset_bottom = 79.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_constants/separation = 15
+
+[node name="RichTextLabel" type="RichTextLabel" parent="Settings/ColorRect/VBoxContainer"]
+custom_minimum_size = Vector2(0, 50)
+layout_mode = 2
+theme_override_font_sizes/normal_font_size = 30
+bbcode_enabled = true
+text = "[center]SFX Volume"
+
+[node name="HSlider" type="HSlider" parent="Settings/ColorRect/VBoxContainer"]
+custom_minimum_size = Vector2(100, 75)
+layout_mode = 2
+
+[node name="BackButton" type="Button" parent="Settings/ColorRect"]
+custom_minimum_size = Vector2(200, 50)
+layout_mode = 1
+anchors_preset = 2
+anchor_top = 1.0
+anchor_bottom = 1.0
+offset_left = 25.0
+offset_top = -75.0
+offset_right = 225.0
+offset_bottom = -25.0
+grow_vertical = 0
+size_flags_horizontal = 4
+theme_override_font_sizes/font_size = 30
+text = "Back"
+icon_alignment = 1
