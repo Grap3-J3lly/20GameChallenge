@@ -3,12 +3,16 @@
   "WorkspaceRootPath": "C:\\Users\\James\\Dev\\Godot\\20GameChallenge\\BreakIn\\",
   "Documents": [
     {
-      "AbsoluteMoniker": "D:0:0:{5A90DA09-7406-4FD1-9F19-909E61F26890}|BreakIn.csproj|c:\\users\\james\\dev\\godot\\20gamechallenge\\breakin\\scene\\managers\\menumanager.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{5A90DA09-7406-4FD1-9F19-909E61F26890}|BreakIn.csproj|solutionrelative:scene\\managers\\menumanager.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+      "AbsoluteMoniker": "D:0:0:{5A90DA09-7406-4FD1-9F19-909E61F26890}|BreakIn.csproj|c:\\users\\james\\dev\\godot\\20gamechallenge\\breakin\\scene\\ui\\playbutton.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{5A90DA09-7406-4FD1-9F19-909E61F26890}|BreakIn.csproj|solutionrelative:scene\\ui\\playbutton.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
       "AbsoluteMoniker": "D:0:0:{5A90DA09-7406-4FD1-9F19-909E61F26890}|BreakIn.csproj|c:\\users\\james\\dev\\godot\\20gamechallenge\\breakin\\scene\\scenemanagement\\scenemanager.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
       "RelativeMoniker": "D:0:0:{5A90DA09-7406-4FD1-9F19-909E61F26890}|BreakIn.csproj|solutionrelative:scene\\scenemanagement\\scenemanager.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{5A90DA09-7406-4FD1-9F19-909E61F26890}|BreakIn.csproj|c:\\users\\james\\dev\\godot\\20gamechallenge\\breakin\\scene\\ui\\quitbutton.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{5A90DA09-7406-4FD1-9F19-909E61F26890}|BreakIn.csproj|solutionrelative:scene\\ui\\quitbutton.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
       "AbsoluteMoniker": "D:0:0:{5A90DA09-7406-4FD1-9F19-909E61F26890}|BreakIn.csproj|c:\\users\\james\\dev\\godot\\20gamechallenge\\breakin\\scene\\managers\\breakoutmanager.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
@@ -58,19 +62,32 @@
       "DocumentGroups": [
         {
           "DockedWidth": 200,
-          "SelectedChildIndex": 0,
+          "SelectedChildIndex": 1,
           "Children": [
             {
               "$type": "Document",
-              "DocumentIndex": 0,
-              "Title": "MenuManager.cs",
-              "DocumentMoniker": "C:\\Users\\James\\Dev\\Godot\\20GameChallenge\\BreakIn\\Scene\\Managers\\MenuManager.cs",
-              "RelativeDocumentMoniker": "Scene\\Managers\\MenuManager.cs",
-              "ToolTip": "C:\\Users\\James\\Dev\\Godot\\20GameChallenge\\BreakIn\\Scene\\Managers\\MenuManager.cs",
-              "RelativeToolTip": "Scene\\Managers\\MenuManager.cs",
-              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA==",
+              "DocumentIndex": 2,
+              "Title": "QuitButton.cs",
+              "DocumentMoniker": "C:\\Users\\James\\Dev\\Godot\\20GameChallenge\\BreakIn\\Scene\\UI\\QuitButton.cs",
+              "RelativeDocumentMoniker": "Scene\\UI\\QuitButton.cs",
+              "ToolTip": "C:\\Users\\James\\Dev\\Godot\\20GameChallenge\\BreakIn\\Scene\\UI\\QuitButton.cs",
+              "RelativeToolTip": "Scene\\UI\\QuitButton.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAUAAAABAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-06-25T23:13:37.232Z",
+              "WhenOpened": "2025-06-25T23:15:48.64Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 0,
+              "Title": "PlayButton.cs",
+              "DocumentMoniker": "C:\\Users\\James\\Dev\\Godot\\20GameChallenge\\BreakIn\\Scene\\UI\\PlayButton.cs",
+              "RelativeDocumentMoniker": "Scene\\UI\\PlayButton.cs",
+              "ToolTip": "C:\\Users\\James\\Dev\\Godot\\20GameChallenge\\BreakIn\\Scene\\UI\\PlayButton.cs",
+              "RelativeToolTip": "Scene\\UI\\PlayButton.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAgAAAAjAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-06-25T23:15:47.252Z",
               "EditorCaption": ""
             },
             {
@@ -81,14 +98,14 @@
               "RelativeDocumentMoniker": "Scene\\SceneManagement\\SceneManager.cs",
               "ToolTip": "C:\\Users\\James\\Dev\\Godot\\20GameChallenge\\BreakIn\\Scene\\SceneManagement\\SceneManager.cs",
               "RelativeToolTip": "Scene\\SceneManagement\\SceneManager.cs",
-              "ViewState": "AgIAAEcAAAAAAAAAAAAQwF4AAABiAAAAAAAAAA==",
+              "ViewState": "AgIAAEUAAAAAAAAAAAAAAFMAAAAPAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
               "WhenOpened": "2025-06-24T23:52:13.838Z",
               "EditorCaption": ""
             },
             {
               "$type": "Document",
-              "DocumentIndex": 3,
+              "DocumentIndex": 4,
               "Title": "GameManager.cs",
               "DocumentMoniker": "C:\\Users\\James\\Dev\\Godot\\20GameChallenge\\BreakIn\\Scene\\Managers\\GameManager.cs",
               "RelativeDocumentMoniker": "Scene\\Managers\\GameManager.cs",
@@ -100,7 +117,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 2,
+              "DocumentIndex": 3,
               "Title": "BreakoutManager.cs",
               "DocumentMoniker": "C:\\Users\\James\\Dev\\Godot\\20GameChallenge\\BreakIn\\Scene\\Managers\\BreakoutManager.cs",
               "RelativeDocumentMoniker": "Scene\\Managers\\BreakoutManager.cs",
@@ -112,7 +129,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 4,
+              "DocumentIndex": 5,
               "Title": "PowerupOrb.cs",
               "DocumentMoniker": "C:\\Users\\James\\Dev\\Godot\\20GameChallenge\\BreakIn\\Entities\\Ball\\PowerupOrb.cs",
               "RelativeDocumentMoniker": "Entities\\Ball\\PowerupOrb.cs",
@@ -124,7 +141,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 11,
+              "DocumentIndex": 12,
               "Title": "PowerUpManager.cs",
               "DocumentMoniker": "C:\\Users\\James\\Dev\\Godot\\20GameChallenge\\BreakIn\\Scene\\Managers\\PowerUpManager.cs",
               "RelativeDocumentMoniker": "Scene\\Managers\\PowerUpManager.cs",
@@ -136,7 +153,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 10,
+              "DocumentIndex": 11,
               "Title": "ObjectPool.cs",
               "DocumentMoniker": "C:\\Users\\James\\Dev\\Godot\\20GameChallenge\\BreakIn\\Scene\\Managers\\ObjectPool.cs",
               "RelativeDocumentMoniker": "Scene\\Managers\\ObjectPool.cs",
@@ -148,7 +165,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 9,
+              "DocumentIndex": 10,
               "Title": "Wall.cs",
               "DocumentMoniker": "C:\\Users\\James\\Dev\\Godot\\20GameChallenge\\BreakIn\\Scene\\GameBoard\\Walls\\Wall.cs",
               "RelativeDocumentMoniker": "Scene\\GameBoard\\Walls\\Wall.cs",
@@ -160,7 +177,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 8,
+              "DocumentIndex": 9,
               "Title": "Paddle.cs",
               "DocumentMoniker": "C:\\Users\\James\\Dev\\Godot\\20GameChallenge\\BreakIn\\Entities\\Paddle\\Paddle.cs",
               "RelativeDocumentMoniker": "Entities\\Paddle\\Paddle.cs",
@@ -172,7 +189,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 7,
+              "DocumentIndex": 8,
               "Title": "Ball.cs",
               "DocumentMoniker": "C:\\Users\\James\\Dev\\Godot\\20GameChallenge\\BreakIn\\Entities\\Ball\\Ball.cs",
               "RelativeDocumentMoniker": "Entities\\Ball\\Ball.cs",
@@ -184,7 +201,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 5,
+              "DocumentIndex": 6,
               "Title": "Brick.cs",
               "DocumentMoniker": "C:\\Users\\James\\Dev\\Godot\\20GameChallenge\\BreakIn\\Entities\\Brick\\Brick.cs",
               "RelativeDocumentMoniker": "Entities\\Brick\\Brick.cs",
@@ -196,7 +213,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 6,
+              "DocumentIndex": 7,
               "Title": "Goal.cs",
               "DocumentMoniker": "C:\\Users\\James\\Dev\\Godot\\20GameChallenge\\BreakIn\\Scene\\GameBoard\\Goals\\Goal.cs",
               "RelativeDocumentMoniker": "Scene\\GameBoard\\Goals\\Goal.cs",

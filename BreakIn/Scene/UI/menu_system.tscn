@@ -1,10 +1,11 @@
-[gd_scene load_steps=4 format=3 uid="uid://c4ueua7jfdfco"]
+[gd_scene load_steps=5 format=3 uid="uid://c4ueua7jfdfco"]
 
 [ext_resource type="Script" uid="uid://bxcy6bjnl7by5" path="res://Scene/Managers/MenuManager.cs" id="1_sjjf8"]
-[ext_resource type="Script" uid="uid://cc0olugnkxali" path="res://Scene/UI/PlayButton.cs" id="2_fywvq"]
-[ext_resource type="Script" uid="uid://tj4lr00leo8f" path="res://Scene/UI/QuitButton.cs" id="2_pyovw"]
+[ext_resource type="Script" uid="uid://cc0olugnkxali" path="res://Scene/UI/GameUI/PlayButton.cs" id="2_fywvq"]
+[ext_resource type="Script" uid="uid://cul4tuuar8x7t" path="res://Scene/UI/GameUI/ControlButton.cs" id="2_kn2t0"]
+[ext_resource type="Script" uid="uid://tj4lr00leo8f" path="res://Scene/UI/GameUI/QuitButton.cs" id="2_pyovw"]
 
-[node name="MenuSystem" type="Control"]
+[node name="MenuSystem" type="Control" node_paths=PackedStringArray("menus")]
 layout_mode = 3
 anchors_preset = 15
 anchor_right = 1.0
@@ -12,6 +13,7 @@ anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
 script = ExtResource("1_sjjf8")
+menus = [NodePath("MainMenu"), NodePath("LevelSelect"), NodePath("Settings")]
 
 [node name="MainMenu" type="Control" parent="."]
 layout_mode = 1
@@ -49,14 +51,25 @@ theme_override_font_sizes/normal_font_size = 50
 bbcode_enabled = true
 text = "[center]Breakout"
 
-[node name="PlayButton" type="Button" parent="MainMenu/ColorRect/TitleArea"]
+[node name="LevelSelectButton" type="Button" parent="MainMenu/ColorRect/TitleArea"]
 custom_minimum_size = Vector2(200, 50)
 layout_mode = 2
 size_flags_horizontal = 4
 theme_override_font_sizes/font_size = 30
 text = "Play"
 icon_alignment = 1
-script = ExtResource("2_fywvq")
+script = ExtResource("2_kn2t0")
+controlIndex = 1
+
+[node name="SettingsButton" type="Button" parent="MainMenu/ColorRect/TitleArea"]
+custom_minimum_size = Vector2(200, 50)
+layout_mode = 2
+size_flags_horizontal = 4
+theme_override_font_sizes/font_size = 30
+text = "Settings"
+icon_alignment = 1
+script = ExtResource("2_kn2t0")
+controlIndex = 2
 
 [node name="QuitButton" type="Button" parent="MainMenu/ColorRect/TitleArea"]
 custom_minimum_size = Vector2(200, 50)
@@ -177,6 +190,8 @@ size_flags_horizontal = 4
 theme_override_font_sizes/font_size = 30
 text = "Back"
 icon_alignment = 1
+script = ExtResource("2_kn2t0")
+controlIndex = 0
 
 [node name="Settings" type="Control" parent="."]
 visible = false
@@ -238,3 +253,5 @@ size_flags_horizontal = 4
 theme_override_font_sizes/font_size = 30
 text = "Back"
 icon_alignment = 1
+script = ExtResource("2_kn2t0")
+controlIndex = 0

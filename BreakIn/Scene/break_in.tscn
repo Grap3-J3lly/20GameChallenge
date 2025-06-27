@@ -1,4 +1,4 @@
-[gd_scene load_steps=11 format=3 uid="uid://1iva5wilxcet"]
+[gd_scene load_steps=13 format=3 uid="uid://1iva5wilxcet"]
 
 [ext_resource type="Script" uid="uid://dk72s2bwdvrrf" path="res://Scene/Managers/BreakoutManager.cs" id="1_ra2vd"]
 [ext_resource type="PackedScene" uid="uid://dw0ubxif7xkl1" path="res://Entities/Paddle/paddle.tscn" id="2_dhw4s"]
@@ -10,6 +10,8 @@
 [ext_resource type="PackedScene" uid="uid://dual7tj41jj13" path="res://Scene/GameBoard/Goals/enemy_goal.tscn" id="8_n83oc"]
 [ext_resource type="Script" uid="uid://b13didcx4upnl" path="res://Scene/Managers/ObjectPool.cs" id="9_idhfp"]
 [ext_resource type="Script" uid="uid://o45puakrkpcp" path="res://Scene/UI/BreakoutUI/UIManager.cs" id="10_dq7ph"]
+[ext_resource type="Script" uid="uid://cul4tuuar8x7t" path="res://Scene/UI/GameUI/ControlButton.cs" id="11_dhw4s"]
+[ext_resource type="Script" uid="uid://cfelhi0upatd2" path="res://Scene/UI/BreakoutUI/HUDManager.cs" id="11_vsjxa"]
 
 [node name="BreakIn" type="Node2D"]
 
@@ -56,8 +58,8 @@ script = ExtResource("9_idhfp")
 
 [node name="UI Manager" type="CanvasLayer" parent="." node_paths=PackedStringArray("livesField", "scoreField")]
 script = ExtResource("10_dq7ph")
-livesField = NodePath("WholeCanvas/TopArea/LivesLeftText")
-scoreField = NodePath("WholeCanvas/TopArea/ScoreText")
+livesField = NodePath("WholeCanvas/HUDArea/LivesLeftText")
+scoreField = NodePath("WholeCanvas/HUDArea/ScoreText")
 
 [node name="WholeCanvas" type="Control" parent="UI Manager"]
 layout_mode = 3
@@ -67,14 +69,17 @@ anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
 
-[node name="TopArea" type="Control" parent="UI Manager/WholeCanvas"]
+[node name="HUDArea" type="Control" parent="UI Manager/WholeCanvas" node_paths=PackedStringArray("livesField", "scoreField")]
 layout_mode = 1
 anchors_preset = 10
 anchor_right = 1.0
 offset_bottom = 105.0
 grow_horizontal = 2
+script = ExtResource("11_vsjxa")
+livesField = NodePath("LivesLeftText")
+scoreField = NodePath("ScoreText")
 
-[node name="LivesLeftText" type="RichTextLabel" parent="UI Manager/WholeCanvas/TopArea"]
+[node name="LivesLeftText" type="RichTextLabel" parent="UI Manager/WholeCanvas/HUDArea"]
 layout_mode = 1
 anchors_preset = 4
 anchor_top = 0.5
@@ -87,7 +92,7 @@ grow_vertical = 2
 theme_override_font_sizes/normal_font_size = 40
 text = "Lives Remaining: "
 
-[node name="ScoreText" type="RichTextLabel" parent="UI Manager/WholeCanvas/TopArea"]
+[node name="ScoreText" type="RichTextLabel" parent="UI Manager/WholeCanvas/HUDArea"]
 layout_mode = 1
 anchors_preset = 6
 anchor_left = 1.0
@@ -101,3 +106,156 @@ grow_horizontal = 0
 grow_vertical = 2
 theme_override_font_sizes/normal_font_size = 40
 text = "Score: 999"
+
+[node name="PopupArea" type="Control" parent="UI Manager/WholeCanvas"]
+visible = false
+custom_minimum_size = Vector2(500, 600)
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -20.0
+offset_top = -20.0
+offset_right = 20.0
+offset_bottom = 20.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="ColorRect" type="ColorRect" parent="UI Manager/WholeCanvas/PopupArea"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+color = Color(0.228554, 0.142329, 0.301255, 1)
+
+[node name="SettingsButton" type="Button" parent="UI Manager/WholeCanvas/PopupArea"]
+custom_minimum_size = Vector2(200, 50)
+offset_left = 10.0
+offset_top = 10.0
+offset_right = 210.0
+offset_bottom = 60.0
+size_flags_horizontal = 4
+theme_override_font_sizes/font_size = 30
+text = "Settings"
+icon_alignment = 1
+script = ExtResource("11_dhw4s")
+controlIndex = 2
+
+[node name="TitleText" type="RichTextLabel" parent="UI Manager/WholeCanvas/PopupArea"]
+custom_minimum_size = Vector2(150, 0)
+layout_mode = 1
+anchors_preset = 5
+anchor_left = 0.5
+anchor_right = 0.5
+offset_left = -75.0
+offset_top = 100.0
+offset_right = 75.0
+offset_bottom = 150.0
+grow_horizontal = 2
+theme_override_font_sizes/normal_font_size = 30
+bbcode_enabled = true
+text = "[center]You Won!"
+
+[node name="ScoreContainer" type="HBoxContainer" parent="UI Manager/WholeCanvas/PopupArea"]
+custom_minimum_size = Vector2(300, 200)
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -150.0
+offset_top = -20.0
+offset_right = 150.0
+offset_bottom = 20.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="VBoxContainer" type="VBoxContainer" parent="UI Manager/WholeCanvas/PopupArea/ScoreContainer"]
+custom_minimum_size = Vector2(250, 0)
+layout_mode = 2
+
+[node name="CurrentScoreText" type="RichTextLabel" parent="UI Manager/WholeCanvas/PopupArea/ScoreContainer/VBoxContainer"]
+custom_minimum_size = Vector2(0, 50)
+layout_mode = 2
+bbcode_enabled = true
+text = "[right]Score: "
+
+[node name="HighScoreText" type="RichTextLabel" parent="UI Manager/WholeCanvas/PopupArea/ScoreContainer/VBoxContainer"]
+custom_minimum_size = Vector2(0, 50)
+layout_mode = 2
+bbcode_enabled = true
+text = "[right]High Score: "
+
+[node name="VBoxContainer2" type="VBoxContainer" parent="UI Manager/WholeCanvas/PopupArea/ScoreContainer"]
+custom_minimum_size = Vector2(250, 0)
+layout_mode = 2
+
+[node name="CurrentScoreTextVal" type="RichTextLabel" parent="UI Manager/WholeCanvas/PopupArea/ScoreContainer/VBoxContainer2"]
+custom_minimum_size = Vector2(0, 50)
+layout_mode = 2
+text = "999"
+
+[node name="HighScoreTextVal" type="RichTextLabel" parent="UI Manager/WholeCanvas/PopupArea/ScoreContainer/VBoxContainer2"]
+custom_minimum_size = Vector2(0, 50)
+layout_mode = 2
+text = "999"
+
+[node name="HBoxContainer" type="VBoxContainer" parent="UI Manager/WholeCanvas/PopupArea"]
+layout_mode = 1
+anchors_preset = 7
+anchor_left = 0.5
+anchor_top = 1.0
+anchor_right = 0.5
+anchor_bottom = 1.0
+offset_left = -155.0
+offset_top = -140.0
+offset_right = 155.0
+offset_bottom = -30.0
+grow_horizontal = 2
+grow_vertical = 0
+theme_override_constants/separation = 10
+
+[node name="RetryLevelButton" type="Button" parent="UI Manager/WholeCanvas/PopupArea/HBoxContainer"]
+custom_minimum_size = Vector2(150, 50)
+layout_mode = 2
+size_flags_horizontal = 4
+theme_override_font_sizes/font_size = 30
+text = "Retry Level"
+icon_alignment = 1
+script = ExtResource("11_dhw4s")
+controlIndex = 2
+
+[node name="NextLevelButton" type="Button" parent="UI Manager/WholeCanvas/PopupArea/HBoxContainer"]
+custom_minimum_size = Vector2(150, 50)
+layout_mode = 2
+size_flags_horizontal = 4
+theme_override_font_sizes/font_size = 30
+text = "Next Level"
+icon_alignment = 1
+script = ExtResource("11_dhw4s")
+controlIndex = 2
+
+[node name="UnpauseButton" type="Button" parent="UI Manager/WholeCanvas/PopupArea/HBoxContainer"]
+custom_minimum_size = Vector2(150, 50)
+layout_mode = 2
+size_flags_horizontal = 4
+theme_override_font_sizes/font_size = 30
+text = "Unpause"
+icon_alignment = 1
+script = ExtResource("11_dhw4s")
+controlIndex = 2
+
+[node name="HomeButton" type="Button" parent="UI Manager/WholeCanvas/PopupArea/HBoxContainer"]
+custom_minimum_size = Vector2(150, 50)
+layout_mode = 2
+size_flags_horizontal = 4
+theme_override_font_sizes/font_size = 30
+text = "Home"
+icon_alignment = 1
+script = ExtResource("11_dhw4s")
+controlIndex = 2

@@ -145,6 +145,8 @@ public partial class BreakoutManager : Node
 
 	private void Setup()
 	{
+		difficulty = GameManager.Instance.CurrentDifficulty;
+		GD.Print($"BreakoutManager.cs: Difficulty from Game Manager: {difficulty}");
 		playerScore = 0;
 		playerLives = playerMaxLives;
 		gameOver = false;
