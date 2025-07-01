@@ -1,4 +1,4 @@
-[gd_scene load_steps=13 format=3 uid="uid://1iva5wilxcet"]
+[gd_scene load_steps=14 format=3 uid="uid://1iva5wilxcet"]
 
 [ext_resource type="Script" uid="uid://dk72s2bwdvrrf" path="res://Scene/Managers/BreakoutManager.cs" id="1_ra2vd"]
 [ext_resource type="PackedScene" uid="uid://dw0ubxif7xkl1" path="res://Entities/Paddle/paddle.tscn" id="2_dhw4s"]
@@ -12,18 +12,20 @@
 [ext_resource type="Script" uid="uid://o45puakrkpcp" path="res://Scene/UI/BreakoutUI/UIManager.cs" id="10_dq7ph"]
 [ext_resource type="Script" uid="uid://cul4tuuar8x7t" path="res://Scene/UI/GameUI/ControlButton.cs" id="11_dhw4s"]
 [ext_resource type="Script" uid="uid://cfelhi0upatd2" path="res://Scene/UI/BreakoutUI/HUDManager.cs" id="11_vsjxa"]
+[ext_resource type="Script" uid="uid://catwhk35le0b6" path="res://Scene/UI/BreakoutUI/PopupManager.cs" id="12_24pcb"]
 
 [node name="BreakIn" type="Node2D"]
 
-[node name="BreakoutManager" type="Node" parent="." node_paths=PackedStringArray("objectPool", "brickParent", "powerUpManager", "powerupParent")]
+[node name="BreakoutManager" type="Node" parent="." node_paths=PackedStringArray("objectPool", "powerUpManager", "uiManager", "brickParent", "powerupParent")]
 script = ExtResource("1_ra2vd")
 paddleScene = ExtResource("2_dhw4s")
 ballScene = ExtResource("3_vsjxa")
 brickScene = ExtResource("4_24pcb")
 powerupOrbScene = ExtResource("5_77uq7")
 objectPool = NodePath("../ObjectPool")
-brickParent = NodePath("../ObjectPool/Bricks")
 powerUpManager = NodePath("../PowerUpManager")
+uiManager = NodePath("../UI Manager")
+brickParent = NodePath("../ObjectPool/Bricks")
 powerupParent = NodePath("../ObjectPool/Powerups")
 difficulty = 3
 
@@ -56,10 +58,11 @@ script = ExtResource("9_idhfp")
 
 [node name="Powerups" type="Node" parent="ObjectPool"]
 
-[node name="UI Manager" type="CanvasLayer" parent="." node_paths=PackedStringArray("livesField", "scoreField")]
+[node name="UI Manager" type="CanvasLayer" parent="." node_paths=PackedStringArray("uiAreas", "hudManager", "popupManager")]
 script = ExtResource("10_dq7ph")
-livesField = NodePath("WholeCanvas/HUDArea/LivesLeftText")
-scoreField = NodePath("WholeCanvas/HUDArea/ScoreText")
+uiAreas = [NodePath("WholeCanvas/HUDArea"), NodePath("WholeCanvas/PopupArea")]
+hudManager = NodePath("WholeCanvas/HUDArea")
+popupManager = NodePath("WholeCanvas/PopupArea")
 
 [node name="WholeCanvas" type="Control" parent="UI Manager"]
 layout_mode = 3
@@ -107,8 +110,7 @@ grow_vertical = 2
 theme_override_font_sizes/normal_font_size = 40
 text = "Score: 999"
 
-[node name="PopupArea" type="Control" parent="UI Manager/WholeCanvas"]
-visible = false
+[node name="PopupArea" type="Control" parent="UI Manager/WholeCanvas" node_paths=PackedStringArray("uiManager", "titleLabel", "currentScoreLabel", "highScoreLabel")]
 custom_minimum_size = Vector2(500, 600)
 layout_mode = 1
 anchors_preset = 8
@@ -122,6 +124,11 @@ offset_right = 20.0
 offset_bottom = 20.0
 grow_horizontal = 2
 grow_vertical = 2
+script = ExtResource("12_24pcb")
+uiManager = NodePath("../..")
+titleLabel = NodePath("TitleText")
+currentScoreLabel = NodePath("ScoreContainer/VBoxContainer2/CurrentScoreTextVal")
+highScoreLabel = NodePath("ScoreContainer/VBoxContainer2/HighScoreTextVal")
 
 [node name="ColorRect" type="ColorRect" parent="UI Manager/WholeCanvas/PopupArea"]
 layout_mode = 1
@@ -134,6 +141,7 @@ color = Color(0.228554, 0.142329, 0.301255, 1)
 
 [node name="SettingsButton" type="Button" parent="UI Manager/WholeCanvas/PopupArea"]
 custom_minimum_size = Vector2(200, 50)
+layout_mode = 0
 offset_left = 10.0
 offset_top = 10.0
 offset_right = 210.0
@@ -146,7 +154,7 @@ script = ExtResource("11_dhw4s")
 controlIndex = 2
 
 [node name="TitleText" type="RichTextLabel" parent="UI Manager/WholeCanvas/PopupArea"]
-custom_minimum_size = Vector2(150, 0)
+custom_minimum_size = Vector2(250, 0)
 layout_mode = 1
 anchors_preset = 5
 anchor_left = 0.5
@@ -158,7 +166,7 @@ offset_bottom = 150.0
 grow_horizontal = 2
 theme_override_font_sizes/normal_font_size = 30
 bbcode_enabled = true
-text = "[center]You Won!"
+text = "[center]Game Paused"
 
 [node name="ScoreContainer" type="HBoxContainer" parent="UI Manager/WholeCanvas/PopupArea"]
 custom_minimum_size = Vector2(300, 200)

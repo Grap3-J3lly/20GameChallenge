@@ -22,6 +22,10 @@ public partial class BreakoutManager : Node
 	// Managers
     [Export]
 	private ObjectPool objectPool;
+	[Export]
+	private PowerUpManager powerUpManager;
+	[Export]
+	private UIManager uiManager;
 
     // Paddle Details
     private Paddle paddle;
@@ -32,6 +36,7 @@ public partial class BreakoutManager : Node
 	private Array<Ball> balls = new Array<Ball>();
     [Export]
 	private float ballIncreaseSpeedAmount = 25f;
+	private Array<Vector2> previousBallVelocities = new Array<Vector2>();
 
 	// Brick Details
 	private Brick[,] bricks;
@@ -52,12 +57,12 @@ public partial class BreakoutManager : Node
     private int maxRowCount_Hard = 5;
 
 	// Powerup Details
-	[Export]
-	private PowerUpManager powerUpManager;
     [Export]
     private Node powerupParent;
 	[Export]
 	private float powerupSpawnRate = .25f;
+	private Array<PowerupOrb> activePowerups = new Array<PowerupOrb>();
+	private Array<Vector2> previousPowerupVelocities = new Array<Vector2>();
 
     // General Game Settings
 	[Export]
@@ -68,6 +73,7 @@ public partial class BreakoutManager : Node
     private int playerScore = 0;
 	private int playerLives = 3;
 	private bool gameOver = false;
+	private bool gamePaused = false;
 
 	// Signals
 	[Signal]
@@ -79,20 +85,32 @@ public partial class BreakoutManager : Node
 
 	public static BreakoutManager Instance { get; private set; }
 
-	public PackedScene PaddleScene { get => paddleScene; }
+    // Packed Scenes
+    public PackedScene PaddleScene { get => paddleScene; }
 	public PackedScene BallScene { get => ballScene; }
 
-	public Paddle Paddle { get => paddle; }
-	public Array<Ball> Balls { get => balls; }
-    public Brick[,] Bricks { get { return bricks; } }
+    // Managers
     public ObjectPool ObjectPool { get => objectPool; }
 	public PowerUpManager PowerUpManager { get => powerUpManager; }
 
+    // Paddle Details
+    public Paddle Paddle { get => paddle; }
 	public Vector2 PaddleStartingLocation { get => paddleStartingLocation; }
 
-	public int PlayerScore { get => playerScore; set => playerScore = value; }
+    // Ball Details
+    public Array<Ball> Balls { get => balls; }
+    
+	// Brick Details
+    public Brick[,] Bricks { get { return bricks; } }
+
+	// Powerup Details
+	public Array<PowerupOrb> ActrivePowerups { get => activePowerups; }
+
+    // General Game Settings
+    public int PlayerScore { get => playerScore; set => playerScore = value; }
 	public int PlayerLives { get => playerLives; set => playerLives = value; }
 	public bool GameOver { get => gameOver; }
+	public bool GamePaused { get => gamePaused; }
 
 	// --------------------------------
 	//		STANDARD FUNCTIONS	
@@ -110,33 +128,6 @@ public partial class BreakoutManager : Node
 
 		HandleGeneralInput();
 		gameOver = DetermineGameOver();
-	}
-
-	// --------------------------------
-	//		SCORING LOGIC	
-	// --------------------------------
-
-	public void ReduceScore(int amount = 1)
-	{
-		if(playerScore <= 0) { return; }
-		playerScore -= amount;
-        GD.Print($"GameManager.cpp: Reducing Score to: {playerScore}");
-    }
-
-	public void ReduceLife()
-	{
-		--playerLives;
-
-		foreach (Ball ball in Balls)
-		{
-			ball.BallSpeed -= ballIncreaseSpeedAmount;
-		}
-		GD.Print($"GameManager.cpp: Reducing Lives to: {playerLives}");
-	}
-
-	public bool DetermineGameOver()
-	{
-		return playerLives <= 0;
 	}
 
 	// --------------------------------
@@ -175,10 +166,37 @@ public partial class BreakoutManager : Node
     }
 
     // --------------------------------
+    //		SCORING LOGIC	
+    // --------------------------------
+
+    public void ReduceScore(int amount = 1)
+    {
+        if (playerScore <= 0) { return; }
+        playerScore -= amount;
+        GD.Print($"BreakoutManager.cpp: Reducing Score to: {playerScore}");
+    }
+
+    public void ReduceLife()
+    {
+        --playerLives;
+
+        foreach (Ball ball in Balls)
+        {
+            ball.BallSpeed -= ballIncreaseSpeedAmount;
+        }
+        GD.Print($"BreakoutManager.cpp: Reducing Lives to: {playerLives}");
+    }
+
+    public bool DetermineGameOver()
+    {
+        return playerLives <= 0;
+    }
+
+    // --------------------------------
     //		GENERAL LOGIC	
     // --------------------------------
 
-	public void TriggerObjectiveSuccess()
+    public void TriggerObjectiveSuccess()
 	{
         playerScore++;
 
@@ -186,30 +204,68 @@ public partial class BreakoutManager : Node
 		{
 			ball.BallSpeed += ballIncreaseSpeedAmount;
 		}
-		GD.Print($"GameManager.cs: New Ball Speed: {balls[0].BallSpeed}");
+		GD.Print($"BreakoutManager.cs: New Ball Speed: {balls[0].BallSpeed}");
     }
 
     public void HandleGeneralInput()
 	{
-		if(Input.IsActionJustPressed("ui_accept") && gameOver)
+		if(Input.IsActionJustPressed("ui_accept") && gameOver && !gamePaused)
 		{
 			RestartGame();
 		}
-		if(Input.IsActionJustPressed("ui_accept") && !gameOver && balls[0].Velocity == Vector2.Zero)
+		if(Input.IsActionJustPressed("ui_accept") && !gameOver && balls[0].Velocity == Vector2.Zero && !gamePaused)
 		{
 			balls[0].Fire(paddle.Velocity);
 		}
 		if(Input.IsActionJustPressed("ui_cancel"))
 		{
-			// Opens Menu
-			GD.Print($"GameManager.cs: Triggering Powerup");
-			// powerUpManager.Debug_TriBall();
-			// powerUpManager.Debug_SuperBall();
-			// powerUpManager.Debug_SuperWide();
-			// powerUpManager.Debug_PaddleSpeed();
-			// powerUpManager.Debug_Shield();
+			gamePaused = !gamePaused;
+
+			if(gamePaused)
+			{
+				Pause();
+				uiManager.PopupManager.ChangeTitle("Game Paused");
+				uiManager.PopupManager.ChangeScore(playerScore);
+			}
+			else
+			{
+				Unpause();
+			}
+			uiManager.ToggleArea(1, gamePaused);
 		}
 	}
+
+	private void Pause()
+	{
+		previousBallVelocities.Clear();
+		previousPowerupVelocities.Clear();
+		for (int index = 0; index < balls.Count; index++)
+		{
+			GD.Print($"BreakoutManager: Previous Velocity: {balls[index].Velocity}");
+			previousBallVelocities.Add(balls[index].Velocity);
+			balls[index].Velocity = Vector2.Zero;
+            GD.Print($"BreakoutManager: Current Velocity: {balls[index].Velocity}");
+        }
+		for (int index = 0; index < activePowerups.Count; index++)
+		{
+			previousPowerupVelocities.Add(activePowerups[index].Velocity);
+			activePowerups[index].Velocity = Vector2.Zero;
+		}
+	}
+
+	private void Unpause()
+	{
+        for (int index = 0; index < balls.Count; index++)
+        {
+            GD.Print($"BreakoutManager: Stored Velocity: {previousBallVelocities[index]}");
+            balls[index].Velocity = previousBallVelocities[index];
+            GD.Print($"BreakoutManager: New Velocity: {balls[index].Velocity}");
+        }
+        for (int index = 0; index < activePowerups.Count; index++)
+        {
+			activePowerups[index].Velocity = previousPowerupVelocities[index];
+        }
+    }
 
     // --------------------------------
     //			SPAWN LOGIC	
@@ -241,7 +297,7 @@ public partial class BreakoutManager : Node
 				break;
 
 			default:
-				GD.PrintErr($"GameManager.cs: Invalid Difficulty Provided. Defaulting to Easy");
+				GD.PrintErr($"BreakoutManager.cs: Invalid Difficulty Provided. Defaulting to Easy");
 				columnCount = maxRowCount_Easy;
 				break;
 				
@@ -268,7 +324,8 @@ public partial class BreakoutManager : Node
 
 		if (spawnChance <= powerupSpawnRate)
 		{
-			objectPool.SpawnObjectAtPosition<PowerupOrb>(powerupOrbScene, position, powerupParent);
+			PowerupOrb newOrb = objectPool.SpawnObjectAtPosition<PowerupOrb>(powerupOrbScene, position, powerupParent);
+			activePowerups.Add(newOrb);
 		}
 	}
 

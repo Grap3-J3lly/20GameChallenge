@@ -1,35 +1,40 @@
 using Godot;
+using Godot.Collections;
 using System;
-using static System.Net.Mime.MediaTypeNames;
 
 public partial class UIManager : CanvasLayer
 {
     private BreakoutManager breakoutManager;
 
     [Export]
-    private string livesLabelText = "Lives Remaining: ";
+    private Array<Control> uiAreas = new Array<Control>();
     [Export]
-    private RichTextLabel livesField;
+    private HUDManager hudManager;
+    [Export]
+    private PopupManager popupManager;
 
-    [Export]
-    private string scoreLabelText = "Score: ";
-    [Export]
-    private RichTextLabel scoreField;
+
+
+    public static UIManager Instance { get; private set; }
+    public PopupManager PopupManager { get => popupManager; }
+
 
     public override void _Ready()
     {
+        Instance = this;
         breakoutManager = BreakoutManager.Instance;
+
+        ToggleArea(1, false);
     }
 
     public override void _Process(double delta)
     {
-        UpdateLabel(livesField, livesLabelText, breakoutManager.PlayerLives);
-        UpdateLabel(scoreField, scoreLabelText, breakoutManager.PlayerScore);
+        
     }
 
-    private void UpdateLabel(RichTextLabel label, string preValueText, int value)
+    public void ToggleArea(int areaIndex, bool isVisible)
     {
-        label.Text = preValueText + value.ToString();
+        uiAreas[areaIndex].Visible = isVisible;
     }
 
 }

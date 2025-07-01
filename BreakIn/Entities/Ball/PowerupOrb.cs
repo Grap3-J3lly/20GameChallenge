@@ -49,6 +49,7 @@ public partial class PowerupOrb : Ball
         }
         if (potentialPaddle != null || potentialGoal != null)
         {
+            breakoutManager.ActrivePowerups.Remove(this);
             QueueFree();
         }
     }

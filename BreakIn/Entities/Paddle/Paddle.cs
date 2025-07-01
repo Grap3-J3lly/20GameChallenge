@@ -59,6 +59,8 @@ public partial class Paddle : AnimatableBody2D
     // --------------------------------
     private void HandleMovement(double delta)
 	{
+        if(breakoutManager.GamePaused) { return; }
+
         float inputDir = Input.GetAxis("ui_left", "ui_right");
         float movementAmount = inputDir * paddleSpeed * (float)delta;
         velocity = Vector2.Right * movementAmount;
