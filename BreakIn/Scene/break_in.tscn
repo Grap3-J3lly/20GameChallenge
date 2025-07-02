@@ -1,4 +1,4 @@
-[gd_scene load_steps=14 format=3 uid="uid://1iva5wilxcet"]
+[gd_scene load_steps=16 format=3 uid="uid://1iva5wilxcet"]
 
 [ext_resource type="Script" uid="uid://dk72s2bwdvrrf" path="res://Scene/Managers/BreakoutManager.cs" id="1_ra2vd"]
 [ext_resource type="PackedScene" uid="uid://dw0ubxif7xkl1" path="res://Entities/Paddle/paddle.tscn" id="2_dhw4s"]
@@ -10,9 +10,11 @@
 [ext_resource type="PackedScene" uid="uid://dual7tj41jj13" path="res://Scene/GameBoard/Goals/enemy_goal.tscn" id="8_n83oc"]
 [ext_resource type="Script" uid="uid://b13didcx4upnl" path="res://Scene/Managers/ObjectPool.cs" id="9_idhfp"]
 [ext_resource type="Script" uid="uid://o45puakrkpcp" path="res://Scene/UI/BreakoutUI/UIManager.cs" id="10_dq7ph"]
-[ext_resource type="Script" uid="uid://cul4tuuar8x7t" path="res://Scene/UI/GameUI/ControlButton.cs" id="11_dhw4s"]
+[ext_resource type="Script" uid="uid://cul4tuuar8x7t" path="res://Scene/UI/UI Buttons/ControlButton.cs" id="11_dhw4s"]
 [ext_resource type="Script" uid="uid://cfelhi0upatd2" path="res://Scene/UI/BreakoutUI/HUDManager.cs" id="11_vsjxa"]
 [ext_resource type="Script" uid="uid://catwhk35le0b6" path="res://Scene/UI/BreakoutUI/PopupManager.cs" id="12_24pcb"]
+[ext_resource type="Script" uid="uid://cpqtoxswte8t" path="res://Scene/UI/UI Buttons/UnpauseButton.cs" id="14_77uq7"]
+[ext_resource type="Script" uid="uid://xxh4t7ep6b50" path="res://Scene/UI/UI Buttons/HomeButton.cs" id="15_1a48d"]
 
 [node name="BreakIn" type="Node2D"]
 
@@ -110,7 +112,7 @@ grow_vertical = 2
 theme_override_font_sizes/normal_font_size = 40
 text = "Score: 999"
 
-[node name="PopupArea" type="Control" parent="UI Manager/WholeCanvas" node_paths=PackedStringArray("uiManager", "titleLabel", "currentScoreLabel", "highScoreLabel")]
+[node name="PopupArea" type="Control" parent="UI Manager/WholeCanvas" node_paths=PackedStringArray("uiManager", "titleLabel", "currentScoreLabel", "highScoreLabel", "swappableButtons")]
 custom_minimum_size = Vector2(500, 600)
 layout_mode = 1
 anchors_preset = 8
@@ -129,6 +131,7 @@ uiManager = NodePath("../..")
 titleLabel = NodePath("TitleText")
 currentScoreLabel = NodePath("ScoreContainer/VBoxContainer2/CurrentScoreTextVal")
 highScoreLabel = NodePath("ScoreContainer/VBoxContainer2/HighScoreTextVal")
+swappableButtons = [NodePath("HBoxContainer/UnpauseButton"), NodePath("HBoxContainer/RetryLevelButton"), NodePath("HBoxContainer/NextLevelButton")]
 
 [node name="ColorRect" type="ColorRect" parent="UI Manager/WholeCanvas/PopupArea"]
 layout_mode = 1
@@ -137,7 +140,7 @@ anchor_right = 1.0
 anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
-color = Color(0.228554, 0.142329, 0.301255, 1)
+color = Color(0.305423, 0.197033, 0.397061, 1)
 
 [node name="SettingsButton" type="Button" parent="UI Manager/WholeCanvas/PopupArea"]
 custom_minimum_size = Vector2(200, 50)
@@ -152,6 +155,7 @@ text = "Settings"
 icon_alignment = 1
 script = ExtResource("11_dhw4s")
 controlIndex = 2
+clearPreviousMenu = true
 
 [node name="TitleText" type="RichTextLabel" parent="UI Manager/WholeCanvas/PopupArea"]
 custom_minimum_size = Vector2(250, 0)
@@ -228,6 +232,15 @@ grow_horizontal = 2
 grow_vertical = 0
 theme_override_constants/separation = 10
 
+[node name="UnpauseButton" type="Button" parent="UI Manager/WholeCanvas/PopupArea/HBoxContainer"]
+custom_minimum_size = Vector2(150, 50)
+layout_mode = 2
+size_flags_horizontal = 4
+theme_override_font_sizes/font_size = 30
+text = "Resume"
+icon_alignment = 1
+script = ExtResource("14_77uq7")
+
 [node name="RetryLevelButton" type="Button" parent="UI Manager/WholeCanvas/PopupArea/HBoxContainer"]
 custom_minimum_size = Vector2(150, 50)
 layout_mode = 2
@@ -248,16 +261,6 @@ icon_alignment = 1
 script = ExtResource("11_dhw4s")
 controlIndex = 2
 
-[node name="UnpauseButton" type="Button" parent="UI Manager/WholeCanvas/PopupArea/HBoxContainer"]
-custom_minimum_size = Vector2(150, 50)
-layout_mode = 2
-size_flags_horizontal = 4
-theme_override_font_sizes/font_size = 30
-text = "Unpause"
-icon_alignment = 1
-script = ExtResource("11_dhw4s")
-controlIndex = 2
-
 [node name="HomeButton" type="Button" parent="UI Manager/WholeCanvas/PopupArea/HBoxContainer"]
 custom_minimum_size = Vector2(150, 50)
 layout_mode = 2
@@ -265,5 +268,4 @@ size_flags_horizontal = 4
 theme_override_font_sizes/font_size = 30
 text = "Home"
 icon_alignment = 1
-script = ExtResource("11_dhw4s")
-controlIndex = 2
+script = ExtResource("15_1a48d")

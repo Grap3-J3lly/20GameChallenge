@@ -6,6 +6,8 @@ public partial class ControlButton : Button
 {
     [Export]
     private int controlIndex = -1;
+    [Export]
+    private bool clearPreviousMenu = false;
 
     private MenuManager menuManager;
 
@@ -23,6 +25,6 @@ public partial class ControlButton : Button
 
     public void OnPress()
     {
-        menuManager.OpenMenu(controlIndex);
+        menuManager.OpenMenu(controlIndex, clearPreviousMenu);
     }
 }

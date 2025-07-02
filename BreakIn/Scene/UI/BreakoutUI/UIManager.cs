@@ -4,6 +4,10 @@ using System;
 
 public partial class UIManager : CanvasLayer
 {
+    // --------------------------------
+    //			VARIABLES	
+    // --------------------------------
+
     private BreakoutManager breakoutManager;
 
     [Export]
@@ -13,12 +17,16 @@ public partial class UIManager : CanvasLayer
     [Export]
     private PopupManager popupManager;
 
-
+    // --------------------------------
+    //			PROPERTIES	
+    // --------------------------------
 
     public static UIManager Instance { get; private set; }
     public PopupManager PopupManager { get => popupManager; }
 
-
+    // --------------------------------
+    //		STANDARD FUNCTIONS	
+    // --------------------------------
     public override void _Ready()
     {
         Instance = this;
@@ -27,11 +35,16 @@ public partial class UIManager : CanvasLayer
         ToggleArea(1, false);
     }
 
-    public override void _Process(double delta)
-    {
-        
-    }
+    // --------------------------------
+    //			GENERAL LOGIC	
+    // --------------------------------
 
+    /// <summary>
+    /// AreaIndex: Area to toggle, 0 - HUDManager, 1 - PopupManager
+    /// IsVisible: Make AreaIndex Visible or not
+    /// </summary>
+    /// <param name="areaIndex"></param>
+    /// <param name="isVisible"></param>
     public void ToggleArea(int areaIndex, bool isVisible)
     {
         uiAreas[areaIndex].Visible = isVisible;

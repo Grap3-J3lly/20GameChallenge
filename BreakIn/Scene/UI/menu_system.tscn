@@ -1,22 +1,18 @@
-[gd_scene load_steps=5 format=3 uid="uid://c4ueua7jfdfco"]
+[gd_scene load_steps=6 format=3 uid="uid://c4ueua7jfdfco"]
 
 [ext_resource type="Script" uid="uid://bxcy6bjnl7by5" path="res://Scene/Managers/MenuManager.cs" id="1_sjjf8"]
-[ext_resource type="Script" uid="uid://cc0olugnkxali" path="res://Scene/UI/GameUI/PlayButton.cs" id="2_fywvq"]
-[ext_resource type="Script" uid="uid://cul4tuuar8x7t" path="res://Scene/UI/GameUI/ControlButton.cs" id="2_kn2t0"]
-[ext_resource type="Script" uid="uid://tj4lr00leo8f" path="res://Scene/UI/GameUI/QuitButton.cs" id="2_pyovw"]
+[ext_resource type="Script" uid="uid://cc0olugnkxali" path="res://Scene/UI/UI Buttons/PlayButton.cs" id="2_fywvq"]
+[ext_resource type="Script" uid="uid://cul4tuuar8x7t" path="res://Scene/UI/UI Buttons/ControlButton.cs" id="2_kn2t0"]
+[ext_resource type="Script" uid="uid://tj4lr00leo8f" path="res://Scene/UI/UI Buttons/QuitButton.cs" id="2_pyovw"]
+[ext_resource type="Script" uid="uid://bfuyiic4xwiph" path="res://Scene/UI/UI Buttons/BackButton.cs" id="5_at6ue"]
 
-[node name="MenuSystem" type="Control" node_paths=PackedStringArray("menus")]
-layout_mode = 3
-anchors_preset = 15
-anchor_right = 1.0
-anchor_bottom = 1.0
-grow_horizontal = 2
-grow_vertical = 2
+[node name="MenuSystem" type="CanvasLayer" node_paths=PackedStringArray("menus")]
+layer = 10
 script = ExtResource("1_sjjf8")
 menus = [NodePath("MainMenu"), NodePath("LevelSelect"), NodePath("Settings")]
 
 [node name="MainMenu" type="Control" parent="."]
-layout_mode = 1
+layout_mode = 3
 anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0
@@ -115,7 +111,7 @@ Pixabay"
 
 [node name="LevelSelect" type="Control" parent="."]
 visible = false
-layout_mode = 1
+layout_mode = 3
 anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0
@@ -195,7 +191,7 @@ controlIndex = 0
 
 [node name="Settings" type="Control" parent="."]
 visible = false
-layout_mode = 1
+layout_mode = 3
 anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0
@@ -253,5 +249,4 @@ size_flags_horizontal = 4
 theme_override_font_sizes/font_size = 30
 text = "Back"
 icon_alignment = 1
-script = ExtResource("2_kn2t0")
-controlIndex = 0
+script = ExtResource("5_at6ue")

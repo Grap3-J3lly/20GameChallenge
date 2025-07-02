@@ -17,7 +17,8 @@ public partial class PlayButton : Button
 
     public void OnPress()
     {
+        MenuManager.Instance.CloseMenus(true);
         GameManager.Instance.CurrentDifficulty = gameDifficulty;
-        SceneManager.LoadScene(gameSceneIndex);
+        SceneManager.LoadScene(gameSceneIndex, false);
     }
 }

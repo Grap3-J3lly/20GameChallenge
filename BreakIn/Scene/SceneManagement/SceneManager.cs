@@ -4,16 +4,33 @@ using System;
 
 public struct PackedSceneLoad
 {
+    // --------------------------------
+    //			VARIABLES	
+    // --------------------------------
+
     private string path;
     private Godot.Collections.Array loadProgress = new Godot.Collections.Array();
+
+    // --------------------------------
+    //			PROPERTIES	
+    // --------------------------------
+
     public PackedScene LoadedScene { get; private set; }
     public float Progress { get; private set; }
+
+    // --------------------------------
+    //			CONSTRUCTOR	
+    // --------------------------------
 
     public PackedSceneLoad(string scenePath, out Godot.Error error)
     {
         path = scenePath;
         error = ResourceLoader.LoadThreadedRequest(scenePath);
     }
+
+    // --------------------------------
+    //			GENERAL LOGIC	
+    // --------------------------------
 
     public ResourceLoader.ThreadLoadStatus Tick()
     {
@@ -42,18 +59,31 @@ public struct PackedSceneLoad
 
 public partial class SceneManager : Node
 {
+    // --------------------------------
+    //			VARIABLES	
+    // --------------------------------
+
     [Export]
     private Array<string> scenePaths;
+    private Array<Node> openScenes = new Array<Node>();
     private Node currentScene;
 
+    // --------------------------------
+    //			PROPERTIES	
+    // --------------------------------
+
     public static SceneManager Instance { get; private set; }
+
+    // --------------------------------
+    //		STANDARD FUNCTIONS	
+    // --------------------------------
 
     public override void _Ready()
     {
         base._Ready();
 
         Instance = this;
-        LoadScene(scenePaths[0]);
+        LoadScene(scenePaths[0], true);
     }
 
     public override void _Process(double delta)
@@ -62,12 +92,16 @@ public partial class SceneManager : Node
         // Eventually will need to add to this to account for Async Scene Loading
     }
 
-    public static void LoadScene(int sceneIndex)
+    // --------------------------------
+    //		SCENE LOAD LOGIC	
+    // --------------------------------
+
+    public static void LoadScene(int sceneIndex, bool unloadPreviousScene = true, int newSceneIndex = 0)
     {
-        LoadScene(Instance.scenePaths[sceneIndex]);
+        LoadScene(Instance.scenePaths[sceneIndex], unloadPreviousScene);
     }
 
-    private static void LoadScene(string path)
+    private static void LoadScene(string path, bool unloadPreviousScenes, int newSceneIndex = 0)
     {
         GD.Print($"SceneManager.cs: Loading Scene: {path}"); // <- Eventually replace with SceneSettings to make this easier to read
         PackedSceneLoad packedSceneLoad = new PackedSceneLoad(path, out Godot.Error error);
@@ -88,17 +122,29 @@ public partial class SceneManager : Node
         if(status == ResourceLoader.ThreadLoadStatus.Loaded)
         {
             // Unload Scene once new Scene is loaded
-            if(Instance.currentScene != null)
+            if(Instance.currentScene != null && unloadPreviousScenes)
             {
                 GD.Print($"SceneManager.cs: Unloading Previous Scene: {Instance.currentScene.Name}");
-                Instance.currentScene.QueueFree();
+                // Instance.currentScene.QueueFree();
+                UnloadScenes();                
             }
 
             // Load New Scene
             Instance.currentScene = packedSceneLoad.LoadedScene.Instantiate();
             Instance.AddChild(Instance.currentScene);
+            Instance.MoveChild(Instance.currentScene, newSceneIndex);
+            Instance.openScenes.Add(Instance.currentScene);
             GD.Print($"SceneManager.cs: Scene Successfully Loaded: {Instance.currentScene.Name}");
         }
     }
 
+
+    public static void UnloadScenes()
+    {
+        foreach (Node scene in Instance.openScenes)
+        {
+            scene.QueueFree();
+        }
+        Instance.openScenes.Clear();
+    }
 }

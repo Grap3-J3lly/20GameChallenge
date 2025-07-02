@@ -128,6 +128,7 @@ public partial class BreakoutManager : Node
 
 		HandleGeneralInput();
 		gameOver = DetermineGameOver();
+		HandleGameOver();
 	}
 
 	// --------------------------------
@@ -189,8 +190,24 @@ public partial class BreakoutManager : Node
 
     public bool DetermineGameOver()
     {
-        return playerLives <= 0;
+        return playerLives <= 0 || bricks.Length <= 0;
     }
+
+	private void HandleGameOver()
+	{
+		if(!gameOver || gamePaused) { return; }
+		gamePaused = true;
+		Pause();
+		if(playerLives <= 0)
+		{
+			uiManager.PopupManager.OpenPopup(PopupManager.PopupType.GameLose);
+		}
+		else
+		{
+            uiManager.PopupManager.OpenPopup(PopupManager.PopupType.GameWin);
+        }
+		uiManager.ToggleArea(1, true);
+	}
 
     // --------------------------------
     //		GENERAL LOGIC	
@@ -211,7 +228,7 @@ public partial class BreakoutManager : Node
 	{
 		if(Input.IsActionJustPressed("ui_accept") && gameOver && !gamePaused)
 		{
-			RestartGame();
+			// RestartGame();
 		}
 		if(Input.IsActionJustPressed("ui_accept") && !gameOver && balls[0].Velocity == Vector2.Zero && !gamePaused)
 		{
@@ -219,21 +236,25 @@ public partial class BreakoutManager : Node
 		}
 		if(Input.IsActionJustPressed("ui_cancel"))
 		{
-			gamePaused = !gamePaused;
-
-			if(gamePaused)
-			{
-				Pause();
-				uiManager.PopupManager.ChangeTitle("Game Paused");
-				uiManager.PopupManager.ChangeScore(playerScore);
-			}
-			else
-			{
-				Unpause();
-			}
-			uiManager.ToggleArea(1, gamePaused);
+			HandlePauseGame();
 		}
 	}
+
+	public void HandlePauseGame()
+	{
+        gamePaused = !gamePaused;
+
+        if (gamePaused)
+        {
+            Pause();
+            uiManager.PopupManager.OpenPopup(PopupManager.PopupType.GamePause);
+        }
+        else
+        {
+            Unpause();
+        }
+        uiManager.ToggleArea(1, gamePaused);
+    }
 
 	private void Pause()
 	{
