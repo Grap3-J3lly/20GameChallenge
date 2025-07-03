@@ -72,6 +72,28 @@ public partial class PowerUpManager : Node
     //		    POWERUP LOGIC	
     // --------------------------------
 
+    public void ResetPowerups()
+    {
+        // Triball gets handled during regular setup
+
+        // Disables Superball
+        if(breakoutManager != null && breakoutManager.Balls != null)
+        {
+            Array<Ball> balls = breakoutManager.Balls;
+            foreach (Ball ball in balls)
+            {
+                if (ball != null)
+                {
+                    ball.SuperMode = false;
+                }
+            }
+        }
+
+        shieldTimer = 0;
+        superWideTimer = 0;
+        paddleSpeedTimer = 0;
+    }
+
     /// <summary>
     /// Trigger one of the supported powerups by a given index. 
     /// </summary>
@@ -182,11 +204,16 @@ public partial class PowerUpManager : Node
 
     private void RunShieldTimer(float realDelta)
     {
-        if (shieldTimer > 0 && shield != null)
+        if(shield != null)
+        {
+            GD.Print($"PowerUpManager.cs: Shield Value: {shield}");
+        }
+        if (shieldTimer >= 0 && shield != null)
         {
             shieldTimer -= realDelta;
-            if (shieldTimer <= 0)
+            if (shieldTimer < 0)
             {
+                GD.Print("PowerUpManager.cs: Deleting Shield");
                 shieldTimer = 0;
                 shield.Free();
                 shield = null;
@@ -211,10 +238,10 @@ public partial class PowerUpManager : Node
 
     private void RunSuperWideTimer(float realDelta)
     {
-        if (superWideTimer > 0)
+        if (superWideTimer >= 0)
         {
             superWideTimer -= realDelta;
-            if (superWideTimer <= 0)
+            if (superWideTimer < 0 || paddle.IsQueuedForDeletion())
             {
                 superWideTimer = 0;
                 paddle.ResetPaddleSize();
@@ -239,10 +266,10 @@ public partial class PowerUpManager : Node
 
     private void RunPaddleSpeedTimer(float realDelta)
     {
-        if (paddleSpeedTimer > 0)
+        if (paddleSpeedTimer >= 0)
         {
             paddleSpeedTimer -= realDelta;
-            if (paddleSpeedTimer <= 0)
+            if (paddleSpeedTimer < 0)
             {
                 paddleSpeedTimer = 0;
                 paddle.ResetSpeed();

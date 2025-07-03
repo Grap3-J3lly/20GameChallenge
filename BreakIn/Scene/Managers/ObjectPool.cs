@@ -32,7 +32,13 @@ public partial class ObjectPool : Node
         T newObject = objectScene.Instantiate<T>();
         // Make Add Child and/or Position assignment part of Call Deferred
         newObject.Position = spawnPosition;
-        parent.AddChild(newObject);
+        CallDeferred("DelayAssignPosition", (Node2D)newObject, spawnPosition, parent);
         return newObject;
     }    
+
+    public void DelayAssignPosition(Node2D newObject, Vector2 spawnPosition, Node parent)
+    {
+        GD.Print($"ObjectPool.cs: Calling DelayAssignPosition");
+        parent.AddChild(newObject);
+    }
 }

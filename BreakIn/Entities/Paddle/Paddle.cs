@@ -42,6 +42,7 @@ public partial class Paddle : AnimatableBody2D
 
     public override void _Ready()
 	{
+        meshInstance = GetChild<MeshInstance2D>(0);
         startSpeed = paddleSpeed;
         breakoutManager = BreakoutManager.Instance;
         breakoutManager.RowClear += ReducePaddleSize;
@@ -52,6 +53,12 @@ public partial class Paddle : AnimatableBody2D
         base._PhysicsProcess(delta);
 
         HandleMovement(delta);
+    }
+
+    public override void _ExitTree()
+    {
+        base._ExitTree();
+        breakoutManager.RowClear -= ReducePaddleSize;
     }
 
     // --------------------------------
@@ -79,7 +86,10 @@ public partial class Paddle : AnimatableBody2D
 
     public void Reset()
     {
-        Position = breakoutManager.PaddleStartingLocation;
+        if(breakoutManager != null)
+        {
+            Position = breakoutManager.PaddleStartingLocation;
+        }
     }
 
     // --------------------------------
@@ -122,6 +132,7 @@ public partial class Paddle : AnimatableBody2D
 
     public void ResetPaddleSize()
     {
+        if (!IsInstanceValid(this)) return;
         meshInstance.Scale = Vector2.One;
         collisionShape.Scale = Vector2.One;
         superMode = false;

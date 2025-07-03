@@ -32,6 +32,7 @@ uiManager = NodePath("../UI Manager")
 ballIncreaseSpeedAmount = 10.0
 brickParent = NodePath("../ObjectPool/Bricks")
 powerupParent = NodePath("../ObjectPool/Powerups")
+powerupSpawnRate = 1.0
 difficulty = 3
 
 [node name="PowerUpManager" type="Node" parent="."]

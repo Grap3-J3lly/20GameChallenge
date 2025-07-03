@@ -141,21 +141,8 @@ public partial class BreakoutManager : Node
         ClearPowerups();
         ClearBricks();
 		if(paddle != null) paddle.Free();
+		powerUpManager.ResetPowerups();
 
-        CallDeferred("DelayedSpawn");
-    }
-
-    // Reset handles the ball hitting the goal, but the game not being over
-    public void Reset()
-	{
-		balls[0].ResetOnPaddle(paddle);
-		paddle.Reset();
-		ReduceLife();
-		ReduceScore();
-	}
-
-	private void DelayedSpawn()
-	{
         difficulty = GameManager.Instance.CurrentDifficulty;
         GD.Print($"BreakoutManager.cs: Difficulty from Game Manager: {difficulty}");
         playerScore = 0;
@@ -168,8 +155,17 @@ public partial class BreakoutManager : Node
         SpawnPaddle(paddleStartingLocation);
         SpawnBricks(difficulty);
         SpawnBall();
-		paddle.Reset();
+        paddle.Reset();
     }
+
+    // Reset handles the ball hitting the goal, but the game not being over
+    public void Reset()
+	{
+		balls[0].ResetOnPaddle(paddle);
+		paddle.Reset();
+		ReduceLife();
+		ReduceScore();
+	}
 
     // --------------------------------
     //		SCORING LOGIC	

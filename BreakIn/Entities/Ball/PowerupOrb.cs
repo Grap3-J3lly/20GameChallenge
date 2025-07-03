@@ -19,6 +19,7 @@ public partial class PowerupOrb : Ball
         RandomNumberGenerator rng = new RandomNumberGenerator();
         GD.Print($"PowerupOrb.cs: Colors Count: {colors.Count}");
         powerupIndex = rng.RandiRange(0, colors.Count-1);
+        powerupIndex = 3;
         GD.Print($"PowerupOrb.cs: Index: {powerupIndex}");
         Modulate = colors[powerupIndex];
     }
