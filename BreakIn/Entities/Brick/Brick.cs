@@ -35,10 +35,20 @@ public partial class Brick : StaticBody2D
 	{
 		breakoutManager = BreakoutManager.Instance;
 		objectPool = breakoutManager.ObjectPool;
-		Modulate = layerColors[layerCount];
+		// GD.Print($"Brick.cs: Assigned Layer Count in Ready: {layerCount}");
 	}
 
-	public void ProcessHit(bool superBall)
+    // --------------------------------
+    //		SINGLE BRICK LOGIC	
+    // --------------------------------
+
+	public void ChangeBrickLayer(int layerIndex)
+	{
+		layerCount = layerIndex;
+        Modulate = layerColors[layerIndex];
+    }
+
+    public void ProcessHit(bool superBall)
 	{
 		GD.Print($"Brick.cs: Layer Count - {layerCount}");
 		if(layerCount == 0 || superBall)
@@ -61,7 +71,11 @@ public partial class Brick : StaticBody2D
         QueueFree();
     }
 
-	private void CheckIfBrickRowEmpty()
+    // --------------------------------
+    //			ROW LOGIC	
+    // --------------------------------
+
+    private void CheckIfBrickRowEmpty()
 	{
 		int bricksInRow = GetBrickCountByRowID(rowID);
 		GD.Print($"Brick.cs: Bricks Remaining in Row {rowID}: {bricksInRow}");

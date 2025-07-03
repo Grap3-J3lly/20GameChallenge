@@ -30,8 +30,9 @@ public partial class ObjectPool : Node
     public T SpawnObjectAtPosition<T>(PackedScene objectScene, Vector2 spawnPosition, Node parent) where T : Node2D
     {
         T newObject = objectScene.Instantiate<T>();
-        parent.AddChild(newObject);
+        // Make Add Child and/or Position assignment part of Call Deferred
         newObject.Position = spawnPosition;
+        parent.AddChild(newObject);
         return newObject;
     }    
 }

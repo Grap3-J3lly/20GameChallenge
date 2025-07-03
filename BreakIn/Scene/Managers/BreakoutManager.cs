@@ -135,17 +135,14 @@ public partial class BreakoutManager : Node
 	//		SETUP LOGIC	
 	// --------------------------------
 
-	private void Setup()
+	public void Setup()
 	{
-		difficulty = GameManager.Instance.CurrentDifficulty;
-		GD.Print($"BreakoutManager.cs: Difficulty from Game Manager: {difficulty}");
-		playerScore = 0;
-		playerLives = playerMaxLives;
-		gameOver = false;
+        ClearBalls();
+        ClearPowerups();
+        ClearBricks();
+		if(paddle != null) paddle.Free();
 
-		SpawnPaddle(paddleStartingLocation);
-		SpawnBall();
-		SpawnBricks(difficulty);
+        CallDeferred("DelayedSpawn");
     }
 
     // Reset handles the ball hitting the goal, but the game not being over
@@ -157,13 +154,21 @@ public partial class BreakoutManager : Node
 		ReduceScore();
 	}
 
-	// Restart handles the game fully ending
-    private void RestartGame()
-    {
-		playerLives = playerMaxLives;
-		gameOver = false;
-		balls[0].ResetSpeed();
-		balls[0].Visible = true;
+	private void DelayedSpawn()
+	{
+        difficulty = GameManager.Instance.CurrentDifficulty;
+        GD.Print($"BreakoutManager.cs: Difficulty from Game Manager: {difficulty}");
+        playerScore = 0;
+        playerLives = playerMaxLives;
+        gameOver = false;
+        gamePaused = true;
+
+        HandlePauseGame();
+
+        SpawnPaddle(paddleStartingLocation);
+        SpawnBricks(difficulty);
+        SpawnBall();
+		paddle.Reset();
     }
 
     // --------------------------------
@@ -190,7 +195,7 @@ public partial class BreakoutManager : Node
 
     public bool DetermineGameOver()
     {
-        return playerLives <= 0 || bricks.Length <= 0;
+        return playerLives <= 0 || AreAllBricksNull();
     }
 
 	private void HandleGameOver()
@@ -204,9 +209,22 @@ public partial class BreakoutManager : Node
 		}
 		else
 		{
-            uiManager.PopupManager.OpenPopup(PopupManager.PopupType.GameWin);
+            uiManager.PopupManager.OpenPopup(PopupManager.PopupType.GameWin, difficulty >= 3);
         }
 		uiManager.ToggleArea(1, true);
+	}
+
+	private bool AreAllBricksNull()
+	{
+		foreach (Brick brick in Bricks)
+		{
+			if(brick != null)
+			{
+				return false;
+			}
+		}
+
+		return true;
 	}
 
     // --------------------------------
@@ -276,6 +294,7 @@ public partial class BreakoutManager : Node
 
 	private void Unpause()
 	{
+		if (balls == null) return;
         for (int index = 0; index < balls.Count; index++)
         {
             GD.Print($"BreakoutManager: Stored Velocity: {previousBallVelocities[index]}");
@@ -332,9 +351,11 @@ public partial class BreakoutManager : Node
 			for(int x = 0;  x < bricks.GetLength(0); x++)
 			{
                 bricks[x, y].GridPosition = new Vector2I(x, y);
-                bricks[x, y].LayerCount = gridCount.Y - y - 1;
+				bricks[x, y].ChangeBrickLayer(gridCount.Y - y - 1);
+				// GD.Print($"BreakoutManager.cs: Assigned Layer Count in Spawn: {bricks[x, y].LayerCount}");
                 bricks[x, y].RowID = y;
-			}
+				// GD.Print($"BreakoutManager.cs: Assigned Row ID: {bricks[x, y].RowID}");
+            }
 		}
     }
 
@@ -350,4 +371,40 @@ public partial class BreakoutManager : Node
 		}
 	}
 
+    // --------------------------------
+    //			CLEAR LOGIC	
+    // --------------------------------
+
+	public void ClearBalls()
+	{
+		if (balls == null) return;
+		foreach (Ball ball in balls)
+		{
+			ball.Free();
+		}
+		balls.Clear();
+	}
+
+	public void ClearBricks()
+	{
+		if (bricks == null) return;
+		foreach(Brick brick in bricks)
+		{
+			if(brick != null)
+			{
+				brick.QueueFree();
+			}
+		}
+		bricks = null;
+	}
+
+    public void ClearPowerups()
+	{
+		if(activePowerups == null) return;
+		foreach(PowerupOrb powerupOrb in activePowerups)
+		{
+			powerupOrb.QueueFree();
+		}
+		activePowerups.Clear();
+	}
 }

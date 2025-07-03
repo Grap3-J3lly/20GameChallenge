@@ -69,6 +69,7 @@ public partial class Paddle : AnimatableBody2D
         {
             HandleCollision(collision, delta);
         }
+
     }
 
     public void ResetSpeed()
@@ -90,6 +91,7 @@ public partial class Paddle : AnimatableBody2D
         float realDelta = (float)delta;
         GodotObject collidingObject = collision.GetCollider();
         Ball ball = collidingObject as Ball;
+        GD.Print($"Paddle.cs: Colliding with: {collidingObject.ToString()}");
 
 
         if (ball != null)
@@ -111,7 +113,7 @@ public partial class Paddle : AnimatableBody2D
     public void ChangePaddleSize(float changeAmount, bool isSuper = false)
     {
         GD.Print($"Paddle.cs: Attempting to change Paddle Size");
-        if (meshInstance.Scale.X <= minScale || superMode) { return; }
+        if (meshInstance == null || meshInstance.Scale.X <= minScale || superMode) { return; }
         Vector2 adjustedScale = new Vector2(meshInstance.Scale.X + changeAmount, meshInstance.Scale.Y);
         meshInstance.Scale = adjustedScale;
         collisionShape.Scale = adjustedScale;

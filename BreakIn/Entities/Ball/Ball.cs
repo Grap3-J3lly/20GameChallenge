@@ -100,7 +100,7 @@ public partial class Ball : CharacterBody2D
     public void ResetOnPaddle(Node newParent)
     {
         Reparent(newParent);
-        Position = Vector2.Up * 25f;
+        Position = Vector2.Up * 30f;
         Velocity = Vector2.Zero;
     }
 

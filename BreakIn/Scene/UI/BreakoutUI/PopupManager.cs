@@ -33,7 +33,7 @@ public partial class PopupManager : Control
         // Where high score val is set by breakoutManager
     }
 
-    public void OpenPopup(PopupType popupType)
+    public void OpenPopup(PopupType popupType, bool isFinalLevel = false)
     {
         SetScore(BreakoutManager.Instance.PlayerScore);
         switch(popupType)
@@ -48,7 +48,8 @@ public partial class PopupManager : Control
                 break;
             case PopupType.GameWin:
                 SetTitle("You Won!");
-                SetActiveButton(2);
+                if(isFinalLevel) SetActiveButton(1);
+                else SetActiveButton(2);
                 break;
         }
     }
