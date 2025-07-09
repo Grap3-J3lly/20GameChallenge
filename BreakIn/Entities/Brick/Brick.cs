@@ -51,13 +51,14 @@ public partial class Brick : StaticBody2D
     public void ProcessHit(bool superBall)
 	{
 		GD.Print($"Brick.cs: Layer Count - {layerCount}");
+        AudioManager.Instance.PlaySFX(AudioManager.SFXType.OnDestroy);
 		if(layerCount == 0 || superBall)
 		{
 			DestroyBrick();
 			return;
 		}
 		Modulate = layerColors[--layerCount];
-	}
+    }
 
 	private void DestroyBrick()
 	{

@@ -1,7 +1,12 @@
-[gd_scene load_steps=3 format=3 uid="uid://g5gxb4cpktqk"]
+[gd_scene load_steps=8 format=3 uid="uid://g5gxb4cpktqk"]
 
 [ext_resource type="Script" uid="uid://nr5a437t5qn4" path="res://Scene/Managers/GameManager.cs" id="1_7o08m"]
 [ext_resource type="Script" uid="uid://b557hnulbsi83" path="res://Scene/SceneManagement/SceneManager.cs" id="2_k15wb"]
+[ext_resource type="Script" uid="uid://bcjlrdvkhu07" path="res://Scene/Managers/AudioManager.cs" id="3_ijlju"]
+[ext_resource type="AudioStream" uid="uid://qyn6bv6a24uc" path="res://Assets/SFX/Hit.ogg" id="4_vdwas"]
+[ext_resource type="AudioStream" uid="uid://c2un4t3v3bxwv" path="res://Assets/SFX/BrickBreak.ogg" id="5_2aj80"]
+[ext_resource type="AudioStream" uid="uid://bxt67qeyaqkdx" path="res://Assets/SFX/UIInteractSound.ogg" id="6_ftf7w"]
+[ext_resource type="Script" uid="uid://d3jq334fs3ybu" path="res://Scene/Managers/SaveManager.cs" id="7_vdwas"]
 
 [node name="GameNode" type="Node"]
 script = ExtResource("1_7o08m")
@@ -9,3 +14,17 @@ script = ExtResource("1_7o08m")
 [node name="SceneManager" type="Node" parent="."]
 script = ExtResource("2_k15wb")
 scenePaths = Array[String](["res://Scene/UI/menu_system.tscn", "res://Scene/break_in.tscn"])
+
+[node name="AudioManager" type="Node" parent="." node_paths=PackedStringArray("audioPlayer")]
+script = ExtResource("3_ijlju")
+audioPlayer = NodePath("AudioStreamPlayer")
+sfxLibrary = Dictionary[int, AudioStreamOggVorbis]({
+1: ExtResource("4_vdwas"),
+2: ExtResource("5_2aj80"),
+3: ExtResource("6_ftf7w")
+})
+
+[node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="AudioManager"]
+
+[node name="SaveManager" type="Node" parent="."]
+script = ExtResource("7_vdwas")

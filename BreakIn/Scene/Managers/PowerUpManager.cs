@@ -74,6 +74,10 @@ public partial class PowerUpManager : Node
 
     public void ResetPowerups()
     {
+        if(breakoutManager != null)
+        {
+            paddle = breakoutManager.Paddle;
+        }
         // Triball gets handled during regular setup
 
         // Disables Superball
@@ -97,15 +101,19 @@ public partial class PowerUpManager : Node
     /// <summary>
     /// Trigger one of the supported powerups by a given index. 
     /// </summary>
-    /// <param name="powerupIndex">Index 0: TriBall
+    /// <param name="powerupIndex">
+    /// Index 0: TriBall
     /// Index 1: SuperBall
     /// Index 2: SuperWide
     /// Index 3: Shield
-    /// Index 4: PaddleSpeed</param>
+    /// Index 4: PaddleSpeed
+    /// </param>
     public void TriggerPowerupByIndex(int powerupIndex)
     {
         //RandomNumberGenerator rng = new RandomNumberGenerator();
         //int powerupIndex = rng.RandiRange(0, 4);
+
+        paddle = breakoutManager.Paddle;
 
         switch (powerupIndex)
         {
@@ -127,6 +135,7 @@ public partial class PowerUpManager : Node
 
     public void Debug_TriBall()
     {
+        paddle = breakoutManager.Paddle;
         TriggerPowerUp_TriBall();
     }
 
@@ -166,6 +175,7 @@ public partial class PowerUpManager : Node
 
     public void Debug_SuperBall()
     {
+        paddle = breakoutManager.Paddle;
         TriggerPowerUp_SuperBall();
     }
     
@@ -175,7 +185,10 @@ public partial class PowerUpManager : Node
         Array<Ball> balls = breakoutManager.Balls;
         foreach (Ball ball in balls)
         {
-            ball.BallSpeed += superBallSpeedBoostAmount;
+            if(!ball.SuperMode)
+            {
+                ball.BallSpeed += superBallSpeedBoostAmount;
+            }
             ball.SuperMode = true;
             ball.BrickBreakCount = 0;
         }
@@ -186,6 +199,7 @@ public partial class PowerUpManager : Node
 
     public void Debug_Shield()
     {
+        paddle = breakoutManager.Paddle;
         TriggerPowerUp_Shield();
     }
 
@@ -225,6 +239,7 @@ public partial class PowerUpManager : Node
     // SuperWide: Stretches Paddle to be larger for short period of time
     public void Debug_SuperWide()
     {
+        paddle = breakoutManager.Paddle;
         TriggerPowerUp_SuperWide();
     }
     
@@ -232,6 +247,10 @@ public partial class PowerUpManager : Node
     private void TriggerPowerUp_SuperWide()
     {
         GD.Print($"PowerupManager.cs: Triggering SuperWide");
+        if(!IsInstanceValid(paddle))
+        {
+            return;
+        }
         paddle.ChangePaddleSize(superWidePaddleWidth, true);
         superWideTimer = superWideDuration;
     }
@@ -254,6 +273,7 @@ public partial class PowerUpManager : Node
 
     public void Debug_PaddleSpeed()
     {
+        paddle = breakoutManager.Paddle;
         TriggerPowerUp_PaddleSpeed();
     }
     

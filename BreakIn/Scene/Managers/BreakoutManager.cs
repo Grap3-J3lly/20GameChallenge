@@ -10,6 +10,7 @@ public partial class BreakoutManager : Node
 	// --------------------------------
 
 	// Packed Scenes
+	[ExportGroup("Packed Scenes")]
 	[Export]
 	private PackedScene paddleScene;
 	[Export]
@@ -19,7 +20,8 @@ public partial class BreakoutManager : Node
     [Export]
     private PackedScene powerupOrbScene;
 
-	// Managers
+    // Managers
+    [ExportGroup("Managers")]
     [Export]
 	private ObjectPool objectPool;
 	[Export]
@@ -28,18 +30,21 @@ public partial class BreakoutManager : Node
 	private UIManager uiManager;
 
     // Paddle Details
+    [ExportGroup("Paddle Details")]
     private Paddle paddle;
     [Export]
     private Vector2 paddleStartingLocation = new Vector2(576.0f, 796.0f);
 
     // Ball Details
-	private Array<Ball> balls = new Array<Ball>();
+    [ExportGroup("Ball Details")]
+    private Array<Ball> balls = new Array<Ball>();
     [Export]
 	private float ballIncreaseSpeedAmount = 25f;
 	private Array<Vector2> previousBallVelocities = new Array<Vector2>();
 
-	// Brick Details
-	private Brick[,] bricks;
+    // Brick Details
+    [ExportGroup("Brick Details")]
+    private Brick[,] bricks;
 
     [Export]
     private Node brickParent;
@@ -56,7 +61,8 @@ public partial class BreakoutManager : Node
     [Export]
     private int maxRowCount_Hard = 5;
 
-	// Powerup Details
+    // Powerup Details
+    [ExportGroup("Powerup Details")]
     [Export]
     private Node powerupParent;
 	[Export]
@@ -65,7 +71,8 @@ public partial class BreakoutManager : Node
 	private Array<Vector2> previousPowerupVelocities = new Array<Vector2>();
 
     // General Game Settings
-	[Export]
+    [ExportGroup("General Game Settings")]
+    [Export]
 	private int playerMaxLives = 3;
 	[Export]
 	private int difficulty = 1;
@@ -250,7 +257,9 @@ public partial class BreakoutManager : Node
 		}
 		if(Input.IsActionJustPressed("ui_cancel"))
 		{
-			HandlePauseGame();
+			powerUpManager.Debug_SuperWide();
+
+			//HandlePauseGame();
 		}
 	}
 

@@ -129,7 +129,9 @@ public partial class Ball : CharacterBody2D
         Wall potentialWall = collidingObject as Wall;
         Ball potentialBall = collidingObject as Ball;
 
-        if(potentialPaddle != null)
+        AudioManager.Instance.PlaySFX(AudioManager.SFXType.OnHit);
+
+        if (potentialPaddle != null)
         {
             HandlePaddleImpact(currentCollision);
         }
@@ -149,6 +151,7 @@ public partial class Ball : CharacterBody2D
         {
             HandleDefaultImpact(currentCollision);
         }
+
     }
 
     private void HandleDefaultImpact(KinematicCollision2D collisionInfo)

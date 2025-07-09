@@ -19,7 +19,11 @@ public partial class PowerupOrb : Ball
         RandomNumberGenerator rng = new RandomNumberGenerator();
         GD.Print($"PowerupOrb.cs: Colors Count: {colors.Count}");
         powerupIndex = rng.RandiRange(0, colors.Count-1);
-        powerupIndex = 3;
+
+        // DEBUG ONLY
+        // powerupIndex = 2;
+        // DEBUG ONLY END
+
         GD.Print($"PowerupOrb.cs: Index: {powerupIndex}");
         Modulate = colors[powerupIndex];
     }
@@ -46,7 +50,8 @@ public partial class PowerupOrb : Ball
         Goal potentialGoal = collidingObject as Goal;
         if (potentialPaddle != null)
         {
-            HandlePaddleImpact(currentCollision);
+            // HandlePaddleImpact(currentCollision);
+            RunPaddleImpact();
         }
         if (potentialPaddle != null || potentialGoal != null)
         {
@@ -56,6 +61,11 @@ public partial class PowerupOrb : Ball
     }
 
     protected override void HandlePaddleImpact(KinematicCollision2D collisionInfo)
+    {
+        powerUpManager.TriggerPowerupByIndex(powerupIndex);
+    }
+
+    public void RunPaddleImpact()
     {
         powerUpManager.TriggerPowerupByIndex(powerupIndex);
     }

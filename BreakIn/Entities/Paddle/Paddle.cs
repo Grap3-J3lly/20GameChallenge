@@ -101,9 +101,15 @@ public partial class Paddle : AnimatableBody2D
         float realDelta = (float)delta;
         GodotObject collidingObject = collision.GetCollider();
         Ball ball = collidingObject as Ball;
+        PowerupOrb powerupOrb = collidingObject as PowerupOrb;
         GD.Print($"Paddle.cs: Colliding with: {collidingObject.ToString()}");
 
-
+        if(powerupOrb != null)
+        {
+            powerupOrb.RunPaddleImpact();
+            powerupOrb.QueueFree();
+            return;
+        }
         if (ball != null)
         {            
             // Gross hack but it does what I want
@@ -132,7 +138,7 @@ public partial class Paddle : AnimatableBody2D
 
     public void ResetPaddleSize()
     {
-        if (!IsInstanceValid(this)) return;
+        if (!IsInstanceValid(this) || (meshInstance.Scale == Vector2.One && collisionShape.Scale == Vector2.One)) return;
         meshInstance.Scale = Vector2.One;
         collisionShape.Scale = Vector2.One;
         superMode = false;
