@@ -15,6 +15,7 @@ public partial class HomeButton : Button
 
     public void OnPress()
     {        
+        AudioManager.Instance.PlaySFX(AudioManager.SFXType.UI_Interact);
         SceneManager.LoadScene(sceneIndex);
     }
 }

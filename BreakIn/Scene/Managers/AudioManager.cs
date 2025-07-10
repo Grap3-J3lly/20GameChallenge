@@ -4,8 +4,12 @@ using System;
 
 public partial class AudioManager : Node
 {
+    // --------------------------------
+    //			VARIABLES	
+    // --------------------------------
+
     [Export]
-    private AudioStreamPlayer audioPlayer;
+    private AudioStreamPlayer sfxAudioPlayer;
     public enum SFXType
     {
         None,
@@ -17,22 +21,35 @@ public partial class AudioManager : Node
     [Export]
     public Dictionary<SFXType, AudioStreamOggVorbis> sfxLibrary = new Dictionary<SFXType, AudioStreamOggVorbis>();
 
+    // --------------------------------
+    //			PROPERTIES	
+    // --------------------------------
+
     public static AudioManager Instance { get; private set; }
+
+    // --------------------------------
+    //		STANDARD FUNCTIONS	
+    // --------------------------------
+
     public override void _Ready()
     {
         base._Ready();
         Instance = this;
     }
 
+    // --------------------------------
+    //		    AUDIO LOGIC	
+    // --------------------------------
+
     public void PlaySFX(SFXType type)
     {
         GD.Print($"AudioManager.cs: Playing SFX: {type}");
         
-        if(audioPlayer != null )//&& !audioPlayer.Playing)
+        if(sfxAudioPlayer != null )//&& !audioPlayer.Playing)
         {
-            audioPlayer.Stream = sfxLibrary[type];
+            sfxAudioPlayer.Stream = sfxLibrary[type];
 
-            audioPlayer.Play();
+            sfxAudioPlayer.Play();
         }
     }
 }

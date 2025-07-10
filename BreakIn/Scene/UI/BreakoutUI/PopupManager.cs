@@ -30,11 +30,11 @@ public partial class PopupManager : Control
     public override void _Ready()
     {
         base._Ready();
-        // Where high score val is set by breakoutManager
     }
 
     public void OpenPopup(PopupType popupType, bool isFinalLevel = false)
     {
+        highScoreVal = BreakoutManager.Instance.HighScore;
         SetScore(BreakoutManager.Instance.PlayerScore);
         switch(popupType)
         {

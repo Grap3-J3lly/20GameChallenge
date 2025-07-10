@@ -1,28 +1,48 @@
 using Godot;
 using Godot.Collections;
 using System.Linq;
-// using System;
 
-public partial class SaveSystem : Node
+public partial class SaveManager : Node
 {
-    public static SaveSystem Instance { get; private set; }
+    // --------------------------------
+    //			VARIABLES	
+    // --------------------------------
+
+    private Array<Variant> dataToSave = new Array<Variant>();
+    [Export]
+    private string defaultSaveFileName = "breakoutGameData";
+
+    // --------------------------------
+    //			PROPERTIES	
+    // --------------------------------
+    public static SaveManager Instance { get; private set; }
+    public Array<Variant> DataToSave { get => dataToSave; set => dataToSave = value; }
+
+    // --------------------------------
+    //		STANDARD FUNCTIONS	
+    // --------------------------------
+
     public override void _Ready()
     {
         base._Ready();
         Instance = this;
     }
 
-    private Array<Variant> PopulateDataToSave()
+    // --------------------------------
+    //		    FILE LOGIC	
+    // --------------------------------
+
+    public void SaveToFile()
     {
-        return null;
+        SaveToFile(defaultSaveFileName);
     }
 
     /// <summary>
     /// Stores all data in the appropriate data list into a json object and writes it into a file, using the listName for the fileName
+    /// FILES ARE SAVED TO C:\Users\[UserName]\AppData\Roaming\Godot\app_userdata\[Projectname]
     /// </summary>
-    public void Save(string fileName)
+    public void SaveToFile(string fileName)
     {
-        Array<Variant> dataToSave = PopulateDataToSave();
         using var saveFile = FileAccess.Open("user://" + fileName + ".save", FileAccess.ModeFlags.Write);
 
         Array dataToSaveArray = new Array(dataToSave.ToArray());
@@ -32,13 +52,21 @@ public partial class SaveSystem : Node
         dataToSave.Clear();
     }
 
+    public Array LoadFromFile()
+    {
+        return LoadFromFile(defaultSaveFileName);
+    }
+
     /// <summary>
-    /// Takes in a specific file and attempts to load in the data of said file. Deletes relevant data from the application prior to loading in new data.
+    /// Takes in a specific file and attempts to load in the data of said file.
     /// </summary>
     /// <param name="specificFile"></param>
-    public void Load(string specificFile)
+    public Array LoadFromFile(string specificFile)
     {
         using var saveFile = FileAccess.Open("user://" + specificFile + ".save", FileAccess.ModeFlags.Read);
+        Array loadedData = new Array();
+
+        if (saveFile == null) return null;
 
         while (saveFile.GetPosition() < saveFile.GetLength())
         {
@@ -53,9 +81,9 @@ public partial class SaveSystem : Node
                 continue;
             }
 
-            Array data = new Godot.Collections.Array((Godot.Collections.Array)json.Data);
-
-            // Handle the data
+            loadedData += (Array)json.Data;
         }
+
+        return loadedData;
     }
 }

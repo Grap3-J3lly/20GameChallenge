@@ -25,6 +25,7 @@ public partial class ControlButton : Button
 
     public void OnPress()
     {
+        AudioManager.Instance.PlaySFX(AudioManager.SFXType.UI_Interact);
         menuManager.OpenMenu(controlIndex, clearPreviousMenu);
     }
 }

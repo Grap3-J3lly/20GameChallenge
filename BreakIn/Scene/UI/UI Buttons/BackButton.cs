@@ -21,6 +21,7 @@ public partial class BackButton : Button
     public void OnPress()
     {
         Control previousMenu = menuManager.PreviousMenu;
+        AudioManager.Instance.PlaySFX(AudioManager.SFXType.UI_Interact);
 
         if (previousMenu != null)
         {

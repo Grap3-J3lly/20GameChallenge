@@ -1,7 +1,6 @@
 using Godot;
 using Godot.Collections;
 using System;
-using System.Collections;
 
 public partial class BreakoutManager : Node
 {
@@ -78,6 +77,7 @@ public partial class BreakoutManager : Node
 	private int difficulty = 1;
 
     private int playerScore = 0;
+	private int highScore = -1;
 	private int playerLives = 3;
 	private bool gameOver = false;
 	private bool gamePaused = false;
@@ -115,6 +115,7 @@ public partial class BreakoutManager : Node
 
     // General Game Settings
     public int PlayerScore { get => playerScore; set => playerScore = value; }
+	public int HighScore { get => highScore; set => highScore = value; }
 	public int PlayerLives { get => playerLives; set => playerLives = value; }
 	public bool GameOver { get => gameOver; }
 	public bool GamePaused { get => gamePaused; }
@@ -144,6 +145,8 @@ public partial class BreakoutManager : Node
 
 	public void Setup()
 	{
+		LoadHighScore();
+
         ClearBalls();
         ClearPowerups();
         ClearBricks();
@@ -172,6 +175,30 @@ public partial class BreakoutManager : Node
 		paddle.Reset();
 		ReduceLife();
 		ReduceScore();
+	}
+
+	private void LoadHighScore()
+	{
+		Godot.Collections.Array data = SaveManager.Instance.LoadFromFile();
+		if (data == null)
+		{
+			GD.Print($"BreakoutManager.cs: No Data loaded, resetting high score");
+			highScore = -1;
+			return;
+		}
+		
+		for (int i = 0; i < data.Count; i++)
+		{
+			GD.Print($"BreakoutManager.cs: Saved Data: {data[i].ToString()}");
+			if (data[i].ToString().Contains("difficulty") && (int)data[i+1] == difficulty)
+			{
+				GD.Print($"BreakoutManager.cs: Assigning High Score to: {(int)data[i + 3]}");
+				highScore = (int)data[i + 3];
+				i += 3;
+			}
+		}
+		GD.Print($"BreakoutManager.cs: High Score Loaded: {highScore}");
+
 	}
 
     // --------------------------------
@@ -215,6 +242,17 @@ public partial class BreakoutManager : Node
             uiManager.PopupManager.OpenPopup(PopupManager.PopupType.GameWin, difficulty >= 3);
         }
 		uiManager.ToggleArea(1, true);
+
+		if(playerScore > highScore)
+		{
+			SaveManager.Instance.DataToSave.Add("difficulty");
+			SaveManager.Instance.DataToSave.Add(difficulty);
+			SaveManager.Instance.DataToSave.Add("score");
+			SaveManager.Instance.DataToSave.Add(playerScore);
+			SaveManager.Instance.SaveToFile();
+
+			GD.Print($"BreakoutManager.cs: Saved Score ({playerScore}) to file");
+		}
 	}
 
 	private bool AreAllBricksNull()

@@ -15,16 +15,17 @@ script = ExtResource("1_7o08m")
 script = ExtResource("2_k15wb")
 scenePaths = Array[String](["res://Scene/UI/menu_system.tscn", "res://Scene/break_in.tscn"])
 
-[node name="AudioManager" type="Node" parent="." node_paths=PackedStringArray("audioPlayer")]
+[node name="AudioManager" type="Node" parent="." node_paths=PackedStringArray("sfxAudioPlayer")]
 script = ExtResource("3_ijlju")
-audioPlayer = NodePath("AudioStreamPlayer")
+sfxAudioPlayer = NodePath("SFXStreamPlayer")
 sfxLibrary = Dictionary[int, AudioStreamOggVorbis]({
 1: ExtResource("4_vdwas"),
 2: ExtResource("5_2aj80"),
 3: ExtResource("6_ftf7w")
 })
 
-[node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="AudioManager"]
+[node name="SFXStreamPlayer" type="AudioStreamPlayer" parent="AudioManager"]
+bus = &"SFXBus"
 
 [node name="SaveManager" type="Node" parent="."]
 script = ExtResource("7_vdwas")

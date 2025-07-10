@@ -1,9 +1,10 @@
-[gd_scene load_steps=6 format=3 uid="uid://c4ueua7jfdfco"]
+[gd_scene load_steps=7 format=3 uid="uid://c4ueua7jfdfco"]
 
 [ext_resource type="Script" uid="uid://bxcy6bjnl7by5" path="res://Scene/Managers/MenuManager.cs" id="1_sjjf8"]
 [ext_resource type="Script" uid="uid://cc0olugnkxali" path="res://Scene/UI/UI Buttons/PlayButton.cs" id="2_fywvq"]
 [ext_resource type="Script" uid="uid://cul4tuuar8x7t" path="res://Scene/UI/UI Buttons/ControlButton.cs" id="2_kn2t0"]
 [ext_resource type="Script" uid="uid://tj4lr00leo8f" path="res://Scene/UI/UI Buttons/QuitButton.cs" id="2_pyovw"]
+[ext_resource type="Script" uid="uid://bqwgq0t3vphx1" path="res://Scene/Managers/SettingsManager.cs" id="5_0g2ml"]
 [ext_resource type="Script" uid="uid://bfuyiic4xwiph" path="res://Scene/UI/UI Buttons/BackButton.cs" id="5_at6ue"]
 
 [node name="MenuSystem" type="CanvasLayer" node_paths=PackedStringArray("menus")]
@@ -189,7 +190,7 @@ icon_alignment = 1
 script = ExtResource("2_kn2t0")
 controlIndex = 0
 
-[node name="Settings" type="Control" parent="."]
+[node name="Settings" type="Control" parent="." node_paths=PackedStringArray("sfxSlider")]
 visible = false
 layout_mode = 3
 anchors_preset = 15
@@ -197,6 +198,8 @@ anchor_right = 1.0
 anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
+script = ExtResource("5_0g2ml")
+sfxSlider = NodePath("ColorRect/VBoxContainer/HSlider")
 
 [node name="ColorRect" type="ColorRect" parent="Settings"]
 layout_mode = 1
@@ -233,6 +236,8 @@ text = "[center]SFX Volume"
 [node name="HSlider" type="HSlider" parent="Settings/ColorRect/VBoxContainer"]
 custom_minimum_size = Vector2(100, 75)
 layout_mode = 2
+max_value = 1.0
+step = 0.1
 
 [node name="BackButton" type="Button" parent="Settings/ColorRect"]
 custom_minimum_size = Vector2(200, 50)

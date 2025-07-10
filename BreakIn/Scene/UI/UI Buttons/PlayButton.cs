@@ -17,6 +17,7 @@ public partial class PlayButton : Button
 
     public void OnPress()
     {
+        AudioManager.Instance.PlaySFX(AudioManager.SFXType.UI_Interact);
         MenuManager.Instance.CloseMenus(true);
         GameManager.Instance.CurrentDifficulty = gameDifficulty;
         SceneManager.LoadScene(gameSceneIndex, false);
