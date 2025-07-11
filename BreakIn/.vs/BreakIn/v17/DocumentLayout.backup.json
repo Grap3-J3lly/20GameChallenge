@@ -3,16 +3,36 @@
   "WorkspaceRootPath": "C:\\Users\\James\\Dev\\Godot\\20GameChallenge\\BreakIn\\",
   "Documents": [
     {
-      "AbsoluteMoniker": "D:0:0:{5A90DA09-7406-4FD1-9F19-909E61F26890}|BreakIn.csproj|c:\\users\\james\\dev\\godot\\20gamechallenge\\breakin\\scene\\managers\\savemanager.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{5A90DA09-7406-4FD1-9F19-909E61F26890}|BreakIn.csproj|solutionrelative:scene\\managers\\savemanager.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
-    },
-    {
       "AbsoluteMoniker": "D:0:0:{5A90DA09-7406-4FD1-9F19-909E61F26890}|BreakIn.csproj|c:\\users\\james\\dev\\godot\\20gamechallenge\\breakin\\scene\\managers\\breakoutmanager.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
       "RelativeMoniker": "D:0:0:{5A90DA09-7406-4FD1-9F19-909E61F26890}|BreakIn.csproj|solutionrelative:scene\\managers\\breakoutmanager.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
+      "AbsoluteMoniker": "D:0:0:{5A90DA09-7406-4FD1-9F19-909E61F26890}|BreakIn.csproj|c:\\users\\james\\dev\\godot\\20gamechallenge\\breakin\\scene\\managers\\savemanager.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{5A90DA09-7406-4FD1-9F19-909E61F26890}|BreakIn.csproj|solutionrelative:scene\\managers\\savemanager.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
       "AbsoluteMoniker": "D:0:0:{5A90DA09-7406-4FD1-9F19-909E61F26890}|BreakIn.csproj|c:\\users\\james\\dev\\godot\\20gamechallenge\\breakin\\scene\\managers\\powerupmanager.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
       "RelativeMoniker": "D:0:0:{5A90DA09-7406-4FD1-9F19-909E61F26890}|BreakIn.csproj|solutionrelative:scene\\managers\\powerupmanager.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{5A90DA09-7406-4FD1-9F19-909E61F26890}|BreakIn.csproj|c:\\users\\james\\dev\\godot\\20gamechallenge\\breakin\\scene\\ui\\breakoutui\\popupmanager.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{5A90DA09-7406-4FD1-9F19-909E61F26890}|BreakIn.csproj|solutionrelative:scene\\ui\\breakoutui\\popupmanager.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{5A90DA09-7406-4FD1-9F19-909E61F26890}|BreakIn.csproj|c:\\users\\james\\dev\\godot\\20gamechallenge\\breakin\\scene\\ui\\breakoutui\\uimanager.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{5A90DA09-7406-4FD1-9F19-909E61F26890}|BreakIn.csproj|solutionrelative:scene\\ui\\breakoutui\\uimanager.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{5A90DA09-7406-4FD1-9F19-909E61F26890}|BreakIn.csproj|c:\\users\\james\\dev\\godot\\20gamechallenge\\breakin\\scene\\managers\\audiomanager.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{5A90DA09-7406-4FD1-9F19-909E61F26890}|BreakIn.csproj|solutionrelative:scene\\managers\\audiomanager.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{5A90DA09-7406-4FD1-9F19-909E61F26890}|BreakIn.csproj|c:\\users\\james\\dev\\godot\\20gamechallenge\\breakin\\scene\\managers\\settingsmanager.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{5A90DA09-7406-4FD1-9F19-909E61F26890}|BreakIn.csproj|solutionrelative:scene\\managers\\settingsmanager.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{5A90DA09-7406-4FD1-9F19-909E61F26890}|BreakIn.csproj|c:\\users\\james\\dev\\godot\\20gamechallenge\\breakin\\scene\\managers\\objectpool.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{5A90DA09-7406-4FD1-9F19-909E61F26890}|BreakIn.csproj|solutionrelative:scene\\managers\\objectpool.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
       "AbsoluteMoniker": "D:0:0:{5A90DA09-7406-4FD1-9F19-909E61F26890}|BreakIn.csproj|c:\\users\\james\\dev\\godot\\20gamechallenge\\breakin\\entities\\brick\\brick.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
@@ -31,44 +51,12 @@
       "RelativeMoniker": "D:0:0:{5A90DA09-7406-4FD1-9F19-909E61F26890}|BreakIn.csproj|solutionrelative:scene\\managers\\gamemanager.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{5A90DA09-7406-4FD1-9F19-909E61F26890}|BreakIn.csproj|c:\\users\\james\\dev\\godot\\20gamechallenge\\breakin\\scene\\managers\\audiomanager.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{5A90DA09-7406-4FD1-9F19-909E61F26890}|BreakIn.csproj|solutionrelative:scene\\managers\\audiomanager.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
-    },
-    {
       "AbsoluteMoniker": "D:0:0:{5A90DA09-7406-4FD1-9F19-909E61F26890}|BreakIn.csproj|c:\\users\\james\\dev\\godot\\20gamechallenge\\breakin\\entities\\ball\\poweruporb.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
       "RelativeMoniker": "D:0:0:{5A90DA09-7406-4FD1-9F19-909E61F26890}|BreakIn.csproj|solutionrelative:entities\\ball\\poweruporb.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{5A90DA09-7406-4FD1-9F19-909E61F26890}|BreakIn.csproj|c:\\users\\james\\dev\\godot\\20gamechallenge\\breakin\\scene\\managers\\objectpool.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{5A90DA09-7406-4FD1-9F19-909E61F26890}|BreakIn.csproj|solutionrelative:scene\\managers\\objectpool.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{5A90DA09-7406-4FD1-9F19-909E61F26890}|BreakIn.csproj|c:\\users\\james\\dev\\godot\\20gamechallenge\\breakin\\scene\\ui\\ui buttons\\nextlevelbutton.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{5A90DA09-7406-4FD1-9F19-909E61F26890}|BreakIn.csproj|solutionrelative:scene\\ui\\ui buttons\\nextlevelbutton.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{5A90DA09-7406-4FD1-9F19-909E61F26890}|BreakIn.csproj|c:\\users\\james\\dev\\godot\\20gamechallenge\\breakin\\scene\\ui\\ui buttons\\retrybutton.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{5A90DA09-7406-4FD1-9F19-909E61F26890}|BreakIn.csproj|solutionrelative:scene\\ui\\ui buttons\\retrybutton.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{5A90DA09-7406-4FD1-9F19-909E61F26890}|BreakIn.csproj|c:\\users\\james\\dev\\godot\\20gamechallenge\\breakin\\scene\\ui\\breakoutui\\popupmanager.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{5A90DA09-7406-4FD1-9F19-909E61F26890}|BreakIn.csproj|solutionrelative:scene\\ui\\breakoutui\\popupmanager.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{5A90DA09-7406-4FD1-9F19-909E61F26890}|BreakIn.csproj|c:\\users\\james\\dev\\godot\\20gamechallenge\\breakin\\scene\\ui\\ui buttons\\playbutton.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{5A90DA09-7406-4FD1-9F19-909E61F26890}|BreakIn.csproj|solutionrelative:scene\\ui\\ui buttons\\playbutton.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
-    },
-    {
       "AbsoluteMoniker": "D:0:0:{5A90DA09-7406-4FD1-9F19-909E61F26890}|BreakIn.csproj|c:\\users\\james\\dev\\godot\\20gamechallenge\\breakin\\scene\\managers\\menumanager.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
       "RelativeMoniker": "D:0:0:{5A90DA09-7406-4FD1-9F19-909E61F26890}|BreakIn.csproj|solutionrelative:scene\\managers\\menumanager.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{5A90DA09-7406-4FD1-9F19-909E61F26890}|BreakIn.csproj|c:\\users\\james\\dev\\godot\\20gamechallenge\\breakin\\scene\\ui\\breakoutui\\uimanager.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{5A90DA09-7406-4FD1-9F19-909E61F26890}|BreakIn.csproj|solutionrelative:scene\\ui\\breakoutui\\uimanager.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{5A90DA09-7406-4FD1-9F19-909E61F26890}|BreakIn.csproj|c:\\users\\james\\dev\\godot\\20gamechallenge\\breakin\\scene\\ui\\ui buttons\\homebutton.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{5A90DA09-7406-4FD1-9F19-909E61F26890}|BreakIn.csproj|solutionrelative:scene\\ui\\ui buttons\\homebutton.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
       "AbsoluteMoniker": "D:0:0:{5A90DA09-7406-4FD1-9F19-909E61F26890}|BreakIn.csproj|c:\\users\\james\\dev\\godot\\20gamechallenge\\breakin\\scene\\scenemanagement\\scenemanager.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
@@ -82,62 +70,50 @@
       "DocumentGroups": [
         {
           "DockedWidth": 200,
-          "SelectedChildIndex": 0,
+          "SelectedChildIndex": 7,
           "Children": [
             {
               "$type": "Document",
-              "DocumentIndex": 0,
+              "DocumentIndex": 6,
+              "Title": "SettingsManager.cs",
+              "DocumentMoniker": "C:\\Users\\James\\Dev\\Godot\\20GameChallenge\\BreakIn\\Scene\\Managers\\SettingsManager.cs",
+              "RelativeDocumentMoniker": "Scene\\Managers\\SettingsManager.cs",
+              "ToolTip": "C:\\Users\\James\\Dev\\Godot\\20GameChallenge\\BreakIn\\Scene\\Managers\\SettingsManager.cs",
+              "RelativeToolTip": "Scene\\Managers\\SettingsManager.cs",
+              "ViewState": "AgIAAAgAAAAAAAAAAAAAwB0AAABIAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-07-09T22:24:03.298Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 1,
               "Title": "SaveManager.cs",
               "DocumentMoniker": "C:\\Users\\James\\Dev\\Godot\\20GameChallenge\\BreakIn\\Scene\\Managers\\SaveManager.cs",
               "RelativeDocumentMoniker": "Scene\\Managers\\SaveManager.cs",
               "ToolTip": "C:\\Users\\James\\Dev\\Godot\\20GameChallenge\\BreakIn\\Scene\\Managers\\SaveManager.cs",
               "RelativeToolTip": "Scene\\Managers\\SaveManager.cs",
-              "ViewState": "AgIAACIAAAAAAAAAAAAkwDkAAAAeAAAAAAAAAA==",
+              "ViewState": "AgIAABoAAAAAAAAAAAAgwCkAAABfAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
               "WhenOpened": "2025-07-08T23:41:44.977Z",
               "EditorCaption": ""
             },
             {
               "$type": "Document",
-              "DocumentIndex": 7,
+              "DocumentIndex": 5,
               "Title": "AudioManager.cs",
               "DocumentMoniker": "C:\\Users\\James\\Dev\\Godot\\20GameChallenge\\BreakIn\\Scene\\Managers\\AudioManager.cs",
               "RelativeDocumentMoniker": "Scene\\Managers\\AudioManager.cs",
               "ToolTip": "C:\\Users\\James\\Dev\\Godot\\20GameChallenge\\BreakIn\\Scene\\Managers\\AudioManager.cs",
               "RelativeToolTip": "Scene\\Managers\\AudioManager.cs",
-              "ViewState": "AgIAAAoAAAAAAAAAAAAQwBsAAAAFAAAAAAAAAA==",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAYAAAAEAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
               "WhenOpened": "2025-07-08T22:14:29.769Z",
               "EditorCaption": ""
             },
             {
               "$type": "Document",
-              "DocumentIndex": 4,
-              "Title": "Ball.cs",
-              "DocumentMoniker": "C:\\Users\\James\\Dev\\Godot\\20GameChallenge\\BreakIn\\Entities\\Ball\\Ball.cs",
-              "RelativeDocumentMoniker": "Entities\\Ball\\Ball.cs",
-              "ToolTip": "C:\\Users\\James\\Dev\\Godot\\20GameChallenge\\BreakIn\\Entities\\Ball\\Ball.cs",
-              "RelativeToolTip": "Entities\\Ball\\Ball.cs",
-              "ViewState": "AgIAAKUAAAAAAAAAAAAAALEAAAAbAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-07-02T22:42:38.44Z",
-              "EditorCaption": ""
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 10,
-              "Title": "NextLevelButton.cs",
-              "DocumentMoniker": "C:\\Users\\James\\Dev\\Godot\\20GameChallenge\\BreakIn\\Scene\\UI\\UI Buttons\\NextLevelButton.cs",
-              "RelativeDocumentMoniker": "Scene\\UI\\UI Buttons\\NextLevelButton.cs",
-              "ToolTip": "C:\\Users\\James\\Dev\\Godot\\20GameChallenge\\BreakIn\\Scene\\UI\\UI Buttons\\NextLevelButton.cs",
-              "RelativeToolTip": "Scene\\UI\\UI Buttons\\NextLevelButton.cs",
-              "ViewState": "AgIAAAAAAAAAAAAAAAAAAA8AAAAmAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-07-02T22:37:59.419Z"
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 3,
+              "DocumentIndex": 8,
               "Title": "Brick.cs",
               "DocumentMoniker": "C:\\Users\\James\\Dev\\Godot\\20GameChallenge\\BreakIn\\Entities\\Brick\\Brick.cs",
               "RelativeDocumentMoniker": "Entities\\Brick\\Brick.cs",
@@ -145,60 +121,24 @@
               "RelativeToolTip": "Entities\\Brick\\Brick.cs",
               "ViewState": "AgIAACcAAAAAAAAAAAAqwDUAAABGAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-07-02T22:09:02.091Z",
-              "EditorCaption": ""
+              "WhenOpened": "2025-07-02T22:09:02.091Z"
             },
             {
               "$type": "Document",
-              "DocumentIndex": 11,
-              "Title": "RetryButton.cs",
-              "DocumentMoniker": "C:\\Users\\James\\Dev\\Godot\\20GameChallenge\\BreakIn\\Scene\\UI\\UI Buttons\\RetryButton.cs",
-              "RelativeDocumentMoniker": "Scene\\UI\\UI Buttons\\RetryButton.cs",
-              "ToolTip": "C:\\Users\\James\\Dev\\Godot\\20GameChallenge\\BreakIn\\Scene\\UI\\UI Buttons\\RetryButton.cs",
-              "RelativeToolTip": "Scene\\UI\\UI Buttons\\RetryButton.cs",
-              "ViewState": "AgIAAAAAAAAAAAAAAAAAAA8AAAAmAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-07-02T22:05:53.235Z"
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 13,
-              "Title": "PlayButton.cs",
-              "DocumentMoniker": "C:\\Users\\James\\Dev\\Godot\\20GameChallenge\\BreakIn\\Scene\\UI\\UI Buttons\\PlayButton.cs",
-              "RelativeDocumentMoniker": "Scene\\UI\\UI Buttons\\PlayButton.cs",
-              "ToolTip": "C:\\Users\\James\\Dev\\Godot\\20GameChallenge\\BreakIn\\Scene\\UI\\UI Buttons\\PlayButton.cs",
-              "RelativeToolTip": "Scene\\UI\\UI Buttons\\PlayButton.cs",
-              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAUAAAAEAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-07-01T23:34:05.756Z"
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 16,
-              "Title": "HomeButton.cs",
-              "DocumentMoniker": "C:\\Users\\James\\Dev\\Godot\\20GameChallenge\\BreakIn\\Scene\\UI\\UI Buttons\\HomeButton.cs",
-              "RelativeDocumentMoniker": "Scene\\UI\\UI Buttons\\HomeButton.cs",
-              "ToolTip": "C:\\Users\\James\\Dev\\Godot\\20GameChallenge\\BreakIn\\Scene\\UI\\UI Buttons\\HomeButton.cs",
-              "RelativeToolTip": "Scene\\UI\\UI Buttons\\HomeButton.cs",
-              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAYAAAAfAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-07-01T23:34:00.244Z"
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 15,
+              "DocumentIndex": 4,
               "Title": "UIManager.cs",
               "DocumentMoniker": "C:\\Users\\James\\Dev\\Godot\\20GameChallenge\\BreakIn\\Scene\\UI\\BreakoutUI\\UIManager.cs",
               "RelativeDocumentMoniker": "Scene\\UI\\BreakoutUI\\UIManager.cs",
               "ToolTip": "C:\\Users\\James\\Dev\\Godot\\20GameChallenge\\BreakIn\\Scene\\UI\\BreakoutUI\\UIManager.cs",
               "RelativeToolTip": "Scene\\UI\\BreakoutUI\\UIManager.cs",
-              "ViewState": "AgIAABcAAAAAAAAAAAAowCsAAAAwAAAAAAAAAA==",
+              "ViewState": "AgIAAAYAAAAAAAAAAAAkwBEAAAAmAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-06-26T23:43:20.497Z"
+              "WhenOpened": "2025-06-26T23:43:20.497Z",
+              "EditorCaption": ""
             },
             {
               "$type": "Document",
-              "DocumentIndex": 14,
+              "DocumentIndex": 13,
               "Title": "MenuManager.cs",
               "DocumentMoniker": "C:\\Users\\James\\Dev\\Godot\\20GameChallenge\\BreakIn\\Scene\\Managers\\MenuManager.cs",
               "RelativeDocumentMoniker": "Scene\\Managers\\MenuManager.cs",
@@ -210,7 +150,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 17,
+              "DocumentIndex": 14,
               "Title": "SceneManager.cs",
               "DocumentMoniker": "C:\\Users\\James\\Dev\\Godot\\20GameChallenge\\BreakIn\\Scene\\SceneManagement\\SceneManager.cs",
               "RelativeDocumentMoniker": "Scene\\SceneManagement\\SceneManager.cs",
@@ -222,20 +162,20 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 1,
+              "DocumentIndex": 0,
               "Title": "BreakoutManager.cs",
               "DocumentMoniker": "C:\\Users\\James\\Dev\\Godot\\20GameChallenge\\BreakIn\\Scene\\Managers\\BreakoutManager.cs",
               "RelativeDocumentMoniker": "Scene\\Managers\\BreakoutManager.cs",
               "ToolTip": "C:\\Users\\James\\Dev\\Godot\\20GameChallenge\\BreakIn\\Scene\\Managers\\BreakoutManager.cs",
               "RelativeToolTip": "Scene\\Managers\\BreakoutManager.cs",
-              "ViewState": "AgIAAIoAAAAAAAAAAAAswJYAAAAeAAAAAAAAAA==",
+              "ViewState": "AgIAALEAAAAAAAAAAADwv8EAAAAEAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
               "WhenOpened": "2025-06-24T23:13:30.983Z",
               "EditorCaption": ""
             },
             {
               "$type": "Document",
-              "DocumentIndex": 8,
+              "DocumentIndex": 12,
               "Title": "PowerupOrb.cs",
               "DocumentMoniker": "C:\\Users\\James\\Dev\\Godot\\20GameChallenge\\BreakIn\\Entities\\Ball\\PowerupOrb.cs",
               "RelativeDocumentMoniker": "Entities\\Ball\\PowerupOrb.cs",
@@ -243,8 +183,7 @@
               "RelativeToolTip": "Entities\\Ball\\PowerupOrb.cs",
               "ViewState": "AgIAAAIAAAAAAAAAAAAiwBcAAAALAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-06-18T22:23:08.19Z",
-              "EditorCaption": ""
+              "WhenOpened": "2025-06-18T22:23:08.19Z"
             },
             {
               "$type": "Document",
@@ -261,7 +200,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 5,
+              "DocumentIndex": 10,
               "Title": "Paddle.cs",
               "DocumentMoniker": "C:\\Users\\James\\Dev\\Godot\\20GameChallenge\\BreakIn\\Entities\\Paddle\\Paddle.cs",
               "RelativeDocumentMoniker": "Entities\\Paddle\\Paddle.cs",
@@ -269,12 +208,11 @@
               "RelativeToolTip": "Entities\\Paddle\\Paddle.cs",
               "ViewState": "AgIAAHcAAAAAAAAAAAAqwG4AAAATAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-07-02T23:04:42.063Z",
-              "EditorCaption": ""
+              "WhenOpened": "2025-07-02T23:04:42.063Z"
             },
             {
               "$type": "Document",
-              "DocumentIndex": 6,
+              "DocumentIndex": 11,
               "Title": "GameManager.cs",
               "DocumentMoniker": "C:\\Users\\James\\Dev\\Godot\\20GameChallenge\\BreakIn\\Scene\\Managers\\GameManager.cs",
               "RelativeDocumentMoniker": "Scene\\Managers\\GameManager.cs",
@@ -282,12 +220,11 @@
               "RelativeToolTip": "Scene\\Managers\\GameManager.cs",
               "ViewState": "AgIAAAAAAAAAAAAAAAAAAAwAAAAWAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-07-02T22:40:04.101Z",
-              "EditorCaption": ""
+              "WhenOpened": "2025-07-02T22:40:04.101Z"
             },
             {
               "$type": "Document",
-              "DocumentIndex": 9,
+              "DocumentIndex": 7,
               "Title": "ObjectPool.cs",
               "DocumentMoniker": "C:\\Users\\James\\Dev\\Godot\\20GameChallenge\\BreakIn\\Scene\\Managers\\ObjectPool.cs",
               "RelativeDocumentMoniker": "Scene\\Managers\\ObjectPool.cs",
@@ -295,19 +232,33 @@
               "RelativeToolTip": "Scene\\Managers\\ObjectPool.cs",
               "ViewState": "AgIAAAwAAAAAAAAAAADwvyUAAAAAAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-07-02T23:33:52.188Z"
+              "WhenOpened": "2025-07-02T23:33:52.188Z",
+              "EditorCaption": ""
             },
             {
               "$type": "Document",
-              "DocumentIndex": 12,
+              "DocumentIndex": 3,
               "Title": "PopupManager.cs",
               "DocumentMoniker": "C:\\Users\\James\\Dev\\Godot\\20GameChallenge\\BreakIn\\Scene\\UI\\BreakoutUI\\PopupManager.cs",
               "RelativeDocumentMoniker": "Scene\\UI\\BreakoutUI\\PopupManager.cs",
               "ToolTip": "C:\\Users\\James\\Dev\\Godot\\20GameChallenge\\BreakIn\\Scene\\UI\\BreakoutUI\\PopupManager.cs",
               "RelativeToolTip": "Scene\\UI\\BreakoutUI\\PopupManager.cs",
-              "ViewState": "AgIAABwAAAAAAAAAAAAQwDMAAAAoAAAAAAAAAA==",
+              "ViewState": "AgIAABwAAAAAAAAAAAAQwCQAAAA6AAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-07-02T22:59:59.466Z"
+              "WhenOpened": "2025-07-02T22:59:59.466Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 9,
+              "Title": "Ball.cs",
+              "DocumentMoniker": "C:\\Users\\James\\Dev\\Godot\\20GameChallenge\\BreakIn\\Entities\\Ball\\Ball.cs",
+              "RelativeDocumentMoniker": "Entities\\Ball\\Ball.cs",
+              "ToolTip": "C:\\Users\\James\\Dev\\Godot\\20GameChallenge\\BreakIn\\Entities\\Ball\\Ball.cs",
+              "RelativeToolTip": "Entities\\Ball\\Ball.cs",
+              "ViewState": "AgIAAKUAAAAAAAAAAAAAALEAAAAbAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-07-02T22:42:38.44Z"
             }
           ]
         }

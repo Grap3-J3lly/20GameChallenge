@@ -62,10 +62,11 @@ public partial class PopupManager : Control
     public void SetScore(int score)
     {
         currentScoreLabel.Text = score.ToString();
-        if(score > highScoreVal)
+        if (score > highScoreVal)
         {
-            highScoreLabel.Text = score.ToString();
+            highScoreVal = score;
         }
+        highScoreLabel.Text = highScoreVal.ToString();
     }
 
     /// <summary>

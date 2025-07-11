@@ -145,6 +145,7 @@ public partial class BreakoutManager : Node
 
 	public void Setup()
 	{
+        difficulty = GameManager.Instance.CurrentDifficulty;
 		LoadHighScore();
 
         ClearBalls();
@@ -153,7 +154,6 @@ public partial class BreakoutManager : Node
 		if(paddle != null) paddle.Free();
 		powerUpManager.ResetPowerups();
 
-        difficulty = GameManager.Instance.CurrentDifficulty;
         GD.Print($"BreakoutManager.cs: Difficulty from Game Manager: {difficulty}");
         playerScore = 0;
         playerLives = playerMaxLives;
@@ -187,14 +187,13 @@ public partial class BreakoutManager : Node
 			return;
 		}
 		
-		for (int i = 0; i < data.Count; i++)
+		for (int i = 0; i < data.Count - 1; i++)
 		{
-			GD.Print($"BreakoutManager.cs: Saved Data: {data[i].ToString()}");
 			if (data[i].ToString().Contains("difficulty") && (int)data[i+1] == difficulty)
 			{
-				GD.Print($"BreakoutManager.cs: Assigning High Score to: {(int)data[i + 3]}");
 				highScore = (int)data[i + 3];
 				i += 3;
+				break;
 			}
 		}
 		GD.Print($"BreakoutManager.cs: High Score Loaded: {highScore}");
@@ -245,10 +244,16 @@ public partial class BreakoutManager : Node
 
 		if(playerScore > highScore)
 		{
-			SaveManager.Instance.DataToSave.Add("difficulty");
-			SaveManager.Instance.DataToSave.Add(difficulty);
-			SaveManager.Instance.DataToSave.Add("score");
-			SaveManager.Instance.DataToSave.Add(playerScore);
+			//SaveManager.Instance.DataToSave.Add("difficulty");
+			//SaveManager.Instance.DataToSave.Add(difficulty);
+			//SaveManager.Instance.DataToSave.Add("score");
+			//SaveManager.Instance.DataToSave.Add(playerScore);
+
+			SaveManager.Instance.PopulateDataToSave<string>("difficulty", false);
+			SaveManager.Instance.PopulateDataToSave<string>(difficulty, true);
+			SaveManager.Instance.PopulateDataToSave<string>("score", false);
+			SaveManager.Instance.PopulateDataToSave<string>(playerScore, true);
+
 			SaveManager.Instance.SaveToFile();
 
 			GD.Print($"BreakoutManager.cs: Saved Score ({playerScore}) to file");
@@ -295,9 +300,7 @@ public partial class BreakoutManager : Node
 		}
 		if(Input.IsActionJustPressed("ui_cancel"))
 		{
-			powerUpManager.Debug_SuperWide();
-
-			//HandlePauseGame();
+			HandlePauseGame();
 		}
 	}
 
