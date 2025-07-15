@@ -1,4 +1,4 @@
-[gd_scene load_steps=8 format=3 uid="uid://g5gxb4cpktqk"]
+[gd_scene load_steps=7 format=3 uid="uid://g5gxb4cpktqk"]
 
 [ext_resource type="Script" uid="uid://nr5a437t5qn4" path="res://Scene/Managers/GameManager.cs" id="1_7o08m"]
 [ext_resource type="Script" uid="uid://b557hnulbsi83" path="res://Scene/SceneManagement/SceneManager.cs" id="2_k15wb"]
@@ -6,7 +6,6 @@
 [ext_resource type="AudioStream" uid="uid://qyn6bv6a24uc" path="res://Assets/SFX/Hit.ogg" id="4_vdwas"]
 [ext_resource type="AudioStream" uid="uid://c2un4t3v3bxwv" path="res://Assets/SFX/BrickBreak.ogg" id="5_2aj80"]
 [ext_resource type="AudioStream" uid="uid://bxt67qeyaqkdx" path="res://Assets/SFX/UIInteractSound.ogg" id="6_ftf7w"]
-[ext_resource type="Script" uid="uid://d3jq334fs3ybu" path="res://Scene/Managers/SaveManager.cs" id="7_vdwas"]
 
 [node name="GameNode" type="Node"]
 script = ExtResource("1_7o08m")
@@ -26,6 +25,3 @@ sfxLibrary = Dictionary[int, AudioStreamOggVorbis]({
 
 [node name="SFXStreamPlayer" type="AudioStreamPlayer" parent="AudioManager"]
 bus = &"SFXBus"
-
-[node name="SaveManager" type="Node" parent="."]
-script = ExtResource("7_vdwas")

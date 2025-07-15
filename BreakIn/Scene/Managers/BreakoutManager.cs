@@ -82,6 +82,8 @@ public partial class BreakoutManager : Node
 	private bool gameOver = false;
 	private bool gamePaused = false;
 
+	private Dictionary<string, float> scores = new Dictionary<string, float>();
+
 	// Signals
 	[Signal]
 	public delegate void RowClearEventHandler();
@@ -179,26 +181,30 @@ public partial class BreakoutManager : Node
 
 	private void LoadHighScore()
 	{
-		Godot.Collections.Array data = SaveManager.Instance.LoadFromFile();
-		if (data == null)
+		scores = SaveSystem.GetDataItem("Scores", "scores", defaultValue: new Dictionary<string, float>()
 		{
-			GD.Print($"BreakoutManager.cs: No Data loaded, resetting high score");
-			highScore = -1;
-			return;
-		}
-		
-		for (int i = 0; i < data.Count - 1; i++)
-		{
-			if (data[i].ToString().Contains("difficulty") && (int)data[i+1] == difficulty)
-			{
-				highScore = (int)data[i + 3];
-				i += 3;
-				break;
-			}
-		}
-		GD.Print($"BreakoutManager.cs: High Score Loaded: {highScore}");
+            { "Easy", 0 },
+            { "Medium", 0 },
+            { "Hard", 0 }
+        });
 
-	}
+        switch (difficulty)
+        {
+            case 1:
+				highScore = (int)scores["Easy"];
+                break;
+            case 2:
+                highScore = (int)scores["Medium"];
+                break;
+            case 3:
+                highScore = (int)scores["Hard"];
+                break;
+            default:
+                GD.PrintErr($"BreakoutManager.cs: Attempted to Load invalid difficulty");
+                break;
+        }
+		GD.Print($"BreakoutManager.cs: High Score Loaded: {highScore}");
+    }
 
     // --------------------------------
     //		SCORING LOGIC	
@@ -244,17 +250,22 @@ public partial class BreakoutManager : Node
 
 		if(playerScore > highScore)
 		{
-			//SaveManager.Instance.DataToSave.Add("difficulty");
-			//SaveManager.Instance.DataToSave.Add(difficulty);
-			//SaveManager.Instance.DataToSave.Add("score");
-			//SaveManager.Instance.DataToSave.Add(playerScore);
-
-			SaveManager.Instance.PopulateDataToSave<string>("difficulty", false);
-			SaveManager.Instance.PopulateDataToSave<string>(difficulty, true);
-			SaveManager.Instance.PopulateDataToSave<string>("score", false);
-			SaveManager.Instance.PopulateDataToSave<string>(playerScore, true);
-
-			SaveManager.Instance.SaveToFile();
+			switch(difficulty)
+			{
+				case 1:
+					scores["Easy"] = playerScore;
+					break;
+				case 2:
+                    scores["Medium"] = playerScore;
+                    break;
+				case 3:
+                    scores["Hard"] = playerScore;
+                    break;
+				default: GD.PrintErr($"BreakoutManager.cs: Attempted to Save invalid difficulty");
+					break;
+			}
+			SaveSystem.AddDataItem("Scores", "scores", scores);
+			SaveSystem.SaveData("Scores");
 
 			GD.Print($"BreakoutManager.cs: Saved Score ({playerScore}) to file");
 		}
