@@ -409,9 +409,7 @@ public partial class BreakoutManager : Node
 			{
                 bricks[x, y].GridPosition = new Vector2I(x, y);
 				bricks[x, y].ChangeBrickLayer(gridCount.Y - y - 1);
-				// GD.Print($"BreakoutManager.cs: Assigned Layer Count in Spawn: {bricks[x, y].LayerCount}");
                 bricks[x, y].RowID = y;
-				// GD.Print($"BreakoutManager.cs: Assigned Row ID: {bricks[x, y].RowID}");
             }
 		}
     }

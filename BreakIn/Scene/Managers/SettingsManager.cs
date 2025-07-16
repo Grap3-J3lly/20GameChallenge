@@ -16,42 +16,29 @@ public partial class SettingsManager : Control
         Instance = this;
 
         CallDeferred("Setup");
-        // Setup();
     }
 
     private void Setup()
     {
         sfxSlider.ValueChanged += OnSliderChange_SFX;
+        InitialSliderValueAssignment();
+    }
 
-        //Array data = SaveManager.Instance.LoadFromFile();
-        //for (int i = 0; i < data.Count - 1; i++)
-        //{
-        //    if (data[i].ToString().Contains("sfxVolume"))
-        //    {
-        //        sfxSlider.SetValueNoSignal((double)data[i + 1]);
-        //        return;
-        //    }
-        //}
-
-        double sfxValue = (double)SaveSystem.GetDataItem("Settings", "volume", defaultValue: 0.0f);
+    private void InitialSliderValueAssignment()
+    {
+        double sfxValue = (double)SaveSystem.GetDataItem("Settings", "sfxVolume", defaultValue: 0.0f);
         sfxSlider.SetValueNoSignal(sfxValue);
-
-        sfxSlider.SetValueNoSignal(Mathf.DbToLinear(AudioServer.GetBusVolumeDb(sfxAudioBusIndex)));
     }
 
     public void OnSliderChange_SFX(double value)
     {
-        float volume = (float)Mathf.LinearToDb(value);
-        GD.Print($"SettingsManager.cs: Changing Volume to: {volume}");
+        GD.Print($"SettingsManager.cs: Changing Volume to: {value}");
 
+        float volume = (float)Mathf.LinearToDb(value);
         AudioServer.SetBusVolumeDb(sfxAudioBusIndex, volume);
         AudioManager.Instance.PlaySFX(AudioManager.SFXType.UI_Interact);
 
-        //SaveManager.Instance.PopulateDataToSave<string>("sfxVolume", false);
-        //SaveManager.Instance.PopulateDataToSave<string>(value, true);
-
-        //SaveManager.Instance.SaveToFile();
-        SaveSystem.AddDataItem("Settings", "volume", volume);
+        SaveSystem.AddDataItem("Settings", "sfxVolume", value);
         SaveSystem.SaveData("Settings");
     }
 }

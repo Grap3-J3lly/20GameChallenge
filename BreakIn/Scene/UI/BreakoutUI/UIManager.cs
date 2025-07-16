@@ -17,6 +17,9 @@ public partial class UIManager : CanvasLayer
     [Export]
     private PopupManager popupManager;
 
+    private const int popupAreaIndex = 1;
+    private const bool popupDefaultVisibility = false;
+
     // --------------------------------
     //			PROPERTIES	
     // --------------------------------
@@ -32,7 +35,7 @@ public partial class UIManager : CanvasLayer
         Instance = this;
         breakoutManager = BreakoutManager.Instance;
 
-        ToggleArea(1, false);
+        ToggleArea(popupAreaIndex, popupDefaultVisibility);
     }
 
     // --------------------------------

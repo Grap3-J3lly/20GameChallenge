@@ -21,6 +21,8 @@ public partial class AudioManager : Node
     [Export]
     public Dictionary<SFXType, AudioStreamOggVorbis> sfxLibrary = new Dictionary<SFXType, AudioStreamOggVorbis>();
 
+    private const int sfxAudioBusIndex = 1;
+
     // --------------------------------
     //			PROPERTIES	
     // --------------------------------
@@ -45,16 +47,13 @@ public partial class AudioManager : Node
 
     private void Setup()
     {
-        //Godot.Collections.Array data = SaveManager.Instance.LoadFromFile();
-        //for (int i = 0; i < data.Count - 1; i++)
-        //{
-        //    if (data[i].ToString().Contains("sfxVolume"))
-        //    {
-        //        GD.Print($"AudioManager.cs: Assigning Initial SFX Volume");
-        //        AudioServer.SetBusVolumeDb(1, (float)Mathf.LinearToDb((float)data[i + 1]));
-        //        return;
-        //    }
-        //}
+        AssignDefaultVolumeLevel();
+    }
+
+    private void AssignDefaultVolumeLevel()
+    {
+        double sfxValue = (double)SaveSystem.GetDataItem("Settings", "sfxVolume", defaultValue: 0.0f);
+        AudioServer.SetBusVolumeDb(sfxAudioBusIndex, (float)Mathf.LinearToDb(sfxValue));
     }
 
     // --------------------------------

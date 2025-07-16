@@ -4,6 +4,7 @@ using System.Collections.Generic;
 
 public static class SaveSystem
 {
+    // Default Save Location: C:\Users\[User]\AppData\Roaming\Godot\app_userdata
     private const string root = "user://";
     private const string fileExtension = ".saved";
 
