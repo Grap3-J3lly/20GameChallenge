@@ -15,6 +15,9 @@ public partial class Paddle : AnimatableBody2D
     private CollisionShape2D collisionShape;
 
     [Export]
+    private Array<Color> paddleColors = new Array<Color>();
+
+    [Export]
     private float paddleSpeed = 10f;
     private float startSpeed;
 
@@ -59,6 +62,15 @@ public partial class Paddle : AnimatableBody2D
     {
         base._ExitTree();
         breakoutManager.RowClear -= ReducePaddleSize;
+    }
+
+    // --------------------------------
+    //          SETUP 	
+    // --------------------------------
+
+    public void AssignColorByIndex(int index)
+    {
+        meshInstance.Modulate = paddleColors[index];
     }
 
     // --------------------------------

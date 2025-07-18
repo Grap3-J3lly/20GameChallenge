@@ -1,0 +1,644 @@
+[gd_scene load_steps=11 format=3 uid="uid://10kjq20c1oqt"]
+
+[ext_resource type="Texture2D" uid="uid://cvon7axoccvso" path="res://Entities/Ball/Circle.png" id="1_08oxq"]
+[ext_resource type="Texture2D" uid="uid://c3e87vpjsxeeo" path="res://Assets/Kenney/PNG/Default/blue_body_square.png" id="2_cs1ti"]
+[ext_resource type="Texture2D" uid="uid://bdl4gbuidgpia" path="res://Assets/Kenney/PNG/Default/blue_body_rhombus.png" id="3_yf5x3"]
+[ext_resource type="Texture2D" uid="uid://b3v2h71tbtpnx" path="res://Assets/Kenney/PNG/Default/tile_background_grass.png" id="4_iil4l"]
+[ext_resource type="Texture2D" uid="uid://csahh20ethcw" path="res://Assets/Kenney/PNG/Default/blue_body_circle.png" id="5_18umv"]
+[ext_resource type="Texture2D" uid="uid://r11q6plv77h8" path="res://Assets/Kenney/PNG/Default/blue_body_squircle.png" id="6_ttvfy"]
+[ext_resource type="Texture2D" uid="uid://crw4ymem60425" path="res://Assets/Kenney/PNG/Default/tile_cloud.png" id="7_fpyrq"]
+[ext_resource type="Texture2D" uid="uid://cl0l03a81qpas" path="res://Assets/Kenney/PNG/Double/tile_coin.png" id="8_80lhm"]
+[ext_resource type="Texture2D" uid="uid://cp8fi3laanxk0" path="res://Assets/Kenney/PNG/Double/tile_background_tree_large.png" id="9_fsfx3"]
+[ext_resource type="Texture2D" uid="uid://vhnr34l5oysa" path="res://Assets/Kenney/PNG/Retina/button_grey.png" id="10_tmrpy"]
+
+[node name="Level 3 (Snow-ish)" type="ColorRect"]
+offset_right = 1152.0
+offset_bottom = 864.0
+color = Color(0.529458, 0.728856, 0.861344, 1)
+
+[node name="RichTextLabel" type="RichTextLabel" parent="."]
+visible = false
+layout_mode = 0
+offset_left = 112.0
+offset_top = 55.0
+offset_right = 533.0
+offset_bottom = 168.0
+theme_override_font_sizes/normal_font_size = 50
+text = "Level 3 (Winter)"
+
+[node name="SnowHills" type="Node" parent="."]
+
+[node name="SnowBank" type="Node" parent="SnowHills"]
+
+[node name="Circle" type="Sprite2D" parent="SnowHills/SnowBank"]
+position = Vector2(269.592, 669)
+scale = Vector2(0.603, 0.603)
+texture = ExtResource("1_08oxq")
+
+[node name="Circle2" type="Sprite2D" parent="SnowHills/SnowBank"]
+modulate = Color(0.948951, 0.948951, 0.948951, 1)
+position = Vector2(258.002, 689)
+scale = Vector2(0.603, 0.603)
+texture = ExtResource("1_08oxq")
+
+[node name="SnowBank2" type="Node" parent="SnowHills"]
+
+[node name="Circle" type="Sprite2D" parent="SnowHills/SnowBank2"]
+position = Vector2(153.592, 804)
+scale = Vector2(0.577586, 0.577586)
+texture = ExtResource("1_08oxq")
+
+[node name="Circle2" type="Sprite2D" parent="SnowHills/SnowBank2"]
+modulate = Color(0.948951, 0.948951, 0.948951, 1)
+position = Vector2(140.592, 811)
+scale = Vector2(0.553, 0.553)
+texture = ExtResource("1_08oxq")
+
+[node name="SnowBank3" type="Node" parent="SnowHills"]
+
+[node name="Circle" type="Sprite2D" parent="SnowHills/SnowBank3"]
+z_index = 10
+position = Vector2(534.592, 936)
+scale = Vector2(0.577586, 0.577586)
+texture = ExtResource("1_08oxq")
+
+[node name="Circle2" type="Sprite2D" parent="SnowHills/SnowBank3"]
+modulate = Color(0.948951, 0.948951, 0.948951, 1)
+z_index = 10
+position = Vector2(522.002, 951)
+scale = Vector2(0.553, 0.553)
+texture = ExtResource("1_08oxq")
+
+[node name="SnowBank4" type="Node" parent="SnowHills"]
+
+[node name="Circle" type="Sprite2D" parent="SnowHills/SnowBank4"]
+z_index = 1
+position = Vector2(950.592, 808)
+scale = Vector2(0.713, 0.713)
+texture = ExtResource("1_08oxq")
+
+[node name="Circle2" type="Sprite2D" parent="SnowHills/SnowBank4"]
+modulate = Color(0.948951, 0.948951, 0.948951, 1)
+z_index = 1
+position = Vector2(939.002, 832)
+scale = Vector2(0.713, 0.713)
+texture = ExtResource("1_08oxq")
+
+[node name="SnowBank5" type="Node" parent="SnowHills"]
+
+[node name="Circle" type="Sprite2D" parent="SnowHills/SnowBank5"]
+position = Vector2(760.422, 724.83)
+scale = Vector2(0.713, 0.713)
+texture = ExtResource("1_08oxq")
+
+[node name="Circle2" type="Sprite2D" parent="SnowHills/SnowBank5"]
+modulate = Color(0.948951, 0.948951, 0.948951, 1)
+position = Vector2(748.832, 748.83)
+scale = Vector2(0.713, 0.713)
+texture = ExtResource("1_08oxq")
+
+[node name="BlueBodySquare" type="Sprite2D" parent="."]
+position = Vector2(-250, 394)
+scale = Vector2(2.025, 2.025)
+texture = ExtResource("2_cs1ti")
+
+[node name="BlueBodyRhombus" type="Sprite2D" parent="."]
+position = Vector2(-86, 248)
+texture = ExtResource("3_yf5x3")
+
+[node name="Plants" type="Node" parent="."]
+
+[node name="TileBackgroundGrass2" type="Sprite2D" parent="Plants"]
+z_index = 10
+position = Vector2(292.002, 461)
+texture = ExtResource("4_iil4l")
+
+[node name="TileBackgroundGrass3" type="Sprite2D" parent="Plants"]
+z_index = 10
+position = Vector2(643.002, 501)
+texture = ExtResource("4_iil4l")
+
+[node name="TileBackgroundGrass4" type="Sprite2D" parent="Plants"]
+z_index = 10
+position = Vector2(132.002, 454)
+texture = ExtResource("4_iil4l")
+
+[node name="TileBackgroundGrass5" type="Sprite2D" parent="Plants"]
+z_index = 10
+position = Vector2(71.0019, 651)
+texture = ExtResource("4_iil4l")
+
+[node name="TileBackgroundGrass6" type="Sprite2D" parent="Plants"]
+z_index = 10
+position = Vector2(221.002, 594)
+texture = ExtResource("4_iil4l")
+
+[node name="TileBackgroundGrass7" type="Sprite2D" parent="Plants"]
+z_index = 15
+position = Vector2(519.002, 727)
+texture = ExtResource("4_iil4l")
+
+[node name="TileBackgroundGrass8" type="Sprite2D" parent="Plants"]
+z_index = 15
+position = Vector2(654.002, 771)
+texture = ExtResource("4_iil4l")
+
+[node name="TileBackgroundGrass9" type="Sprite2D" parent="Plants"]
+z_index = 15
+position = Vector2(729.002, 673)
+texture = ExtResource("4_iil4l")
+
+[node name="TileBackgroundGrass10" type="Sprite2D" parent="Plants"]
+z_index = 15
+position = Vector2(840.002, 572)
+texture = ExtResource("4_iil4l")
+
+[node name="TileBackgroundGrass11" type="Sprite2D" parent="Plants"]
+z_index = 15
+position = Vector2(992.002, 600)
+texture = ExtResource("4_iil4l")
+
+[node name="TileBackgroundGrass12" type="Sprite2D" parent="Plants"]
+z_index = 15
+position = Vector2(862.002, 455)
+texture = ExtResource("4_iil4l")
+
+[node name="BlueBodyCircle2" type="Sprite2D" parent="."]
+position = Vector2(-49, 402)
+texture = ExtResource("5_18umv")
+
+[node name="BlueBodySquircle" type="Sprite2D" parent="."]
+position = Vector2(-68, 568)
+texture = ExtResource("6_ttvfy")
+
+[node name="Sky" type="Node" parent="."]
+
+[node name="TileCloud2" type="Sprite2D" parent="Sky"]
+position = Vector2(738.502, 129.5)
+scale = Vector2(1.975, 1.975)
+texture = ExtResource("7_fpyrq")
+
+[node name="TileCloud3" type="Sprite2D" parent="Sky"]
+position = Vector2(591.502, 191.5)
+scale = Vector2(1.975, 1.975)
+texture = ExtResource("7_fpyrq")
+
+[node name="TileCloud4" type="Sprite2D" parent="Sky"]
+position = Vector2(427.502, 259.5)
+scale = Vector2(1.975, 1.975)
+texture = ExtResource("7_fpyrq")
+
+[node name="TileCloud5" type="Sprite2D" parent="Sky"]
+position = Vector2(211.502, 306.5)
+scale = Vector2(1.975, 1.975)
+texture = ExtResource("7_fpyrq")
+
+[node name="TileCloud6" type="Sprite2D" parent="Sky"]
+position = Vector2(119.502, 110.5)
+scale = Vector2(1.975, 1.975)
+texture = ExtResource("7_fpyrq")
+
+[node name="TileCoin" type="Sprite2D" parent="Sky"]
+position = Vector2(972.502, 152.5)
+scale = Vector2(2.1875, 2.1875)
+texture = ExtResource("8_80lhm")
+
+[node name="Trees" type="Node" parent="."]
+
+[node name="Tree20" type="Control" parent="Trees"]
+z_index = 5
+custom_minimum_size = Vector2(100, 150)
+layout_mode = 3
+anchors_preset = 0
+offset_left = 37.0019
+offset_top = 481.0
+offset_right = 137.002
+offset_bottom = 631.0
+
+[node name="TreeBody" type="TextureRect" parent="Trees/Tree20"]
+layout_mode = 0
+offset_right = 98.0
+offset_bottom = 150.0
+texture = ExtResource("9_fsfx3")
+expand_mode = 1
+
+[node name="TreeTrunk" type="TextureRect" parent="Trees/Tree20"]
+modulate = Color(0.454524, 0.304958, 0.182671, 1)
+layout_mode = 0
+offset_left = 31.0
+offset_top = 150.0
+offset_right = 62.0
+offset_bottom = 188.0
+rotation = -1.57079
+texture = ExtResource("10_tmrpy")
+expand_mode = 1
+
+[node name="Tree21" type="Control" parent="Trees"]
+z_index = 5
+custom_minimum_size = Vector2(100, 150)
+layout_mode = 3
+anchors_preset = 0
+offset_left = 121.002
+offset_top = 568.0
+offset_right = 221.002
+offset_bottom = 718.0
+
+[node name="TreeBody" type="TextureRect" parent="Trees/Tree21"]
+layout_mode = 0
+offset_right = 98.0
+offset_bottom = 150.0
+texture = ExtResource("9_fsfx3")
+expand_mode = 1
+
+[node name="TreeTrunk" type="TextureRect" parent="Trees/Tree21"]
+modulate = Color(0.454524, 0.304958, 0.182671, 1)
+layout_mode = 0
+offset_left = 31.0
+offset_top = 150.0
+offset_right = 62.0
+offset_bottom = 188.0
+rotation = -1.57079
+texture = ExtResource("10_tmrpy")
+expand_mode = 1
+
+[node name="Tree22" type="Control" parent="Trees"]
+z_index = 5
+custom_minimum_size = Vector2(100, 150)
+layout_mode = 3
+anchors_preset = 0
+offset_left = 249.002
+offset_top = 533.0
+offset_right = 349.002
+offset_bottom = 683.0
+
+[node name="TreeBody" type="TextureRect" parent="Trees/Tree22"]
+layout_mode = 0
+offset_right = 98.0
+offset_bottom = 150.0
+texture = ExtResource("9_fsfx3")
+expand_mode = 1
+
+[node name="TreeTrunk" type="TextureRect" parent="Trees/Tree22"]
+modulate = Color(0.454524, 0.304958, 0.182671, 1)
+layout_mode = 0
+offset_left = 31.0
+offset_top = 150.0
+offset_right = 62.0
+offset_bottom = 188.0
+rotation = -1.57079
+texture = ExtResource("10_tmrpy")
+expand_mode = 1
+
+[node name="Tree23" type="Control" parent="Trees"]
+z_index = 5
+custom_minimum_size = Vector2(100, 150)
+layout_mode = 3
+anchors_preset = 0
+offset_left = 548.002
+offset_top = 614.0
+offset_right = 648.002
+offset_bottom = 764.0
+
+[node name="TreeBody" type="TextureRect" parent="Trees/Tree23"]
+z_index = 10
+layout_mode = 0
+offset_right = 98.0
+offset_bottom = 150.0
+texture = ExtResource("9_fsfx3")
+expand_mode = 1
+
+[node name="TreeTrunk" type="TextureRect" parent="Trees/Tree23"]
+modulate = Color(0.454524, 0.304958, 0.182671, 1)
+z_index = 10
+layout_mode = 0
+offset_left = 31.0
+offset_top = 150.0
+offset_right = 62.0
+offset_bottom = 188.0
+rotation = -1.57079
+texture = ExtResource("10_tmrpy")
+expand_mode = 1
+
+[node name="Tree24" type="Control" parent="Trees"]
+z_index = 5
+custom_minimum_size = Vector2(100, 150)
+layout_mode = 3
+anchors_preset = 0
+offset_left = 724.002
+offset_top = 507.0
+offset_right = 824.002
+offset_bottom = 657.0
+
+[node name="TreeBody" type="TextureRect" parent="Trees/Tree24"]
+z_index = 10
+layout_mode = 0
+offset_right = 98.0
+offset_bottom = 150.0
+texture = ExtResource("9_fsfx3")
+expand_mode = 1
+
+[node name="TreeTrunk" type="TextureRect" parent="Trees/Tree24"]
+modulate = Color(0.454524, 0.304958, 0.182671, 1)
+z_index = 10
+layout_mode = 0
+offset_left = 31.0
+offset_top = 150.0
+offset_right = 62.0
+offset_bottom = 188.0
+rotation = -1.57079
+texture = ExtResource("10_tmrpy")
+expand_mode = 1
+
+[node name="Tree25" type="Control" parent="Trees"]
+z_index = 5
+custom_minimum_size = Vector2(100, 150)
+layout_mode = 3
+anchors_preset = 0
+offset_left = 898.002
+offset_top = 421.0
+offset_right = 998.002
+offset_bottom = 571.0
+
+[node name="TreeBody" type="TextureRect" parent="Trees/Tree25"]
+z_index = 10
+layout_mode = 0
+offset_right = 98.0
+offset_bottom = 150.0
+texture = ExtResource("9_fsfx3")
+expand_mode = 1
+
+[node name="TreeTrunk" type="TextureRect" parent="Trees/Tree25"]
+modulate = Color(0.454524, 0.304958, 0.182671, 1)
+z_index = 10
+layout_mode = 0
+offset_left = 31.0
+offset_top = 150.0
+offset_right = 62.0
+offset_bottom = 188.0
+rotation = -1.57079
+texture = ExtResource("10_tmrpy")
+expand_mode = 1
+
+[node name="Tree26" type="Control" parent="Trees"]
+z_index = 5
+custom_minimum_size = Vector2(100, 150)
+layout_mode = 3
+anchors_preset = 0
+offset_left = 1011.0
+offset_top = 455.0
+offset_right = 1111.0
+offset_bottom = 605.0
+
+[node name="TreeBody" type="TextureRect" parent="Trees/Tree26"]
+z_index = 10
+layout_mode = 0
+offset_right = 98.0
+offset_bottom = 150.0
+texture = ExtResource("9_fsfx3")
+expand_mode = 1
+
+[node name="TreeTrunk" type="TextureRect" parent="Trees/Tree26"]
+modulate = Color(0.454524, 0.304958, 0.182671, 1)
+z_index = 10
+layout_mode = 0
+offset_left = 31.0
+offset_top = 150.0
+offset_right = 62.0
+offset_bottom = 188.0
+rotation = -1.57079
+texture = ExtResource("10_tmrpy")
+expand_mode = 1
+
+[node name="Tree27" type="Control" parent="Trees"]
+z_index = 5
+custom_minimum_size = Vector2(75, 100)
+layout_mode = 3
+anchors_preset = 0
+offset_left = 669.002
+offset_top = 309.0
+offset_right = 744.002
+offset_bottom = 419.0
+
+[node name="TreeBody" type="TextureRect" parent="Trees/Tree27"]
+z_index = 10
+layout_mode = 0
+offset_right = 98.0
+offset_bottom = 150.0
+scale = Vector2(0.7, 0.7)
+texture = ExtResource("9_fsfx3")
+expand_mode = 1
+
+[node name="TreeTrunk" type="TextureRect" parent="Trees/Tree27"]
+modulate = Color(0.454524, 0.304958, 0.182671, 1)
+z_index = 10
+layout_mode = 0
+offset_left = 21.0
+offset_top = 105.0
+offset_right = 52.0
+offset_bottom = 143.0
+rotation = -1.57079
+scale = Vector2(0.7, 0.7)
+texture = ExtResource("10_tmrpy")
+expand_mode = 1
+
+[node name="Tree28" type="Control" parent="Trees"]
+z_index = 5
+custom_minimum_size = Vector2(75, 100)
+layout_mode = 3
+anchors_preset = 0
+offset_left = 625.002
+offset_top = 367.0
+offset_right = 700.002
+offset_bottom = 477.0
+
+[node name="TreeBody" type="TextureRect" parent="Trees/Tree28"]
+z_index = 10
+layout_mode = 0
+offset_right = 98.0
+offset_bottom = 150.0
+scale = Vector2(0.7, 0.7)
+texture = ExtResource("9_fsfx3")
+expand_mode = 1
+
+[node name="TreeTrunk" type="TextureRect" parent="Trees/Tree28"]
+modulate = Color(0.454524, 0.304958, 0.182671, 1)
+z_index = 10
+layout_mode = 0
+offset_left = 21.0
+offset_top = 105.0
+offset_right = 52.0
+offset_bottom = 143.0
+rotation = -1.57079
+scale = Vector2(0.7, 0.7)
+texture = ExtResource("10_tmrpy")
+expand_mode = 1
+
+[node name="Tree29" type="Control" parent="Trees"]
+z_index = 5
+custom_minimum_size = Vector2(75, 100)
+layout_mode = 3
+anchors_preset = 0
+offset_left = 726.002
+offset_top = 352.0
+offset_right = 801.002
+offset_bottom = 462.0
+
+[node name="TreeBody" type="TextureRect" parent="Trees/Tree29"]
+z_index = 10
+layout_mode = 0
+offset_right = 98.0
+offset_bottom = 150.0
+scale = Vector2(0.7, 0.7)
+texture = ExtResource("9_fsfx3")
+expand_mode = 1
+
+[node name="TreeTrunk" type="TextureRect" parent="Trees/Tree29"]
+modulate = Color(0.454524, 0.304958, 0.182671, 1)
+z_index = 10
+layout_mode = 0
+offset_left = 21.0
+offset_top = 105.0
+offset_right = 52.0
+offset_bottom = 143.0
+rotation = -1.57079
+scale = Vector2(0.7, 0.7)
+texture = ExtResource("10_tmrpy")
+expand_mode = 1
+
+[node name="Tree30" type="Control" parent="Trees"]
+z_index = 5
+custom_minimum_size = Vector2(75, 100)
+layout_mode = 3
+anchors_preset = 0
+offset_left = 796.002
+offset_top = 327.0
+offset_right = 871.002
+offset_bottom = 437.0
+
+[node name="TreeBody" type="TextureRect" parent="Trees/Tree30"]
+z_index = 10
+layout_mode = 0
+offset_right = 98.0
+offset_bottom = 150.0
+scale = Vector2(0.7, 0.7)
+texture = ExtResource("9_fsfx3")
+expand_mode = 1
+
+[node name="TreeTrunk" type="TextureRect" parent="Trees/Tree30"]
+modulate = Color(0.454524, 0.304958, 0.182671, 1)
+z_index = 10
+layout_mode = 0
+offset_left = 21.0
+offset_top = 105.0
+offset_right = 52.0
+offset_bottom = 143.0
+rotation = -1.57079
+scale = Vector2(0.7, 0.7)
+texture = ExtResource("10_tmrpy")
+expand_mode = 1
+
+[node name="Tree31" type="Control" parent="Trees"]
+z_index = 5
+custom_minimum_size = Vector2(75, 100)
+layout_mode = 3
+anchors_preset = 0
+offset_left = 130.002
+offset_top = 339.0
+offset_right = 205.002
+offset_bottom = 449.0
+
+[node name="TreeBody" type="TextureRect" parent="Trees/Tree31"]
+z_index = 10
+layout_mode = 0
+offset_right = 98.0
+offset_bottom = 150.0
+scale = Vector2(0.7, 0.7)
+texture = ExtResource("9_fsfx3")
+expand_mode = 1
+
+[node name="TreeTrunk" type="TextureRect" parent="Trees/Tree31"]
+modulate = Color(0.454524, 0.304958, 0.182671, 1)
+z_index = 10
+layout_mode = 0
+offset_left = 21.0
+offset_top = 105.0
+offset_right = 52.0
+offset_bottom = 143.0
+rotation = -1.57079
+scale = Vector2(0.7, 0.7)
+texture = ExtResource("10_tmrpy")
+expand_mode = 1
+
+[node name="Tree32" type="Control" parent="Trees"]
+z_index = 5
+custom_minimum_size = Vector2(75, 100)
+layout_mode = 3
+anchors_preset = 0
+offset_left = 199.002
+offset_top = 358.0
+offset_right = 274.002
+offset_bottom = 468.0
+
+[node name="TreeBody" type="TextureRect" parent="Trees/Tree32"]
+z_index = 10
+layout_mode = 0
+offset_right = 98.0
+offset_bottom = 150.0
+scale = Vector2(0.7, 0.7)
+texture = ExtResource("9_fsfx3")
+expand_mode = 1
+
+[node name="TreeTrunk" type="TextureRect" parent="Trees/Tree32"]
+modulate = Color(0.454524, 0.304958, 0.182671, 1)
+z_index = 10
+layout_mode = 0
+offset_left = 21.0
+offset_top = 105.0
+offset_right = 52.0
+offset_bottom = 143.0
+rotation = -1.57079
+scale = Vector2(0.7, 0.7)
+texture = ExtResource("10_tmrpy")
+expand_mode = 1
+
+[node name="Tree33" type="Control" parent="Trees"]
+z_index = 5
+custom_minimum_size = Vector2(75, 100)
+layout_mode = 3
+anchors_preset = 0
+offset_left = 277.002
+offset_top = 322.0
+offset_right = 352.002
+offset_bottom = 432.0
+
+[node name="TreeBody" type="TextureRect" parent="Trees/Tree33"]
+z_index = 10
+layout_mode = 0
+offset_right = 98.0
+offset_bottom = 150.0
+scale = Vector2(0.7, 0.7)
+texture = ExtResource("9_fsfx3")
+expand_mode = 1
+
+[node name="TreeTrunk" type="TextureRect" parent="Trees/Tree33"]
+modulate = Color(0.454524, 0.304958, 0.182671, 1)
+z_index = 10
+layout_mode = 0
+offset_left = 21.0
+offset_top = 105.0
+offset_right = 52.0
+offset_bottom = 143.0
+rotation = -1.57079
+scale = Vector2(0.7, 0.7)
+texture = ExtResource("10_tmrpy")
+expand_mode = 1
+
+[node name="ColorRect" type="ColorRect" parent="."]
+z_index = 20
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+color = Color(0.147672, 0.147672, 0.147672, 0.447059)

@@ -1,6 +1,7 @@
-[gd_scene load_steps=4 format=3 uid="uid://bf43jjavm06nd"]
+[gd_scene load_steps=5 format=3 uid="uid://bf43jjavm06nd"]
 
 [ext_resource type="Script" uid="uid://bmr42wfwd4854" path="res://Entities/Brick/Brick.cs" id="1_ci3aa"]
+[ext_resource type="Texture2D" uid="uid://vhnr34l5oysa" path="res://Assets/Kenney/PNG/Retina/button_grey.png" id="2_6uwq6"]
 
 [sub_resource type="QuadMesh" id="QuadMesh_svshc"]
 size = Vector2(100, 20)
@@ -14,7 +15,9 @@ script = ExtResource("1_ci3aa")
 layerColors = Array[Color]([Color(1, 1, 1, 1), Color(0, 0, 1, 1), Color(1, 0, 0, 1), Color(0, 1, 0, 1), Color(0.925359, 0.566063, 0.195519, 1)])
 
 [node name="MeshInstance2D" type="MeshInstance2D" parent="."]
+rotation = 3.14159
 mesh = SubResource("QuadMesh_svshc")
+texture = ExtResource("2_6uwq6")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 shape = SubResource("RectangleShape2D_d1082")

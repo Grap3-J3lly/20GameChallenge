@@ -1,4 +1,4 @@
-[gd_scene load_steps=18 format=3 uid="uid://1iva5wilxcet"]
+[gd_scene load_steps=25 format=3 uid="uid://1iva5wilxcet"]
 
 [ext_resource type="Script" uid="uid://dk72s2bwdvrrf" path="res://Scene/Managers/BreakoutManager.cs" id="1_ra2vd"]
 [ext_resource type="PackedScene" uid="uid://dw0ubxif7xkl1" path="res://Entities/Paddle/paddle.tscn" id="2_dhw4s"]
@@ -6,21 +6,30 @@
 [ext_resource type="PackedScene" uid="uid://bf43jjavm06nd" path="res://Entities/Brick/brick.tscn" id="4_24pcb"]
 [ext_resource type="PackedScene" uid="uid://cj18gu8fxmlk" path="res://Entities/Ball/powerup_orb.tscn" id="5_77uq7"]
 [ext_resource type="Script" uid="uid://c7rm6lquvpdu5" path="res://Scene/Managers/PowerUpManager.cs" id="6_1a48d"]
+[ext_resource type="PackedScene" uid="uid://dwop3ethip057" path="res://Scene/Environment/forest.tscn" id="6_tqbv1"]
 [ext_resource type="PackedScene" uid="uid://di2wp66555pv0" path="res://Scene/GameBoard/Walls/wall.tscn" id="7_iqavb"]
+[ext_resource type="PackedScene" uid="uid://blnk6w7lmp408" path="res://Scene/Environment/desert.tscn" id="7_llvgi"]
+[ext_resource type="PackedScene" uid="uid://10kjq20c1oqt" path="res://Scene/Environment/snowyForest.tscn" id="8_k8v7j"]
 [ext_resource type="PackedScene" uid="uid://dual7tj41jj13" path="res://Scene/GameBoard/Goals/enemy_goal.tscn" id="8_n83oc"]
 [ext_resource type="Script" uid="uid://b13didcx4upnl" path="res://Scene/Managers/ObjectPool.cs" id="9_idhfp"]
 [ext_resource type="Script" uid="uid://o45puakrkpcp" path="res://Scene/UI/BreakoutUI/UIManager.cs" id="10_dq7ph"]
 [ext_resource type="Script" uid="uid://cul4tuuar8x7t" path="res://Scene/UI/UI Buttons/ControlButton.cs" id="11_dhw4s"]
+[ext_resource type="Script" uid="uid://eoisvnnjklg1" path="res://Scene/GameBoard/GameBoard.cs" id="11_llvgi"]
 [ext_resource type="Script" uid="uid://cfelhi0upatd2" path="res://Scene/UI/BreakoutUI/HUDManager.cs" id="11_vsjxa"]
 [ext_resource type="Script" uid="uid://catwhk35le0b6" path="res://Scene/UI/BreakoutUI/PopupManager.cs" id="12_24pcb"]
+[ext_resource type="Texture2D" uid="uid://5lsefs4xlxmu" path="res://Scene/GameBoard/Walls/forestGradient.tres" id="12_ugwee"]
+[ext_resource type="Texture2D" uid="uid://dfov8fql0b7p4" path="res://Scene/GameBoard/Walls/desertGradient.tres" id="13_8mvvy"]
 [ext_resource type="Script" uid="uid://cpqtoxswte8t" path="res://Scene/UI/UI Buttons/UnpauseButton.cs" id="14_77uq7"]
+[ext_resource type="Texture2D" uid="uid://dbi1frlluu2gg" path="res://Scene/GameBoard/Walls/winterGradient.tres" id="14_wq475"]
 [ext_resource type="Script" uid="uid://xxh4t7ep6b50" path="res://Scene/UI/UI Buttons/HomeButton.cs" id="15_1a48d"]
 [ext_resource type="Script" uid="uid://bxu0lj1iiwiaq" path="res://Scene/UI/UI Buttons/RetryButton.cs" id="15_iqavb"]
 [ext_resource type="Script" uid="uid://b58xtk0suh0i3" path="res://Scene/UI/UI Buttons/NextLevelButton.cs" id="16_n83oc"]
 
 [node name="BreakIn" type="Node2D"]
 
-[node name="BreakoutManager" type="Node" parent="." node_paths=PackedStringArray("objectPool", "powerUpManager", "uiManager", "brickParent", "powerupParent")]
+[node name="Environment" type="Node" parent="."]
+
+[node name="BreakoutManager" type="Node" parent="." node_paths=PackedStringArray("objectPool", "powerUpManager", "uiManager", "brickParent", "powerupParent", "environmentParent", "board")]
 script = ExtResource("1_ra2vd")
 paddleScene = ExtResource("2_dhw4s")
 ballScene = ExtResource("3_vsjxa")
@@ -33,12 +42,19 @@ ballIncreaseSpeedAmount = 10.0
 brickParent = NodePath("../ObjectPool/Bricks")
 powerupParent = NodePath("../ObjectPool/Powerups")
 difficulty = 3
+environmentParent = NodePath("../Environment")
+environments = Array[PackedScene]([ExtResource("6_tqbv1"), ExtResource("7_llvgi"), ExtResource("8_k8v7j")])
+board = NodePath("../GameBoard")
 
 [node name="PowerUpManager" type="Node" parent="."]
 script = ExtResource("6_1a48d")
 wallScene = ExtResource("7_iqavb")
 
-[node name="GameBoard" type="Node" parent="."]
+[node name="GameBoard" type="Node2D" parent="." node_paths=PackedStringArray("wallMeshes")]
+z_index = 25
+script = ExtResource("11_llvgi")
+wallMeshes = [NodePath("WallL/MeshInstance2D"), NodePath("WallR/MeshInstance2D"), NodePath("WallT/MeshInstance2D")]
+wallTextures = Array[Texture2D]([ExtResource("12_ugwee"), ExtResource("13_8mvvy"), ExtResource("14_wq475")])
 
 [node name="WallL" parent="GameBoard" instance=ExtResource("7_iqavb")]
 position = Vector2(0, 440)
@@ -47,21 +63,20 @@ position = Vector2(0, 440)
 position = Vector2(1152, 440)
 
 [node name="WallT" parent="GameBoard" instance=ExtResource("7_iqavb")]
-position = Vector2(649.85, 116)
+position = Vector2(649.85, 115)
 rotation = 1.5708
-scale = Vector2(1, 1.6)
+scale = Vector2(0.5, 1.6)
 
 [node name="EnemyGoal" parent="GameBoard" instance=ExtResource("8_n83oc")]
 position = Vector2(576, 864)
 
-[node name="Environment" type="Node" parent="."]
-
-[node name="ObjectPool" type="Node" parent="."]
+[node name="ObjectPool" type="Node2D" parent="."]
+z_index = 25
 script = ExtResource("9_idhfp")
 
-[node name="Bricks" type="Node" parent="ObjectPool"]
+[node name="Bricks" type="Node2D" parent="ObjectPool"]
 
-[node name="Powerups" type="Node" parent="ObjectPool"]
+[node name="Powerups" type="Node2D" parent="ObjectPool"]
 
 [node name="UI Manager" type="CanvasLayer" parent="." node_paths=PackedStringArray("uiAreas", "hudManager", "popupManager")]
 script = ExtResource("10_dq7ph")
@@ -270,3 +285,7 @@ theme_override_font_sizes/font_size = 30
 text = "Home"
 icon_alignment = 1
 script = ExtResource("15_1a48d")
+
+[editable path="GameBoard/WallL"]
+[editable path="GameBoard/WallR"]
+[editable path="GameBoard/WallT"]

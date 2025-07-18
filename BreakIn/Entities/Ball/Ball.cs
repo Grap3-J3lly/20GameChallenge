@@ -21,6 +21,9 @@ public partial class Ball : CharacterBody2D
 
     protected Queue<KinematicCollision2D> collisionsWaiting = new Queue<KinematicCollision2D>();
 
+    [Export]
+    private Array<Color> colors = new Array<Color>();
+
     // Powerup Info
     private bool superMode = false;
     private int brickBreakCount = 0;
@@ -74,6 +77,11 @@ public partial class Ball : CharacterBody2D
 		Vector2 randomDirection = new Vector2(rng.RandfRange(-1f, 1f), rng.RandfRange(-1f, 1f));
 		return randomDirection;
 	}
+
+    public void AssignColorByIndex(int index)
+    {
+        Modulate = colors[index];
+    }
 
     // --------------------------------
     //		TRANSFORM LOGIC	

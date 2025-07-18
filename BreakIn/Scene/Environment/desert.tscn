@@ -1,0 +1,111 @@
+[gd_scene load_steps=7 format=3 uid="uid://blnk6w7lmp408"]
+
+[ext_resource type="Texture2D" uid="uid://d2kegkt1s1rfg" path="res://Assets/Kenney/PNG/Double/yellow_body_circle.png" id="1_s15vr"]
+[ext_resource type="Texture2D" uid="uid://b3v2h71tbtpnx" path="res://Assets/Kenney/PNG/Default/tile_background_grass.png" id="2_kfern"]
+[ext_resource type="Texture2D" uid="uid://6ye1emrpb1s5" path="res://Assets/Kenney/PNG/Double/yellow_body_rhombus.png" id="3_1g4xv"]
+[ext_resource type="Texture2D" uid="uid://c8e8b3kk8bcr" path="res://Assets/Kenney/PNG/Double/yellow_body_square.png" id="4_ee31j"]
+[ext_resource type="Texture2D" uid="uid://dhbg3dmpw18y0" path="res://Assets/Kenney/PNG/Double/yellow_body_squircle.png" id="5_6af7y"]
+[ext_resource type="Texture2D" uid="uid://cl0l03a81qpas" path="res://Assets/Kenney/PNG/Double/tile_coin.png" id="6_3wiq5"]
+
+[node name="Level 2 (Desert-ish)" type="ColorRect"]
+offset_right = 1152.0
+offset_bottom = 864.0
+color = Color(0.770741, 0.92291, 0.912378, 1)
+
+[node name="RichTextLabel" type="RichTextLabel" parent="."]
+visible = false
+layout_mode = 0
+offset_left = 112.0
+offset_top = 55.0
+offset_right = 513.0
+offset_bottom = 168.0
+theme_override_colors/default_color = Color(0, 0, 0, 1)
+theme_override_font_sizes/normal_font_size = 50
+text = "Level 2 (Desert)"
+
+[node name="Dunes" type="Node" parent="."]
+
+[node name="YellowBodyCircle2" type="Sprite2D" parent="Dunes"]
+z_index = 5
+position = Vector2(225.313, 897)
+scale = Vector2(8.19141, 4.66562)
+texture = ExtResource("1_s15vr")
+
+[node name="YellowBodyCircle3" type="Sprite2D" parent="Dunes"]
+z_index = 5
+position = Vector2(815.313, 1026)
+scale = Vector2(8.19141, 4.66562)
+texture = ExtResource("1_s15vr")
+
+[node name="YellowBodyCircle5" type="Sprite2D" parent="Dunes"]
+z_index = 1
+position = Vector2(964.563, 730.25)
+scale = Vector2(4.66562, 4.66562)
+texture = ExtResource("1_s15vr")
+
+[node name="YellowBodyCircle6" type="Sprite2D" parent="Dunes"]
+position = Vector2(630.563, 688.25)
+scale = Vector2(4.66562, 4.66562)
+texture = ExtResource("1_s15vr")
+
+[node name="YellowBodyCircle7" type="Sprite2D" parent="Dunes"]
+position = Vector2(172.563, 676.25)
+scale = Vector2(4.66562, 4.66562)
+texture = ExtResource("1_s15vr")
+
+[node name="Plants" type="Node" parent="."]
+
+[node name="TileBackgroundGrass4" type="Sprite2D" parent="Plants"]
+modulate = Color(0.842652, 0.717262, 0.0577588, 1)
+z_index = 10
+position = Vector2(303.313, 521)
+scale = Vector2(1.83333, 1.83333)
+texture = ExtResource("2_kfern")
+
+[node name="TileBackgroundGrass7" type="Sprite2D" parent="Plants"]
+modulate = Color(0.842652, 0.717262, 0.0577588, 1)
+z_index = 10
+position = Vector2(34.3129, 325)
+scale = Vector2(1.25, 1.25)
+texture = ExtResource("2_kfern")
+
+[node name="TileBackgroundGrass6" type="Sprite2D" parent="Plants"]
+modulate = Color(0.842652, 0.717262, 0.0577588, 1)
+z_index = 10
+position = Vector2(606.313, 716)
+scale = Vector2(2.97222, 2.97222)
+texture = ExtResource("2_kfern")
+
+[node name="TileBackgroundGrass5" type="Sprite2D" parent="Plants"]
+modulate = Color(0.842652, 0.717262, 0.0577588, 1)
+z_index = 10
+position = Vector2(759.313, 343)
+scale = Vector2(0.805555, 0.805555)
+texture = ExtResource("2_kfern")
+
+[node name="YellowBodyRhombus" type="Sprite2D" parent="."]
+position = Vector2(-525, 184)
+texture = ExtResource("3_1g4xv")
+
+[node name="YellowBodySquare" type="Sprite2D" parent="."]
+position = Vector2(-491, 402)
+texture = ExtResource("4_ee31j")
+
+[node name="YellowBodySquircle" type="Sprite2D" parent="."]
+position = Vector2(-552, 659)
+texture = ExtResource("5_6af7y")
+
+[node name="Sun" type="Sprite2D" parent="."]
+position = Vector2(1048, 102)
+scale = Vector2(2.1875, 2.1875)
+texture = ExtResource("6_3wiq5")
+
+[node name="ColorRect" type="ColorRect" parent="."]
+z_index = 10
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+color = Color(0.147672, 0.147672, 0.147672, 0.447059)

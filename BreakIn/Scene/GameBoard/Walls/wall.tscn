@@ -1,11 +1,14 @@
-[gd_scene load_steps=4 format=3 uid="uid://di2wp66555pv0"]
+[gd_scene load_steps=5 format=3 uid="uid://di2wp66555pv0"]
 
 [ext_resource type="Script" uid="uid://ctxgjpo7cpy10" path="res://Scene/GameBoard/Walls/Wall.cs" id="1_qh3gu"]
+[ext_resource type="Texture2D" uid="uid://dfov8fql0b7p4" path="res://Scene/GameBoard/Walls/desertGradient.tres" id="2_mi7v4"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_thtfy"]
 size = Vector2(20, 760)
 
 [sub_resource type="QuadMesh" id="QuadMesh_l2iol"]
+lightmap_size_hint = Vector2i(102, 3802)
+add_uv2 = true
 size = Vector2(20, 760)
 
 [node name="WallL" type="StaticBody2D"]
@@ -16,5 +19,12 @@ position = Vector2(0, 50)
 shape = SubResource("RectangleShape2D_thtfy")
 
 [node name="MeshInstance2D" type="MeshInstance2D" parent="."]
+z_index = 1
 position = Vector2(0, 50)
+mesh = SubResource("QuadMesh_l2iol")
+texture = ExtResource("2_mi7v4")
+
+[node name="MeshInstance2D2" type="MeshInstance2D" parent="."]
+modulate = Color(0.14902, 0.14902, 0.14902, 0.45098)
+position = Vector2(3, 50)
 mesh = SubResource("QuadMesh_l2iol")

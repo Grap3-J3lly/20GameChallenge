@@ -167,6 +167,7 @@ public partial class PowerUpManager : Node
         breakoutManager.ObjectPool.AddChild(newBall);
         newBall.Position = primaryBall.Position + (direction * extraBallPositionOffset);
         newBall.Velocity = primaryBall.Velocity + (direction * extraBallVelocityOffset);
+        newBall.Modulate = primaryBall.Modulate;
         return newBall;
     }
 

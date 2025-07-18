@@ -1,10 +1,13 @@
-[gd_scene load_steps=5 format=3 uid="uid://c47pvo1br7fck"]
+[gd_scene load_steps=6 format=3 uid="uid://c47pvo1br7fck"]
 
 [ext_resource type="Script" uid="uid://bflwrwrqqrcqj" path="res://Entities/Ball/Ball.cs" id="1_mwafn"]
 [ext_resource type="Texture2D" uid="uid://cvon7axoccvso" path="res://Entities/Ball/Circle.png" id="2_iv2fd"]
 
 [sub_resource type="QuadMesh" id="QuadMesh_2g1ek"]
 size = Vector2(20, 20)
+
+[sub_resource type="CompressedTexture2D" id="CompressedTexture2D_njvlh"]
+load_path = "res://.godot/imported/Circle.png-9d17fe3feb0f54e4308834e4932c6433.s3tc.ctex"
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_yrq3t"]
 
@@ -17,10 +20,19 @@ platform_floor_layers = 4278190081
 platform_wall_layers = 1
 script = ExtResource("1_mwafn")
 ballSpeed = 100.0
+colors = Array[Color]([Color(0.436525, 0.283532, 0.196441, 1), Color(0.831373, 0.286275, 0.286275, 1), Color(0.423529, 0.462745, 0.913725, 1)])
+
+[node name="MeshInstance2D2" type="MeshInstance2D" parent="."]
+modulate = Color(0.797092, 0.797092, 0.797092, 1)
+position = Vector2(1, 1)
+scale = Vector2(1.1, 1.1)
+mesh = SubResource("QuadMesh_2g1ek")
+texture = SubResource("CompressedTexture2D_njvlh")
 
 [node name="MeshInstance2D" type="MeshInstance2D" parent="."]
 mesh = SubResource("QuadMesh_2g1ek")
 texture = ExtResource("2_iv2fd")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+visible = false
 shape = SubResource("CircleShape2D_yrq3t")

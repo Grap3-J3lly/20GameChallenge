@@ -42,11 +42,11 @@ public partial class BreakoutManager : Node
 	private Array<Vector2> previousBallVelocities = new Array<Vector2>();
 
     // Brick Details
-    [ExportGroup("Brick Details")]
-    private Brick[,] bricks;
 
+    [ExportGroup("Brick Details")]
     [Export]
     private Node brickParent;
+    private Brick[,] bricks;
     [Export]
     private Vector2 initialBrickSpawnPosition = new Vector2(66, 138);
     [Export] 
@@ -84,6 +84,15 @@ public partial class BreakoutManager : Node
 
 	private Dictionary<string, float> scores = new Dictionary<string, float>();
 
+	// Environment Settings
+	[ExportGroup("Environment Settings")]
+	[Export]
+	private Node environmentParent;
+	private ColorRect currentEnvironment;
+	[Export]
+	private Array<PackedScene> environments = new Array<PackedScene>();
+	[Export]
+	private GameBoard board;
 	// Signals
 	[Signal]
 	public delegate void RowClearEventHandler();
@@ -168,6 +177,8 @@ public partial class BreakoutManager : Node
         SpawnBricks(difficulty);
         SpawnBall();
         paddle.Reset();
+
+        SetupEnvironment(difficulty);
     }
 
     // Reset handles the ball hitting the goal, but the game not being over
@@ -177,6 +188,20 @@ public partial class BreakoutManager : Node
 		paddle.Reset();
 		ReduceLife();
 		ReduceScore();
+	}
+
+	private void SetupEnvironment(int currentDifficulty)
+	{
+		currentEnvironment = environments[currentDifficulty - 1].Instantiate<ColorRect>();
+		environmentParent.AddChild(currentEnvironment);
+
+		board.AssignTextures(currentDifficulty - 1);
+		paddle.AssignColorByIndex(currentDifficulty - 1);
+		
+		foreach(Ball ball in balls)
+		{
+			ball.AssignColorByIndex(currentDifficulty - 1);
+		}
 	}
 
 	private void LoadHighScore()
@@ -311,7 +336,8 @@ public partial class BreakoutManager : Node
 		}
 		if(Input.IsActionJustPressed("ui_cancel"))
 		{
-			HandlePauseGame();
+			powerUpManager.Debug_SuperWide();
+			// HandlePauseGame();
 		}
 	}
 

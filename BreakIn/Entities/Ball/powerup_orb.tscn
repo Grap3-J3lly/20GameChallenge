@@ -8,3 +8,4 @@ collision_layer = 2
 collision_mask = 2
 script = ExtResource("2_rixcl")
 colors = Array[Color]([Color(0, 0, 0, 1), Color(1, 0, 0, 1), Color(0, 1, 0, 1), Color(0, 0, 1, 1), Color(0.648998, 0.00338513, 0.815298, 1)])
+colors = Array[Color]([Color(0, 0, 0, 1), Color(1, 0, 0, 1), Color(0, 1, 0, 1), Color(0, 0, 1, 1), Color(0.648998, 0.00338513, 0.815298, 1)])
