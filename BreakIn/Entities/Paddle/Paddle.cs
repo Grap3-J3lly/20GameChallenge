@@ -18,6 +18,11 @@ public partial class Paddle : AnimatableBody2D
     private Array<Color> paddleColors = new Array<Color>();
 
     [Export]
+    private Vector2 defaultPaddleSize = new Vector2();
+    [Export]
+    private Vector2 expandedPaddleSize = new Vector2();
+
+    [Export]
     private float paddleSpeed = 10f;
     private float startSpeed;
 
@@ -135,25 +140,35 @@ public partial class Paddle : AnimatableBody2D
 
     private void ReducePaddleSize()
     {
-        ChangePaddleSize(-scaleReductionAmount);
+        ChangePaddleSize(-scaleReductionAmount, useScale: true);
     }
 
-    public void ChangePaddleSize(float changeAmount, bool isSuper = false)
+    public void ChangePaddleSize(float changeAmount = 1.0f, bool isSuper = false, bool useScale = false)
     {
         GD.Print($"Paddle.cs: Attempting to change Paddle Size");
-        if (meshInstance == null || meshInstance.Scale.X <= minScale || superMode) { return; }
-        Vector2 adjustedScale = new Vector2(meshInstance.Scale.X + changeAmount, meshInstance.Scale.Y);
-        meshInstance.Scale = adjustedScale;
-        collisionShape.Scale = adjustedScale;
-        superMode = isSuper;
-    }
+        
+        if (!IsInstanceValid(meshInstance) || meshInstance == null) { return; }
+        Vector2 adjustedSize = Vector2.Zero;
 
-    public void ResetPaddleSize()
-    {
-        if (!IsInstanceValid(this) || (meshInstance.Scale == Vector2.One && collisionShape.Scale == Vector2.One)) return;
-        meshInstance.Scale = Vector2.One;
-        collisionShape.Scale = Vector2.One;
-        superMode = false;
-        GD.Print($"Paddle.cs: Resetting Paddle Size");
+        if (isSuper && !useScale)
+        {
+            adjustedSize = expandedPaddleSize;
+        }
+        else if(!useScale)
+        {
+            adjustedSize = defaultPaddleSize;
+        }
+        else
+        {
+            adjustedSize = new Vector2(Scale.X * changeAmount, Scale.Y);
+            return;
+        }
+
+        meshInstance.Mesh.Set("size", adjustedSize);
+        collisionShape.Shape.Set("size", adjustedSize);
+
+        // Need to resolve paddle size not changing when row is cleared
+
+        superMode = isSuper;
     }
 }

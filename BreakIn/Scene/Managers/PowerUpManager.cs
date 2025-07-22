@@ -18,6 +18,7 @@ public partial class PowerUpManager : Node
     private float extraBallPositionOffset = 10f;
     [Export]
     private float extraBallVelocityOffset = 50f;
+    private bool triBallRunning = false;
 
     // Super Ball Info
     [Export]
@@ -28,14 +29,17 @@ public partial class PowerUpManager : Node
     private PackedScene wallScene;
     private Wall shield;
     [Export]
+    private Vector2 shieldPosition = new Vector2();
+    [Export]
     private float shieldWidth = 2f;
+    [Export]
+    private Color shieldColor;
+
     [Export]
     private float shieldDuration = 10f;
     private float shieldTimer = -1;
 
     // Super Wide Info
-    [Export]
-    private float superWidePaddleWidth = 2f;
     [Export]
     private float superWideDuration = 10f;
     private float superWideTimer = -1;
@@ -141,6 +145,12 @@ public partial class PowerUpManager : Node
 
     private void TriggerPowerUp_TriBall()
     {
+        if(triBallRunning)
+        {
+            return;
+        }
+        triBallRunning = true;
+
         GD.Print($"PowerupManager.cs: Triggering TriBall");
 
         Ball leftBall = null;
@@ -159,6 +169,7 @@ public partial class PowerUpManager : Node
             newBalls.Add(rightBall);
         }
         breakoutManager.Balls.AddRange(newBalls);
+        triBallRunning = false;
     }
 
     private Ball SpawnExtraBall(Ball primaryBall, Vector2 direction)
@@ -211,9 +222,10 @@ public partial class PowerUpManager : Node
         if(shield != null) { return; }
 
         shield = wallScene.Instantiate<Wall>();
+        //shield.Modulate = shieldColor;
         breakoutManager.ObjectPool.AddChild(shield);
         shield.Rotation = Mathf.Pi/2;
-        shield.Position = new Vector2(breakoutManager.PaddleStartingLocation.X, breakoutManager.PaddleStartingLocation.Y - 100);
+        shield.Position = shieldPosition;
         shield.Scale = new Vector2(shield.Scale.X, shield.Scale.Y * shieldWidth);
     }
 
@@ -252,7 +264,7 @@ public partial class PowerUpManager : Node
         {
             return;
         }
-        paddle.ChangePaddleSize(superWidePaddleWidth, true);
+        paddle.ChangePaddleSize(isSuper: true);
         superWideTimer = superWideDuration;
     }
 
@@ -264,7 +276,7 @@ public partial class PowerUpManager : Node
             if (superWideTimer < 0 || paddle.IsQueuedForDeletion())
             {
                 superWideTimer = 0;
-                paddle.ResetPaddleSize();
+                paddle.ChangePaddleSize(1);
             }
         }
     }

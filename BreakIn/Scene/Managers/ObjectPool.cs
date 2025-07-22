@@ -3,7 +3,7 @@ using Godot.Collections;
 using System;
 using System.Collections;
 
-public partial class ObjectPool : Node
+public partial class ObjectPool : Node2D
 {
     // --------------------------------
     //		SPAWN FUNCTIONS	

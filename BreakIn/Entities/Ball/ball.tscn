@@ -20,7 +20,7 @@ platform_floor_layers = 4278190081
 platform_wall_layers = 1
 script = ExtResource("1_mwafn")
 ballSpeed = 100.0
-colors = Array[Color]([Color(0.436525, 0.283532, 0.196441, 1), Color(0.831373, 0.286275, 0.286275, 1), Color(0.423529, 0.462745, 0.913725, 1)])
+colors = Array[Color]([Color(0.940809, 0.878609, 0.495369, 1), Color(0.831373, 0.286275, 0.286275, 1), Color(0.423529, 0.462745, 0.913725, 1)])
 
 [node name="MeshInstance2D2" type="MeshInstance2D" parent="."]
 modulate = Color(0.797092, 0.797092, 0.797092, 1)

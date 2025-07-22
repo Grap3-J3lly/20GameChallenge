@@ -1,17 +1,16 @@
 [gd_scene load_steps=5 format=3 uid="uid://di2wp66555pv0"]
 
 [ext_resource type="Script" uid="uid://ctxgjpo7cpy10" path="res://Scene/GameBoard/Walls/Wall.cs" id="1_qh3gu"]
-[ext_resource type="Texture2D" uid="uid://dfov8fql0b7p4" path="res://Scene/GameBoard/Walls/desertGradient.tres" id="2_mi7v4"]
+[ext_resource type="Texture2D" uid="uid://b6po71s2mswfo" path="res://Assets/Kenney/PNG/Retina/laser.png" id="2_0dyq8"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_thtfy"]
 size = Vector2(20, 760)
 
 [sub_resource type="QuadMesh" id="QuadMesh_l2iol"]
-lightmap_size_hint = Vector2i(102, 3802)
-add_uv2 = true
-size = Vector2(20, 760)
+size = Vector2(60, 760)
 
 [node name="WallL" type="StaticBody2D"]
+z_index = 25
 script = ExtResource("1_qh3gu")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
@@ -22,9 +21,10 @@ shape = SubResource("RectangleShape2D_thtfy")
 z_index = 1
 position = Vector2(0, 50)
 mesh = SubResource("QuadMesh_l2iol")
-texture = ExtResource("2_mi7v4")
+texture = ExtResource("2_0dyq8")
 
-[node name="MeshInstance2D2" type="MeshInstance2D" parent="."]
+[node name="ShadeMesh" type="MeshInstance2D" parent="."]
+visible = false
 modulate = Color(0.14902, 0.14902, 0.14902, 0.45098)
 position = Vector2(3, 50)
 mesh = SubResource("QuadMesh_l2iol")

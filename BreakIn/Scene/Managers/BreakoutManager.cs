@@ -192,6 +192,11 @@ public partial class BreakoutManager : Node
 
 	private void SetupEnvironment(int currentDifficulty)
 	{
+		if (currentEnvironment != null)
+		{
+			environmentParent.RemoveChild(currentEnvironment);
+			currentEnvironment.QueueFree();
+		}
 		currentEnvironment = environments[currentDifficulty - 1].Instantiate<ColorRect>();
 		environmentParent.AddChild(currentEnvironment);
 
@@ -336,7 +341,7 @@ public partial class BreakoutManager : Node
 		}
 		if(Input.IsActionJustPressed("ui_cancel"))
 		{
-			powerUpManager.Debug_SuperWide();
+			powerUpManager.Debug_TriBall();
 			// HandlePauseGame();
 		}
 	}

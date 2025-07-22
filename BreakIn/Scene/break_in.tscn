@@ -38,8 +38,9 @@ powerupOrbScene = ExtResource("5_77uq7")
 objectPool = NodePath("../ObjectPool")
 powerUpManager = NodePath("../PowerUpManager")
 uiManager = NodePath("../UI Manager")
-ballIncreaseSpeedAmount = 10.0
+ballIncreaseSpeedAmount = 5.0
 brickParent = NodePath("../ObjectPool/Bricks")
+maxBricksPerRow = 1
 powerupParent = NodePath("../ObjectPool/Powerups")
 difficulty = 3
 environmentParent = NodePath("../Environment")
@@ -49,6 +50,9 @@ board = NodePath("../GameBoard")
 [node name="PowerUpManager" type="Node" parent="."]
 script = ExtResource("6_1a48d")
 wallScene = ExtResource("7_iqavb")
+shieldPosition = Vector2(651, 689)
+shieldWidth = 1.5
+shieldColor = Color(1, 1, 1, 1)
 
 [node name="GameBoard" type="Node2D" parent="." node_paths=PackedStringArray("wallMeshes")]
 z_index = 25
@@ -59,13 +63,22 @@ wallTextures = Array[Texture2D]([ExtResource("12_ugwee"), ExtResource("13_8mvvy"
 [node name="WallL" parent="GameBoard" instance=ExtResource("7_iqavb")]
 position = Vector2(0, 440)
 
+[node name="MeshInstance2D" parent="GameBoard/WallL" index="1"]
+position = Vector2(-20, 50)
+
 [node name="WallR" parent="GameBoard" instance=ExtResource("7_iqavb")]
 position = Vector2(1152, 440)
+
+[node name="MeshInstance2D" parent="GameBoard/WallR" index="1"]
+position = Vector2(20, 50)
 
 [node name="WallT" parent="GameBoard" instance=ExtResource("7_iqavb")]
 position = Vector2(649.85, 115)
 rotation = 1.5708
 scale = Vector2(0.5, 1.6)
+
+[node name="MeshInstance2D" parent="GameBoard/WallT" index="1"]
+position = Vector2(-20, 50)
 
 [node name="EnemyGoal" parent="GameBoard" instance=ExtResource("8_n83oc")]
 position = Vector2(576, 864)
@@ -94,43 +107,46 @@ grow_vertical = 2
 
 [node name="HUDArea" type="Control" parent="UI Manager/WholeCanvas" node_paths=PackedStringArray("livesField", "scoreField")]
 layout_mode = 1
-anchors_preset = 10
+anchors_preset = 15
 anchor_right = 1.0
-offset_bottom = 105.0
+anchor_bottom = 1.0
 grow_horizontal = 2
+grow_vertical = 2
 script = ExtResource("11_vsjxa")
 livesField = NodePath("LivesLeftText")
 scoreField = NodePath("ScoreText")
 
 [node name="LivesLeftText" type="RichTextLabel" parent="UI Manager/WholeCanvas/HUDArea"]
 layout_mode = 1
-anchors_preset = 4
-anchor_top = 0.5
-anchor_bottom = 0.5
-offset_left = 20.0
-offset_top = -32.5
-offset_right = 420.0
-offset_bottom = 27.5
-grow_vertical = 2
+offset_top = 20.0
+offset_right = 400.0
+offset_bottom = 80.0
 theme_override_font_sizes/normal_font_size = 40
 text = "Lives Remaining: "
 
 [node name="ScoreText" type="RichTextLabel" parent="UI Manager/WholeCanvas/HUDArea"]
 layout_mode = 1
-anchors_preset = 6
+anchors_preset = 1
 anchor_left = 1.0
-anchor_top = 0.5
 anchor_right = 1.0
-anchor_bottom = 0.5
 offset_left = -220.0
-offset_top = -30.0
-offset_bottom = 30.0
+offset_top = 20.0
+offset_bottom = 80.0
 grow_horizontal = 0
-grow_vertical = 2
 theme_override_font_sizes/normal_font_size = 40
 text = "Score: 999"
 
+[node name="RichTextLabel" type="RichTextLabel" parent="UI Manager/WholeCanvas/HUDArea"]
+layout_mode = 0
+offset_left = 370.0
+offset_top = 708.0
+offset_right = 770.0
+offset_bottom = 758.0
+theme_override_font_sizes/normal_font_size = 30
+text = "Paddle Speed Up Activated"
+
 [node name="PopupArea" type="Control" parent="UI Manager/WholeCanvas" node_paths=PackedStringArray("uiManager", "titleLabel", "currentScoreLabel", "highScoreLabel", "swappableButtons")]
+visible = false
 custom_minimum_size = Vector2(500, 600)
 layout_mode = 1
 anchors_preset = 8

@@ -71,13 +71,6 @@ public partial class Ball : CharacterBody2D
         Velocity = currentDirection * ballSpeed;
     }
 
-    private Vector2 PickRandomDirection()
-	{
-		RandomNumberGenerator rng = new RandomNumberGenerator();
-		Vector2 randomDirection = new Vector2(rng.RandfRange(-1f, 1f), rng.RandfRange(-1f, 1f));
-		return randomDirection;
-	}
-
     public void AssignColorByIndex(int index)
     {
         Modulate = colors[index];
@@ -113,11 +106,6 @@ public partial class Ball : CharacterBody2D
         }
         Position = Vector2.Up * 30f;
         Velocity = Vector2.Zero;
-    }
-
-    public void ResetSpeed()
-    {
-        ballSpeed = startSpeed;
     }
 
     // --------------------------------
