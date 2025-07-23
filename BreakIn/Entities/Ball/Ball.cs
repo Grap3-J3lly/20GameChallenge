@@ -45,6 +45,7 @@ public partial class Ball : CharacterBody2D
     public override void _Ready()
 	{
         breakoutManager = BreakoutManager.Instance;
+        colors = breakoutManager.LevelColors;
         Setup();
         
 	}

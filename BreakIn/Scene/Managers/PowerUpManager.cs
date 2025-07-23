@@ -270,13 +270,13 @@ public partial class PowerUpManager : Node
 
     private void RunSuperWideTimer(float realDelta)
     {
-        if (superWideTimer >= 0)
+        if (superWideTimer > 0)
         {
             superWideTimer -= realDelta;
             if (superWideTimer < 0 || paddle.IsQueuedForDeletion())
             {
                 superWideTimer = 0;
-                paddle.ChangePaddleSize(1);
+                paddle.ChangePaddleSize();
             }
         }
     }

@@ -20,7 +20,7 @@ paddleColors = Array[Color]([Color(0.940809, 0.878609, 0.495369, 1), Color(0.831
 defaultPaddleSize = Vector2(100, 20)
 expandedPaddleSize = Vector2(200, 20)
 paddleSpeed = 500.0
-scaleReductionAmount = 0.1
+meshReductionAmount = 10.0
 
 [node name="MeshInstance2D" type="MeshInstance2D" parent="."]
 rotation = 3.14159

@@ -15,7 +15,8 @@ public partial class AudioManager : Node
         None,
         OnHit,
         OnDestroy,
-        UI_Interact
+        UI_Interact,
+        TriggerDefaultPowerup
     }
 
     [Export]

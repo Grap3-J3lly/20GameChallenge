@@ -40,12 +40,12 @@ powerUpManager = NodePath("../PowerUpManager")
 uiManager = NodePath("../UI Manager")
 ballIncreaseSpeedAmount = 5.0
 brickParent = NodePath("../ObjectPool/Bricks")
-maxBricksPerRow = 1
 powerupParent = NodePath("../ObjectPool/Powerups")
 difficulty = 3
 environmentParent = NodePath("../Environment")
 environments = Array[PackedScene]([ExtResource("6_tqbv1"), ExtResource("7_llvgi"), ExtResource("8_k8v7j")])
 board = NodePath("../GameBoard")
+levelColors = Array[Color]([Color(0.940809, 0.878609, 0.495369, 1), Color(0.831373, 0.286275, 0.286275, 1), Color(0.423529, 0.462745, 0.913725, 1)])
 
 [node name="PowerUpManager" type="Node" parent="."]
 script = ExtResource("6_1a48d")

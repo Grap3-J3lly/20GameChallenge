@@ -93,6 +93,9 @@ public partial class BreakoutManager : Node
 	private Array<PackedScene> environments = new Array<PackedScene>();
 	[Export]
 	private GameBoard board;
+	[Export]
+	private Array<Color> levelColors = new Array<Color>();
+
 	// Signals
 	[Signal]
 	public delegate void RowClearEventHandler();
@@ -122,7 +125,7 @@ public partial class BreakoutManager : Node
     public Brick[,] Bricks { get { return bricks; } }
 
 	// Powerup Details
-	public Array<PowerupOrb> ActrivePowerups { get => activePowerups; }
+	public Array<PowerupOrb> ActivePowerups { get => activePowerups; }
 
     // General Game Settings
     public int PlayerScore { get => playerScore; set => playerScore = value; }
@@ -130,6 +133,7 @@ public partial class BreakoutManager : Node
 	public int PlayerLives { get => playerLives; set => playerLives = value; }
 	public bool GameOver { get => gameOver; }
 	public bool GamePaused { get => gamePaused; }
+	public Array<Color> LevelColors { get => levelColors; }
 
 	// --------------------------------
 	//		STANDARD FUNCTIONS	
@@ -341,8 +345,9 @@ public partial class BreakoutManager : Node
 		}
 		if(Input.IsActionJustPressed("ui_cancel"))
 		{
-			powerUpManager.Debug_TriBall();
-			// HandlePauseGame();
+			//powerUpManager.Debug_TriBall();
+			//powerUpManager.Debug_SuperWide();
+			HandlePauseGame();
 		}
 	}
 
@@ -413,31 +418,35 @@ public partial class BreakoutManager : Node
 
 	public void SpawnBricks(int currentDifficulty)
 	{
-		int columnCount = 0;
+		int rowCount = 0;
+
+
 
 		switch(currentDifficulty)
 		{
-			case 1: columnCount = maxRowCount_Easy;
+			case 1: rowCount = maxRowCount_Easy;
 				break; 
-			case 2: columnCount = maxRowCount_Medium;
+			case 2: rowCount = maxRowCount_Medium;
 				break;
-			case 3: columnCount = maxRowCount_Hard;
+			case 3: rowCount = maxRowCount_Hard;
 				break;
 
 			default:
 				GD.PrintErr($"BreakoutManager.cs: Invalid Difficulty Provided. Defaulting to Easy");
-				columnCount = maxRowCount_Easy;
+				rowCount = maxRowCount_Easy;
 				break;
 				
 		}
 
-		Vector2I gridCount = new Vector2I(maxBricksPerRow, columnCount);
+		Vector2I gridCount = new Vector2I(maxBricksPerRow, rowCount);
 		// Manually assigning difficulty to easy, need to change per level
 		bricks = objectPool.SpawnObjectsInGrid<Brick>(brickScene, initialBrickSpawnPosition, gridCount, distancePerBrick, brickParent);
 		for(int y = 0; y < bricks.GetLength(1); y++)
 		{
 			for(int x = 0;  x < bricks.GetLength(0); x++)
 			{
+				GD.Print($"BreakoutManager.cs: Brick Index: ({x}, {y})");
+				Brick.SetupLayerColors(bricks[x, y], rowCount);
                 bricks[x, y].GridPosition = new Vector2I(x, y);
 				bricks[x, y].ChangeBrickLayer(gridCount.Y - y - 1);
                 bricks[x, y].RowID = y;

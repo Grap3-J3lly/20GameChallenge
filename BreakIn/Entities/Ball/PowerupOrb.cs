@@ -55,7 +55,8 @@ public partial class PowerupOrb : Ball
         }
         if (potentialPaddle != null || potentialGoal != null)
         {
-            breakoutManager.ActrivePowerups.Remove(this);
+            breakoutManager.ActivePowerups.Remove(this);
+            AudioManager.Instance.PlaySFX(AudioManager.SFXType.TriggerDefaultPowerup);
             QueueFree();
         }
     }

@@ -35,14 +35,47 @@ public partial class Brick : StaticBody2D
 	{
 		breakoutManager = BreakoutManager.Instance;
 		objectPool = breakoutManager.ObjectPool;
-		// GD.Print($"Brick.cs: Assigned Layer Count in Ready: {layerCount}");
 	}
+
+    // --------------------------------
+    //		GENERAL LOGIC	
+    // --------------------------------
+
+	public static void SetupLayerColors(Brick brick, int layerColorCount)
+	{
+        Array<Color> levelColors = BreakoutManager.Instance.LevelColors;
+        int currentDifficulty = GameManager.Instance.CurrentDifficulty - 1;
+        brick.layerColors = new Array<Color>();
+        brick.layerColors.Resize(layerColorCount);
+
+        int offsetFromMedian = 0;
+        for (int i = 0; i < brick.layerColors.Count; i++)
+        {
+            offsetFromMedian = Mathf.Abs((brick.layerColors.Count / 2) - i) + 1;
+            if (i < brick.layerColors.Count / 2)
+            {
+                GD.Print($"Brick.cs: Calculated Offset (Lower): {offsetFromMedian}");
+                brick.layerColors[i] = (levelColors[currentDifficulty]) * offsetFromMedian;
+            }
+            else if (i == brick.layerColors.Count / 2)
+            {
+                brick.layerColors[i] = levelColors[currentDifficulty];
+                GD.Print($"Brick.cs: Middle Brick Color: {brick.layerColors[i]}");
+            }
+            else
+            {
+                GD.Print($"Brick.cs: Calculated Offset (Higher): {offsetFromMedian}");
+                brick.layerColors[i] = (levelColors[currentDifficulty]) / offsetFromMedian;
+            }
+            brick.layerColors[i] = new Color(brick.layerColors[i].R, brick.layerColors[i].G, brick.layerColors[i].B, 1);
+        }
+    }
 
     // --------------------------------
     //		SINGLE BRICK LOGIC	
     // --------------------------------
 
-	public void ChangeBrickLayer(int layerIndex)
+    public void ChangeBrickLayer(int layerIndex)
 	{
 		layerCount = layerIndex;
         Modulate = layerColors[layerIndex];

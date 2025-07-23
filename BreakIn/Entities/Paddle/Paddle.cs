@@ -27,7 +27,7 @@ public partial class Paddle : AnimatableBody2D
     private float startSpeed;
 
     [Export]
-    private float scaleReductionAmount = .05f;
+    private float meshReductionAmount = .05f;
     [Export]
     private float minScale = .5f;
 
@@ -54,6 +54,7 @@ public partial class Paddle : AnimatableBody2D
         startSpeed = paddleSpeed;
         breakoutManager = BreakoutManager.Instance;
         breakoutManager.RowClear += ReducePaddleSize;
+        paddleColors = breakoutManager.LevelColors;
 	}
 
     public override void _PhysicsProcess(double delta)
@@ -140,28 +141,28 @@ public partial class Paddle : AnimatableBody2D
 
     private void ReducePaddleSize()
     {
-        ChangePaddleSize(-scaleReductionAmount, useScale: true);
+        ChangePaddleSize(-meshReductionAmount);
     }
 
-    public void ChangePaddleSize(float changeAmount = 1.0f, bool isSuper = false, bool useScale = false)
+    public void ChangePaddleSize(float changeAmount = 0.0f, bool isSuper = false)
     {
-        GD.Print($"Paddle.cs: Attempting to change Paddle Size");
+        GD.Print($"Paddle.cs: Attempting to change Paddle Size by: {changeAmount}, Is Super? {isSuper}");
         
         if (!IsInstanceValid(meshInstance) || meshInstance == null) { return; }
         Vector2 adjustedSize = Vector2.Zero;
+        Vector2 currentMeshSize = (Vector2)meshInstance.Mesh.Get("size");
 
-        if (isSuper && !useScale)
+        if(changeAmount != 0)
+        {
+            adjustedSize = new Vector2(currentMeshSize.X + changeAmount, currentMeshSize.Y);
+        }
+        else if (isSuper)
         {
             adjustedSize = expandedPaddleSize;
         }
-        else if(!useScale)
-        {
-            adjustedSize = defaultPaddleSize;
-        }
         else
         {
-            adjustedSize = new Vector2(Scale.X * changeAmount, Scale.Y);
-            return;
+            adjustedSize = defaultPaddleSize;
         }
 
         meshInstance.Mesh.Set("size", adjustedSize);

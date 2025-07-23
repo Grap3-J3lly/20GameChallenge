@@ -1,4 +1,4 @@
-[gd_scene load_steps=15 format=3 uid="uid://g5gxb4cpktqk"]
+[gd_scene load_steps=16 format=3 uid="uid://g5gxb4cpktqk"]
 
 [ext_resource type="Script" uid="uid://nr5a437t5qn4" path="res://Scene/Managers/GameManager.cs" id="1_7o08m"]
 [ext_resource type="Script" uid="uid://b557hnulbsi83" path="res://Scene/SceneManagement/SceneManager.cs" id="2_k15wb"]
@@ -6,6 +6,7 @@
 [ext_resource type="AudioStream" uid="uid://qyn6bv6a24uc" path="res://Assets/SFX/Hit.ogg" id="4_vdwas"]
 [ext_resource type="AudioStream" uid="uid://c2un4t3v3bxwv" path="res://Assets/SFX/BrickBreak.ogg" id="5_2aj80"]
 [ext_resource type="AudioStream" uid="uid://bxt67qeyaqkdx" path="res://Assets/SFX/UIInteractSound.ogg" id="6_ftf7w"]
+[ext_resource type="AudioStream" uid="uid://v30j5imrvrhw" path="res://Assets/SFX/Powerup.ogg" id="7_aui1i"]
 [ext_resource type="Texture2D" uid="uid://csahh20ethcw" path="res://Assets/Kenney/PNG/Default/blue_body_circle.png" id="14_yncne"]
 [ext_resource type="Texture2D" uid="uid://c4jsq0ie5hm8y" path="res://Assets/Kenney/PNG/Default/button_grey.png" id="17_686oa"]
 [ext_resource type="Texture2D" uid="uid://p7qmx8ndf7ke" path="res://Assets/Kenney/PNG/Default/green_body_circle.png" id="18_m1ci2"]
@@ -28,7 +29,8 @@ sfxAudioPlayer = NodePath("SFXStreamPlayer")
 sfxLibrary = Dictionary[int, AudioStreamOggVorbis]({
 1: ExtResource("4_vdwas"),
 2: ExtResource("5_2aj80"),
-3: ExtResource("6_ftf7w")
+3: ExtResource("6_ftf7w"),
+4: ExtResource("7_aui1i")
 })
 
 [node name="SFXStreamPlayer" type="AudioStreamPlayer" parent="AudioManager"]
