@@ -25,6 +25,7 @@ public partial class UIManager : CanvasLayer
     // --------------------------------
 
     public static UIManager Instance { get; private set; }
+    public HUDManager HudManager { get => hudManager; }
     public PopupManager PopupManager { get => popupManager; }
 
     // --------------------------------

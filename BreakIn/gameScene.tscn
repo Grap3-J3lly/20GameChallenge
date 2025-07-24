@@ -34,6 +34,7 @@ sfxLibrary = Dictionary[int, AudioStreamOggVorbis]({
 })
 
 [node name="SFXStreamPlayer" type="AudioStreamPlayer" parent="AudioManager"]
+max_polyphony = 10
 bus = &"SFXBus"
 
 [node name="General Use Area" type="ColorRect" parent="."]

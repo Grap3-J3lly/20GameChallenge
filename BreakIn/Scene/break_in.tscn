@@ -38,7 +38,7 @@ powerupOrbScene = ExtResource("5_77uq7")
 objectPool = NodePath("../ObjectPool")
 powerUpManager = NodePath("../PowerUpManager")
 uiManager = NodePath("../UI Manager")
-ballIncreaseSpeedAmount = 5.0
+ballIncreaseSpeedAmount = 1.0
 brickParent = NodePath("../ObjectPool/Bricks")
 powerupParent = NodePath("../ObjectPool/Powerups")
 difficulty = 3
@@ -105,7 +105,7 @@ anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
 
-[node name="HUDArea" type="Control" parent="UI Manager/WholeCanvas" node_paths=PackedStringArray("livesField", "scoreField")]
+[node name="HUDArea" type="Control" parent="UI Manager/WholeCanvas" node_paths=PackedStringArray("textFields")]
 layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
@@ -113,8 +113,11 @@ anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
 script = ExtResource("11_vsjxa")
-livesField = NodePath("LivesLeftText")
-scoreField = NodePath("ScoreText")
+textFields = {
+0: NodePath("LivesLeftText"),
+1: NodePath("ScoreText"),
+2: NodePath("PowerUpText")
+}
 
 [node name="LivesLeftText" type="RichTextLabel" parent="UI Manager/WholeCanvas/HUDArea"]
 layout_mode = 1
@@ -136,14 +139,14 @@ grow_horizontal = 0
 theme_override_font_sizes/normal_font_size = 40
 text = "Score: 999"
 
-[node name="RichTextLabel" type="RichTextLabel" parent="UI Manager/WholeCanvas/HUDArea"]
+[node name="PowerUpText" type="RichTextLabel" parent="UI Manager/WholeCanvas/HUDArea"]
 layout_mode = 0
 offset_left = 370.0
 offset_top = 708.0
 offset_right = 770.0
 offset_bottom = 758.0
 theme_override_font_sizes/normal_font_size = 30
-text = "Paddle Speed Up Activated"
+text = "DEFAULT TEXT VALUE"
 
 [node name="PopupArea" type="Control" parent="UI Manager/WholeCanvas" node_paths=PackedStringArray("uiManager", "titleLabel", "currentScoreLabel", "highScoreLabel", "swappableButtons")]
 visible = false

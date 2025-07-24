@@ -439,7 +439,6 @@ public partial class BreakoutManager : Node
 		}
 
 		Vector2I gridCount = new Vector2I(maxBricksPerRow, rowCount);
-		// Manually assigning difficulty to easy, need to change per level
 		bricks = objectPool.SpawnObjectsInGrid<Brick>(brickScene, initialBrickSpawnPosition, gridCount, distancePerBrick, brickParent);
 		for(int y = 0; y < bricks.GetLength(1); y++)
 		{

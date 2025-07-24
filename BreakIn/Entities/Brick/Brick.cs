@@ -19,6 +19,9 @@ public partial class Brick : StaticBody2D
 
 	private Vector2I gridPosition = new Vector2I();
 
+    [Export]
+    private AudioStreamPlayer2D brickStreamPlayer;
+
     // --------------------------------
     //			PROPERTIES		
     // --------------------------------
@@ -84,8 +87,9 @@ public partial class Brick : StaticBody2D
     public void ProcessHit(bool superBall)
 	{
 		GD.Print($"Brick.cs: Layer Count - {layerCount}");
-        AudioManager.Instance.PlaySFX(AudioManager.SFXType.OnDestroy);
-		if(layerCount == 0 || superBall)
+        // AudioManager.Instance.PlaySFX_Global(AudioManager.SFXType.OnDestroy);
+        AudioManager.Instance.PlaySFX_2D(brickStreamPlayer, AudioManager.SFXType.OnDestroy);
+        if (layerCount == 0 || superBall)
 		{
 			DestroyBrick();
 			return;

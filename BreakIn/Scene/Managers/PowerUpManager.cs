@@ -19,10 +19,15 @@ public partial class PowerUpManager : Node
     [Export]
     private float extraBallVelocityOffset = 50f;
     private bool triBallRunning = false;
+    [Export]
+    private string triBallLabelText = "Tri-Ball Activated";
+
 
     // Super Ball Info
     [Export]
     private float superBallSpeedBoostAmount = 50f;
+    [Export]
+    private string superBallLabelText = "Super Ball Activated";
 
     // Shield Info
     [Export]
@@ -36,6 +41,9 @@ public partial class PowerUpManager : Node
     private Color shieldColor;
 
     [Export]
+    private string shieldLabelText = "Shield Activated";
+
+    [Export]
     private float shieldDuration = 10f;
     private float shieldTimer = -1;
 
@@ -44,12 +52,18 @@ public partial class PowerUpManager : Node
     private float superWideDuration = 10f;
     private float superWideTimer = -1;
 
+    [Export]
+    private string superWideLabelText = "Super-Wide Activated";
+
     // Paddle Speed Info
     [Export]
     private float maxPaddleSpeed = 1000f;
     [Export]
     private float paddleSpeedDuration = 10f;
     private float paddleSpeedTimer = -1;
+
+    [Export]
+    private string paddleSpeedLabelText = "Paddle Speed Up Activated";
 
     // --------------------------------
     //		STANDARD FUNCTIONS	
@@ -132,6 +146,7 @@ public partial class PowerUpManager : Node
             case 4: TriggerPowerUp_PaddleSpeed();
                 break;
         }
+        AudioManager.Instance.PlaySFX_Global(AudioManager.SFXType.TriggerDefaultPowerup);
     }
 
     //  - - - Tri Ball - - - // 
@@ -170,6 +185,8 @@ public partial class PowerUpManager : Node
         }
         breakoutManager.Balls.AddRange(newBalls);
         triBallRunning = false;
+
+        UIManager.Instance.HudManager.UpdateLabel(HUDManager.HUDTextField.Misc, triBallLabelText);
     }
 
     private Ball SpawnExtraBall(Ball primaryBall, Vector2 direction)
@@ -204,6 +221,8 @@ public partial class PowerUpManager : Node
             ball.SuperMode = true;
             ball.BrickBreakCount = 0;
         }
+
+        UIManager.Instance.HudManager.UpdateLabel(HUDManager.HUDTextField.Misc, superBallLabelText);
     }
 
     //  - - - Shield - - - // 
@@ -227,6 +246,8 @@ public partial class PowerUpManager : Node
         shield.Rotation = Mathf.Pi/2;
         shield.Position = shieldPosition;
         shield.Scale = new Vector2(shield.Scale.X, shield.Scale.Y * shieldWidth);
+
+        UIManager.Instance.HudManager.UpdateLabel(HUDManager.HUDTextField.Misc, shieldLabelText);
     }
 
     private void RunShieldTimer(float realDelta)
@@ -266,6 +287,8 @@ public partial class PowerUpManager : Node
         }
         paddle.ChangePaddleSize(isSuper: true);
         superWideTimer = superWideDuration;
+
+        UIManager.Instance.HudManager.UpdateLabel(HUDManager.HUDTextField.Misc, superWideLabelText);
     }
 
     private void RunSuperWideTimer(float realDelta)
@@ -295,6 +318,8 @@ public partial class PowerUpManager : Node
         GD.Print($"PowerupManager.cs: Triggering PaddleSpeed");
         paddle.PaddleSpeed = maxPaddleSpeed;
         paddleSpeedTimer = paddleSpeedDuration;
+
+        UIManager.Instance.HudManager.UpdateLabel(HUDManager.HUDTextField.Misc, paddleSpeedLabelText);
     }
 
     private void RunPaddleSpeedTimer(float realDelta)

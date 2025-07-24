@@ -36,7 +36,7 @@ public partial class SettingsManager : Control
 
         float volume = (float)Mathf.LinearToDb(value);
         AudioServer.SetBusVolumeDb(sfxAudioBusIndex, volume);
-        AudioManager.Instance.PlaySFX(AudioManager.SFXType.UI_Interact);
+        AudioManager.Instance.PlaySFX_Global(AudioManager.SFXType.UI_Interact);
 
         SaveSystem.AddDataItem("Settings", "sfxVolume", value);
         SaveSystem.SaveData("Settings");

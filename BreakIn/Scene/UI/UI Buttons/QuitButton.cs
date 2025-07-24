@@ -11,7 +11,7 @@ public partial class QuitButton : Button
 
 	public void OnPress()
 	{
-        AudioManager.Instance.PlaySFX(AudioManager.SFXType.UI_Interact);
+        AudioManager.Instance.PlaySFX_Global(AudioManager.SFXType.UI_Interact);
         GetTree().Quit();
 	}
 }

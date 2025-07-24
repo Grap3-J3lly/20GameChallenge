@@ -12,7 +12,7 @@ public partial class NextLevelButton : Button
 
     public void OnPress()
     {
-        AudioManager.Instance.PlaySFX(AudioManager.SFXType.UI_Interact);
+        AudioManager.Instance.PlaySFX_Global(AudioManager.SFXType.UI_Interact);
         ++GameManager.Instance.CurrentDifficulty;
         BreakoutManager.Instance.Setup();
     }

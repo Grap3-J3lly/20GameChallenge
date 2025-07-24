@@ -10,6 +10,7 @@ public partial class AudioManager : Node
 
     [Export]
     private AudioStreamPlayer sfxAudioPlayer;
+
     public enum SFXType
     {
         None,
@@ -61,7 +62,7 @@ public partial class AudioManager : Node
     //		    AUDIO LOGIC	
     // --------------------------------
 
-    public void PlaySFX(SFXType type)
+    public void PlaySFX_Global(SFXType type)
     {
         GD.Print($"AudioManager.cs: Playing SFX: {type}");
         
@@ -70,6 +71,18 @@ public partial class AudioManager : Node
             sfxAudioPlayer.Stream = sfxLibrary[type];
 
             sfxAudioPlayer.Play();
+        }
+    }
+
+    public void PlaySFX_2D(AudioStreamPlayer2D streamPlayer, SFXType type)
+    {
+        GD.Print($"AudioManager.cs: Playing SFX: {type} on StreamPlayer: {streamPlayer}");
+
+        if (streamPlayer != null)
+        {            
+            streamPlayer.Stream = sfxLibrary[type];
+
+            streamPlayer.Play();
         }
     }
 }
