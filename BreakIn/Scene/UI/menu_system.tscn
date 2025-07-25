@@ -1,4 +1,4 @@
-[gd_scene load_steps=7 format=3 uid="uid://c4ueua7jfdfco"]
+[gd_scene load_steps=15 format=3 uid="uid://c4ueua7jfdfco"]
 
 [ext_resource type="Script" uid="uid://bxcy6bjnl7by5" path="res://Scene/Managers/MenuManager.cs" id="1_sjjf8"]
 [ext_resource type="Script" uid="uid://cc0olugnkxali" path="res://Scene/UI/UI Buttons/PlayButton.cs" id="2_fywvq"]
@@ -6,6 +6,34 @@
 [ext_resource type="Script" uid="uid://tj4lr00leo8f" path="res://Scene/UI/UI Buttons/QuitButton.cs" id="2_pyovw"]
 [ext_resource type="Script" uid="uid://bqwgq0t3vphx1" path="res://Scene/Managers/SettingsManager.cs" id="5_0g2ml"]
 [ext_resource type="Script" uid="uid://bfuyiic4xwiph" path="res://Scene/UI/UI Buttons/BackButton.cs" id="5_at6ue"]
+[ext_resource type="Script" uid="uid://ccngrj24xmcfh" path="res://Scene/UI/SkyBackground.cs" id="6_c83w7"]
+
+[sub_resource type="Gradient" id="Gradient_c83w7"]
+colors = PackedColorArray(0.247238, 0.181304, 0.279686, 1, 0.441424, 0.244165, 0.599882, 1)
+
+[sub_resource type="GradientTexture1D" id="GradientTexture1D_c83w7"]
+gradient = SubResource("Gradient_c83w7")
+
+[sub_resource type="Gradient" id="Gradient_0g2ml"]
+colors = PackedColorArray(0.441424, 0.244165, 0.599882, 1, 0.247238, 0.181304, 0.279686, 1)
+
+[sub_resource type="GradientTexture1D" id="GradientTexture1D_0g2ml"]
+gradient = SubResource("Gradient_0g2ml")
+
+[sub_resource type="Gradient" id="Gradient_iqsks"]
+offsets = PackedFloat32Array(0.484, 0.924)
+colors = PackedColorArray(0.453, 0.494, 0.95, 0.71, 1, 1, 1, 0.688)
+
+[sub_resource type="FastNoiseLite" id="FastNoiseLite_lllig"]
+noise_type = 3
+frequency = 0.0108
+offset = Vector3(121.75, -7586.15, 17.8)
+fractal_type = 3
+
+[sub_resource type="NoiseTexture2D" id="NoiseTexture2D_e6o43"]
+in_3d_space = true
+color_ramp = SubResource("Gradient_iqsks")
+noise = SubResource("FastNoiseLite_lllig")
 
 [node name="MenuSystem" type="CanvasLayer" node_paths=PackedStringArray("menus")]
 layer = 10
@@ -20,16 +48,16 @@ anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
 
-[node name="ColorRect" type="ColorRect" parent="MainMenu"]
+[node name="Background" type="TextureRect" parent="MainMenu"]
 layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
-color = Color(0.228554, 0.142329, 0.301255, 1)
+texture = SubResource("GradientTexture1D_c83w7")
 
-[node name="TitleArea" type="VBoxContainer" parent="MainMenu/ColorRect"]
+[node name="TitleArea" type="VBoxContainer" parent="MainMenu/Background"]
 layout_mode = 1
 anchors_preset = 2
 anchor_top = 1.0
@@ -40,7 +68,7 @@ offset_bottom = -53.845
 grow_vertical = 0
 theme_override_constants/separation = 15
 
-[node name="RichTextLabel" type="RichTextLabel" parent="MainMenu/ColorRect/TitleArea"]
+[node name="RichTextLabel" type="RichTextLabel" parent="MainMenu/Background/TitleArea"]
 custom_minimum_size = Vector2(350, 100)
 layout_mode = 2
 size_flags_horizontal = 4
@@ -48,7 +76,7 @@ theme_override_font_sizes/normal_font_size = 50
 bbcode_enabled = true
 text = "[center]Breakout"
 
-[node name="LevelSelectButton" type="Button" parent="MainMenu/ColorRect/TitleArea"]
+[node name="LevelSelectButton" type="Button" parent="MainMenu/Background/TitleArea"]
 custom_minimum_size = Vector2(200, 50)
 layout_mode = 2
 size_flags_horizontal = 4
@@ -58,7 +86,7 @@ icon_alignment = 1
 script = ExtResource("2_kn2t0")
 controlIndex = 1
 
-[node name="SettingsButton" type="Button" parent="MainMenu/ColorRect/TitleArea"]
+[node name="SettingsButton" type="Button" parent="MainMenu/Background/TitleArea"]
 custom_minimum_size = Vector2(200, 50)
 layout_mode = 2
 size_flags_horizontal = 4
@@ -68,7 +96,7 @@ icon_alignment = 1
 script = ExtResource("2_kn2t0")
 controlIndex = 2
 
-[node name="QuitButton" type="Button" parent="MainMenu/ColorRect/TitleArea"]
+[node name="QuitButton" type="Button" parent="MainMenu/Background/TitleArea"]
 custom_minimum_size = Vector2(200, 50)
 layout_mode = 2
 size_flags_horizontal = 4
@@ -77,7 +105,7 @@ text = "Quit"
 icon_alignment = 1
 script = ExtResource("2_pyovw")
 
-[node name="CreditArea" type="VBoxContainer" parent="MainMenu/ColorRect"]
+[node name="CreditArea" type="VBoxContainer" parent="MainMenu/Background"]
 layout_mode = 1
 anchors_preset = 3
 anchor_left = 1.0
@@ -90,7 +118,7 @@ grow_horizontal = 0
 grow_vertical = 0
 theme_override_constants/separation = 15
 
-[node name="CreditsTitle" type="RichTextLabel" parent="MainMenu/ColorRect/CreditArea"]
+[node name="CreditsTitle" type="RichTextLabel" parent="MainMenu/Background/CreditArea"]
 custom_minimum_size = Vector2(250, 50)
 layout_mode = 2
 size_flags_horizontal = 4
@@ -100,7 +128,7 @@ theme_override_font_sizes/bold_font_size = 30
 bbcode_enabled = true
 text = "[center][b]Credits"
 
-[node name="CreditsBody" type="RichTextLabel" parent="MainMenu/ColorRect/CreditArea"]
+[node name="CreditsBody" type="RichTextLabel" parent="MainMenu/Background/CreditArea"]
 custom_minimum_size = Vector2(300, 125)
 layout_mode = 2
 size_flags_horizontal = 4
@@ -119,16 +147,16 @@ anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
 
-[node name="ColorRect" type="ColorRect" parent="LevelSelect"]
+[node name="Background" type="TextureRect" parent="LevelSelect"]
 layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
-color = Color(0.228554, 0.142329, 0.301255, 1)
+texture = SubResource("GradientTexture1D_0g2ml")
 
-[node name="VBoxContainer" type="VBoxContainer" parent="LevelSelect/ColorRect"]
+[node name="VBoxContainer" type="VBoxContainer" parent="LevelSelect/Background"]
 layout_mode = 1
 anchors_preset = 8
 anchor_left = 0.5
@@ -143,7 +171,7 @@ grow_horizontal = 2
 grow_vertical = 2
 theme_override_constants/separation = 100
 
-[node name="Level1Button" type="Button" parent="LevelSelect/ColorRect/VBoxContainer"]
+[node name="Level1Button" type="Button" parent="LevelSelect/Background/VBoxContainer"]
 custom_minimum_size = Vector2(200, 75)
 layout_mode = 2
 size_flags_horizontal = 4
@@ -152,7 +180,7 @@ text = "Easy"
 icon_alignment = 1
 script = ExtResource("2_fywvq")
 
-[node name="Level2Button" type="Button" parent="LevelSelect/ColorRect/VBoxContainer"]
+[node name="Level2Button" type="Button" parent="LevelSelect/Background/VBoxContainer"]
 custom_minimum_size = Vector2(200, 75)
 layout_mode = 2
 size_flags_horizontal = 4
@@ -162,7 +190,7 @@ icon_alignment = 1
 script = ExtResource("2_fywvq")
 gameDifficulty = 2
 
-[node name="Level3Button" type="Button" parent="LevelSelect/ColorRect/VBoxContainer"]
+[node name="Level3Button" type="Button" parent="LevelSelect/Background/VBoxContainer"]
 custom_minimum_size = Vector2(200, 75)
 layout_mode = 2
 size_flags_horizontal = 4
@@ -172,7 +200,7 @@ icon_alignment = 1
 script = ExtResource("2_fywvq")
 gameDifficulty = 3
 
-[node name="BackButton" type="Button" parent="LevelSelect/ColorRect"]
+[node name="BackButton" type="Button" parent="LevelSelect/Background"]
 custom_minimum_size = Vector2(200, 50)
 layout_mode = 1
 anchors_preset = 2
@@ -199,18 +227,20 @@ anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
 script = ExtResource("5_0g2ml")
-sfxSlider = NodePath("ColorRect/VBoxContainer/HSlider")
+sfxSlider = NodePath("Background/VBoxContainer/HSlider")
 
-[node name="ColorRect" type="ColorRect" parent="Settings"]
+[node name="Background" type="TextureRect" parent="Settings"]
 layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
-color = Color(0.228554, 0.142329, 0.301255, 1)
+texture = SubResource("NoiseTexture2D_e6o43")
+script = ExtResource("6_c83w7")
+skySpeedMult = 5.0
 
-[node name="VBoxContainer" type="VBoxContainer" parent="Settings/ColorRect"]
+[node name="VBoxContainer" type="VBoxContainer" parent="Settings/Background"]
 custom_minimum_size = Vector2(250, 0)
 layout_mode = 1
 anchors_preset = 8
@@ -226,20 +256,20 @@ grow_horizontal = 2
 grow_vertical = 2
 theme_override_constants/separation = 15
 
-[node name="RichTextLabel" type="RichTextLabel" parent="Settings/ColorRect/VBoxContainer"]
+[node name="RichTextLabel" type="RichTextLabel" parent="Settings/Background/VBoxContainer"]
 custom_minimum_size = Vector2(0, 50)
 layout_mode = 2
 theme_override_font_sizes/normal_font_size = 30
 bbcode_enabled = true
 text = "[center]SFX Volume"
 
-[node name="HSlider" type="HSlider" parent="Settings/ColorRect/VBoxContainer"]
+[node name="HSlider" type="HSlider" parent="Settings/Background/VBoxContainer"]
 custom_minimum_size = Vector2(100, 75)
 layout_mode = 2
 max_value = 1.0
 step = 0.1
 
-[node name="BackButton" type="Button" parent="Settings/ColorRect"]
+[node name="BackButton" type="Button" parent="Settings/Background"]
 custom_minimum_size = Vector2(200, 50)
 layout_mode = 1
 anchors_preset = 2
@@ -255,3 +285,12 @@ theme_override_font_sizes/font_size = 30
 text = "Back"
 icon_alignment = 1
 script = ExtResource("5_at6ue")
+
+[node name="RichTextLabel" type="RichTextLabel" parent="Settings/Background"]
+layout_mode = 0
+offset_left = 1077.0
+offset_top = 18.0
+offset_right = 1138.0
+offset_bottom = 58.0
+theme_override_colors/default_color = Color(0, 0, 0, 1)
+text = "Boo lol"

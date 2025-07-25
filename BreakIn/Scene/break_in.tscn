@@ -140,6 +140,7 @@ theme_override_font_sizes/normal_font_size = 40
 text = "Score: 999"
 
 [node name="PowerUpText" type="RichTextLabel" parent="UI Manager/WholeCanvas/HUDArea"]
+modulate = Color(1, 1, 1, 0)
 layout_mode = 0
 offset_left = 370.0
 offset_top = 708.0

@@ -10,6 +10,7 @@ public partial class AudioManager : Node
 
     [Export]
     private AudioStreamPlayer sfxAudioPlayer;
+    private AudioStreamPlaybackPolyphonic playbackController;
 
     public enum SFXType
     {
@@ -50,6 +51,11 @@ public partial class AudioManager : Node
     private void Setup()
     {
         AssignDefaultVolumeLevel();
+
+        // Start AudioStreamPlayer, make it actively listen for new sounds added to the Polyphonic.
+        sfxAudioPlayer.Stream = new AudioStreamPolyphonic();
+        sfxAudioPlayer.Play();
+        playbackController = sfxAudioPlayer.GetStreamPlayback() as AudioStreamPlaybackPolyphonic;
     }
 
     private void AssignDefaultVolumeLevel()
@@ -68,21 +74,19 @@ public partial class AudioManager : Node
         
         if(sfxAudioPlayer != null )//&& !audioPlayer.Playing)
         {
-            sfxAudioPlayer.Stream = sfxLibrary[type];
-
-            sfxAudioPlayer.Play();
+            playbackController.PlayStream(sfxLibrary[type]);
         }
     }
 
-    public void PlaySFX_2D(AudioStreamPlayer2D streamPlayer, SFXType type)
-    {
-        GD.Print($"AudioManager.cs: Playing SFX: {type} on StreamPlayer: {streamPlayer}");
+    //public void PlaySFX_2D(AudioStreamPlayer2D streamPlayer, SFXType type)
+    //{
+    //    GD.Print($"AudioManager.cs: Playing SFX: {type} on StreamPlayer: {streamPlayer}");
 
-        if (streamPlayer != null)
-        {            
-            streamPlayer.Stream = sfxLibrary[type];
+    //    if (streamPlayer != null)
+    //    {            
+    //        streamPlayer.Stream = sfxLibrary[type];
 
-            streamPlayer.Play();
-        }
-    }
+    //        streamPlayer.Play();
+    //    }
+    //}
 }

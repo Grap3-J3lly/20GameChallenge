@@ -28,9 +28,6 @@ public partial class Ball : CharacterBody2D
     private bool superMode = false;
     private int brickBreakCount = 0;
 
-    [Export]
-    private AudioStreamPlayer2D ballStreamPlayer;
-
     // --------------------------------
     //			PROPERTIES	
     // --------------------------------
@@ -129,8 +126,7 @@ public partial class Ball : CharacterBody2D
         Wall potentialWall = collidingObject as Wall;
         Ball potentialBall = collidingObject as Ball;
 
-        // AudioManager.Instance.PlaySFX(AudioManager.SFXType.OnHit);
-        AudioManager.Instance.PlaySFX_2D(ballStreamPlayer, AudioManager.SFXType.OnHit);
+        AudioManager.Instance.PlaySFX_Global(AudioManager.SFXType.OnHit);
 
         if (potentialPaddle != null)
         {

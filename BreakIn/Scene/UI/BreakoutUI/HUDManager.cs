@@ -28,6 +28,7 @@ public partial class HUDManager : Control
     private bool triggerEffect = false;
     [Export]
     private float effectDuration = 3.0f;
+    private float effectTimer;
 
     // --------------------------------
     //			PROPERTIES	
@@ -43,6 +44,8 @@ public partial class HUDManager : Control
     {
         breakoutManager = BreakoutManager.Instance;
         // textFields[HUDTextField.Misc].Visible = false;
+        effectTimer = effectDuration;
+
     }
 
     public override void _Process(double delta)
@@ -50,7 +53,7 @@ public partial class HUDManager : Control
         UpdateLabel(textFields[HUDTextField.LivesRemaining], livesLabelText, breakoutManager.PlayerLives);
         UpdateLabel(textFields[HUDTextField.Score], scoreLabelText, breakoutManager.PlayerScore);
 
-        ShiftLabelAlpha(textFields[HUDTextField.Misc], effectDuration);
+        if(triggerEffect) ShiftLabelAlpha(textFields[HUDTextField.Misc], (float)delta);
     }
 
     // --------------------------------
@@ -62,22 +65,27 @@ public partial class HUDManager : Control
         label.Text = preValueText + value.ToString();
     }
 
-    public void UpdateLabel(HUDTextField textFieldType, string newText, bool triggerPowerupEffect = false)
+    public void UpdateLabel(HUDTextField textFieldType, string newText)
     {
         textFields[textFieldType].Text = newText;
-        triggerEffect = triggerPowerupEffect;
+        triggerEffect = true;
+        effectTimer = effectDuration;
     }
 
-    private void ShiftLabelAlpha(RichTextLabel label, float duration)
+    private void ShiftLabelAlpha(RichTextLabel label, float deltaTime)
     {
+        if (effectTimer <= 0)
+        {
+            triggerEffect = false;
+            return;
+        }
         // if (!triggerEffect) return;
         Color currentColor = label.Modulate;
-        float alphaVal = (float)(Math.Abs(Mathf.Sin(Time.GetUnixTimeFromSystem())));
+        effectTimer -= deltaTime;
+        float alphaVal = (float)(Math.Abs(Mathf.Sin(effectTimer)));
+
         label.Modulate = new Color(currentColor.R, currentColor.G, currentColor.B, alphaVal);
 
-        // Need to find a means of capturing when the effect is close to 0 so you can increment a counter to know when to disable effect
-        // Also, fix your sound bs
-
-        GD.Print($"HUDManager.cs: Current Modulate on {label.Name}: {label.Modulate}");
+        GD.Print($"HUDManager.cs: Current alpha value: {alphaVal}");
     }
 }
