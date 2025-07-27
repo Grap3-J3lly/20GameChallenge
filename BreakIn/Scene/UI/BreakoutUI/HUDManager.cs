@@ -65,8 +65,9 @@ public partial class HUDManager : Control
         label.Text = preValueText + value.ToString();
     }
 
-    public void UpdateLabel(HUDTextField textFieldType, string newText)
+    public void UpdateLabel(HUDTextField textFieldType, string newText, bool useBBCode = true)
     {
+        textFields[textFieldType].Text = "[center]" + newText;
         textFields[textFieldType].Text = newText;
         triggerEffect = true;
         effectTimer = effectDuration;

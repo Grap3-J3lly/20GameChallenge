@@ -17,7 +17,7 @@ public partial class SkyBackground : TextureRect
         offset.Y += (float)(delta * skySpeedMult);
         offset.Z += (float)(delta * skySpeedMult);
 
-        GD.Print($"SkyBackground: {offset}");
+        // GD.Print($"SkyBackground: {offset}");
 
         noise.Offset = offset;
     }

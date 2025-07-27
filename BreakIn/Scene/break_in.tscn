@@ -147,7 +147,8 @@ offset_top = 708.0
 offset_right = 770.0
 offset_bottom = 758.0
 theme_override_font_sizes/normal_font_size = 30
-text = "DEFAULT TEXT VALUE"
+bbcode_enabled = true
+text = "[center]DEFAULT TEXT VALUE"
 
 [node name="PopupArea" type="Control" parent="UI Manager/WholeCanvas" node_paths=PackedStringArray("uiManager", "titleLabel", "currentScoreLabel", "highScoreLabel", "swappableButtons")]
 visible = false
